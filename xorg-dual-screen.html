@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>fgeDoc's &ndash; Xorg - dual screen</title>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
+  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+<meta name="author" content="FGE">
+<meta name="description" content="Brancher un second écran sur votre ordinateurs">
+<meta name="keywords" content="Xorg">
+<meta property="og:site_name" content="fgeDoc's"/>
+<meta property="og:title" content="Xorg - dual screen"/>
+<meta property="og:description" content="Brancher un second écran sur votre ordinateurs"/>
+<meta property="og:locale" content="fr_BE"/>
+<meta property="og:url" content="./xorg-dual-screen.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-12-03 10:20:00+01:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/fge.html">
+<meta property="article:section" content="linux"/>
+<meta property="article:tag" content="Xorg"/>
+<meta property="og:image" content=""></head>
+<body>
+  <aside>
+    <div>
+      <h1><a href=".">FGE Doc's</a></h1>
+      <p>Sharing notes</p>
+      <nav>
+        <ul class="list">
+          <li><a href=".">Home</a></li>
+        </ul>
+      </nav>
+      <h2><a href="./categories.html"><span class="fa fa-folder-open-o"></span> <small>Catégories</small></a></h2>
+      <nav>
+	      <ul class="list">
+          <li><a href="./category/devtools.html">devtools (5)</a></li>
+          <li><a href="./category/linux.html">linux (4)</a></li>
+        </ul>
+      </nav>
+      <h2><a href="./tags.html"><span class="fa fa-tags"></span> <small>Tags</small></a></h2>
+      <nav>
+        <ul class="list">          <li><a href="./tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="./tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="./tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="./tag/xorg.html">Xorg (2)</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="."><span class="fa fa-home"> Home</a>
+  - <span class="fa fa-folder-open-o" ></span> linux
+      <hr>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="xorg-dual-screen">Xorg - dual screen</h1>
+    <p>Publié le ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a></p>
+  </header>
+  <div>
+    <p>Rien à faire, pas moyen d'avoir l'image sur votre second écran !
+Ce qui va suivre devrait intéresser les personnes qui souhaitent :</p>
+<ul>
+<li>brancher un projecteur vidéo sur leur portable ;</li>
+<li>utiliser un écran plus confortable que celui de leur portable lorsqu'ils sont au bureau ou à la maison ;</li>
+<li>utiliser un bureau étendu, c'est à dire un bureau réparti sur deux écrans ;</li>
+<li>brancher votre ordinateur à la télévision grâce au connecteur HDMI.</li>
+</ul>
+<p>Je présenterai uniquement l'activation du double écran pour les ordinateurs possédant une seule carte graphique muni de deux connecteurs. Ce qui est le cas des ordinateurs portables et des personnes qui disposent de plusieurs connecteurs sur leur carte graphique.</p>
+<p>J'ai réalisé cette configuration sur un vieux portable équipé d'une carte ATI Radeon Mobility IGP-320M (c'est à dire une carte pas très performante).
+La version de Xorg était la 7.4.1 Nous sommes aujourd'hui à la version 7.7, mais ce qui suit fonctionne toujours.</p>
+<h2>Xorg</h2>
+<p>Xorg, c'est la partie de votre GNU/Linux qui gère l'affichage en mode graphique.
+Depuis la version 7.3 (à vérifier pour la version), le fichier xorg.conf n'est plus obligatoire. Xorg est (en général) capable de détecter et configurer votre matériel tout seul. Et c'est bien comme cela, nous ne devrons pas y toucher !</p>
+<p>Si vous lisez la page de man sur xorg.conf, pour activer le double écran, il est indiqué de spécifier une section screen par connecteur, une section monitor par écran, … et blablabla. Cette méthode n'a jamais fonctionné chez moi et fait planter le serveur X. On peut donc oublier tout ceci.</p>
+<h2>XRandr</h2>
+<p>C'est grâce à Xrandr que nous allons configurer le double écran. Il permet de déterminer la taille de l'écran, son orientation, sa réflexion, la définition des moniteurs. xrandr est un outil à utiliser en ligne de commande, ce qui suit doit donc être tapé dans une console. Voici ce que donne comme résultat la commande xrandr sur ma machine :</p>
+<div class="highlight"><pre><span></span>$ xrandr
+Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span class="m">200</span>, current <span class="m">1680</span> x <span class="m">1050</span>, maximum <span class="m">1680</span> x <span class="m">1200</span>
+VGA-0 connected 1680x1050+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 433mm x 271mm
+   1680x1050      <span class="m">60</span>.0*+   <span class="m">60</span>.0     <span class="m">60</span>.0  
+   1600x1024      <span class="m">60</span>.2  
+   1400x1050      <span class="m">74</span>.8     <span class="m">70</span>.0     <span class="m">60</span>.0  
+   1280x1024      <span class="m">75</span>.0     <span class="m">60</span>.0     <span class="m">60</span>.0  
+   1440x900       <span class="m">59</span>.9  
+   1280x960       <span class="m">60</span>.0     <span class="m">60</span>.0  
+   1360x768       <span class="m">59</span>.8  
+   1152x864       <span class="m">75</span>.0     <span class="m">75</span>.0     <span class="m">75</span>.0     <span class="m">70</span>.0     <span class="m">60</span>.0  
+   1024x768       <span class="m">75</span>.1     <span class="m">75</span>.0     <span class="m">70</span>.1     <span class="m">60</span>.0  
+   832x624        <span class="m">74</span>.6  
+   800x600        <span class="m">72</span>.2     <span class="m">75</span>.0     <span class="m">60</span>.3     <span class="m">56</span>.2  
+   640x480        <span class="m">75</span>.0     <span class="m">72</span>.8     <span class="m">72</span>.8     <span class="m">75</span>.0     <span class="m">66</span>.7     <span class="m">60</span>.0     <span class="m">59</span>.9  
+   720x400        <span class="m">70</span>.1  
+LVDS connected 1024x768+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 0mm x 0mm
+   1024x768       <span class="m">60</span>.0*+   <span class="m">60</span>.0  
+   800x600        <span class="m">60</span>.3  
+   640x480        <span class="m">59</span>.9  
+S-video disconnected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+</pre></div>
+
+
+<p>xrandr indique qu'il y a trois sorties sur la carte graphique</p>
+<ul>
+<li>VGA-0 : connecteur VGA situé à l'arrière du portable ;</li>
+<li>LVDS : écran du portable ;</li>
+<li>S-video : sortie TV.</li>
+</ul>
+<p>Pour chacune des sorties, xrandr indique également les possibilités offertes par les écrans. Par défaut, chaque écran utilise la meilleure de ces définitions. Ce dernier point peut poser un problème.</p>
+<p>Dans le cas de ma carte graphique, si l'on souhaite utiliser simultanément VGA-0 et LVDS, leurs définitions doivent être identiques, sinon l'affichage est impossible.</p>
+<p>Pour régler le problème nous allons donc re-configurer VGA-0</p>
+<div class="highlight"><pre><span></span>$ xrandr --output VGA-0 --mode 1024x768 --rate <span class="m">60</span>
+$ xrandr
+Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span class="m">200</span>, current <span class="m">1024</span> x <span class="m">768</span>, maximum <span class="m">1680</span> x <span class="m">1200</span>
+VGA-0 connected 1024x768+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 433mm x 271mm
+  1680x1050 <span class="m">60</span>.0 + <span class="m">60</span>.0 <span class="m">60</span>.0
+  1600x1024 <span class="m">60</span>.2
+  1400x1050 <span class="m">74</span>.8 <span class="m">70</span>.0 <span class="m">60</span>.0
+  1280x1024 <span class="m">75</span>.0 <span class="m">60</span>.0 <span class="m">60</span>.0
+  1440x900 <span class="m">59</span>.9
+  1280x960 <span class="m">60</span>.0 <span class="m">60</span>.0
+  1360x768 <span class="m">59</span>.8
+  1152x864 <span class="m">75</span>.0 <span class="m">75</span>.0 <span class="m">75</span>.0 <span class="m">70</span>.0 <span class="m">60</span>.0
+  1024x768 <span class="m">75</span>.1 <span class="m">75</span>.0 <span class="m">70</span>.1 <span class="m">60</span>.0*
+  832x624 <span class="m">74</span>.6
+  800x600 <span class="m">72</span>.2 <span class="m">75</span>.0 <span class="m">60</span>.3 <span class="m">56</span>.2
+  640x480 <span class="m">75</span>.0 <span class="m">72</span>.8 <span class="m">72</span>.8 <span class="m">75</span>.0 <span class="m">66</span>.7 <span class="m">60</span>.0 <span class="m">59</span>.9
+  720x400 <span class="m">70</span>.1
+LVDS connected 1024x768+0+0 <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span> 0mm x 0mm
+  1024x768 <span class="m">60</span>.0*+ <span class="m">60</span>.0
+  800x600 <span class="m">60</span>.3
+  640x480 <span class="m">59</span>.9
+S-video disconnected <span class="o">(</span>normal left inverted right x axis y axis<span class="o">)</span>
+</pre></div>
+
+
+<p>Comme d'habitude cela ne fonctionne pas du premier coup, loi de Murphy oblige, il n'y a toujours rien sur mon écran externe.</p>
+<p>Il suffit d'arrêter et redémarrer le LVDS !!! (il fallait le sucer de son pouce). Le problème est que si vous arrêtez LVDS, comme VGA-0 ne fonctionne toujours pas et bien vous n'avez plus d'affichage. Il faut donc tapez les deux lignes de commande en une fois.</p>
+<div class="highlight"><pre><span></span>$ xrandr --output LVDS --off<span class="p">;</span> xrandr --output LVDS --auto
+</pre></div>
+
+
+<p>Et là, comme par magie mon écran externe s'est allumé, VGA-0 est donc un clone de LVDS.</p>
+<h2>Scripts d'activations / désactivations</h2>
+<p>Pour me faciliter la vie, j'ai placé sur mon bureau 4 scripts qui permettent de passer d'un mode à un autre d'un simple clic.</p>
+<h3>LVDS seul</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># LVDS only</span>
+xrandr --output VGA-0 --off
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+</pre></div>
+</td></tr></table>
+
+<h3>VGA-0 seul en automatique</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># VGA-0 only @home</span>
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --auto
+</pre></div>
+</td></tr></table>
+
+<h3>VGA-0 seul avec une définition spécifique</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># VGA-0 only @office</span>
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1400x1050
+</pre></div>
+</td></tr></table>
+
+<h3>Clonage LVDS VGA-0</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#LVDS VGA-0 clone</span>
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1024x768 --rate <span class="m">60</span>
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+</pre></div>
+</td></tr></table>
+
+<p>Comme vous l'aurez remarqué dans les 4 scripts, j'éteins les sorties avant de les configurer.</p>
+<h2>Bureau étendu</h2>
+<p>Pour le bureau étendu, il faut tenir compte de la taille maximum que peut avoir votre bureau.</p>
+<div class="highlight"><pre><span></span>$ xrandr
+Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span class="m">200</span>, current <span class="m">1024</span> x <span class="m">768</span>, maximum <span class="m">1680</span> x <span class="m">1200</span>
+...
+</pre></div>
+
+
+<p>Dans mon cas, le maximum est de 1680×1200.</p>
+<p>Comme ma carte oblige à ce que les définitions soient identiques lorsque les deux sorties sont activées, je peux avoir les configurations suivantes :</p>
+<ul>
+<li>si le deuxième écran est à gauche ou à droite du portable : 1680/2 soit une largeur maximale de 840 pour chaque écran ;</li>
+<li>si le deuxième écran est au-dessus ou au-dessous du portable : 1200/2 soit une hauteur maximale de 600 pour chaque écran.</li>
+</ul>
+<h3>Bureau étendu à droite</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># VGA-0 right of LVDS</span>
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 800x600 --rate <span class="m">60</span> --right-of LVDS
+xrandr --output LVDS --off
+xrandr --output LVDS --mode 800x600 --rate <span class="m">60</span>
+</pre></div>
+</td></tr></table>
+  </div>
+  <header>
+  </header>
+  <div class="tag-cloud">
+    <p>
+      <span class="fa fa-tags" ></span> 
+      <a href="./tag/xorg.html">Xorg</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'fgedocs';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Xorg - dual screen",
+  "headline": "Xorg - dual screen",
+  "datePublished": "2010-12-03 10:20:00+01:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "FGE",
+    "url": "./author/fge.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "./xorg-dual-screen.html",
+  "description": "Brancher un second écran sur votre ordinateurs"
+}
+</script></body>
+</html>

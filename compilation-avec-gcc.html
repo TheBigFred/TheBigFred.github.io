@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>fgeDoc's &ndash; Compilation avec GCC</title>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
+  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+<meta name="author" content="FGE">
+<meta name="description" content="GCC, Gnu Compiler Collection, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable. Un simple gcc hello.c appel une …">
+<meta name="keywords" content="cmd-line, GNU-Tools">
+<meta property="og:site_name" content="fgeDoc's"/>
+<meta property="og:title" content="Compilation avec GCC"/>
+<meta property="og:description" content="GCC, Gnu Compiler Collection, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable. Un simple gcc hello.c appel une …"/>
+<meta property="og:locale" content="fr_BE"/>
+<meta property="og:url" content="./compilation-avec-gcc.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-02-05 21:55:00+01:00"/>
+<meta property="article:modified_time" content="2019-01-09 22:18:00+01:00"/>
+<meta property="article:author" content="./author/fge.html">
+<meta property="article:section" content="devtools"/>
+<meta property="article:tag" content="cmd-line"/>
+<meta property="article:tag" content="GNU-Tools"/>
+<meta property="og:image" content=""></head>
+<body>
+  <aside>
+    <div>
+      <h1><a href=".">FGE Doc's</a></h1>
+      <p>Sharing notes</p>
+      <nav>
+        <ul class="list">
+          <li><a href=".">Home</a></li>
+        </ul>
+      </nav>
+      <h2><a href="./categories.html"><span class="fa fa-folder-open-o"></span> <small>Catégories</small></a></h2>
+      <nav>
+	      <ul class="list">
+          <li><a href="./category/devtools.html">devtools (5)</a></li>
+          <li><a href="./category/linux.html">linux (4)</a></li>
+        </ul>
+      </nav>
+      <h2><a href="./tags.html"><span class="fa fa-tags"></span> <small>Tags</small></a></h2>
+      <nav>
+        <ul class="list">          <li><a href="./tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="./tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="./tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="./tag/xorg.html">Xorg (2)</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href="."><span class="fa fa-home"> Home</a>
+  - <span class="fa fa-folder-open-o" ></span> devtools
+      <hr>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="compilation-avec-gcc">Compilation avec GCC</h1>
+    <p>Publié le dim 05 février 2017 dans <a href="./category/devtools.html">devtools</a></p>
+        <p>Série <em>build</em> :
+              Compilation avec GCC
+ -               <a href='./ecrire-un-makefile.html'>Écrire un Makefile</a>
+        </p>
+  </header>
+  <div>
+    <p>GCC, <em>Gnu Compiler Collection</em>, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+Un simple <code>gcc hello.c</code> appel une suite d'outils dans un ordre précis pour créer un binaire nommé <em>a.out</em>.</p>
+<h2>Les phases de compilation, petit rappel</h2>
+<p>Lorsque l'on compile un fichier <em>c</em>, gcc va appeler pour vous les outils suivants dans cet ordre :</p>
+<ul>
+<li>
+<p><strong>Le pré-processeur</strong> <em>(cpp)</em>: traite l'ensemble des directives de pré-compilation tel que <em>#include</em>, <em>#define</em>, <em>#ifndef</em>. Ici, il s'agit simplement de faire des copiés/collés dans votre code.</p>
+</li>
+<li>
+<p><strong>Le compilateur</strong> <em>(cc1)</em>: vérifie la syntaxe, le respect des prototypes des fonctions et transforme votre code C en assembleur.</p>
+</li>
+<li>
+<p><strong>L'assembleur</strong> <em>(as)</em>: transforme (assemble) le code assembleur en binaire compréhensible pour le micro-processeur. On nomme le résultat obtenu : <em>fichier objet</em>. Ce n'est toujours pas un exécutable.</p>
+</li>
+<li>
+<p><strong>Le linker</strong> <em>(ld)</em>: nommé éditeur de lien en français, il va lier votre fichier objet avec les bibliothèques nécessaires (il faut le code de printf, de gets, ...) et également ajouter un loader qui permettra de charger l'application en mémoire.</p>
+</li>
+</ul>
+<p>Il est possible d'arrêter gcc à chacune de ces étapes :</p>
+<ul>
+<li>
+<p><code>gcc -E demo.c</code>, donnera un fichier <em>demo.i</em>, résultat du pré-processeur.</p>
+</li>
+<li>
+<p><code>gcc -S demo.c</code>, donnera un fichier <em>demo.s</em>, qui contient le code assembleur générer par le compilateur.</p>
+</li>
+<li>
+<p><code>gcc -c demo.c</code>, donnera un fichier <em>demo.o</em>, qui est notre fichier objet (binaire non exécutable).</p>
+</li>
+</ul>
+<h2>Options usuelles de gcc</h2>
+<p>Il existe un nombre incroyable d'options pour gcc, voici les plus couramment utilisées.</p>
+<ul>
+<li>
+<p><code>-o</code> : pour output, elle permet de spécifier le nom de l'application. Sans cette option, votre programme se nommera <em>a.out</em>. <code>gcc -o hello hello.c</code> donnera un binaire nommé <em>hello</em>.</p>
+</li>
+<li>
+<p><code>-g</code> : ajoute les symboles (votre code en format txt) dans le binaire, cela permet d'utiliser un débogueur.</p>
+</li>
+<li>
+<p><code>-D TRACE</code> : est l'équivalent de <code>#define TRACE</code>. Cela permet d'activer du code placé entre <em>#ifdef #endif</em> sans devoir modifier vos fichiers pour y écrire (ou supprimer) <code>#define TRACE</code>.</p>
+</li>
+<li>
+<p><code>-D SIZE_MAX=100</code> : est l'équivalent de <code>#define SIZE_MAX 100</code>.</p>
+</li>
+<li>
+<p><code>-Wall</code> : permet d'afficher un maximum de warning sur votre code.</p>
+</li>
+<li>
+<p><code>-Wextra</code> : ajout des vérifications supplémentaires sur le code.</p>
+</li>
+<li>
+<p><code>-pedantics</code> : demande à gcc de vérifier que votre code respecte la norme ISO C.</p>
+</li>
+<li>
+<p><code>-std=</code> : permet de préciser la norme C à utiliser. Les valeurs peuvent être :</p>
+<ul>
+<li>c89, c90 : pour l'ISO C90</li>
+<li>c99 : pour l'ISO C99</li>
+<li>c11 : pour l'ISO C2011</li>
+</ul>
+</li>
+</ul>
+<p>Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souahitez compiler votre code avec d'autres
+compilateur que gcc, n'utilisez pas ces extensions.</p>
+<ul>
+<li>
+<p><code>-ansi</code> : est équivalent à <code>-std=c90</code>, mais interdit les commentaires du type <code>//</code>.</p>
+</li>
+<li>
+<p><code>-O2</code> : Optimise la vitesse d'exécution de votre code. En bref, le compilateur remanie votre code pour le rendre plus rapide. Cette option est à utiliser uniquement lorsque votre programme est au point. Déboguer un programme compilé en <code>-O2</code> est nettement moins facile.</p>
+</li>
+<li>
+<p><code>-I include_path</code> : permet d'indiquer un dossier où gcc peut trouver des fichiers .h.</p>
+</li>
+<li>
+<p><code>-L lib_path</code> : permet d'indiquer un dossier où le linker peut trouver des bibliothèques qui ne sont pas dans <em>/usr/local/lib</em>, <em>/usr/lib</em> ou dans <em>/lib</em>.</p>
+</li>
+<li>
+<p><code>-l libname</code> : permet d'indiquer au linker le nom d'une bibliothèque. Si vous utilisez une fonction mathématique comme <em>sin</em> ou <em>ceil</em>, son code se trouve dans le fichier <em>libm.so</em>. L'option à passer sera alors : <code>-lm</code> (le nom du fichier sans le lib et l'extension).</p>
+</li>
+</ul>
+<h2>Exemple</h2>
+<p>Voici un petit code C qui utilise la libm.so ainsi qu'un ensemble de fichiers .h que nous aurions placé dans un dossier MyInclude à la racine du dossier utilisateur.</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;myinclude1.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;myinclude2.h&quot;</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">double</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;sin(%g) = %g</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">sin</span> <span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="cp">#ifdef MAXVAL</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">&quot;code optionnel, MAX = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">MAX</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Pour compiler ce fichier en mode debug : <code>gcc -g -o myApp main.c -lm -I$HOME/MyInclude</code></p>
+<p>Pour compiler ce fichier en mode release : <code>gcc -02 -o myApp main.c -lm -I$HOME/MyInclude</code></p>
+<p>Pour activer le code optionnel, il faut juste ajouter <code>-DMAXVAL</code> aux commandes précédentes.</p>
+<p>Le code optionnel reprend une variable MAX non définie. l'idée est de définir MAX par le biais de la ligne de commande : <code>gcc -g -o myApp main.c -lm -I$HOME/MyInclude -DMAXVAL -DMAX=5</code></p>
+<h2>Importance du paramètre <code>-std</code></h2>
+<p>Le langage C a été inventé pour être portable. L'idée est qu'il suffit de compiler le code pour le faire fonctionner sur un microprocesseur différent de celui où on là écrit. Il faut évidement disposer d'un compilateur C pour ce µP.</p>
+<p>Il arrive fréquemment d'écrire et tester du code sur PC et de le compiler ensuite pour une autre plateforme. Il ne faut pas perdre de vue que le compilateur de cette plateforme ne supporte pas forcément la dernière version de la norme C.</p>
+<p>Le flag <code>-std</code> permet de forcer le compilateur à respecter une norme en particulier et s'assurer que le code sera compilable avec le compilateur de la plateforme.</p>
+<p>Une bibliothèque tiers n'est pas forcément compatible avec toutes les normes. Si la norme utilisé pour compiler n'est pas compatible, il faut arrêter la compilation.</p>
+<ul>
+<li><code>-std=c89</code> &amp; <code>-std=c90</code> définissent uniquement la macro <code>__STDC__</code>.</li>
+<li><code>-std=c99</code> définit la macro <code>__STD_VERSION__</code> avec la valeur <code>199901L</code></li>
+<li><code>-std=c11</code> définit la macro <code>__STD_VERSION__</code> avec la valeur <code>201112L</code></li>
+<li><code>-std=c17</code> définit la macro <code>__STD_VERSION__</code> avec la valeur <code>201710L</code></li>
+</ul>
+<p>En utilisant des directives de pré-compilation, il est donc possible de vérifier la version de la norme utilisé pour compiler un code.</p>
+<p>Voici un premier exemple qui nécessite d'utiliser l'option <code>-std=c99</code> :</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#if (__STDC_VERSION__ != 199901L)</span>
+<span class="cp">#error &quot;Ce code est compatible uniquement avec C99 !!!&quot;</span>
+<span class="cp">#endif</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__STDC_VERSION__</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="gp">$</span> gcc std.c
+<span class="go">error: &quot;Ce code est compatible uniquement avec C99 !!!&quot;</span>
+<span class="gp">#</span>error <span class="s2">&quot;Ce code est compatible uniquement avec C99 !!!&quot;</span>
+<span class="go"> ^</span>
+<span class="go">1 error generated.</span>
+<span class="gp">$</span>
+<span class="gp">$</span> gcc std.c -std<span class="o">=</span>c99
+<span class="gp">$</span> ./a.out 
+<span class="go">199901</span>
+<span class="gp">$</span>
+</pre></div>
+
+
+<p>Dans ce second exemple, le standard C doit être au minimum c11 :</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#if (__STDC_VERSION__ &lt; 201112L)</span>
+<span class="cp">#error &quot;Ce code nécessite C11 !!!&quot;</span>
+<span class="cp">#endif</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">__STDC_VERSION__</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="gp">$</span> gcc std.c -std<span class="o">=</span>c99
+<span class="go">error: &quot;Ce code nécessite C11 !!!&quot;</span>
+<span class="gp">#</span>error <span class="s2">&quot;Ce code nécessite C11 !!!&quot;</span>
+<span class="go"> ^</span>
+<span class="go">1 error generated.</span>
+<span class="gp">$</span>
+<span class="gp">$</span> gcc std.c
+<span class="gp">$</span> ./a.out 
+<span class="go">201112</span>
+<span class="gp">$</span>
+<span class="gp">$</span> gcc std.c -std<span class="o">=</span>c11
+<span class="gp">$</span> ./a.out 
+<span class="go">201112</span>
+<span class="gp">$</span>
+<span class="gp">$</span> gcc std.c -std<span class="o">=</span>c17
+<span class="gp">$</span> ./a.out 
+<span class="go">201710</span>
+<span class="gp">$</span>
+</pre></div>
+
+
+<p>Ici, on peut constater que sans option, c'est la norme c11 qui est appliquée.</p>
+<h2>Compilation C++</h2>
+<p>Pour compiler du code C++, on utilise <em>g++</em> au lieu de <em>gcc</em> et le tour est joué.</p>
+<p>Les options de compilations vues ci-dessus sont les mêmes, mis à part les valeurs de l'option -std. La macro __cplusplus
+contient la valeur du standard.</p>
+<ul>
+<li>c++98 : pour l'ISO C++ 1998, __cplusplus est définit à 199711L.</li>
+<li>c++11 : pour l'ISO C++ 2011, __cplusplus est définit à 201103L.</li>
+<li>c++14 : pour l'ISO C++ 2014, __cplusplus est définit à 201402L.</li>
+<li>C++17 : pour l'ISO C++ 2017, __cplusplus est définit à 201703L.</li>
+</ul>
+<p>Il existe également les extensions gnu : gnu++98, gnu++11, gnu++14 et gnu++17.</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">__cplusplus</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="gp">$</span> g++ std.cpp <span class="p">;</span> ./a.out 
+<span class="go">199711</span>
+<span class="gp">$</span> g++ std.cpp -std<span class="o">=</span>c++11 <span class="p">;</span> ./a.out 
+<span class="go">201103</span>
+<span class="gp">$</span> g++ std.cpp -std<span class="o">=</span>c++14 <span class="p">;</span> ./a.out 
+<span class="go">201402</span>
+<span class="gp">$</span> g++ std.cpp -std<span class="o">=</span>c++17 <span class="p">;</span> ./a.out 
+<span class="go">201703</span>
+<span class="gp">$</span>
+</pre></div>
+
+
+<p>Il n'y a pas de <em>return 0</em> à la fin de mon fichier <em>.cpp</em>. Ceci n'est pas une faute, la norme c++ définit un <em>return 0</em>
+implicite à la fin de la fonction main.</p>
+<h2>Compilation de plusieurs fichiers</h2>
+<p>Pour compiler une application constituée de plusieurs fichiers c, il suffit d'indiquer la liste des fichiers à compiler : <code>gcc -g -o myApp main.c mesfonctions.c -lm -I$HOME/MyInclude</code>.</p>
+<p>Cette méthode à plusieurs inconvénients:</p>
+<ul>
+<li>Tous les fichiers sont recompilés à chaque fois. Pour un projet plus conséquent de 10, 20, 30 ou 100 fichiers, la compilation peu perdre du temps.</li>
+<li>La ligne de commande devient abominable.</li>
+<li>On modifie rarement la totalité des fichiers, il est donc inutile de les compiler tous à chaque fois.</li>
+</ul>
+<p>L'idée est de compilé chaque fichier .c en .o avec l'option <em>-c</em> de gcc : <code>gcc -c mesfonctions.c</code>.</p>
+<p>Lorsque tous les fichiers <em>.c</em> sont compilés, il reste à les linker : <code>gcc -g -o myApp main.o mesfonctions.o -lm -I$HOME/MyInclude</code>.</p>
+<p>Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.</p>
+<p>Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est <strong>make</strong>.</p>
+  </div>
+  <header>
+    <p>Cet article fait partie de la série <em>build</em> :
+          Compilation avec GCC
+ -           <a href='./ecrire-un-makefile.html'>Écrire un Makefile</a>
+    </p>
+  </header>
+  <div class="tag-cloud">
+    <p>
+      <span class="fa fa-tags" ></span> 
+      <a href="./tag/cmd-line.html">cmd-line</a>
+      <a href="./tag/gnu-tools.html">GNU-Tools</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'fgedocs';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "Compilation avec GCC",
+  "headline": "Compilation avec GCC",
+  "datePublished": "2017-02-05 21:55:00+01:00",
+  "dateModified": "2019-01-09 22:18:00+01:00",
+  "author": {
+    "@type": "Person",
+    "name": "FGE",
+    "url": "./author/fge.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "./compilation-avec-gcc.html",
+  "description": "GCC, Gnu Compiler Collection, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable. Un simple gcc hello.c appel une …"
+}
+</script></body>
+</html>

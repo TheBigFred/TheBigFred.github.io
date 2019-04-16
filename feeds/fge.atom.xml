@@ -1,0 +1,1216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's - FGE</title><link href="http://fgedocs.boitemail.be/" rel="alternate"></link><link href="http://fgedocs.boitemail.be/feeds/fge.atom.xml" rel="self"></link><id>http://fgedocs.boitemail.be/</id><updated>2019-01-09T22:18:00+01:00</updated><entry><title>Compilation avec GCC</title><link href="http://fgedocs.boitemail.be/compilation-avec-gcc.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-01-09T22:18:00+01:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2017-02-05:/compilation-avec-gcc.html</id><summary type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une suite d'outils dans un ordre précis pour créer un binaire nommé &lt;em&gt;a.out&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;Les phases de compilation, petit rappel&lt;/h2&gt;
+&lt;p&gt;Lorsque l'on compile un fichier &lt;em&gt;c&lt;/em&gt;, gcc va appeler pour vous les outils suivants dans cet ordre :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Le pré-processeur&lt;/strong&gt; &lt;em&gt;(cpp)&lt;/em&gt;: traite l'ensemble des directives de pré-compilation tel que &lt;em&gt;#include&lt;/em&gt;, &lt;em&gt;#define&lt;/em&gt;, &lt;em&gt;#ifndef&lt;/em&gt;. Ici, il s'agit simplement de faire des copiés/collés dans votre code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Le compilateur&lt;/strong&gt; &lt;em&gt;(cc1)&lt;/em&gt;: vérifie la syntaxe, le respect des prototypes des fonctions et transforme votre code C en assembleur.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;L'assembleur&lt;/strong&gt; &lt;em&gt;(as)&lt;/em&gt;: transforme (assemble) le code assembleur en binaire compréhensible pour le micro-processeur. On nomme le résultat obtenu : &lt;em&gt;fichier objet&lt;/em&gt;. Ce n'est toujours pas un exécutable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Le linker&lt;/strong&gt; &lt;em&gt;(ld)&lt;/em&gt;: nommé éditeur de lien en français, il va lier votre fichier objet avec les bibliothèques nécessaires (il faut le code de printf, de gets, ...) et également ajouter un loader qui permettra de charger l'application en mémoire.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il est possible d'arrêter gcc à chacune de ces étapes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gcc -E demo.c&lt;/code&gt;, donnera un fichier &lt;em&gt;demo.i&lt;/em&gt;, résultat du pré-processeur.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gcc -S demo.c&lt;/code&gt;, donnera un fichier &lt;em&gt;demo.s&lt;/em&gt;, qui contient le code assembleur générer par le compilateur.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gcc -c demo.c&lt;/code&gt;, donnera un fichier &lt;em&gt;demo.o&lt;/em&gt;, qui est notre fichier objet (binaire non exécutable).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Options usuelles de gcc&lt;/h2&gt;
+&lt;p&gt;Il existe un nombre incroyable d'options pour gcc, voici les plus couramment utilisées.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-o&lt;/code&gt; : pour output, elle permet de spécifier le nom de l'application. Sans cette option, votre programme se nommera &lt;em&gt;a.out&lt;/em&gt;. &lt;code&gt;gcc -o hello hello.c&lt;/code&gt; donnera un binaire nommé &lt;em&gt;hello&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-g&lt;/code&gt; : ajoute les symboles (votre code en format txt) dans le binaire, cela permet d'utiliser un débogueur.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-D TRACE&lt;/code&gt; : est l'équivalent de &lt;code&gt;#define TRACE&lt;/code&gt;. Cela permet d'activer du code placé entre &lt;em&gt;#ifdef #endif&lt;/em&gt; sans devoir modifier vos fichiers pour y écrire (ou supprimer) &lt;code&gt;#define TRACE&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-D SIZE_MAX=100&lt;/code&gt; : est l'équivalent de &lt;code&gt;#define SIZE_MAX 100&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-Wall&lt;/code&gt; : permet d'afficher un maximum de warning sur votre code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-Wextra&lt;/code&gt; : ajout des vérifications supplémentaires sur le code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-pedantics&lt;/code&gt; : demande à gcc de vérifier que votre code respecte la norme ISO C.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-std=&lt;/code&gt; : permet de préciser la norme C à utiliser. Les valeurs peuvent être :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;c89, c90 : pour l'ISO C90&lt;/li&gt;
+&lt;li&gt;c99 : pour l'ISO C99&lt;/li&gt;
+&lt;li&gt;c11 : pour l'ISO C2011&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souahitez compiler votre code avec d'autres
+compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-ansi&lt;/code&gt; : est équivalent à &lt;code&gt;-std=c90&lt;/code&gt;, mais interdit les commentaires du type &lt;code&gt;//&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-O2&lt;/code&gt; : Optimise la vitesse d'exécution de votre code. En bref, le compilateur remanie votre code pour le rendre plus rapide. Cette option est à utiliser uniquement lorsque votre programme est au point. Déboguer un programme compilé en &lt;code&gt;-O2&lt;/code&gt; est nettement moins facile.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-I include_path&lt;/code&gt; : permet d'indiquer un dossier où gcc peut trouver des fichiers .h.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-L lib_path&lt;/code&gt; : permet d'indiquer un dossier où le linker peut trouver des bibliothèques qui ne sont pas dans &lt;em&gt;/usr/local/lib&lt;/em&gt;, &lt;em&gt;/usr/lib&lt;/em&gt; ou dans &lt;em&gt;/lib&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-l libname&lt;/code&gt; : permet d'indiquer au linker le nom d'une bibliothèque. Si vous utilisez une fonction mathématique comme &lt;em&gt;sin&lt;/em&gt; ou &lt;em&gt;ceil&lt;/em&gt;, son code se trouve dans le fichier &lt;em&gt;libm.so&lt;/em&gt;. L'option à passer sera alors : &lt;code&gt;-lm&lt;/code&gt; (le nom du fichier sans le lib et l'extension).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Exemple&lt;/h2&gt;
+&lt;p&gt;Voici un petit code C qui utilise la libm.so ainsi qu'un ensemble de fichiers .h que nous aurions placé dans un dossier MyInclude à la racine du dossier utilisateur.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;math.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;myinclude1.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;myinclude2.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sin(%g) = %g&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="cp"&gt;#ifdef MAXVAL&lt;/span&gt;
+  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;code optionnel, MAX = %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MAX&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pour compiler ce fichier en mode debug : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pour compiler ce fichier en mode release : &lt;code&gt;gcc -02 -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pour activer le code optionnel, il faut juste ajouter &lt;code&gt;-DMAXVAL&lt;/code&gt; aux commandes précédentes.&lt;/p&gt;
+&lt;p&gt;Le code optionnel reprend une variable MAX non définie. l'idée est de définir MAX par le biais de la ligne de commande : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude -DMAXVAL -DMAX=5&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Importance du paramètre &lt;code&gt;-std&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Le langage C a été inventé pour être portable. L'idée est qu'il suffit de compiler le code pour le faire fonctionner sur un microprocesseur différent de celui où on là écrit. Il faut évidement disposer d'un compilateur C pour ce µP.&lt;/p&gt;
+&lt;p&gt;Il arrive fréquemment d'écrire et tester du code sur PC et de le compiler ensuite pour une autre plateforme. Il ne faut pas perdre de vue que le compilateur de cette plateforme ne supporte pas forcément la dernière version de la norme C.&lt;/p&gt;
+&lt;p&gt;Le flag &lt;code&gt;-std&lt;/code&gt; permet de forcer le compilateur à respecter une norme en particulier et s'assurer que le code sera compilable avec le compilateur de la plateforme.&lt;/p&gt;
+&lt;p&gt;Une bibliothèque tiers n'est pas forcément compatible avec toutes les normes. Si la norme utilisé pour compiler n'est pas compatible, il faut arrêter la compilation.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-std=c89&lt;/code&gt; &amp;amp; &lt;code&gt;-std=c90&lt;/code&gt; définissent uniquement la macro &lt;code&gt;__STDC__&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-std=c99&lt;/code&gt; définit la macro &lt;code&gt;__STD_VERSION__&lt;/code&gt; avec la valeur &lt;code&gt;199901L&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-std=c11&lt;/code&gt; définit la macro &lt;code&gt;__STD_VERSION__&lt;/code&gt; avec la valeur &lt;code&gt;201112L&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-std=c17&lt;/code&gt; définit la macro &lt;code&gt;__STD_VERSION__&lt;/code&gt; avec la valeur &lt;code&gt;201710L&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;En utilisant des directives de pré-compilation, il est donc possible de vérifier la version de la norme utilisé pour compiler un code.&lt;/p&gt;
+&lt;p&gt;Voici un premier exemple qui nécessite d'utiliser l'option &lt;code&gt;-std=c99&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;#if (__STDC_VERSION__ != 199901L)&lt;/span&gt;
+&lt;span class="cp"&gt;#error &amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c
+&lt;span class="go"&gt;error: &amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="gp"&gt;#&lt;/span&gt;error &lt;span class="s2"&gt;&amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="go"&gt; ^&lt;/span&gt;
+&lt;span class="go"&gt;1 error generated.&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c99
+&lt;span class="gp"&gt;$&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;199901&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Dans ce second exemple, le standard C doit être au minimum c11 :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;#if (__STDC_VERSION__ &amp;lt; 201112L)&lt;/span&gt;
+&lt;span class="cp"&gt;#error &amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c99
+&lt;span class="go"&gt;error: &amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="gp"&gt;#&lt;/span&gt;error &lt;span class="s2"&gt;&amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="go"&gt; ^&lt;/span&gt;
+&lt;span class="go"&gt;1 error generated.&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c
+&lt;span class="gp"&gt;$&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201112&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c11
+&lt;span class="gp"&gt;$&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201112&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c17
+&lt;span class="gp"&gt;$&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201710&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ici, on peut constater que sans option, c'est la norme c11 qui est appliquée.&lt;/p&gt;
+&lt;h2&gt;Compilation C++&lt;/h2&gt;
+&lt;p&gt;Pour compiler du code C++, on utilise &lt;em&gt;g++&lt;/em&gt; au lieu de &lt;em&gt;gcc&lt;/em&gt; et le tour est joué.&lt;/p&gt;
+&lt;p&gt;Les options de compilations vues ci-dessus sont les mêmes, mis à part les valeurs de l'option -std. La macro __cplusplus
+contient la valeur du standard.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;c++98 : pour l'ISO C++ 1998, __cplusplus est définit à 199711L.&lt;/li&gt;
+&lt;li&gt;c++11 : pour l'ISO C++ 2011, __cplusplus est définit à 201103L.&lt;/li&gt;
+&lt;li&gt;c++14 : pour l'ISO C++ 2014, __cplusplus est définit à 201402L.&lt;/li&gt;
+&lt;li&gt;C++17 : pour l'ISO C++ 2017, __cplusplus est définit à 201703L.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il existe également les extensions gnu : gnu++98, gnu++11, gnu++14 et gnu++17.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;__cplusplus&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; g++ std.cpp &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;199711&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++11 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201103&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++14 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201402&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++17 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="go"&gt;201703&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Il n'y a pas de &lt;em&gt;return 0&lt;/em&gt; à la fin de mon fichier &lt;em&gt;.cpp&lt;/em&gt;. Ceci n'est pas une faute, la norme c++ définit un &lt;em&gt;return 0&lt;/em&gt;
+implicite à la fin de la fonction main.&lt;/p&gt;
+&lt;h2&gt;Compilation de plusieurs fichiers&lt;/h2&gt;
+&lt;p&gt;Pour compiler une application constituée de plusieurs fichiers c, il suffit d'indiquer la liste des fichiers à compiler : &lt;code&gt;gcc -g -o myApp main.c mesfonctions.c -lm -I$HOME/MyInclude&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Cette méthode à plusieurs inconvénients:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tous les fichiers sont recompilés à chaque fois. Pour un projet plus conséquent de 10, 20, 30 ou 100 fichiers, la compilation peu perdre du temps.&lt;/li&gt;
+&lt;li&gt;La ligne de commande devient abominable.&lt;/li&gt;
+&lt;li&gt;On modifie rarement la totalité des fichiers, il est donc inutile de les compiler tous à chaque fois.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L'idée est de compilé chaque fichier .c en .o avec l'option &lt;em&gt;-c&lt;/em&gt; de gcc : &lt;code&gt;gcc -c mesfonctions.c&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Lorsque tous les fichiers &lt;em&gt;.c&lt;/em&gt; sont compilés, il reste à les linker : &lt;code&gt;gcc -g -o myApp main.o mesfonctions.o -lm -I$HOME/MyInclude&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.&lt;/p&gt;
+&lt;p&gt;Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est &lt;strong&gt;make&lt;/strong&gt;.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Écrire un Makefile</title><link href="http://fgedocs.boitemail.be/ecrire-un-makefile.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2017-02-05T21:55:00+01:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2017-02-05:/ecrire-un-makefile.html</id><summary type="html">&lt;p&gt;Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.&lt;/p&gt;
+&lt;p&gt;Cet article est une …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.&lt;/p&gt;
+&lt;p&gt;Cet article est une introduction et n'a pas pour but de présenter la totalité du &lt;a href="https://www.gnu.org/software/make/manual/make.html"&gt;manuel de make&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Make n'est pas dévolu à la compilation de programmes écrit en C, il peut aussi bien être utilisé pour compiler des fichiers latex ou simplement pour exécuter des commandes shell.&lt;/p&gt;
+&lt;p&gt;Les commandes à exécuter ainsi que les dépendances entre fichiers sont décrites dans un fichier nommé makefile.&lt;/p&gt;
+&lt;h2&gt;Les bases&lt;/h2&gt;
+&lt;p&gt;Un makefile est composé d'une ou plusieurs règles. Une règles peut représenter un exécutable, une bibliothèque ou un groupe de commandes quelconques.&lt;/p&gt;
+&lt;p&gt;Lorsque l'on exécute la commande &lt;code&gt;make&lt;/code&gt;, GNU make cherche dans le dossier courant après un fichier nommé GNUmakefile, makefile, Makefile (dans cet ordre).&lt;/p&gt;
+&lt;p&gt;Il est recommandé d'utiliser le nom Makefile, car le &lt;em&gt;M&lt;/em&gt; est plus visible. Le nom GNUmakefile n'est à utilisé que si vous utilisé des spécificités de GNU make.&lt;/p&gt;
+&lt;p&gt;Une règle de makefile ressemble à ceci :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;cible &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;é&lt;span class="n"&gt;pendances&lt;/span&gt;
+    recette
+    …
+    …
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Avec le vocable anglais :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;target &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;prerequisites&lt;/span&gt;
+    recipe
+    …
+    …
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabullation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Premier exemple&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    gcc -o hello.bin hello.c
+
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm hello.bin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ce &lt;em&gt;makefile&lt;/em&gt; est constitué de deux cibles :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;La cible hello : permet de créer l'application nommé hello.bin&lt;/li&gt;
+&lt;li&gt;La cible clean : permet de supprimer cette application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La commande &lt;code&gt;make hello&lt;/code&gt; crée l'exécutable, la commande &lt;code&gt;make clean&lt;/code&gt; le supprime. La commande &lt;code&gt;make&lt;/code&gt;, sans target, exécutera uniquement la première target trouvée dans le makefile.&lt;/p&gt;
+&lt;p&gt;Voici le résultat de l'exécution :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; make clean
+&lt;span class="go"&gt;rm hello.bin&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Second exemple&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    gcc -o hello.bin hello.c mesfonctions.o
+
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;h&lt;/span&gt;
+    gcc -c mesfonctions.c
+
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm hello.bin mesfonctions.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Nous avons ajouté une target &lt;em&gt;mesfonctions.o&lt;/em&gt; qui compile le fichier &lt;em&gt;mesfonctions.c&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Nous avons également ajouté des dépendances, il s'agit de la liste de fichiers qui suit la définition de la &lt;em&gt;target&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;La &lt;em&gt;target hello&lt;/em&gt; dépend des fichiers &lt;em&gt;hello.c&lt;/em&gt; et &lt;em&gt;mesfonctions.o&lt;/em&gt;.
+La &lt;em&gt;target mesfonctions.o&lt;/em&gt; dépend des fichiers &lt;em&gt;mesfonctions.c&lt;/em&gt; et &lt;em&gt;mesfonctions.h&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Avant d’exécuté la recette de la target &lt;em&gt;hello&lt;/em&gt;, &lt;em&gt;make&lt;/em&gt; va vérifier si ces dépendances sont à jour. &lt;em&gt;make&lt;/em&gt;  rechercher la target &lt;em&gt;mesfonctions.o&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;La vérification de la target &lt;em&gt;mesfonctions.o&lt;/em&gt; consiste à vérifier que la date et l'heure du fichier &lt;em&gt;mesfonctions.o&lt;/em&gt; est plus récente que celles de ses dépendances.  Si c'est la cas, make continue sans exécuter la recette de la cible &lt;em&gt;mesfonctions.o&lt;/em&gt;, sinon il l'exécute.&lt;/p&gt;
+&lt;p&gt;Ce mécanisme permet de recompiler uniquement les fichiers qui ont été modifié depuis la dernière compilation.&lt;/p&gt;
+&lt;p&gt;Voici le résultat de l'exécution :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -c mesfonctions.c&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Une modification du fichier &lt;em&gt;mesfonctions.c&lt;/em&gt; recompile le tout :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; mesfonctions.c 
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -c mesfonctions.c&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Une modification du fichier &lt;em&gt;hello.c&lt;/em&gt; ne recompile pas le fichier &lt;em&gt;mesfonctions.c&lt;/em&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; hello.c 
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Si nous exécutons plusieurs fois la &lt;code&gt;make&lt;/code&gt;, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ceci est dû au fait que nous générons un fichier &lt;em&gt;hello.bin&lt;/em&gt; non pas &lt;em&gt;hello&lt;/em&gt;.
+Lorsque make 'vérifie' une target, il cherche un fichier qui porte le même nom que la target.
+Il faut donc veiller à ce que le nom des targets et des fichiers générés coïncides.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    gcc -o hello hello.c mesfonctions.o
+
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;h&lt;/span&gt;
+    gcc -c mesfonctions.c
+
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm hello mesfonctions.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Maintenant deux appels consécutif à make ne recompile plus inutilement &lt;em&gt;hello&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;gcc -o hello hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;make: &amp;#39;hello&amp;#39; is up to date.&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Les variables&lt;/h2&gt;
+&lt;p&gt;Les variables, parfois appelées MACRO, permettent de substituer du texte. Le nom d'une variable ne peut contenir les symboles ':', '#', '=' et l'espace.&lt;/p&gt;
+&lt;p&gt;Il est généralement conseillé de n'utiliser que des lettres, des nombres et le symbole underscore. Le nom d'une variable est &lt;em&gt;case-sensitive&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Habituellement, les noms de variables sont en majuscules. Cependant, le manuel &lt;em&gt;GNU Make&lt;/em&gt; fait les recommandations suivantes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;utiliser des noms en minuscules pour les variables à usage interne ;&lt;/li&gt;
+&lt;li&gt;réserver les noms en majuscules pour :&lt;ul&gt;
+&lt;li&gt;des paramètres contrôlant des règles implicites ;&lt;/li&gt;
+&lt;li&gt;des paramètres que l'utilisateur peut (re-)définir par des options de la ligne de commande.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Définir une variables&lt;/h3&gt;
+&lt;p&gt;Pour définir une variable, on débute une nouvelle ligne  qui commence par le nom de la variable, suivi par '=', ':=' ou '::='. Tout ce qui se trouve à droite du signe d'affectation est le contenu de la variable.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; hello.o mesfonctions.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ceci définit une variable nommé &lt;em&gt;objects&lt;/em&gt; dont le contenu est : &lt;em&gt;hello.o mesfonctions.o&lt;/em&gt;. Les espaces entourant le signe d'affectation sont ignorés.&lt;/p&gt;
+&lt;p&gt;Pour utilisé une variable, on utilise la notation &lt;code&gt;$(nom_variable)&lt;/code&gt;ou &lt;code&gt;${nom_variable}&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; hello.o mesfonctions.o
+&lt;span class="nf"&gt;hello &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+        gcc -o hello.bin &lt;span class="k"&gt;$(&lt;/span&gt;objects&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utilisé une variable &lt;em&gt;x&lt;/em&gt; et y faire référence pas &lt;em&gt;$x&lt;/em&gt;. Cette pratique est fortement découragée.&lt;/p&gt;
+&lt;p&gt;Il n'y a pas de limite sur la longueur du contenu d'une variable (à l'exception de la taille de la mémoire disponible).&lt;/p&gt;
+&lt;h4&gt;Type de variables&lt;/h4&gt;
+&lt;p&gt;Il existe deux catégories de variables : &lt;em&gt;les variables expansées récursivement&lt;/em&gt; et &lt;em&gt;les variables simplement expansées&lt;/em&gt;.&lt;/p&gt;
+&lt;h5&gt;Variables expansées récursivement&lt;/h5&gt;
+&lt;p&gt;Elle se définissent en utilisant le signe '=' ou la directive &lt;em&gt;define&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Si une variable de ce type fait référence à une seconde variable, la seconde variable sera évaluée et son contenu la remplacera et ceci de manière récursive.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;bar&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Hello &lt;span class="k"&gt;$(&lt;/span&gt;who&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;who&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; world !!!
+
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;foo&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ce makefile affichera &lt;em&gt;Hello world !!!&lt;/em&gt;, comme on s'y attend.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ce type de variable à plusieurs inconvénient, dont un majeur, il n'est pas possible d'affecter une variable à elle même.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt; -O
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ceci crée une boucle infinie !&lt;/p&gt;
+&lt;h5&gt;Variables simplement expansées&lt;/h5&gt;
+&lt;p&gt;Elles permettent de contourner les problèmes des variables expansées récursivement.&lt;/p&gt;
+&lt;p&gt;Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.&lt;/p&gt;
+&lt;p&gt;Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut être pas supporté par une ancienne version de make.&lt;/p&gt;
+&lt;p&gt;La valeur d'une variable simplement expansée est calculé une seule fois lors de sa définition.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello
+&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;x&lt;span class="k"&gt;)&lt;/span&gt; world
+&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; !!!
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;est équivalent à &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello world
+&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; !!!
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Ajouter du contenu à une variable&lt;/h3&gt;
+&lt;p&gt;Pour concaténer du contenu à une variable, quelque soit son type, on utilise le signe '+='.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; main.o foo.o bar.o utils.o
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; another.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ce qui est l'équivalent de &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; main.o foo.o bar.o utils.o
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;objects&lt;span class="k"&gt;)&lt;/span&gt; another.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Si la variable n'est pas définie, avec l'utilisation du signe '+=', celui-ci agira comme '=' et définira donc une variable expansée récursivement.&lt;/p&gt;
+&lt;h3&gt;Supprimer une variable&lt;/h3&gt;
+&lt;p&gt;Pour supprimer le contenu d'une variable, il suffit de lui affecter un contenu vide.&lt;/p&gt;
+&lt;p&gt;Cependant, il y a une différence entre une variable non définie et une variable vide. Une variable non définie n'existe pas, alors qu'une variable vide existe, mais n'a pas de contenu.&lt;/p&gt;
+&lt;p&gt;Le mot clef &lt;em&gt;undefine&lt;/em&gt; permet de supprimer une variable.&lt;/p&gt;
+&lt;h3&gt;Les variables d'environnement&lt;/h3&gt;
+&lt;p&gt;Toutes les variables d'environnement vue par make lors de son démarrage sont transformées en variable make
+avec le même nom et la même valeur.&lt;/p&gt;
+&lt;p&gt;Il est ainsi possible de passer des options de compilation sans modifier le makefile. Il faut pour cela que le makefile n’écrase pas le contenu de cette variable par une affection avec &lt;code&gt;=&lt;/code&gt; ou &lt;code&gt;:=&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Target PHONY&lt;/h2&gt;
+&lt;p&gt;Dans certains &lt;em&gt;makefile&lt;/em&gt; écrits jusqu’à présent, nous avons une &lt;em&gt;target clean&lt;/em&gt; qui n'a pas de dépendance et qui ne produit aucun fichier.&lt;/p&gt;
+&lt;p&gt;Si votre dossier contient un fichier nommé &lt;em&gt;clean&lt;/em&gt;, cela va poser un problème.&lt;/p&gt;
+&lt;p&gt;Lors de l'appel de la commande &lt;code&gt;make clean&lt;/code&gt;, &lt;em&gt;make&lt;/em&gt; va détecter le fichier &lt;em&gt;clean&lt;/em&gt; et considérer qu'il est à jour ! La recette ne sera jamais exécutée.&lt;/p&gt;
+&lt;p&gt;Pour résoudre se problème, on déclare simplement clean comme dépendance à la cible spécial &lt;em&gt;.PHONY&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Les dépendances de la cible &lt;em&gt;.PHONY&lt;/em&gt; sont exécutées inconditionnellement.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm -f *.o
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Exemple&lt;/h2&gt;
+&lt;p&gt;Dans l'exemple suivant, les variables &lt;em&gt;CPPFLAGS&lt;/em&gt;,&lt;em&gt;CFLAGS&lt;/em&gt;,&lt;em&gt;LDFLAGS&lt;/em&gt;,&lt;em&gt;LDLIBS&lt;/em&gt; sont vides. Ce qui suit le caractère &lt;em&gt;#&lt;/em&gt; est en commentaire pour donner un exemple d'utilisation de ces variables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
+
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -o hello hello.o mesfonctions.o &lt;span class="k"&gt;$(&lt;/span&gt;LDFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;LDLIBS&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;hello.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c hello.c &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c mesfonctions.c &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm -f *.o
+
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+    rm -f hello
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;STATIC PATTERN&lt;/h2&gt;
+&lt;p&gt;Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser
+une règle &lt;em&gt;générique&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
+
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="nv"&gt;$@&lt;/span&gt; $^ &lt;span class="k"&gt;$(&lt;/span&gt;LDFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;LDLIBS&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;%.o &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;c&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c $&amp;lt; &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm -f *.o
+
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+    rm -f hello
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Voici la signification des variables spéciales utilisée ci-dessus :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$@ : le nom de la cible &lt;/li&gt;
+&lt;li&gt;$&amp;lt; : le nom de la 1er dépendance&lt;/li&gt;
+&lt;li&gt;$^ : la liste de dépendance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La &lt;em&gt;subtilité&lt;/em&gt; est ici : &lt;code&gt;%.o : %.c&lt;/code&gt;. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.&lt;/p&gt;
+&lt;h2&gt;Les régles implicites&lt;/h2&gt;
+&lt;p&gt;Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran,
+TeX et quelques autres.&lt;/p&gt;
+&lt;p&gt;Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.&lt;/p&gt;
+&lt;p&gt;Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target &lt;code&gt;%.o : %.c&lt;/code&gt;, ou même supprimer
+cette target.&lt;/p&gt;
+&lt;p&gt;En rencontrant &lt;em&gt;hello.o&lt;/em&gt; et &lt;em&gt;mesfonctions.o&lt;/em&gt;, make va chercher à utiliser une de ces règles implicites.
+Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et utilisera donc la règle
+implicite du C.&lt;/p&gt;
+&lt;p&gt;Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne
+la recette qui sera utilisée.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;fichier source&lt;/th&gt;
+&lt;th&gt;recette utilisée&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.c&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(CC) $(CPPFLAGS) $(CFLAGS) -c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compilateur C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.cc / .cpp / .C&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compilateur C++&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.s&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(AS) $(ASFLAGS)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Assembleur&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette
+utilisée sera celle du pré-processeur : &lt;code&gt;$(CPP) $(CPPFLAGS)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette
+utilisée sera celle de l'éditeur de liens (linker) : &lt;code&gt;$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Cette règle fonctionne pour un programme simple d'un fichier source. Elle fonctionne également avec plusieurs
+fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;code&gt;x: y.o z.o&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.&lt;/p&gt;
+&lt;p&gt;Voici les variables utilisées par les règles implicites :&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CC&lt;/td&gt;
+&lt;td&gt;compilateur C, par défaut vaut 'cc'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CXX&lt;/td&gt;
+&lt;td&gt;compilateur C++, par défaut vaut 'g++'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CPP&lt;/td&gt;
+&lt;td&gt;préprocesseur C, par défaut vaut '$(CC) -E'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au compilateur C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CXXFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au compilateur C++&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CPPFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au préprocesseur, comme -I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LDFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au linker, comme -L&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LDLIBS&lt;/td&gt;
+&lt;td&gt;options à passer au linker, comme -l&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;On peut maintenant ré-écrire l’exemple précédent :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
+
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm -f *.o
+
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+    rm -f hello
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Wildcard&lt;/h2&gt;
+&lt;p&gt;Si votre projet comporte beaucoup de fichiers, cela devient problématique de maintenir la liste des dépendances du binaire.&lt;/p&gt;
+&lt;p&gt;On peut alors être tenté de créer une variable &lt;code&gt;objects = *.o&lt;/code&gt; qui désignerait tout les fichiers .o.&lt;/p&gt;
+&lt;p&gt;La variable &lt;em&gt;objects&lt;/em&gt; contient la chaîne de caractères *.o et non l'ensemble des fichiers .o. De plus, si votre dossier ne contient aucun fichier .o, l’expansion de *.o est vide.&lt;/p&gt;
+&lt;p&gt;Voici comment procéder :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Utiliser &lt;code&gt;$(wildcard *.c)&lt;/code&gt; pour lister les fichiers .c du dossier.&lt;/li&gt;
+&lt;li&gt;Utiliser la substitution de paterne pour transformer les .c en .o &lt;code&gt;$(patsubst %.c,%.o,$(wildcard *.c))&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Votre makefile devient ceci :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
+
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.c,%.o,&lt;span class="k"&gt;$(&lt;/span&gt;wildcard *.c&lt;span class="k"&gt;))&lt;/span&gt;
+&lt;span class="nf"&gt;hello &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    rm -f *.o
+
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+    rm -f hello
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Dossier de rechercher des dépendances&lt;/h2&gt;
+&lt;p&gt;VPATH
+vpath&lt;/p&gt;
+&lt;h2&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Pour installer le résultat généré par make,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;il faut copier les fichiers dans les dossiers de destinations,&lt;/li&gt;
+&lt;li&gt;modifier le propriétaire et le gourpe des fichiers,&lt;/li&gt;
+&lt;li&gt;modifier les droits.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La commande &lt;em&gt;install&lt;/em&gt; permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne
+pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.&lt;/p&gt;
+&lt;p&gt;Par défaut, les programmes sont installés dans /usr/local.&lt;/p&gt;
+&lt;p&gt;La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : &lt;code&gt;make DESTDIR=$HOME/stage install&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;INSTALL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; install
+&lt;span class="nv"&gt;INSTALL_PROGRAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;INSTALL_DATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt; -m &lt;span class="m"&gt;644&lt;/span&gt;
+
+&lt;span class="nv"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /usr/local
+&lt;span class="nv"&gt;bindir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;prefix&lt;span class="k"&gt;)&lt;/span&gt;/bin
+&lt;span class="nv"&gt;libdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;prefix&lt;span class="k"&gt;)&lt;/span&gt;/lib
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;span class="nf"&gt;install&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+    &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL_PROGRAM&lt;span class="k"&gt;)&lt;/span&gt; hello &lt;span class="k"&gt;$(&lt;/span&gt;DESTDIR&lt;span class="k"&gt;)$(&lt;/span&gt;bindir&lt;span class="k"&gt;)&lt;/span&gt;/hello
+    &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL_DATA&lt;span class="k"&gt;)&lt;/span&gt; libhello.a &lt;span class="k"&gt;$(&lt;/span&gt;DESTDIR&lt;span class="k"&gt;)$(&lt;/span&gt;libdir&lt;span class="k"&gt;)&lt;/span&gt;/libhello.a
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Le problème des makefiles&lt;/h2&gt;
+&lt;p&gt;Comme dit plus haut, cette article est une introduction, si vous voulez en savoir plus, je vous invite à lire le manuel officiel de make : &lt;a href=""&gt;https://www.gnu.org/software/make/manual/make.html&lt;/a&gt;. &lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Afficher un fichier en hexadécimal</title><link href="http://fgedocs.boitemail.be/afficher-un-fichier-en-hexadecimal.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2016-09-25:/afficher-un-fichier-en-hexadecimal.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et en Qt.&lt;/p&gt;
+&lt;p&gt;Par défaut &lt;em&gt;od&lt;/em&gt; (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option &lt;em&gt;-x&lt;/em&gt; pour avoir un affichage hexa.&lt;/p&gt;
+&lt;p&gt;od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc &lt;code&gt;od -x --endian=big hello.txt&lt;/code&gt; ou &lt;code&gt;hexdump -C hello.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;hexdump -C hello.txt&lt;/code&gt; donne :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;00000000  68 65 6c 6c 6f 0a                                 |hello.|
+00000006
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;La première colonne correspond à l'offset des données présentées dans la seconde colonne.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>diff &amp; patch</title><link href="http://fgedocs.boitemail.be/diff-patch.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2016-09-25:/diff-patch.html</id><summary type="html">&lt;p&gt;diff et patch sont deux outils en ligne de commande.&lt;/p&gt;
+&lt;p&gt;diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de …&lt;/p&gt;</summary><content type="html">&lt;p&gt;diff et patch sont deux outils en ligne de commande.&lt;/p&gt;
+&lt;p&gt;diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de voir les ajouts et/ou suppressions qu'il y a eu entre chaque fichier.
+Ce résultat peut être stocké dans un fichier, que l'on nomme patch.&lt;/p&gt;
+&lt;p&gt;La commande patch permet d'appliquer un &lt;em&gt;patch&lt;/em&gt;. Le but est donc de pouvoir ré-appliquer une modification sur un fichier ou dossier en version original.&lt;/p&gt;
+&lt;h2&gt;diff&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;diff -q fichier1 fichier2&lt;/code&gt; permet de savoir si les fichiers sont différents.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -s fichier1 fichier2&lt;/code&gt; permet de savoir si les fichiers sont identiques.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -y fichier1 fichier2&lt;/code&gt; affiche les deux fichiers côte à côte.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -u fichier1 fichier2&lt;/code&gt; imprime (par défaut) 3 lignes qui entourent la différence.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -a fichier1 fichier2&lt;/code&gt; traite les fichiers comme des fichiers textes.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff --color=auto fichier1 fichier2&lt;/code&gt; ajoute de la couleur au résultat.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -r dossier1 dossier2&lt;/code&gt; permet de comparer deux dossiers récursivement.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff -N dossier1 dossier2&lt;/code&gt; traite les fichiers absents comme étant vides.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il y a évidement une multitude d'autres options que vous découvrirez dans &lt;code&gt;man diff&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Meld&lt;/strong&gt;, &lt;strong&gt;Kdiff3&lt;/strong&gt; et &lt;strong&gt;Kompare&lt;/strong&gt; sont des versions graphiques de diff. Le premier est basé sur GTK, les deux autres sur Qt.&lt;/p&gt;
+&lt;h2&gt;Créer un patch&lt;/h2&gt;
+&lt;p&gt;Admettons que votre répertoire de travail est $HOME/projetX. Avant de le modifier, faite en une copie &lt;code&gt;cp -r $HOME/projetX $HOME/projetX.orig&lt;/code&gt;.
+Voici le fichier hello.c original :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Que vous modifiez en :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello World !!!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;La commande &lt;code&gt;diff -Naur projetX.orig projetX&lt;/code&gt; donne comme résultat :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gh"&gt;diff -Naur projetX.orig/hello.c projetX/hello.c&lt;/span&gt;
+&lt;span class="gd"&gt;--- projetX.orig/hello.c  2016-09-25 03:48:01.216191638 +0000&lt;/span&gt;
+&lt;span class="gi"&gt;+++ projetX/hello.c 2016-09-25 03:48:12.059524697 +0000&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -1,6 +1,6 @@&lt;/span&gt;
+ #include &amp;lt;stdio.h&amp;gt;
+ int main()
+ {
+&lt;span class="gd"&gt;-    printf(&amp;quot;Hello\n&amp;quot;);&lt;/span&gt;
+&lt;span class="gi"&gt;+    printf(&amp;quot;Hello world !!!\n&amp;quot;);&lt;/span&gt;
+     return 0;
+ }
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pour créer le patch, il suffit de rediriger la commande diff dans un fichier : &lt;code&gt;diff -Naur projetX.orig projetX &amp;gt; $HOME/bug1.patch&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pour la suite supprimer le dossier &lt;em&gt;projectX&lt;/em&gt; &lt;code&gt;rm -r $HOME/projetX&lt;/code&gt; et renommer &lt;em&gt;projetX.orig&lt;/em&gt; &lt;code&gt;mv projetX.orig projetX&lt;/code&gt; (on applique le patch sur la version d'origine).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Appliquer un patch&lt;/h2&gt;
+&lt;p&gt;Placez vous dans le dossier parent de votre projet. La commande &lt;code&gt;patch -p0 &amp;lt; $hOME/bug1.patch&lt;/code&gt; appliquera votre patch sur le dossier &lt;em&gt;projetX&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Si vous avez renommé, ou souhaitez appliquer le patch sur une copie du projet, appliquez la commande depuis le dossier du projet avec l'option &lt;em&gt;-p1&lt;/em&gt;: &lt;code&gt;patch -p1 &amp;lt; $HOME/bug1.patch&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Cette option &lt;em&gt;-p1&lt;/em&gt; permet à la commande patch d'enlever un niveau de dossier au chemin indiqué dans le fichier &lt;em&gt;.patch&lt;/em&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Il ne faut pas oublier que pour créer un patch, il faut conserver une copie non modifiée du projet. Ceci est grandement facilité en utilisant des outils de gestion de version comme git ou svn.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Est-ce vraiment utile tout cela ?&lt;/h2&gt;
+&lt;p&gt;Voici quelques exemples d'utilisation.&lt;/p&gt;
+&lt;h3&gt;Exemple 1&lt;/h3&gt;
+&lt;p&gt;Vous venez de modifier votre site web, votre modification porte sur plusieurs fichiers php, js, html et css. Soit vous transférez complètement la dernière version de votre site, soit uniquement les fichiers impactés.&lt;/p&gt;
+&lt;p&gt;Dans le premier cas, cela peu prendre un petit peu de temps. Dans le second cas, il faut veiller à ne pas oublier de fichiers.&lt;/p&gt;
+&lt;p&gt;Une autre solution est possible, créer un patch et appliquer ce patch sur le serveur. Le patch est de petite taille comparé à la totalité du site (transfert instantané), aucune modification n'est oubliée.&lt;/p&gt;
+&lt;p&gt;Ici, il faut soit un accès en ssh à votre serveur, soit une interface web qui permet d'appliquer un patch.&lt;/p&gt;
+&lt;h3&gt;Exemple 2&lt;/h3&gt;
+&lt;p&gt;Admettons que vous modifiez un fichier .c du kernel, le meilleur moyen pour diffuser ou conserver cette modification est un fichier &lt;em&gt;patch&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Lorsque vous recevez un &lt;em&gt;patch&lt;/em&gt;, vous pouvez l'éditer et voir les modifications qui seront apportées à l'arborescence.&lt;/p&gt;
+&lt;p&gt;Votre patch sera même peut être applicable sur les versions successives du kernel. En une commande vous pouvez ré-appliquer vos modifications. &lt;/p&gt;
+&lt;p&gt;Par contre si vous diffusez une archive complète du kernel contenant votre modification, comment faire pour intégrer votre modification au kernel suivant ou à une version sur laquelle d'autres patchs ont déjà été appliqués ?&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>indent</title><link href="http://fgedocs.boitemail.be/indent.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2016-09-25:/indent.html</id><summary type="html">&lt;p&gt;Fini de perdre du temps à ré-indenter du code selon vos gouts !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.&lt;/p&gt;
+&lt;p&gt;Voici un petit programme &lt;em&gt;cochonné&lt;/em&gt; pour illustrer la suite :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#define TXT &amp;quot;Hello Wolrd!\n&amp;quot;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;    &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;  &lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;     &lt;span class="p"&gt;(&lt;/span&gt;      &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="cm"&gt;/*A comment*/&lt;/span&gt;
+&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;}&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt; &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;indent&lt;/strong&gt; propose 3 styles prédéfinis.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Le style GNU (le style par défaut) : &lt;code&gt;indent demo.c&lt;/code&gt; ou &lt;code&gt;indent -gnu demo.c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;
+&lt;span class="nf"&gt;main&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="cm"&gt;/*A comment */&lt;/span&gt;
+  &lt;span class="n"&gt;hello&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt;
+&lt;span class="nf"&gt;hello&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Le style Kernighan &amp;amp; Ritchie (ou style k&amp;amp;r, les concepteurs du C) : &lt;code&gt;indent -kr demo.c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/*A comment */&lt;/span&gt;
+    &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Le style Berkeley (le style d'origine) : &lt;code&gt;indent -orig demo.c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;             &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;
+&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;     * A comment &lt;/span&gt;
+&lt;span class="cm"&gt;     */&lt;/span&gt;
+    &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt;
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ces styles définissent chacun un ensemble d'options. Vous pouvez alors ajouter et/ou redéfinir quelques options, voir même sélectionner vous même les options que vous souhaitez.&lt;/p&gt;
+&lt;p&gt;Pour ne pas indiquer 15 options à chaque appel d'&lt;em&gt;indent&lt;/em&gt;, vous pouvez :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;soit définir la variable d'environnement INDENT_PROFILE qui indique le nom du fichier contenant les options ;&lt;/li&gt;
+&lt;li&gt;soit placer un fichier &lt;em&gt;.indent.pro&lt;/em&gt; dans le dossier contenant votre code source (la commande   devra être lancé depuis ce dossier) ;&lt;/li&gt;
+&lt;li&gt;soit placer un fichier &lt;em&gt;.indent.pro&lt;/em&gt; à la racine de votre dossier personnel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pour activer le style k&amp;amp;r par défaut : &lt;code&gt;echo -kr &amp;gt; $HOME/.indent.pro&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Pour utiliser le style GNU sans le retrait des accolades : &lt;code&gt;echo -gnu -bli0 &amp;gt; $HOME/.indent.pro&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Une lecture de la page de &lt;code&gt;man indent&lt;/code&gt; sera nécessaire pour découvrir les options, elles sont trop nombreuses pour les décrire ici.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Wildcards</title><link href="http://fgedocs.boitemail.be/wildcards.html" rel="alternate"></link><published>2016-03-06T21:52:00+01:00</published><updated>2016-03-06T21:52:00+01:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2016-03-06:/wildcards.html</id><summary type="html">&lt;p&gt;Les caractères génériques&lt;/p&gt;</summary><content type="html">&lt;p&gt;Les caractères génériques ou wilcards, permettent d'appliquer une commande à un groupe de fichiers et/ou dossiers dont les noms sont similaires.&lt;/p&gt;
+&lt;p&gt;Une chaîne de texte est un &lt;strong&gt;wildcard pattern&lt;/strong&gt; si elle contient au moins un de ces caractères &lt;strong&gt;?&lt;/strong&gt; &lt;strong&gt;*&lt;/strong&gt; &lt;strong&gt;[&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Le &lt;strong&gt;globbing&lt;/strong&gt; est l'opération qui développe un &lt;strong&gt;wildcard pattern&lt;/strong&gt; en une liste de mots qui correspondent au pattern.&lt;/p&gt;
+&lt;p&gt;Ce qui suit est inspiré de la page &lt;code&gt;man 7 glob&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;L'astérisque *&lt;/h2&gt;
+&lt;p&gt;Permet de remplacer de zéro à plusieurs caractères.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls img*&lt;/code&gt; liste les noms de fichiers débutant par &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls *img&lt;/code&gt; liste les noms de fichiers se terminant par &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls *img*&lt;/code&gt; liste tout les noms de fichiers contenant &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Le point d’interrogation ?&lt;/h2&gt;
+&lt;p&gt;Représente toujours un seul caractère.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls ?&lt;/code&gt; liste les noms comportant un seul caractère.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls img????.jpg&lt;/code&gt; liste les noms de fichiers commençant par &lt;em&gt;img&lt;/em&gt; suivi de quatre caractères et qui se terminent par &lt;em&gt;.jpg&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On peut évidement mixer &lt;em&gt;*&lt;/em&gt; et &lt;em&gt;?&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls img????*&lt;/code&gt; liste les noms de fichiers commençant par &lt;em&gt;img&lt;/em&gt; suivi de quatre caractères et se terminant pas un nombre quelconque de caractères.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Les crochets [ ]&lt;/h2&gt;
+&lt;p&gt;Les crochets permettent d'indiquer une liste de caractères de remplacement.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;ls ?mg*&lt;/code&gt; liste les noms de fichiers contenant &lt;em&gt;m&lt;/em&gt; et &lt;em&gt;g&lt;/em&gt; à la seconde et troisième position.&lt;/p&gt;
+&lt;p&gt;On peut souhaiter limiter la sélection aux fichiers &lt;em&gt;Img...&lt;/em&gt; et &lt;em&gt;img...&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls [iI]mg*&lt;/code&gt; liste donc les noms commençant par &lt;em&gt;img&lt;/em&gt; ou &lt;em&gt;Img&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Si le point d'exclamation &lt;strong&gt;!&lt;/strong&gt; suit le crochet ouvrant &lt;strong&gt;[&lt;/strong&gt;, l'expression est inversée.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls [!iI]mg*&lt;/code&gt; sélectionne tout les fichiers ne commençant par &lt;strong&gt;i&lt;/strong&gt; ou &lt;strong&gt;I&lt;/strong&gt;, dont la seconde et troisième lettre sont &lt;em&gt;m&lt;/em&gt; et &lt;em&gt;g&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Notez :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Les crochets ne peuvent pas être vide.&lt;/li&gt;
+&lt;li&gt;Le crochet fermant &lt;strong&gt;]&lt;/strong&gt; peut être présent. Dans ce cas, il doit suivre le crochet ouvrant.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[ ][!]&lt;/strong&gt; permet de faire correspondre les caractères &lt;strong&gt;]&lt;/strong&gt; &lt;strong&gt;[&lt;/strong&gt; et &lt;strong&gt;!&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il est également possible d'indiquer une plage de caractères (range) en utilisant le tiret &lt;strong&gt;-&lt;/strong&gt; : &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;[a-f]&lt;/em&gt; est équivalent à &lt;em&gt;[abcdef]&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;[a-fA-F0-9]&lt;/em&gt; est équivalent à &lt;em&gt;[abcdefABCDEF0123456789]&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Si le tiret doit faire partie des caractères de remplacement, il doit être placé en première ou dernière position.&lt;/p&gt;
+&lt;h2&gt;Pathnames&lt;/h2&gt;
+&lt;p&gt;Le globbing s'applique séparément sur chaque élément d'un chemin. Le caractère &lt;strong&gt;/&lt;/strong&gt; ne peut être remplacé par le point d'interrogation, l'astérisque ou un range.&lt;/p&gt;</content><category term="cmd-Line"></category></entry><entry><title>XFCE4 - Menu Whisker</title><link href="http://fgedocs.boitemail.be/xfce4-menu-whisker.html" rel="alternate"></link><published>2016-02-28T00:00:00+01:00</published><updated>2016-02-28T00:00:00+01:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2016-02-28:/xfce4-menu-whisker.html</id><summary type="html">&lt;p&gt;Ajouter &lt;em&gt;Menu whisker&lt;/em&gt; à XFCE sous Debian.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Voici comment ajouter &lt;em&gt;Menu whisker&lt;/em&gt; à XFCE sous Debian.
+Il permet de remplacer le menu par défaut par trop à mon gout.&lt;/p&gt;
+&lt;p&gt;Comme toujours, il faut mettre à jours la base de données d'aptitude avant de commencer.&lt;/p&gt;
+&lt;h2&gt;Etape 1 : installer le plugin whiskermenu&lt;/h2&gt;
+&lt;p&gt;Dans un terminal faites ceci :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo aptitude update
+sudo aptitude install xfce4-whiskermenu-plugin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Voilà qui est fait, il reste à le mettre en place.&lt;/p&gt;
+&lt;h2&gt;Etape 2 : ouvrir le gestionnaire du tableau de bord&lt;/h2&gt;
+&lt;h3&gt;Menu paramètres&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Dans le menu choisir : Paramètres.&lt;/p&gt;
+&lt;p&gt;Chercher après l'item &lt;em&gt;Tableau de bord&lt;/em&gt; ou passez par le &lt;em&gt;Gestionnaire de paramètre&lt;/em&gt;. Le gestionnaire de paramètres présente les choses plus proprement.&lt;/p&gt;
+&lt;h3&gt;Gestionnaire de paramètres&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Les barres de menu sont nommées &lt;em&gt;Tableau de bord&lt;/em&gt;, c'est là que l'on peut modifier, ajouter ou supprimer des barres des menus.&lt;/p&gt;
+&lt;p&gt;Cliquer sur l'icône &lt;em&gt;Tableau de bord&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;Gestionnaire de tableaux de bords&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-3.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Tableau de bord 1&lt;/em&gt; correspond au menu situé en haut de l'écran, le &lt;em&gt;Tableau de bord 2&lt;/em&gt; à celui en bas de l'écran.&lt;/p&gt;
+&lt;p&gt;Choisissez l'onglet &lt;em&gt;Greffons&lt;/em&gt; qui permet de modifier le contenu du tableau de bord sélectionné.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-4.png"&gt;&lt;/p&gt;
+&lt;p&gt;Les boutons latéraux permettent de modifier l'ordre des plugins, d'en ajouter ou supprimer.&lt;/p&gt;
+&lt;p&gt;Cliquer sur le bouton &lt;em&gt;plus&lt;/em&gt; pour passer à la fenêtre suivante.&lt;/p&gt;
+&lt;h3&gt;Ajouter le greffon au tableau de bords&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-5.png"&gt;&lt;/p&gt;
+&lt;p&gt;Il n'y a plus qu'à sélectionner &lt;em&gt;Menu Whisker&lt;/em&gt;, cliquer sur &lt;em&gt;Ajouter&lt;/em&gt; et ensuite
+&lt;em&gt;Fermer&lt;/em&gt;. La fenêtre des greffons devrait être la suivante :&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-6.png"&gt;&lt;/p&gt;
+&lt;p&gt;Sélectionner l'item &lt;em&gt;Menu Whisker&lt;/em&gt; et faite le remonter avec le bouton &lt;em&gt;flèche
+haut&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sélectionner l'item &lt;em&gt;Menu des applications&lt;/em&gt; et supprimer le avec le bouton
+&lt;em&gt;moins&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Vous devriez avoir ceci maintenant.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="http://fgedocs.boitemail.be/images/menu-whisker-7.png"&gt;&lt;/p&gt;</content><category term="XFCE4"></category></entry><entry><title>Xorg - configuration du clavier</title><link href="http://fgedocs.boitemail.be/xorg-configuration-du-clavier.html" rel="alternate"></link><published>2010-12-03T10:20:00+01:00</published><updated>2018-05-02T06:34:00+02:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2010-12-03:/xorg-configuration-du-clavier.html</id><summary type="html">&lt;p&gt;En finir avec son clavier mal configuré&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lors de son démarrage, xorg scrute une liste de dossiers dans un ordre déterminé, à la recherche d'un fichier &lt;em&gt;xorg.conf&lt;/em&gt; ou de fichiers .conf dans un dossier nommé &lt;em&gt;xorg.conf.d&lt;/em&gt;. Le dossier &lt;em&gt;xorg.conf.d&lt;/em&gt; permet simplement de découper la configuration en plusieurs fichiers.&lt;/p&gt;
+&lt;p&gt;Notez que si vous utilisez le fichier &lt;em&gt;xorg.conf&lt;/em&gt;, le dossier &lt;em&gt;xorg.cond.d&lt;/em&gt; est simplement ignoré et que, dès lors le fichier &lt;em&gt;xorg.conf&lt;/em&gt; doit contenir la totalité de la configuration.&lt;/p&gt;
+&lt;p&gt;La liste de dossier scruté par xorg peut dépendre de la distribution que vous utilisez, mais généralement à :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;/etc/X11/xorg.conf&lt;/li&gt;
+&lt;li&gt;/etc/X11/xorg.conf.d/…&lt;/li&gt;
+&lt;li&gt;/usr/share/X11/xorg.conf&lt;/li&gt;
+&lt;li&gt;/usr/share/X11/xorg.conf.d/…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il est fort probable de ne rien trouver dans /etc/X11, qui est là pour vous permettre de modifier la configuration sans toucher aux fichiers d'origines. Il suffit alors de recopier (avec sudo) le fichier que vous souhaitez modifier depuis &lt;em&gt;/usr/share/X11/…&lt;/em&gt; vers &lt;em&gt;/etc/X11/…&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Modifier le clavier&lt;/h2&gt;
+&lt;!--
+Généralement je ne modifie que le fichier 10-evdev.conf pour configurer correctement mon clavier.
+
+Sous Archlinux
+
+        sudo mkdir -p /etc/X11/xorg.conf.d
+        sudo cp /usr/share/xorg.conf.d/10-evdev.conf /etc/X11/xorg.conf.d
+
+    Dans ce fichier, je cherche le code suivant :
+
+        Section "InputClass"
+            Identifier      "evdev keyboard catchall"
+            MatchIsKeyboard "on"
+            MatchDevicePath "/dev/input/event*"
+            Driver          "evdev"
+        EndSection
+--&gt;
+
+&lt;p&gt;Sous Archlinux, je crée dans &lt;em&gt;/etc/X11/xorg.conf.d&lt;/em&gt; un fichier nommé &lt;em&gt;10-keyboard-layout.conf&lt;/em&gt;, avec le code suivant:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Section &amp;quot;InputClass&amp;quot;
+        Identifier      &amp;quot;keyboard Layout&amp;quot;
+        MatchIsKeyboard &amp;quot;on&amp;quot;
+EndSection
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pour un clavier belge, j'ajoute après la ligne driver :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Option &amp;quot;XkbLayout&amp;quot; &amp;quot;be&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pour un clavier mac, j'ajoute :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Option &amp;quot;XkbLayout&amp;quot; &amp;quot;fr&amp;quot;
+Option &amp;quot;XkbVariant&amp;quot; &amp;quot;mac&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Sous Debian, il est conseillé de modifier le fichier &lt;em&gt;/etc/default/keyboard&lt;/em&gt; et d'utiliser la commande &lt;code&gt;dpkg-reconfigure keyboard-configuration&lt;/code&gt;, à exécuter en &lt;em&gt;sudo&lt;/em&gt;. Celle-ci lance un utilitaire de configuration qui modifiera le fichier de configuration de xorg pour vous.&lt;/p&gt;
+&lt;h2&gt;Modifier temporairement le clavier&lt;/h2&gt;
+&lt;p&gt;Il est également possible de modifier le clavier temporairement - jusqu'à la prochaine déconnexion de l'interface graphique - en utilisant la commande &lt;code&gt;setxkbmap&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;setxkbmap -layout &amp;quot;fr&amp;quot; -variant &amp;quot;mac&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Corriger les touches qui déconnent&lt;/h2&gt;
+&lt;p&gt;Si comme moi les touches @ et &amp;lt; sont inversées sur votre clavier mac, il est possible de corriger le mapping clavier.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;xev&lt;/code&gt; (à lancer dans un terminal) permet de connaître le keycode des touches. Elle affiche le contenu de chaque événement capté par l'interface graphique. Le moindre mouvement de souris, pression ou relâchement de touche génère un événement.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;xev&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="n"&gt;KeyPress&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;serial&lt;/span&gt; &lt;span class="mi"&gt;37&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;synthetic&lt;/span&gt; &lt;span class="nb"&gt;NO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="mh"&gt;0x3200001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mh"&gt;0x165&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subw&lt;/span&gt; &lt;span class="mh"&gt;0x0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;3927162&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;163&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nl"&gt;root&lt;/span&gt;&lt;span class="p"&gt;:(&lt;/span&gt;&lt;span class="mi"&gt;474&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;228&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keycode&lt;/span&gt; &lt;span class="mi"&gt;94&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keysym&lt;/span&gt; &lt;span class="mh"&gt;0x3c&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;less&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;same_screen&lt;/span&gt; &lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;XLookupString&lt;/span&gt; &lt;span class="n"&gt;gives&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nl"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;XmbLookupString&lt;/span&gt; &lt;span class="n"&gt;gives&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nl"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;XFilterEvent&lt;/span&gt; &lt;span class="nl"&gt;returns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;False&lt;/span&gt;
+
+&lt;span class="n"&gt;KeyPress&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;serial&lt;/span&gt; &lt;span class="mi"&gt;37&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;synthetic&lt;/span&gt; &lt;span class="nb"&gt;NO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="mh"&gt;0x3200001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mh"&gt;0x165&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subw&lt;/span&gt; &lt;span class="mh"&gt;0x0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;3927914&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;163&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nl"&gt;root&lt;/span&gt;&lt;span class="p"&gt;:(&lt;/span&gt;&lt;span class="mi"&gt;474&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;228&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="n"&gt;state&lt;/span&gt; &lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;keycode&lt;/span&gt; &lt;span class="mi"&gt;49&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keysym&lt;/span&gt; &lt;span class="mh"&gt;0x40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;same_screen&lt;/span&gt; &lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;XLookupString&lt;/span&gt; &lt;span class="n"&gt;gives&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nl"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;@&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;XmbLookupString&lt;/span&gt; &lt;span class="n"&gt;gives&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="nl"&gt;bytes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;@&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;XFilterEvent&lt;/span&gt; &lt;span class="nl"&gt;returns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;False&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;La touche @ correspond au keycode 94 et la touche &amp;lt; correspond au keycode 49.
+L'inverse de ce que le message précédent nous indique.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;xmodmap -pke&lt;/code&gt; affiche le mapping du clavier. Les commandes suivantes permettent d'extraire uniquement les lignes qui nous intéresse et de les placer directement dans le fichier &lt;em&gt;.Xmodmap&lt;/em&gt;  (situé à la racine de votre dossier personnel).&lt;/p&gt;
+&lt;p&gt;Noter qu'il y a deux espaces entre keycode et le nombre.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; xmodmap -pke | grep &amp;#39;keycode  49 =&amp;#39; &amp;gt;&amp;gt; ~/.Xmodmap
+ xmodmap -pke | grep &amp;#39;keycode  94 =&amp;#39; &amp;gt;&amp;gt; ~/.Xmodmap
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Éditer le fichier &lt;em&gt;~/.Xmodmap&lt;/em&gt;, vous devriez avoir ceci à la fin du fichier :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;keycode 49 = at numbersign at numbersign periodcentered ...
+keycode 94 = less greater less greater VoidSymbol ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Il reste à intervertir le 49 et le 94 comme suit :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;keycode 94 = at numbersign at numbersign periodcentered ...
+keycode 49 = less greater less greater VoidSymbol ...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pour prendre en compte cette modification, il faut quitter sa session graphique.&lt;/p&gt;
+&lt;p&gt;Chaque utilisateur devra copier ce fichier dans son dossier personnel. L'idéal est d'en placer une copie dans le dossier &lt;em&gt;/etc/skel&lt;/em&gt;, de cette manière, à chaque création d'un nouvel utilisateur, ce fichier sera copié.&lt;/p&gt;</content><category term="Xorg"></category></entry><entry><title>Xorg - dual screen</title><link href="http://fgedocs.boitemail.be/xorg-dual-screen.html" rel="alternate"></link><published>2010-12-03T10:20:00+01:00</published><updated>2010-12-03T10:20:00+01:00</updated><author><name>FGE</name></author><id>tag:fgedocs.boitemail.be,2010-12-03:/xorg-dual-screen.html</id><summary type="html">&lt;p&gt;Brancher un second écran sur votre ordinateurs&lt;/p&gt;</summary><content type="html">&lt;p&gt;Rien à faire, pas moyen d'avoir l'image sur votre second écran !
+Ce qui va suivre devrait intéresser les personnes qui souhaitent :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;brancher un projecteur vidéo sur leur portable ;&lt;/li&gt;
+&lt;li&gt;utiliser un écran plus confortable que celui de leur portable lorsqu'ils sont au bureau ou à la maison ;&lt;/li&gt;
+&lt;li&gt;utiliser un bureau étendu, c'est à dire un bureau réparti sur deux écrans ;&lt;/li&gt;
+&lt;li&gt;brancher votre ordinateur à la télévision grâce au connecteur HDMI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Je présenterai uniquement l'activation du double écran pour les ordinateurs possédant une seule carte graphique muni de deux connecteurs. Ce qui est le cas des ordinateurs portables et des personnes qui disposent de plusieurs connecteurs sur leur carte graphique.&lt;/p&gt;
+&lt;p&gt;J'ai réalisé cette configuration sur un vieux portable équipé d'une carte ATI Radeon Mobility IGP-320M (c'est à dire une carte pas très performante).
+La version de Xorg était la 7.4.1 Nous sommes aujourd'hui à la version 7.7, mais ce qui suit fonctionne toujours.&lt;/p&gt;
+&lt;h2&gt;Xorg&lt;/h2&gt;
+&lt;p&gt;Xorg, c'est la partie de votre GNU/Linux qui gère l'affichage en mode graphique.
+Depuis la version 7.3 (à vérifier pour la version), le fichier xorg.conf n'est plus obligatoire. Xorg est (en général) capable de détecter et configurer votre matériel tout seul. Et c'est bien comme cela, nous ne devrons pas y toucher !&lt;/p&gt;
+&lt;p&gt;Si vous lisez la page de man sur xorg.conf, pour activer le double écran, il est indiqué de spécifier une section screen par connecteur, une section monitor par écran, … et blablabla. Cette méthode n'a jamais fonctionné chez moi et fait planter le serveur X. On peut donc oublier tout ceci.&lt;/p&gt;
+&lt;h2&gt;XRandr&lt;/h2&gt;
+&lt;p&gt;C'est grâce à Xrandr que nous allons configurer le double écran. Il permet de déterminer la taille de l'écran, son orientation, sa réflexion, la définition des moniteurs. xrandr est un outil à utiliser en ligne de commande, ce qui suit doit donc être tapé dans une console. Voici ce que donne comme résultat la commande xrandr sur ma machine :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1050&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+VGA-0 connected 1680x1050+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 433mm x 271mm
+   1680x1050      &lt;span class="m"&gt;60&lt;/span&gt;.0*+   &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1600x1024      &lt;span class="m"&gt;60&lt;/span&gt;.2  
+   1400x1050      &lt;span class="m"&gt;74&lt;/span&gt;.8     &lt;span class="m"&gt;70&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1280x1024      &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1440x900       &lt;span class="m"&gt;59&lt;/span&gt;.9  
+   1280x960       &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1360x768       &lt;span class="m"&gt;59&lt;/span&gt;.8  
+   1152x864       &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;70&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1024x768       &lt;span class="m"&gt;75&lt;/span&gt;.1     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;70&lt;/span&gt;.1     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   832x624        &lt;span class="m"&gt;74&lt;/span&gt;.6  
+   800x600        &lt;span class="m"&gt;72&lt;/span&gt;.2     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.3     &lt;span class="m"&gt;56&lt;/span&gt;.2  
+   640x480        &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;72&lt;/span&gt;.8     &lt;span class="m"&gt;72&lt;/span&gt;.8     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;66&lt;/span&gt;.7     &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;59&lt;/span&gt;.9  
+   720x400        &lt;span class="m"&gt;70&lt;/span&gt;.1  
+LVDS connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 0mm x 0mm
+   1024x768       &lt;span class="m"&gt;60&lt;/span&gt;.0*+   &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   800x600        &lt;span class="m"&gt;60&lt;/span&gt;.3  
+   640x480        &lt;span class="m"&gt;59&lt;/span&gt;.9  
+S-video disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;xrandr indique qu'il y a trois sorties sur la carte graphique&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VGA-0 : connecteur VGA situé à l'arrière du portable ;&lt;/li&gt;
+&lt;li&gt;LVDS : écran du portable ;&lt;/li&gt;
+&lt;li&gt;S-video : sortie TV.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pour chacune des sorties, xrandr indique également les possibilités offertes par les écrans. Par défaut, chaque écran utilise la meilleure de ces définitions. Ce dernier point peut poser un problème.&lt;/p&gt;
+&lt;p&gt;Dans le cas de ma carte graphique, si l'on souhaite utiliser simultanément VGA-0 et LVDS, leurs définitions doivent être identiques, sinon l'affichage est impossible.&lt;/p&gt;
+&lt;p&gt;Pour régler le problème nous allons donc re-configurer VGA-0&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr --output VGA-0 --mode 1024x768 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1024&lt;/span&gt; x &lt;span class="m"&gt;768&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+VGA-0 connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 433mm x 271mm
+  1680x1050 &lt;span class="m"&gt;60&lt;/span&gt;.0 + &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1600x1024 &lt;span class="m"&gt;60&lt;/span&gt;.2
+  1400x1050 &lt;span class="m"&gt;74&lt;/span&gt;.8 &lt;span class="m"&gt;70&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1280x1024 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1440x900 &lt;span class="m"&gt;59&lt;/span&gt;.9
+  1280x960 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1360x768 &lt;span class="m"&gt;59&lt;/span&gt;.8
+  1152x864 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;70&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1024x768 &lt;span class="m"&gt;75&lt;/span&gt;.1 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;70&lt;/span&gt;.1 &lt;span class="m"&gt;60&lt;/span&gt;.0*
+  832x624 &lt;span class="m"&gt;74&lt;/span&gt;.6
+  800x600 &lt;span class="m"&gt;72&lt;/span&gt;.2 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.3 &lt;span class="m"&gt;56&lt;/span&gt;.2
+  640x480 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;72&lt;/span&gt;.8 &lt;span class="m"&gt;72&lt;/span&gt;.8 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;66&lt;/span&gt;.7 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;59&lt;/span&gt;.9
+  720x400 &lt;span class="m"&gt;70&lt;/span&gt;.1
+LVDS connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 0mm x 0mm
+  1024x768 &lt;span class="m"&gt;60&lt;/span&gt;.0*+ &lt;span class="m"&gt;60&lt;/span&gt;.0
+  800x600 &lt;span class="m"&gt;60&lt;/span&gt;.3
+  640x480 &lt;span class="m"&gt;59&lt;/span&gt;.9
+S-video disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Comme d'habitude cela ne fonctionne pas du premier coup, loi de Murphy oblige, il n'y a toujours rien sur mon écran externe.&lt;/p&gt;
+&lt;p&gt;Il suffit d'arrêter et redémarrer le LVDS !!! (il fallait le sucer de son pouce). Le problème est que si vous arrêtez LVDS, comme VGA-0 ne fonctionne toujours pas et bien vous n'avez plus d'affichage. Il faut donc tapez les deux lignes de commande en une fois.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr --output LVDS --off&lt;span class="p"&gt;;&lt;/span&gt; xrandr --output LVDS --auto
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Et là, comme par magie mon écran externe s'est allumé, VGA-0 est donc un clone de LVDS.&lt;/p&gt;
+&lt;h2&gt;Scripts d'activations / désactivations&lt;/h2&gt;
+&lt;p&gt;Pour me faciliter la vie, j'ai placé sur mon bureau 4 scripts qui permettent de passer d'un mode à un autre d'un simple clic.&lt;/p&gt;
+&lt;h3&gt;LVDS seul&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# LVDS only&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;VGA-0 seul en automatique&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 only @home&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --auto
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;VGA-0 seul avec une définition spécifique&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 only @office&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1400x1050
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;h3&gt;Clonage LVDS VGA-0&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;#LVDS VGA-0 clone&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1024x768 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Comme vous l'aurez remarqué dans les 4 scripts, j'éteins les sorties avant de les configurer.&lt;/p&gt;
+&lt;h2&gt;Bureau étendu&lt;/h2&gt;
+&lt;p&gt;Pour le bureau étendu, il faut tenir compte de la taille maximum que peut avoir votre bureau.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1024&lt;/span&gt; x &lt;span class="m"&gt;768&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Dans mon cas, le maximum est de 1680×1200.&lt;/p&gt;
+&lt;p&gt;Comme ma carte oblige à ce que les définitions soient identiques lorsque les deux sorties sont activées, je peux avoir les configurations suivantes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;si le deuxième écran est à gauche ou à droite du portable : 1680/2 soit une largeur maximale de 840 pour chaque écran ;&lt;/li&gt;
+&lt;li&gt;si le deuxième écran est au-dessus ou au-dessous du portable : 1200/2 soit une hauteur maximale de 600 pour chaque écran.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Bureau étendu à droite&lt;/h3&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 right of LVDS&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 800x600 --rate &lt;span class="m"&gt;60&lt;/span&gt; --right-of LVDS
+xrandr --output LVDS --off
+xrandr --output LVDS --mode 800x600 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content><category term="Xorg"></category></entry></feed>

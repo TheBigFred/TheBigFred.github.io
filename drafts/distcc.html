@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>fgeDoc's &ndash; distcc</title>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/stylesheet/pygments.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/stylesheet/font-awesome.min.css">
+  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+<meta name="author" content="FGE">
+<meta name="description" content="Summary: Réduire le temps de compilation en la répartissant sur le réseau La compilation d'un kernel avec les options par défaut en version x86_64 prend …">
+<meta name="keywords" content="cmd-Line, GNU-Tools">
+<meta property="og:site_name" content="fgeDoc's"/>
+<meta property="og:title" content="distcc"/>
+<meta property="og:description" content="Summary: Réduire le temps de compilation en la répartissant sur le réseau La compilation d'un kernel avec les options par défaut en version x86_64 prend …"/>
+<meta property="og:locale" content="fr_BE"/>
+<meta property="og:url" content="../drafts/distcc.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-06-19 21:55:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/fge.html">
+<meta property="article:section" content="devtools"/>
+<meta property="article:tag" content="cmd-Line"/>
+<meta property="article:tag" content="GNU-Tools"/>
+<meta property="og:image" content=""></head>
+<body>
+  <aside>
+    <div>
+      <h1><a href="..">FGE Doc's</a></h1>
+      <p>Sharing notes</p>
+      <nav>
+        <ul class="list">
+          <li><a href="..">Home</a></li>
+        </ul>
+      </nav>
+      <h2><a href="../categories.html"><span class="fa fa-folder-open-o"></span> <small>Catégories</small></a></h2>
+      <nav>
+	      <ul class="list">
+          <li><a href="../category/devtools.html">devtools (5)</a></li>
+          <li><a href="../category/linux.html">linux (4)</a></li>
+        </ul>
+      </nav>
+      <h2><a href="../tags.html"><span class="fa fa-tags"></span> <small>Tags</small></a></h2>
+      <nav>
+        <ul class="list">          <li><a href="../tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="../tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="../tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="../tag/xorg.html">Xorg (2)</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href=".."><span class="fa fa-home"> Home</a>
+  - <span class="fa fa-folder-open-o" ></span> devtools
+      <hr>
+    </nav>
+
+<article>
+  <header>
+    <h1 id="distcc">distcc</h1>
+    <p>Publié le dim 19 juin 2016 dans <a href="../category/devtools.html">devtools</a></p>
+        <p>Série <em></em> :
+        </p>
+  </header>
+  <div>
+    <p>Summary: Réduire le temps de compilation en la répartissant sur le réseau</p>
+<p>La compilation d'un kernel avec les options par défaut en version x86_64 prend
+facilement 30 à 40 minutes. La création d'un cross compilateur dure encore plus
+longtemps.</p>
+<p>Ceci est souvent dû au fait que l'on compile chaque fichier .c l'un après l'autre sans aucune parallélisassions.</p>
+<h2>make -j</h2>
+<p>Lorsque l'on utilise make, il est possible de lui transmettre un nombre de jobs à exécuter en parallèle. <code>make -j8</code> lancera 8 jobs au maximum.</p>
+<p>Sans valeur numérique pour l'option <em>-j</em>, make parallélisera sans limiter le nombre de tâches.</p>
+<h2>Compilation distribuée avec distcc</h2>
+<p>distcc permet de répartir la compilation sur plusieurs machines d'un réseau. </p>
+<p>La compilation d'un kernel x86_64 passe de 30 minutes à moins de 5 minutes (le gain de performance dépend du nombre de machines et des performances réseau).</p>
+<p>distcc est le client qui envoie des fichiers à compiler vers les serveurs distccd du réseau.</p>
+<p>On distingue deux modes pour distcc.</p>
+<ul>
+<li>Le <em>plain mode</em>, distcc pré-processe tous les fichiers sources avant de les envoyer aux serveurs, il effectue ensuite l'édition des liens.</li>
+<li>Le <em>pump mode</em>, distcc-pump envoie les fichiers sources <strong>et</strong> les headers (les headers système ne sont pas échangés). L'édition des liens se déroule également sur le client.</li>
+</ul>
+<p>distcc est prévu pour (et doit) être utilisé avec option -j de GNU make. Il est conseillé d'utiliser le double du nombre de cpu serveur disponible. Il faut cependant veillez à ne pas engorger la carte réseau du client.</p>
+<blockquote>
+<p>Il est évidement fortement recommandé d'installer la même version du compilateur sur chaque machine.</p>
+</blockquote>
+<h3>Configuration du client</h3>
+<p>/etc/default/distcc</p>
+<p>STARTDISTCC="True"
+ALLOWEDNETS="127.0.0.1 192.168.10.0/24"
+LISTENER="0.0.0.0"
+JOBS=""
+ZEROCONF="true"</p>
+<p>La config du serveur
+/etc/init.d/distcc
+Ajouter le PATH du crossTool</p>
+<p>distcc utilise TCP sur le port 3632. Notez qu'il n'y a aucune sécurité ! Il est possible d'utiliser ssh, mais cela ralenti les performance de ±25%.</p>
+  </div>
+  <header>
+    <p>Cet article fait partie de la série <em></em> :
+    </p>
+  </header>
+  <div class="tag-cloud">
+    <p>
+      <span class="fa fa-tags" ></span> 
+      <a href="../tag/cmd-line.html">cmd-Line</a>
+      <a href="../tag/gnu-tools.html">GNU-Tools</a>
+    </p>
+  </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'fgedocs';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</article>
+
+    <footer>
+<p>
+  &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "name": "distcc",
+  "headline": "distcc",
+  "datePublished": "2016-06-19 21:55:00+02:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "FGE",
+    "url": "../author/fge.html"
+  },
+  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
+  "url": "../drafts/distcc.html",
+  "description": "Summary: Réduire le temps de compilation en la répartissant sur le réseau La compilation d'un kernel avec les options par défaut en version x86_64 prend …"
+}
+</script></body>
+</html>

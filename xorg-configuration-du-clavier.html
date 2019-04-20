@@ -1,18 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>fgeDoc's &ndash; Xorg - configuration du clavier</title>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
-  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
 <meta name="author" content="FGE">
 <meta name="description" content="En finir avec son clavier mal configuré">
 <meta name="keywords" content="Xorg">
+
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="Xorg - configuration du clavier"/>
 <meta property="og:description" content="En finir avec son clavier mal configuré"/>
@@ -24,13 +48,17 @@
 <meta property="article:author" content="./author/fge.html">
 <meta property="article:section" content="linux"/>
 <meta property="article:tag" content="Xorg"/>
-<meta property="og:image" content=""></head>
+<meta property="og:image" content="">
+
+  <title>fgeDoc's &ndash; Xorg - configuration du clavier</title>
+
+</head>
 <body>
   <aside>
     <div>
       <h1><a href=".">FGE Doc's</a></h1>
-      <p>Sharing notes</p>
-      <nav>
+
+<p>Sharing notes</p>      <nav>
         <ul class="list">
           <li><a href=".">Home</a></li>
         </ul>
@@ -51,27 +79,44 @@
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://thebigfred.github.io/feeds/all.atom.xml" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
       <a href="."><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> linux
       <hr>
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="xorg-configuration-du-clavier">Xorg - configuration du clavier</h1>
-    <p>Publié le ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a></p>
+    <p>
+      Posté le Ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a>
+
+    </p>
   </header>
+
+
   <div>
     <p>Lors de son démarrage, xorg scrute une liste de dossiers dans un ordre déterminé, à la recherche d'un fichier <em>xorg.conf</em> ou de fichiers .conf dans un dossier nommé <em>xorg.conf.d</em>. Le dossier <em>xorg.conf.d</em> permet simplement de découper la configuration en plusieurs fichiers.</p>
 <p>Notez que si vous utilisez le fichier <em>xorg.conf</em>, le dossier <em>xorg.cond.d</em> est simplement ignoré et que, dès lors le fichier <em>xorg.conf</em> doit contenir la totalité de la configuration.</p>
-<p>La liste de dossier scruté par xorg peut dépendre de la distribution que vous utilisez, mais généralement à :</p>
+<p>La liste de dossier scruté par xorg est généralement :</p>
 <ul>
 <li>/etc/X11/xorg.conf</li>
 <li>/etc/X11/xorg.conf.d/…</li>
@@ -79,7 +124,7 @@
 <li>/usr/share/X11/xorg.conf.d/…</li>
 </ul>
 <p>Il est fort probable de ne rien trouver dans /etc/X11, qui est là pour vous permettre de modifier la configuration sans toucher aux fichiers d'origines. Il suffit alors de recopier (avec sudo) le fichier que vous souhaitez modifier depuis <em>/usr/share/X11/…</em> vers <em>/etc/X11/…</em></p>
-<h2>Modifier le clavier</h2>
+<h2 id="modifier-le-clavier">Modifier le clavier</h2>
 <!--
 Généralement je ne modifie que le fichier 10-evdev.conf pour configurer correctement mon clavier.
 
@@ -118,13 +163,13 @@ Option &quot;XkbVariant&quot; &quot;mac&quot;
 
 
 <p>Sous Debian, il est conseillé de modifier le fichier <em>/etc/default/keyboard</em> et d'utiliser la commande <code>dpkg-reconfigure keyboard-configuration</code>, à exécuter en <em>sudo</em>. Celle-ci lance un utilitaire de configuration qui modifiera le fichier de configuration de xorg pour vous.</p>
-<h2>Modifier temporairement le clavier</h2>
+<h2 id="modifier-temporairement-le-clavier">Modifier temporairement le clavier</h2>
 <p>Il est également possible de modifier le clavier temporairement - jusqu'à la prochaine déconnexion de l'interface graphique - en utilisant la commande <code>setxkbmap</code> :</p>
 <div class="highlight"><pre><span></span>setxkbmap -layout &quot;fr&quot; -variant &quot;mac&quot;
 </pre></div>
 
 
-<h2>Corriger les touches qui déconnent</h2>
+<h2 id="corriger-les-touches-qui-deconnent">Corriger les touches qui déconnent</h2>
 <p>Si comme moi les touches @ et &lt; sont inversées sur votre clavier mac, il est possible de corriger le mapping clavier.</p>
 <p>La commande <code>xev</code> (à lancer dans un terminal) permet de connaître le keycode des touches. Elle affiche le contenu de chaque événement capté par l'interface graphique. Le moindre mouvement de souris, pression ou relâchement de touche génère un événement.</p>
 <div class="highlight"><pre><span></span><span class="n">xev</span>
@@ -169,38 +214,31 @@ keycode 49 = less greater less greater VoidSymbol ...
 <p>Pour prendre en compte cette modification, il faut quitter sa session graphique.</p>
 <p>Chaque utilisateur devra copier ce fichier dans son dossier personnel. L'idéal est d'en placer une copie dans le dossier <em>/etc/skel</em>, de cette manière, à chaque création d'un nouvel utilisateur, ce fichier sera copié.</p>
   </div>
-  <header>
-  </header>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
       <a href="./tag/xorg.html">Xorg</a>
     </p>
   </div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'fgedocs';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+
 </article>
 
     <footer>
 <p>
   &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
     <img alt="Creative Commons License"
          title="Creative Commons License"
          style="border-width:0"
-         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
          width="80"
          height="15"/>
   </a>
@@ -210,23 +248,16 @@ keycode 49 = less greater less greater VoidSymbol ...
 
 
 
-
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Xorg - configuration du clavier",
-  "headline": "Xorg - configuration du clavier",
-  "datePublished": "2010-12-03 10:20:00+01:00",
-  "dateModified": "2018-05-02 06:34:00+02:00",
-  "author": {
-    "@type": "Person",
-    "name": "FGE",
-    "url": "./author/fge.html"
-  },
-  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
-  "url": "./xorg-configuration-du-clavier.html",
-  "description": "En finir avec son clavier mal configuré"
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " fgeDoc's ",
+  "url" : ".",
+  "image": "",
+  "description": "FGE's Thoughts and Writings"
 }
-</script></body>
+</script>
+
+</body>
 </html>

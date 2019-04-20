@@ -1,37 +1,65 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>fgeDoc's &ndash; Écrire un Makefile</title>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
-  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
 <meta name="author" content="FGE">
-<meta name="description" content="Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet. Cet article est une …">
+<meta name="description" content="Make est un outil qui permet d&#39;exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d&#39;un projet. Cet article est une …">
 <meta name="keywords" content="cmd-line, GNU-Tools">
+
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="Écrire un Makefile"/>
-<meta property="og:description" content="Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet. Cet article est une …"/>
+<meta property="og:description" content="Make est un outil qui permet d&#39;exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d&#39;un projet. Cet article est une …"/>
 <meta property="og:locale" content="fr_BE"/>
 <meta property="og:url" content="./ecrire-un-makefile.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-02-05 21:55:00+01:00"/>
-<meta property="article:modified_time" content=""/>
+<meta property="article:modified_time" content="2019-01-21 23:14:00+01:00"/>
 <meta property="article:author" content="./author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
-<meta property="og:image" content=""></head>
+<meta property="og:image" content="">
+
+  <title>fgeDoc's &ndash; Écrire un Makefile</title>
+
+</head>
 <body>
   <aside>
     <div>
       <h1><a href=".">FGE Doc's</a></h1>
-      <p>Sharing notes</p>
-      <nav>
+
+<p>Sharing notes</p>      <nav>
         <ul class="list">
           <li><a href=".">Home</a></li>
         </ul>
@@ -52,33 +80,47 @@
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://thebigfred.github.io/feeds/all.atom.xml" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
       <a href="."><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="ecrire-un-makefile">Écrire un Makefile</h1>
-    <p>Publié le dim 05 février 2017 dans <a href="./category/devtools.html">devtools</a></p>
-        <p>Série <em>build</em> :
-              <a href='./compilation-avec-gcc.html'>Compilation avec GCC</a>
- -               Écrire un Makefile
-        </p>
+    <p>
+      Posté le Dim 05 février 2017 dans <a href="./category/devtools.html">devtools</a>
+
+    </p>
   </header>
+
+
   <div>
-    <p>Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.</p>
+    
+<p>Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.</p>
 <p>Cet article est une introduction et n'a pas pour but de présenter la totalité du <a href="https://www.gnu.org/software/make/manual/make.html">manuel de make</a>.</p>
 <p>Make n'est pas dévolu à la compilation de programmes écrit en C, il peut aussi bien être utilisé pour compiler des fichiers latex ou simplement pour exécuter des commandes shell.</p>
 <p>Les commandes à exécuter ainsi que les dépendances entre fichiers sont décrites dans un fichier nommé makefile.</p>
-<h2>Les bases</h2>
+<h2 id="les-bases">Les bases</h2>
 <p>Un makefile est composé d'une ou plusieurs règles. Une règles peut représenter un exécutable, une bibliothèque ou un groupe de commandes quelconques.</p>
 <p>Lorsque l'on exécute la commande <code>make</code>, GNU make cherche dans le dossier courant après un fichier nommé GNUmakefile, makefile, Makefile (dans cet ordre).</p>
 <p>Il est recommandé d'utiliser le nom Makefile, car le <em>M</em> est plus visible. Le nom GNUmakefile n'est à utilisé que si vous utilisé des spécificités de GNU make.</p>
@@ -88,16 +130,12 @@
     …
     …
 </pre></div>
-
-
 <p>Avec le vocable anglais :</p>
 <div class="highlight"><pre><span></span><span class="nf">target </span><span class="o">:</span> <span class="n">prerequisites</span>
     recipe
     …
     …
 </pre></div>
-
-
 <blockquote>
 <p>Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabullation.</p>
 </blockquote>
@@ -108,8 +146,6 @@
 <span class="nf">clean</span><span class="o">:</span>
     rm hello.bin
 </pre></div>
-
-
 <p>Ce <em>makefile</em> est constitué de deux cibles :</p>
 <ul>
 <li>La cible hello : permet de créer l'application nommé hello.bin</li>
@@ -123,8 +159,6 @@
 <span class="go">rm hello.bin</span>
 <span class="gp">$</span>
 </pre></div>
-
-
 <h3>Second exemple</h3>
 <div class="highlight"><pre><span></span><span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
     gcc -o hello.bin hello.c mesfonctions.o
@@ -135,8 +169,6 @@
 <span class="nf">clean</span><span class="o">:</span>
     rm hello.bin mesfonctions.o
 </pre></div>
-
-
 <p>Nous avons ajouté une target <em>mesfonctions.o</em> qui compile le fichier <em>mesfonctions.c</em>.</p>
 <p>Nous avons également ajouté des dépendances, il s'agit de la liste de fichiers qui suit la définition de la <em>target</em>.</p>
 <p>La <em>target hello</em> dépend des fichiers <em>hello.c</em> et <em>mesfonctions.o</em>.
@@ -150,25 +182,19 @@ La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> e
 <span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
 <span class="gp">$</span>
 </pre></div>
-
-
 <p>Une modification du fichier <em>mesfonctions.c</em> recompile le tout :</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot; &quot;</span> &gt;&gt; mesfonctions.c 
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">" "</span> &gt;&gt; mesfonctions.c 
 <span class="gp">$</span> make
 <span class="go">gcc -c mesfonctions.c</span>
 <span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
 <span class="gp">$</span>
 </pre></div>
-
-
 <p>Une modification du fichier <em>hello.c</em> ne recompile pas le fichier <em>mesfonctions.c</em> :</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot; &quot;</span> &gt;&gt; hello.c 
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">echo</span> <span class="s2">" "</span> &gt;&gt; hello.c 
 <span class="gp">$</span> make
 <span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
 <span class="gp">$</span>
 </pre></div>
-
-
 <blockquote>
 <p>Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.</p>
 </blockquote>
@@ -179,8 +205,6 @@ La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> e
 <span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
 <span class="gp">$</span>
 </pre></div>
-
-
 <p>Ceci est dû au fait que nous générons un fichier <em>hello.bin</em> non pas <em>hello</em>.
 Lorsque make 'vérifie' une target, il cherche un fichier qui porte le même nom que la target.
 Il faut donc veiller à ce que le nom des targets et des fichiers générés coïncides.</p>
@@ -193,18 +217,14 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <span class="nf">clean</span><span class="o">:</span>
     rm hello mesfonctions.o
 </pre></div>
-
-
 <p>Maintenant deux appels consécutif à make ne recompile plus inutilement <em>hello</em>.</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> make
 <span class="go">gcc -o hello hello.c mesfonctions.o</span>
 <span class="gp">$</span> make
-<span class="go">make: &#39;hello&#39; is up to date.</span>
+<span class="go">make: 'hello' is up to date.</span>
 <span class="gp">$</span>
 </pre></div>
-
-
-<h2>Les variables</h2>
+<h2 id="les-variables">Les variables</h2>
 <p>Les variables, parfois appelées MACRO, permettent de substituer du texte. Le nom d'une variable ne peut contenir les symboles ':', '#', '=' et l'espace.</p>
 <p>Il est généralement conseillé de n'utiliser que des lettres, des nombres et le symbole underscore. Le nom d'une variable est <em>case-sensitive</em>.</p>
 <p>Habituellement, les noms de variables sont en majuscules. Cependant, le manuel <em>GNU Make</em> fait les recommandations suivantes :</p>
@@ -220,16 +240,12 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <p>Pour définir une variable, on débute une nouvelle ligne  qui commence par le nom de la variable, suivi par '=', ':=' ou '::='. Tout ce qui se trouve à droite du signe d'affectation est le contenu de la variable.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
 </pre></div>
-
-
 <p>Ceci définit une variable nommé <em>objects</em> dont le contenu est : <em>hello.o mesfonctions.o</em>. Les espaces entourant le signe d'affectation sont ignorés.</p>
 <p>Pour utilisé une variable, on utilise la notation <code>$(nom_variable)</code>ou <code>${nom_variable}</code>.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
 <span class="nf">hello </span><span class="o">:</span> <span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
         gcc -o hello.bin <span class="k">$(</span>objects<span class="k">)</span>
 </pre></div>
-
-
 <p>Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utilisé une variable <em>x</em> et y faire référence pas <em>$x</em>. Cette pratique est fortement découragée.</p>
 <p>Il n'y a pas de limite sur la longueur du contenu d'une variable (à l'exception de la taille de la mémoire disponible).</p>
 <h4>Type de variables</h4>
@@ -244,47 +260,36 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <span class="nf">all</span><span class="o">:</span>
     <span class="nb">echo</span> <span class="k">$(</span>foo<span class="k">)</span>
 </pre></div>
-
-
 <p>Ce makefile affichera <em>Hello world !!!</em>, comme on s'y attend.</p>
 <blockquote>
 <p>Ce type de variable à plusieurs inconvénient, dont un majeur, il n'est pas possible d'affecter une variable à elle même.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><span class="nv">CFLAGS</span> <span class="o">=</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> -O
 </pre></div>
-
-
 <p>Ceci crée une boucle infinie !</p>
 <h5>Variables simplement expansées</h5>
 <p>Elles permettent de contourner les problèmes des variables expansées récursivement.</p>
 <p>Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.</p>
 <p>Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut être pas supporté par une ancienne version de make.</p>
 <p>La valeur d'une variable simplement expansée est calculé une seule fois lors de sa définition.</p>
-<div class="highlight"><pre><span></span><span class="nv">x</span> <span class="o">:=</span> Hello
-<span class="nv">y</span> <span class="o">:=</span> <span class="k">$(</span>x<span class="k">)</span> world
-<span class="nv">x</span> <span class="o">:=</span> !!!
+<div class="highlight"><pre><span></span> :::basemake
+ x := Hello
+ y := $(x) world
+ x := !!!
 </pre></div>
-
-
 <p>est équivalent à </p>
 <div class="highlight"><pre><span></span><span class="nv">y</span> <span class="o">:=</span> Hello world
 <span class="nv">x</span> <span class="o">:=</span> !!!
 </pre></div>
-
-
 <h3>Ajouter du contenu à une variable</h3>
 <p>Pour concaténer du contenu à une variable, quelque soit son type, on utilise le signe '+='.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> main.o foo.o bar.o utils.o
 <span class="nv">objects</span> <span class="o">+=</span> another.o
 </pre></div>
-
-
 <p>Ce qui est l'équivalent de </p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> main.o foo.o bar.o utils.o
 <span class="nv">objects</span> <span class="o">:=</span> <span class="k">$(</span>objects<span class="k">)</span> another.o
 </pre></div>
-
-
 <p>Si la variable n'est pas définie, avec l'utilisation du signe '+=', celui-ci agira comme '=' et définira donc une variable expansée récursivement.</p>
 <h3>Supprimer une variable</h3>
 <p>Pour supprimer le contenu d'une variable, il suffit de lui affecter un contenu vide.</p>
@@ -294,7 +299,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <p>Toutes les variables d'environnement vue par make lors de son démarrage sont transformées en variable make
 avec le même nom et la même valeur.</p>
 <p>Il est ainsi possible de passer des options de compilation sans modifier le makefile. Il faut pour cela que le makefile n’écrase pas le contenu de cette variable par une affection avec <code>=</code> ou <code>:=</code>.</p>
-<h2>Target PHONY</h2>
+<h2 id="target-phony">Target PHONY</h2>
 <p>Dans certains <em>makefile</em> écrits jusqu’à présent, nous avons une <em>target clean</em> qui n'a pas de dépendance et qui ne produit aucun fichier.</p>
 <p>Si votre dossier contient un fichier nommé <em>clean</em>, cela va poser un problème.</p>
 <p>Lors de l'appel de la commande <code>make clean</code>, <em>make</em> va détecter le fichier <em>clean</em> et considérer qu'il est à jour ! La recette ne sera jamais exécutée.</p>
@@ -305,9 +310,7 @@ avec le même nom et la même valeur.</p>
 <span class="nf">clean</span><span class="o">:</span>
     rm -f *.o
 </pre></div>
-
-
-<h2>Exemple</h2>
+<h2 id="exemple">Exemple</h2>
 <p>Dans l'exemple suivant, les variables <em>CPPFLAGS</em>,<em>CFLAGS</em>,<em>LDFLAGS</em>,<em>LDLIBS</em> sont vides. Ce qui suit le caractère <em>#</em> est en commentaire pour donner un exemple d'utilisation de ces variables.</p>
 <div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span> gcc
 <span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
@@ -331,9 +334,7 @@ avec le même nom et la même valeur.</p>
 <span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
     rm -f hello
 </pre></div>
-
-
-<h2>STATIC PATTERN</h2>
+<h2 id="static-pattern">STATIC PATTERN</h2>
 <p>Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser
 une règle <em>générique</em>.</p>
 <div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span> gcc
@@ -355,8 +356,6 @@ une règle <em>générique</em>.</p>
 <span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
     rm -f hello
 </pre></div>
-
-
 <p>Voici la signification des variables spéciales utilisée ci-dessus :</p>
 <ul>
 <li>$@ : le nom de la cible </li>
@@ -364,7 +363,7 @@ une règle <em>générique</em>.</p>
 <li>$^ : la liste de dépendance</li>
 </ul>
 <p>La <em>subtilité</em> est ici : <code>%.o : %.c</code>. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.</p>
-<h2>Les régles implicites</h2>
+<h2 id="les-regles-implicites">Les régles implicites</h2>
 <p>Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran,
 TeX et quelques autres.</p>
 <p>Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.</p>
@@ -375,32 +374,11 @@ Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et
 implicite du C.</p>
 <p>Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne
 la recette qui sera utilisée.</p>
-<table>
-<thead>
-<tr>
-<th align="center">fichier source</th>
-<th>recette utilisée</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">.c</td>
-<td><code>$(CC) $(CPPFLAGS) $(CFLAGS) -c</code></td>
-<td>Compilateur C</td>
-</tr>
-<tr>
-<td align="center">.cc / .cpp / .C</td>
-<td><code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code></td>
-<td>Compilateur C++</td>
-</tr>
-<tr>
-<td align="center">.s</td>
-<td><code>$(AS) $(ASFLAGS)</code></td>
-<td>Assembleur</td>
-</tr>
-</tbody>
-</table>
+<p>| fichier source  | recette utilisée                    |                 | 
+|:---------------:|-------------------------------------|-----------------|
+| .c              | <code>$(CC) $(CPPFLAGS) $(CFLAGS) -c</code>    | Compilateur C   |
+| .cc / .cpp / .C | <code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code> | Compilateur C++ |
+| .s              | <code>$(AS) $(ASFLAGS)</code>                  | Assembleur      |</p>
 <p>Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette
 utilisée sera celle du pré-processeur : <code>$(CPP) $(CPPFLAGS)</code>.</p>
 <p>Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette
@@ -409,48 +387,16 @@ utilisée sera celle de l'éditeur de liens (linker) : <code>$(CC) -o $@ $^ $(LD
 fichiers sources, un des fichiers sources devant définir le nom du binaire <code>x: y.o z.o</code></p>
 <p>Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.</p>
 <p>Voici les variables utilisées par les règles implicites :</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CC</td>
-<td>compilateur C, par défaut vaut 'cc'</td>
-</tr>
-<tr>
-<td>CXX</td>
-<td>compilateur C++, par défaut vaut 'g++'</td>
-</tr>
-<tr>
-<td>CPP</td>
-<td>préprocesseur C, par défaut vaut '$(CC) -E'</td>
-</tr>
-<tr>
-<td>CFLAGS</td>
-<td>options à passer au compilateur C</td>
-</tr>
-<tr>
-<td>CXXFLAGS</td>
-<td>options à passer au compilateur C++</td>
-</tr>
-<tr>
-<td>CPPFLAGS</td>
-<td>options à passer au préprocesseur, comme -I</td>
-</tr>
-<tr>
-<td>LDFLAGS</td>
-<td>options à passer au linker, comme -L</td>
-</tr>
-<tr>
-<td>LDLIBS</td>
-<td>options à passer au linker, comme -l</td>
-</tr>
-</tbody>
-</table>
+<p>|          |                                             |
+|----------|---------------------------------------------|
+| CC       | compilateur C, par défaut vaut 'cc'         |
+| CXX      | compilateur C++, par défaut vaut 'g++'      |
+| CPP      | préprocesseur C, par défaut vaut '$(CC) -E' |
+| CFLAGS   | options à passer au compilateur C           |
+| CXXFLAGS | options à passer au compilateur C++         |
+| CPPFLAGS | options à passer au préprocesseur, comme -I |
+| LDFLAGS  | options à passer au linker, comme -L        |
+| LDLIBS   | options à passer au linker, comme -l        |</p>
 <p>On peut maintenant ré-écrire l’exemple précédent :</p>
 <div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span> gcc
 <span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
@@ -467,9 +413,7 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire <cod
 <span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
     rm -f hello
 </pre></div>
-
-
-<h2>Wildcard</h2>
+<h2 id="wildcard">Wildcard</h2>
 <p>Si votre projet comporte beaucoup de fichiers, cela devient problématique de maintenir la liste des dépendances du binaire.</p>
 <p>On peut alors être tenté de créer une variable <code>objects = *.o</code> qui désignerait tout les fichiers .o.</p>
 <p>La variable <em>objects</em> contient la chaîne de caractères *.o et non l'ensemble des fichiers .o. De plus, si votre dossier ne contient aucun fichier .o, l’expansion de *.o est vide.</p>
@@ -495,12 +439,10 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire <cod
 <span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
     rm -f hello
 </pre></div>
-
-
-<h2>Dossier de rechercher des dépendances</h2>
+<h2 id="dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</h2>
 <p>VPATH
 vpath</p>
-<h2>Installation</h2>
+<h2 id="installation">Installation</h2>
 <p>Pour installer le résultat généré par make,</p>
 <ul>
 <li>il faut copier les fichiers dans les dossiers de destinations,</li>
@@ -525,17 +467,9 @@ pas utiliser directement la commande install, mais de passer par une variable $(
     <span class="k">$(</span>INSTALL_PROGRAM<span class="k">)</span> hello <span class="k">$(</span>DESTDIR<span class="k">)$(</span>bindir<span class="k">)</span>/hello
     <span class="k">$(</span>INSTALL_DATA<span class="k">)</span> libhello.a <span class="k">$(</span>DESTDIR<span class="k">)$(</span>libdir<span class="k">)</span>/libhello.a
 </pre></div>
-
-
-<h2>Le problème des makefiles</h2>
+<h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
 <p>Comme dit plus haut, cette article est une introduction, si vous voulez en savoir plus, je vous invite à lire le manuel officiel de make : <a href="">https://www.gnu.org/software/make/manual/make.html</a>. </p>
   </div>
-  <header>
-    <p>Cet article fait partie de la série <em>build</em> :
-          <a href='./compilation-avec-gcc.html'>Compilation avec GCC</a>
- -           Écrire un Makefile
-    </p>
-  </header>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
@@ -543,30 +477,25 @@ pas utiliser directement la commande install, mais de passer par une variable $(
       <a href="./tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'fgedocs';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+
 </article>
 
     <footer>
 <p>
   &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
     <img alt="Creative Commons License"
          title="Creative Commons License"
          style="border-width:0"
-         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
          width="80"
          height="15"/>
   </a>
@@ -576,23 +505,16 @@ pas utiliser directement la commande install, mais de passer par une variable $(
 
 
 
-
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Écrire un Makefile",
-  "headline": "Écrire un Makefile",
-  "datePublished": "2017-02-05 21:55:00+01:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "FGE",
-    "url": "./author/fge.html"
-  },
-  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
-  "url": "./ecrire-un-makefile.html",
-  "description": "Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet. Cet article est une …"
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " fgeDoc's ",
+  "url" : ".",
+  "image": "",
+  "description": "FGE's Thoughts and Writings"
 }
-</script></body>
+</script>
+
+</body>
 </html>

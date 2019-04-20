@@ -1,18 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>fgeDoc's &ndash; indent</title>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
-  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
 <meta name="author" content="FGE">
 <meta name="description" content="Fini de perdre du temps à ré-indenter du code selon vos gouts !">
 <meta name="keywords" content="cmd-line, GNU-Tools">
+
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="indent"/>
 <meta property="og:description" content="Fini de perdre du temps à ré-indenter du code selon vos gouts !"/>
@@ -25,13 +49,17 @@
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
-<meta property="og:image" content=""></head>
+<meta property="og:image" content="">
+
+  <title>fgeDoc's &ndash; indent</title>
+
+</head>
 <body>
   <aside>
     <div>
       <h1><a href=".">FGE Doc's</a></h1>
-      <p>Sharing notes</p>
-      <nav>
+
+<p>Sharing notes</p>      <nav>
         <ul class="list">
           <li><a href=".">Home</a></li>
         </ul>
@@ -52,23 +80,40 @@
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://thebigfred.github.io/feeds/all.atom.xml" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
       <a href="."><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="indent">indent</h1>
-    <p>Publié le dim 25 septembre 2016 dans <a href="./category/devtools.html">devtools</a></p>
+    <p>
+      Posté le Dim 25 septembre 2016 dans <a href="./category/devtools.html">devtools</a>
+
+    </p>
   </header>
+
+
   <div>
     <p>Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.</p>
 <p>Voici un petit programme <em>cochonné</em> pour illustrer la suite :</p>
@@ -83,9 +128,7 @@
 
 
 <p><strong>indent</strong> propose 3 styles prédéfinis.</p>
-<ul>
-<li>Le style GNU (le style par défaut) : <code>indent demo.c</code> ou <code>indent -gnu demo.c</code></li>
-</ul>
+<p>Le style GNU (le style par défaut) : <code>indent demo.c</code> ou <code>indent -gnu demo.c</code></p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="kt">void</span> <span class="nf">hello</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
 <span class="kt">int</span>
@@ -111,9 +154,7 @@
 </pre></div>
 
 
-<ul>
-<li>Le style Kernighan &amp; Ritchie (ou style k&amp;r, les concepteurs du C) : <code>indent -kr demo.c</code></li>
-</ul>
+<p>Le style Kernighan &amp; Ritchie (ou style k&amp;r, les concepteurs du C) : <code>indent -kr demo.c</code> </p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="kt">void</span> <span class="nf">hello</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
@@ -134,9 +175,7 @@
 </pre></div>
 
 
-<ul>
-<li>Le style Berkeley (le style d'origine) : <code>indent -orig demo.c</code></li>
-</ul>
+<p>Le style Berkeley (le style d'origine) : <code>indent -orig demo.c</code></p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 <span class="kt">int</span>             <span class="nf">hello</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
 <span class="kt">int</span>
@@ -172,8 +211,6 @@
 <p>Pour utiliser le style GNU sans le retrait des accolades : <code>echo -gnu -bli0 &gt; $HOME/.indent.pro</code>.</p>
 <p>Une lecture de la page de <code>man indent</code> sera nécessaire pour découvrir les options, elles sont trop nombreuses pour les décrire ici.</p>
   </div>
-  <header>
-  </header>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
@@ -181,30 +218,25 @@
       <a href="./tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'fgedocs';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+
 </article>
 
     <footer>
 <p>
   &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
     <img alt="Creative Commons License"
          title="Creative Commons License"
          style="border-width:0"
-         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
          width="80"
          height="15"/>
   </a>
@@ -214,23 +246,16 @@
 
 
 
-
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "indent",
-  "headline": "indent",
-  "datePublished": "2016-09-25 00:00:00+02:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "FGE",
-    "url": "./author/fge.html"
-  },
-  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
-  "url": "./indent.html",
-  "description": "Fini de perdre du temps à ré-indenter du code selon vos gouts !"
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " fgeDoc's ",
+  "url" : ".",
+  "image": "",
+  "description": "FGE's Thoughts and Writings"
 }
-</script></body>
+</script>
+
+</body>
 </html>

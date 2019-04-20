@@ -1,18 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>fgeDoc's &ndash; Xorg - dual screen</title>
-  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/pygments.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/font-awesome.min.css">
-  <link href="http://fgedocs.boitemail.be/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
 <meta name="author" content="FGE">
 <meta name="description" content="Brancher un second écran sur votre ordinateurs">
 <meta name="keywords" content="Xorg">
+
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="Xorg - dual screen"/>
 <meta property="og:description" content="Brancher un second écran sur votre ordinateurs"/>
@@ -24,13 +48,17 @@
 <meta property="article:author" content="./author/fge.html">
 <meta property="article:section" content="linux"/>
 <meta property="article:tag" content="Xorg"/>
-<meta property="og:image" content=""></head>
+<meta property="og:image" content="">
+
+  <title>fgeDoc's &ndash; Xorg - dual screen</title>
+
+</head>
 <body>
   <aside>
     <div>
       <h1><a href=".">FGE Doc's</a></h1>
-      <p>Sharing notes</p>
-      <nav>
+
+<p>Sharing notes</p>      <nav>
         <ul class="list">
           <li><a href=".">Home</a></li>
         </ul>
@@ -51,23 +79,40 @@
         </ul>
       </nav>
       <ul class="social">
-        <li><a class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-        <li><a class="sc-rss" href="//fgedocs.boitemail.be/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+          <li>
+            <a  class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://thebigfred.github.io/feeds/all.atom.xml" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
       </ul>
     </div>
+
+
   </aside>
   <main>
+
     <nav>
       <a href="."><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> linux
       <hr>
     </nav>
 
-<article>
+<article class="single">
   <header>
+      
     <h1 id="xorg-dual-screen">Xorg - dual screen</h1>
-    <p>Publié le ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a></p>
+    <p>
+      Posté le Ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a>
+
+    </p>
   </header>
+
+
   <div>
     <p>Rien à faire, pas moyen d'avoir l'image sur votre second écran !
 Ce qui va suivre devrait intéresser les personnes qui souhaitent :</p>
@@ -80,11 +125,11 @@ Ce qui va suivre devrait intéresser les personnes qui souhaitent :</p>
 <p>Je présenterai uniquement l'activation du double écran pour les ordinateurs possédant une seule carte graphique muni de deux connecteurs. Ce qui est le cas des ordinateurs portables et des personnes qui disposent de plusieurs connecteurs sur leur carte graphique.</p>
 <p>J'ai réalisé cette configuration sur un vieux portable équipé d'une carte ATI Radeon Mobility IGP-320M (c'est à dire une carte pas très performante).
 La version de Xorg était la 7.4.1 Nous sommes aujourd'hui à la version 7.7, mais ce qui suit fonctionne toujours.</p>
-<h2>Xorg</h2>
+<h2 id="xorg">Xorg</h2>
 <p>Xorg, c'est la partie de votre GNU/Linux qui gère l'affichage en mode graphique.
 Depuis la version 7.3 (à vérifier pour la version), le fichier xorg.conf n'est plus obligatoire. Xorg est (en général) capable de détecter et configurer votre matériel tout seul. Et c'est bien comme cela, nous ne devrons pas y toucher !</p>
 <p>Si vous lisez la page de man sur xorg.conf, pour activer le double écran, il est indiqué de spécifier une section screen par connecteur, une section monitor par écran, … et blablabla. Cette méthode n'a jamais fonctionné chez moi et fait planter le serveur X. On peut donc oublier tout ceci.</p>
-<h2>XRandr</h2>
+<h2 id="xrandr">XRandr</h2>
 <p>C'est grâce à Xrandr que nous allons configurer le double écran. Il permet de déterminer la taille de l'écran, son orientation, sa réflexion, la définition des moniteurs. xrandr est un outil à utiliser en ligne de commande, ce qui suit doit donc être tapé dans une console. Voici ce que donne comme résultat la commande xrandr sur ma machine :</p>
 <div class="highlight"><pre><span></span>$ xrandr
 Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span class="m">200</span>, current <span class="m">1680</span> x <span class="m">1050</span>, maximum <span class="m">1680</span> x <span class="m">1200</span>
@@ -151,64 +196,47 @@ S-video disconnected <span class="o">(</span>normal left inverted right x axis y
 
 
 <p>Et là, comme par magie mon écran externe s'est allumé, VGA-0 est donc un clone de LVDS.</p>
-<h2>Scripts d'activations / désactivations</h2>
+<h2 id="scripts-dactivations-desactivations">Scripts d'activations / désactivations</h2>
 <p>Pour me faciliter la vie, j'ai placé sur mon bureau 4 scripts qui permettent de passer d'un mode à un autre d'un simple clic.</p>
 <h3>LVDS seul</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># LVDS only</span>
 xrandr --output VGA-0 --off
 xrandr --output LVDS --off
 xrandr --output LVDS --auto
 </pre></div>
-</td></tr></table>
+
 
 <h3>VGA-0 seul en automatique</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># VGA-0 only @home</span>
 xrandr --output LVDS --off
 xrandr --output VGA-0 --off
 xrandr --output VGA-0 --auto
 </pre></div>
-</td></tr></table>
+
 
 <h3>VGA-0 seul avec une définition spécifique</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># VGA-0 only @office</span>
 xrandr --output LVDS --off
 xrandr --output VGA-0 --off
 xrandr --output VGA-0 --mode 1400x1050
 </pre></div>
-</td></tr></table>
+
 
 <h3>Clonage LVDS VGA-0</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1">#LVDS VGA-0 clone</span>
 xrandr --output VGA-0 --off
 xrandr --output VGA-0 --mode 1024x768 --rate <span class="m">60</span>
 xrandr --output LVDS --off
 xrandr --output LVDS --auto
 </pre></div>
-</td></tr></table>
+
 
 <p>Comme vous l'aurez remarqué dans les 4 scripts, j'éteins les sorties avant de les configurer.</p>
-<h2>Bureau étendu</h2>
+<h2 id="bureau-etendu">Bureau étendu</h2>
 <p>Pour le bureau étendu, il faut tenir compte de la taille maximum que peut avoir votre bureau.</p>
 <div class="highlight"><pre><span></span>$ xrandr
 Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span class="m">200</span>, current <span class="m">1024</span> x <span class="m">768</span>, maximum <span class="m">1680</span> x <span class="m">1200</span>
@@ -223,52 +251,39 @@ Screen <span class="m">0</span>: minimum <span class="m">320</span> x <span clas
 <li>si le deuxième écran est au-dessus ou au-dessous du portable : 1200/2 soit une hauteur maximale de 600 pour chaque écran.</li>
 </ul>
 <h3>Bureau étendu à droite</h3>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="c1"># VGA-0 right of LVDS</span>
 xrandr --output VGA-0 --off
 xrandr --output VGA-0 --mode 800x600 --rate <span class="m">60</span> --right-of LVDS
 xrandr --output LVDS --off
 xrandr --output LVDS --mode 800x600 --rate <span class="m">60</span>
 </pre></div>
-</td></tr></table>
   </div>
-  <header>
-  </header>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
       <a href="./tag/xorg.html">Xorg</a>
     </p>
   </div>
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-    var disqus_shortname = 'fgedocs';
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+
 </article>
 
     <footer>
 <p>
   &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
 </p>
-<p>Built using <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
   <a rel="license"
      href="http://creativecommons.org/licenses/by-sa/4.0/"
      target="_blank">
     <img alt="Creative Commons License"
          title="Creative Commons License"
          style="border-width:0"
-         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
          width="80"
          height="15"/>
   </a>
@@ -278,23 +293,16 @@ xrandr --output LVDS --mode 800x600 --rate <span class="m">60</span>
 
 
 
-
 <script type="application/ld+json">
 {
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "name": "Xorg - dual screen",
-  "headline": "Xorg - dual screen",
-  "datePublished": "2010-12-03 10:20:00+01:00",
-  "dateModified": "",
-  "author": {
-    "@type": "Person",
-    "name": "FGE",
-    "url": "./author/fge.html"
-  },
-  "image": "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/img/profile.png",
-  "url": "./xorg-dual-screen.html",
-  "description": "Brancher un second écran sur votre ordinateurs"
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " fgeDoc's ",
+  "url" : ".",
+  "image": "",
+  "description": "FGE's Thoughts and Writings"
 }
-</script></body>
+</script>
+
+</body>
 </html>

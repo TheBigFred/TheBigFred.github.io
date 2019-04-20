@@ -490,11 +490,32 @@ Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et
 implicite du C.&lt;/p&gt;
 &lt;p&gt;Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne
 la recette qui sera utilisée.&lt;/p&gt;
-&lt;p&gt;| fichier source  | recette utilisée                    |                 | 
-|:---------------:|-------------------------------------|-----------------|
-| .c              | &lt;code&gt;$(CC) $(CPPFLAGS) $(CFLAGS) -c&lt;/code&gt;    | Compilateur C   |
-| .cc / .cpp / .C | &lt;code&gt;$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c&lt;/code&gt; | Compilateur C++ |
-| .s              | &lt;code&gt;$(AS) $(ASFLAGS)&lt;/code&gt;                  | Assembleur      |&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;fichier source&lt;/th&gt;
+&lt;th&gt;recette utilisée&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.c&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(CC) $(CPPFLAGS) $(CFLAGS) -c&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compilateur C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.cc / .cpp / .C&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c&lt;/code&gt; &lt;/td&gt;
+&lt;td&gt;Compilateur C++&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;.s&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$(AS) $(ASFLAGS)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Assembleur&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette
 utilisée sera celle du pré-processeur : &lt;code&gt;$(CPP) $(CPPFLAGS)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette
@@ -503,16 +524,48 @@ utilisée sera celle de l'éditeur de liens (linker) : &lt;code&gt;$(CC) -o $@ $
 fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;code&gt;x: y.o z.o&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.&lt;/p&gt;
 &lt;p&gt;Voici les variables utilisées par les règles implicites :&lt;/p&gt;
-&lt;p&gt;|          |                                             |
-|----------|---------------------------------------------|
-| CC       | compilateur C, par défaut vaut 'cc'         |
-| CXX      | compilateur C++, par défaut vaut 'g++'      |
-| CPP      | préprocesseur C, par défaut vaut '$(CC) -E' |
-| CFLAGS   | options à passer au compilateur C           |
-| CXXFLAGS | options à passer au compilateur C++         |
-| CPPFLAGS | options à passer au préprocesseur, comme -I |
-| LDFLAGS  | options à passer au linker, comme -L        |
-| LDLIBS   | options à passer au linker, comme -l        |&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CC&lt;/td&gt;
+&lt;td&gt;compilateur C, par défaut vaut 'cc'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CXX&lt;/td&gt;
+&lt;td&gt;compilateur C++, par défaut vaut 'g++'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CPP&lt;/td&gt;
+&lt;td&gt;préprocesseur C, par défaut vaut '$(CC) -E'&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au compilateur C&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CXXFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au compilateur C++&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CPPFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au préprocesseur, comme -I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LDFLAGS&lt;/td&gt;
+&lt;td&gt;options à passer au linker, comme -L&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LDLIBS&lt;/td&gt;
+&lt;td&gt;options à passer au linker, comme -l&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;On peut maintenant ré-écrire l’exemple précédent :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
 &lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
@@ -556,8 +609,7 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;
     rm -f hello
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="dossier-de-rechercher-des-dependances"&gt;Dossier de rechercher des dépendances&lt;/h2&gt;
-&lt;p&gt;VPATH
-vpath&lt;/p&gt;
+&lt;p&gt;VPATH (to be continued...)&lt;/p&gt;
 &lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Pour installer le résultat généré par make,&lt;/p&gt;
 &lt;ul&gt;

@@ -380,11 +380,32 @@ Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et
 implicite du C.</p>
 <p>Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne
 la recette qui sera utilisée.</p>
-<p>| fichier source  | recette utilisée                    |                 | 
-|:---------------:|-------------------------------------|-----------------|
-| .c              | <code>$(CC) $(CPPFLAGS) $(CFLAGS) -c</code>    | Compilateur C   |
-| .cc / .cpp / .C | <code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code> | Compilateur C++ |
-| .s              | <code>$(AS) $(ASFLAGS)</code>                  | Assembleur      |</p>
+<table>
+<thead>
+<tr>
+<th align="center">fichier source</th>
+<th>recette utilisée</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">.c</td>
+<td><code>$(CC) $(CPPFLAGS) $(CFLAGS) -c</code></td>
+<td>Compilateur C</td>
+</tr>
+<tr>
+<td align="center">.cc / .cpp / .C</td>
+<td><code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code> </td>
+<td>Compilateur C++</td>
+</tr>
+<tr>
+<td align="center">.s</td>
+<td><code>$(AS) $(ASFLAGS)</code></td>
+<td>Assembleur</td>
+</tr>
+</tbody>
+</table>
 <p>Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette
 utilisée sera celle du pré-processeur : <code>$(CPP) $(CPPFLAGS)</code>.</p>
 <p>Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette
@@ -393,16 +414,48 @@ utilisée sera celle de l'éditeur de liens (linker) : <code>$(CC) -o $@ $^ $(LD
 fichiers sources, un des fichiers sources devant définir le nom du binaire <code>x: y.o z.o</code></p>
 <p>Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.</p>
 <p>Voici les variables utilisées par les règles implicites :</p>
-<p>|          |                                             |
-|----------|---------------------------------------------|
-| CC       | compilateur C, par défaut vaut 'cc'         |
-| CXX      | compilateur C++, par défaut vaut 'g++'      |
-| CPP      | préprocesseur C, par défaut vaut '$(CC) -E' |
-| CFLAGS   | options à passer au compilateur C           |
-| CXXFLAGS | options à passer au compilateur C++         |
-| CPPFLAGS | options à passer au préprocesseur, comme -I |
-| LDFLAGS  | options à passer au linker, comme -L        |
-| LDLIBS   | options à passer au linker, comme -l        |</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CC</td>
+<td>compilateur C, par défaut vaut 'cc'</td>
+</tr>
+<tr>
+<td>CXX</td>
+<td>compilateur C++, par défaut vaut 'g++'</td>
+</tr>
+<tr>
+<td>CPP</td>
+<td>préprocesseur C, par défaut vaut '$(CC) -E'</td>
+</tr>
+<tr>
+<td>CFLAGS</td>
+<td>options à passer au compilateur C</td>
+</tr>
+<tr>
+<td>CXXFLAGS</td>
+<td>options à passer au compilateur C++</td>
+</tr>
+<tr>
+<td>CPPFLAGS</td>
+<td>options à passer au préprocesseur, comme -I</td>
+</tr>
+<tr>
+<td>LDFLAGS</td>
+<td>options à passer au linker, comme -L</td>
+</tr>
+<tr>
+<td>LDLIBS</td>
+<td>options à passer au linker, comme -l</td>
+</tr>
+</tbody>
+</table>
 <p>On peut maintenant ré-écrire l’exemple précédent :</p>
 <div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span> gcc
 <span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
@@ -446,8 +499,7 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire <cod
     rm -f hello
 </pre></div>
 <h2 id="dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</h2>
-<p>VPATH
-vpath</p>
+<p>VPATH (to be continued...)</p>
 <h2 id="installation">Installation</h2>
 <p>Pour installer le résultat généré par make,</p>
 <ul>

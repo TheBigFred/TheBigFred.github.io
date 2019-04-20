@@ -13,17 +13,17 @@ hr{color:#eee;background-color:#eee;height:1px;border:none;margin-top:40px;margi
 img{max-width:100%}
 aside{background-color:#2c3e50;color:#fff;text-align:center}aside a{color:#fff}
 aside a:hover{color:#eee}
-aside div{padding:20px;margin:0}aside div img{border-radius:50%;max-width:140px}
-aside div h1{margin:15px 0 5px 0}
-aside div h2{margin:15px 0 0 0}
+aside div{padding:20px;margin:0}
+aside div img{border-radius:50%;max-width:140px}
+aside div h1{margin:15px 0 5px 0}aside div h2{margin:15px 0 0 0}
 aside div p{margin:0 0 15px 0;font-size:.92em}
-aside nav ul li{display:inline-block;line-height:1.6em;font-size:1em;text-transform:lowercase}
+aside nav ul li{display:inline-block;line-height:1.6em;font-size:1.28em;text-transform:lowercase}
 main nav{text-align:left;text-transform:capitalize;padding:14px 0 0 0;margin:0 8% 0 8%}main nav a{padding:0 4px 0 4px}
 main nav hr{margin:10px 0 0 0}
 main .pagination{margin:4% 8% 2% 8%;height:20px}
 main .social-share p{font-size:.8em}
 main article{margin:0 8% 2% 8%}main article header h1,main article h2 a,main article header h2, main article header h2 a {margin-bottom:0;color:#2c3e50;}
-main article header p{color:#999;font-size:.82em;line-height: 20%;}
+main article header p{color:#999;font-size:.82em}
 main article code,main article kbd,main article samp,main article pre{font-family:'Source Code Pro','Consolas',monospace}
 main article blockquote,main article pre{background-color:rgba(128,128,128,0.05);border-top-right-radius:5px;border-bottom-right-radius:5px;border-left:8px solid rgba(128,128,128,0.075);border-left-width:10px}
 main article blockquote{padding:10px 20px;font-weight:300;font-size:1.1em}
@@ -48,10 +48,14 @@ ul.social a:hover{z-index:2;-webkit-transform:translateY(-5px);transform:transla
 ul.social a{display:inline-block;width:36px;height:36px;border-radius:100%;text-align:center;font-size:.8em;line-height:36px}
 ul.social a.sc-facebook{background-color:#3e5b98}
 ul.social a.sc-google{background-color:#d93e2d}
+ul.social a.sc-instagram{background-color:#125688}
+ul.social a.sc-keybase{background-color:#4c8dff}
 ul.social a.sc-pinterest{background-color:#c92619}
 ul.social a.sc-linkedin{background-color:#3371b7}
+ul.social a.sc-medium{background-color:#00ab6b}
 ul.social a.sc-rss{background-color:#f26109}
 ul.social a.sc-stack-overflow{background-color:#f90}
+ul.social a.sc-tumblr{background-color:#36465d}
 ul.social a.sc-twitter{background-color:#4da7de}
 ul.social a.sc-youtube{background-color:#e02a20}
 ul.social a.sc-github,ul.social a.sc-github-alt{background-color:#111010}

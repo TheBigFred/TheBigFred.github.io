@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's</title><link href="http://thebigfred.github.io/" rel="alternate"></link><link href="http://thebigfred.github.io/feeds/all.atom.xml" rel="self"></link><id>http://thebigfred.github.io/</id><updated>2019-01-21T23:14:00+01:00</updated><subtitle>Sharing notes</subtitle><entry><title>Compilation avec GCC</title><link href="http://thebigfred.github.io/compilation-avec-gcc.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-01-09T22:18:00+01:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/compilation-avec-gcc.html</id><summary type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's</title><link href="http://thebigfred.github.io/" rel="alternate"></link><link href="http://thebigfred.github.io/feeds/all.atom.xml" rel="self"></link><id>http://thebigfred.github.io/</id><updated>2019-04-24T21:01:00+02:00</updated><subtitle>Sharing notes</subtitle><entry><title>Compilation avec GCC</title><link href="http://thebigfred.github.io/compilation-avec-gcc.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-04-24T21:01:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/compilation-avec-gcc.html</id><summary type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
 Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
 Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une suite d'outils dans un ordre précis pour créer un binaire nommé &lt;em&gt;a.out&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id="les-phases-de-compilation-petit-rappel"&gt;Les phases de compilation, petit rappel&lt;/h2&gt;
@@ -101,7 +101,7 @@ compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
 
 
 &lt;p&gt;Pour compiler ce fichier en mode debug : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Pour compiler ce fichier en mode release : &lt;code&gt;gcc -02 -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pour compiler ce fichier en mode release : &lt;code&gt;gcc -O2 -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pour activer le code optionnel, il faut juste ajouter &lt;code&gt;-DMAXVAL&lt;/code&gt; aux commandes précédentes.&lt;/p&gt;
 &lt;p&gt;Le code optionnel reprend une variable MAX non définie. l'idée est de définir MAX par le biais de la ligne de commande : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude -DMAXVAL -DMAX=5&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id="importance-du-parametre-std"&gt;Importance du paramètre &lt;code&gt;-std&lt;/code&gt;&lt;/h2&gt;
@@ -229,7 +229,7 @@ implicite à la fin de la fonction main.&lt;/p&gt;
 &lt;p&gt;L'idée est de compilé chaque fichier .c en .o avec l'option &lt;em&gt;-c&lt;/em&gt; de gcc : &lt;code&gt;gcc -c mesfonctions.c&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Lorsque tous les fichiers &lt;em&gt;.c&lt;/em&gt; sont compilés, il reste à les linker : &lt;code&gt;gcc -g -o myApp main.o mesfonctions.o -lm -I$HOME/MyInclude&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.&lt;/p&gt;
-&lt;p&gt;Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est &lt;strong&gt;make&lt;/strong&gt;.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Écrire un Makefile</title><link href="http://thebigfred.github.io/ecrire-un-makefile.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-01-21T23:14:00+01:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/ecrire-un-makefile.html</id><summary type="html">
+&lt;p&gt;Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est &lt;strong&gt;make&lt;/strong&gt;.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Écrire un Makefile</title><link href="http://thebigfred.github.io/ecrire-un-makefile.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-04-23T20:23:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/ecrire-un-makefile.html</id><summary type="html">
 &lt;p&gt;Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.&lt;/p&gt;
 &lt;p&gt;Cet article est une …&lt;/p&gt;</summary><content type="html">
 &lt;p&gt;Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.&lt;/p&gt;
@@ -388,10 +388,9 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;p&gt;Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.&lt;/p&gt;
 &lt;p&gt;Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut être pas supporté par une ancienne version de make.&lt;/p&gt;
 &lt;p&gt;La valeur d'une variable simplement expansée est calculé une seule fois lors de sa définition.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; :::basemake
- x := Hello
- y := $(x) world
- x := !!!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello
+&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;x&lt;span class="k"&gt;)&lt;/span&gt; world
+&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; !!!
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;est équivalent à &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello world
@@ -636,6 +635,10 @@ pas utiliser directement la commande install, mais de passer par une variable $(
     &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL_DATA&lt;span class="k"&gt;)&lt;/span&gt; libhello.a &lt;span class="k"&gt;$(&lt;/span&gt;DESTDIR&lt;span class="k"&gt;)$(&lt;/span&gt;libdir&lt;span class="k"&gt;)&lt;/span&gt;/libhello.a
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="le-probleme-des-makefiles"&gt;Le problème des makefiles&lt;/h2&gt;
+&lt;p&gt;Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX.&lt;/p&gt;
+&lt;p&gt;Par exemple, si votre makefile utilise des librairies tiers, il faut en vérifier leurs présences. Mais également l'emplacement et mettre à jours les variable comme CPPFLAGS ou LDFLAGS. &lt;/p&gt;
+&lt;p&gt;Lorsque vous fournissez un package de source vous ne devriez pas imposer les dossiers des bibliothéque tiers.&lt;/p&gt;
+&lt;p&gt;Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.&lt;/p&gt;
 &lt;p&gt;Comme dit plus haut, cette article est une introduction, si vous voulez en savoir plus, je vous invite à lire le manuel officiel de make : &lt;a href=""&gt;https://www.gnu.org/software/make/manual/make.html&lt;/a&gt;. &lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Afficher un fichier en hexadécimal</title><link href="http://thebigfred.github.io/afficher-un-fichier-en-hexadecimal.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/afficher-un-fichier-en-hexadecimal.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et en Qt.&lt;/p&gt;
 &lt;p&gt;Par défaut &lt;em&gt;od&lt;/em&gt; (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option &lt;em&gt;-x&lt;/em&gt; pour avoir un affichage hexa.&lt;/p&gt;
 &lt;p&gt;od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc &lt;code&gt;od -x --endian=big hello.txt&lt;/code&gt; ou &lt;code&gt;hexdump -C hello.txt&lt;/code&gt;.&lt;/p&gt;

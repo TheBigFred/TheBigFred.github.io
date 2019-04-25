@@ -44,7 +44,7 @@
 <meta property="og:url" content="./compilation-avec-gcc.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-02-05 21:55:00+01:00"/>
-<meta property="article:modified_time" content="2019-01-09 22:18:00+01:00"/>
+<meta property="article:modified_time" content="2019-04-24 21:01:00+02:00"/>
 <meta property="article:author" content="./author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
@@ -222,7 +222,7 @@ compilateur que gcc, n'utilisez pas ces extensions.</p>
 
 
 <p>Pour compiler ce fichier en mode debug : <code>gcc -g -o myApp main.c -lm -I$HOME/MyInclude</code></p>
-<p>Pour compiler ce fichier en mode release : <code>gcc -02 -o myApp main.c -lm -I$HOME/MyInclude</code></p>
+<p>Pour compiler ce fichier en mode release : <code>gcc -O2 -o myApp main.c -lm -I$HOME/MyInclude</code></p>
 <p>Pour activer le code optionnel, il faut juste ajouter <code>-DMAXVAL</code> aux commandes précédentes.</p>
 <p>Le code optionnel reprend une variable MAX non définie. l'idée est de définir MAX par le biais de la ligne de commande : <code>gcc -g -o myApp main.c -lm -I$HOME/MyInclude -DMAXVAL -DMAX=5</code></p>
 <h2 id="importance-du-parametre-std">Importance du paramètre <code>-std</code></h2>
@@ -352,6 +352,14 @@ implicite à la fin de la fonction main.</p>
 <p>Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.</p>
 <p>Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est <strong>make</strong>.</p>
   </div>
+  <header><p>
+        <br>Série build :
+            Compilation avec GCC
+           - 
+   
+            <a href='./ecrire-un-makefile.html'>Écrire un Makefile</a>
+   
+  </p></header>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 

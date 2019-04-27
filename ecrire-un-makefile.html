@@ -525,11 +525,10 @@ pas utiliser directement la commande install, mais de passer par une variable $(
     <span class="k">$(</span>INSTALL_DATA<span class="k">)</span> libhello.a <span class="k">$(</span>DESTDIR<span class="k">)$(</span>libdir<span class="k">)</span>/libhello.a
 </pre></div>
 <h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
-<p>Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX.</p>
-<p>Par exemple, si votre makefile utilise des librairies tiers, il faut en vérifier leurs présences. Mais également l'emplacement et mettre à jours les variable comme CPPFLAGS ou LDFLAGS. </p>
-<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer les dossiers des bibliothéque tiers.</p>
+<p>Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
+<p>Par exemple, si votre makefile utilise des librairies tiers, il faut en vérifier leurs présences. Mais également l'emplacement et mettre à jours les variables comme CPPFLAGS ou LDFLAGS. </p>
+<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer les dossiers des bibliothéques tiers.</p>
 <p>Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.</p>
-<p>Comme dit plus haut, cette article est une introduction, si vous voulez en savoir plus, je vous invite à lire le manuel officiel de make : <a href="">https://www.gnu.org/software/make/manual/make.html</a>. </p>
   </div>
   <header><p>
         <br>Série build :

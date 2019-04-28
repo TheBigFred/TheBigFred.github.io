@@ -411,8 +411,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;p&gt;Cependant, il y a une différence entre une variable non définie et une variable vide. Une variable non définie n'existe pas, alors qu'une variable vide existe, mais n'a pas de contenu.&lt;/p&gt;
 &lt;p&gt;Le mot clef &lt;em&gt;undefine&lt;/em&gt; permet de supprimer une variable.&lt;/p&gt;
 &lt;h3&gt;Les variables d'environnement&lt;/h3&gt;
-&lt;p&gt;Toutes les variables d'environnement vue par make lors de son démarrage sont transformées en variable make
-avec le même nom et la même valeur.&lt;/p&gt;
+&lt;p&gt;Toutes les variables d'environnement vue par make lors de son démarrage sont transformées en variable make avec le même nom et la même valeur.&lt;/p&gt;
 &lt;p&gt;Il est ainsi possible de passer des options de compilation sans modifier le makefile. Il faut pour cela que le makefile n’écrase pas le contenu de cette variable par une affection avec &lt;code&gt;=&lt;/code&gt; ou &lt;code&gt;:=&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id="target-phony"&gt;Target PHONY&lt;/h2&gt;
 &lt;p&gt;Dans certains &lt;em&gt;makefile&lt;/em&gt; écrits jusqu’à présent, nous avons une &lt;em&gt;target clean&lt;/em&gt; qui n'a pas de dépendance et qui ne produit aucun fichier.&lt;/p&gt;
@@ -450,8 +449,7 @@ avec le même nom et la même valeur.&lt;/p&gt;
     rm -f hello
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="static-pattern"&gt;STATIC PATTERN&lt;/h2&gt;
-&lt;p&gt;Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser
-une règle &lt;em&gt;générique&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser une règle &lt;em&gt;générique&lt;/em&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
 &lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
 &lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
@@ -479,16 +477,11 @@ une règle &lt;em&gt;générique&lt;/em&gt;.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;La &lt;em&gt;subtilité&lt;/em&gt; est ici : &lt;code&gt;%.o : %.c&lt;/code&gt;. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.&lt;/p&gt;
 &lt;h2 id="les-regles-implicites"&gt;Les régles implicites&lt;/h2&gt;
-&lt;p&gt;Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran,
-TeX et quelques autres.&lt;/p&gt;
+&lt;p&gt;Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran, TeX et quelques autres.&lt;/p&gt;
 &lt;p&gt;Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.&lt;/p&gt;
-&lt;p&gt;Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target &lt;code&gt;%.o : %.c&lt;/code&gt;, ou même supprimer
-cette target.&lt;/p&gt;
-&lt;p&gt;En rencontrant &lt;em&gt;hello.o&lt;/em&gt; et &lt;em&gt;mesfonctions.o&lt;/em&gt;, make va chercher à utiliser une de ces règles implicites.
-Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et utilisera donc la règle
-implicite du C.&lt;/p&gt;
-&lt;p&gt;Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne
-la recette qui sera utilisée.&lt;/p&gt;
+&lt;p&gt;Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target &lt;code&gt;%.o : %.c&lt;/code&gt;, ou même supprimer cette target.&lt;/p&gt;
+&lt;p&gt;En rencontrant &lt;em&gt;hello.o&lt;/em&gt; et &lt;em&gt;mesfonctions.o&lt;/em&gt;, make va chercher à utiliser une de ces règles implicites. Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et utilisera donc la règle implicite du C.&lt;/p&gt;
+&lt;p&gt;Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne la recette qui sera utilisée.&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -515,53 +508,79 @@ la recette qui sera utilisée.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette
-utilisée sera celle du pré-processeur : &lt;code&gt;$(CPP) $(CPPFLAGS)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette
-utilisée sera celle de l'éditeur de liens (linker) : &lt;code&gt;$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Cette règle fonctionne pour un programme simple d'un fichier source. Elle fonctionne également avec plusieurs
-fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;code&gt;x: y.o z.o&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette utilisée sera celle du pré-processeur : &lt;code&gt;$(CPP) $(CPPFLAGS)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette utilisée sera celle de l'éditeur de liens (linker) : &lt;code&gt;$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Cette règle fonctionne pour un programme simple d'un fichier source. Elle fonctionne également avec plusieurs fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;code&gt;x: y.o z.o&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.&lt;/p&gt;
 &lt;p&gt;Voici les variables utilisées par les règles implicites :&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Variables&lt;/th&gt;
+&lt;th&gt;Valeur par défaut&lt;/th&gt;
 &lt;th&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;CC&lt;/td&gt;
-&lt;td&gt;compilateur C, par défaut vaut 'cc'&lt;/td&gt;
+&lt;td&gt;cc&lt;/td&gt;
+&lt;td&gt;compilateur C&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CXX&lt;/td&gt;
-&lt;td&gt;compilateur C++, par défaut vaut 'g++'&lt;/td&gt;
+&lt;td&gt;g++&lt;/td&gt;
+&lt;td&gt;compilateur C++&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CPP&lt;/td&gt;
-&lt;td&gt;préprocesseur C, par défaut vaut '$(CC) -E'&lt;/td&gt;
+&lt;td&gt;$(CC) -E&lt;/td&gt;
+&lt;td&gt;préprocesseur C&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CFLAGS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;options à passer au compilateur C&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CXXFLAGS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;options à passer au compilateur C++&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;CPPFLAGS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;options à passer au préprocesseur, comme -I&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;LDFLAGS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;options à passer au linker, comme -L&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;LDLIBS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
 &lt;td&gt;options à passer au linker, comme -l&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AR&lt;/td&gt;
+&lt;td&gt;ar&lt;/td&gt;
+&lt;td&gt;archiver utilisé pour créer des lib statiques&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ARFLAGS&lt;/td&gt;
+&lt;td&gt;rv&lt;/td&gt;
+&lt;td&gt;options à passer à l'archiver&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AS&lt;/td&gt;
+&lt;td&gt;as&lt;/td&gt;
+&lt;td&gt;l'assembleur&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ASFLAGS&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;options à passer à l'assembleur lorsque qu'il est invoqué explicitement sur fichier un '.s' ou '.S'&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -588,7 +607,13 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;
 &lt;p&gt;Voici comment procéder :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Utiliser &lt;code&gt;$(wildcard *.c)&lt;/code&gt; pour lister les fichiers .c du dossier.&lt;/li&gt;
-&lt;li&gt;Utiliser la substitution de paterne pour transformer les .c en .o &lt;code&gt;$(patsubst %.c,%.o,$(wildcard *.c))&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Utiliser la substitution de pattern pour transformer les .c en .o &lt;code&gt;$(patsubst %.c,%.o,$(wildcard *.c))&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;patsubt comprend 3 arguments :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;le premier est %.c, c'est le pattern de recherche,&lt;/li&gt;
+&lt;li&gt;le second est %.o, c'est le pattern de substitution,&lt;/li&gt;
+&lt;li&gt;le troisième la liste des fichiers à traiter.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Votre makefile devient ceci :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
@@ -608,7 +633,104 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;
     rm -f hello
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="dossier-de-rechercher-des-dependances"&gt;Dossier de rechercher des dépendances&lt;/h2&gt;
-&lt;p&gt;VPATH (to be continued...)&lt;/p&gt;
+&lt;p&gt;Jusqu'a présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.&lt;/p&gt;
+&lt;p&gt;Le plus simple est alors d'utiliser la variable &lt;code&gt;VPATH&lt;/code&gt;. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;VPATH&lt;/code&gt; contient simplement une liste de dossier séparé par &lt;code&gt;:&lt;/code&gt; : &lt;code&gt;VPATH=sources:includes&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Il existe également la directive &lt;code&gt;vpath&lt;/code&gt; (en minuscule) qui permet également de spécifier une liste de dossier pour des fichiers qui respect un pattern donné : &lt;code&gt;vpath %.h includes&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Lorsqu'une dépendance est trouvée dans un dossier référencé par VPATH, cela n'adapte pas la recette. Il faut donc écrire les recettes pour prendre en compte ces dossiers.&lt;/p&gt;
+&lt;p&gt;Notez également que les wildcard ou la substitution de pattern vu ci-dessus ne tiennent pas compte de &lt;code&gt;VPATH&lt;/code&gt;. Lorsque l'on écrit &lt;code&gt;$(wildcard *.c)&lt;/code&gt;, on demande à make de faire la liste des fichiers .c du dossier dans lequel se trouve le makefile.&lt;/p&gt;
+&lt;h2 id="exemple_1"&gt;Exemple&lt;/h2&gt;
+&lt;p&gt;Le projets est organisé comme suit :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;le sous dossier &lt;em&gt;src&lt;/em&gt; contient toutes les sources de l'application;&lt;/li&gt;
+&lt;li&gt;j'ai également décidé de déplacer chaque fichier .o dans un sous dossier &lt;em&gt;objs&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;l'application finale sera placé dans le sous dossier &lt;em&gt;dist&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Je définis des variables contenant le nom des dossiers &lt;em&gt;src&lt;/em&gt;, &lt;em&gt;objs&lt;/em&gt; et &lt;em&gt;dist&lt;/em&gt;. Cela permet par la suite modifier plus facilement les noms de ces dossiers si besoin.&lt;/p&gt;
+&lt;p&gt;Analysons la ligne OBJS en plusieurs étapes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$(wildcard $(SRCDIR)/*.c)&lt;/code&gt; : créer la liste des fichiers .c se trouvant dans le sous dossier &lt;code&gt;src&lt;/code&gt;. Si on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;$(patsubst $(SRCDIR)/%.c,%.o,...)&lt;/code&gt; : permet de rempalcer les .c par des .o dans la liste précédement constituée. Notez également que le préfix &lt;em&gt;src/&lt;/em&gt; présent devant chaque nom de fichier est supprimé. La substitution &lt;em&gt;$(patsubst %.c,%.o,...)&lt;/em&gt; ne retire pas les préfix &lt;em&gt;src/&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La variable &lt;code&gt;OBJS&lt;/code&gt; contient donc la liste de tout les fichiers sources mais avec l'extention .o.&lt;/p&gt;
+&lt;p&gt;La recette de &lt;em&gt;%.o: %.c&lt;/em&gt; écrit bien les .o dans le sous dossier objs.
+La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; MyApp
+&lt;span class="nv"&gt;SRCDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; src
+&lt;span class="nv"&gt;OBJDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; objs
+&lt;span class="nv"&gt;DISTDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; dist
+&lt;span class="nv"&gt;VPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;:&lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.c,%.o,&lt;span class="k"&gt;$(&lt;/span&gt;wildcard &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/*.c&lt;span class="k"&gt;))&lt;/span&gt;
+
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;$(APP)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    gcc -o &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;/&lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJS&lt;span class="k"&gt;))&lt;/span&gt;
+
+&lt;span class="nf"&gt;%.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;c&lt;/span&gt;
+    gcc -c $&amp;lt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/&lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @rm -rf &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;resource&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    mkdir -p &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;mkdir -p objs dist&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/hello.c -o objs/hello.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/myfunction.c -o objs/myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o dist/MyApp objs/hello.o objs/myfunction.o &lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;mkdir -p objs dist&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o dist/MyApp objs/hello.o objs/myfunction.o&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;On peut constaté que le fait de déplacer l'application dans le sous dossier &lt;em&gt;dist&lt;/em&gt; relance la phase de link. Il serait préférable de copier l'application dans le dossier &lt;em&gt;dist&lt;/em&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nf"&gt;$(APP)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    gcc -o &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJS&lt;span class="k"&gt;))&lt;/span&gt;
+    cp &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Le fait de créer les .o dans le sous dossier &lt;em&gt;objs&lt;/em&gt; complexifie la ligne de link. Voici le make file réécrit sans ce dossier.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; MyApp
+&lt;span class="nv"&gt;SRCDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; src
+&lt;span class="nv"&gt;DISTDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; dist
+&lt;span class="nv"&gt;VPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.c,%.o,&lt;span class="k"&gt;$(&lt;/span&gt;wildcard &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/*.c&lt;span class="k"&gt;))&lt;/span&gt;
+
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;$(APP)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    gcc -o &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; $^
+    mkdir -p &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+    cp &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;%.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;c&lt;/span&gt;
+    gcc -c $&amp;lt; -o &lt;span class="nv"&gt;$@&lt;/span&gt;
+
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    @rm -f &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt;
+
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+    @rm -rf &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+    @rm -f *.o
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt;make
+&lt;span class="go"&gt;gcc -c src/hello.c -o hello.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/myfunction.c -o myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o MyApp hello.o myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;mkdir -p dist&lt;/span&gt;
+&lt;span class="go"&gt;cp MyApp dist &lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt; make
+&lt;span class="go"&gt;make: Nothing to be done for `all'.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Pour installer le résultat généré par make,&lt;/p&gt;
 &lt;ul&gt;
@@ -616,8 +738,7 @@ fichiers sources, un des fichiers sources devant définir le nom du binaire &lt;
 &lt;li&gt;modifier le propriétaire et le gourpe des fichiers,&lt;/li&gt;
 &lt;li&gt;modifier les droits.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;La commande &lt;em&gt;install&lt;/em&gt; permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne
-pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.&lt;/p&gt;
+&lt;p&gt;La commande &lt;em&gt;install&lt;/em&gt; permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.&lt;/p&gt;
 &lt;p&gt;Par défaut, les programmes sont installés dans /usr/local.&lt;/p&gt;
 &lt;p&gt;La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : &lt;code&gt;make DESTDIR=$HOME/stage install&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;INSTALL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; install

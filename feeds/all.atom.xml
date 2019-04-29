@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's</title><link href="http://thebigfred.github.io/" rel="alternate"></link><link href="http://thebigfred.github.io/feeds/all.atom.xml" rel="self"></link><id>http://thebigfred.github.io/</id><updated>2019-04-24T21:01:00+02:00</updated><subtitle>Sharing notes</subtitle><entry><title>Compilation avec GCC</title><link href="http://thebigfred.github.io/compilation-avec-gcc.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-04-24T21:01:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/compilation-avec-gcc.html</id><summary type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
-Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une …&lt;/p&gt;</summary><content type="html">&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's</title><link href="http://thebigfred.github.io/" rel="alternate"></link><link href="http://thebigfred.github.io/feeds/all.atom.xml" rel="self"></link><id>http://thebigfred.github.io/</id><updated>2019-04-24T21:01:00+02:00</updated><subtitle>Sharing notes</subtitle><entry><title>Compilation avec GCC</title><link href="http://thebigfred.github.io/compilation-avec-gcc.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-04-24T21:01:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/compilation-avec-gcc.html</id><summary type="html">
+&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
+Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une …&lt;/p&gt;</summary><content type="html">
+&lt;p&gt;GCC, &lt;em&gt;Gnu Compiler Collection&lt;/em&gt;, est l'ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable.
 Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une suite d'outils dans un ordre précis pour créer un binaire nommé &lt;em&gt;a.out&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id="les-phases-de-compilation-petit-rappel"&gt;Les phases de compilation, petit rappel&lt;/h2&gt;
 &lt;p&gt;Lorsque l'on compile un fichier &lt;em&gt;c&lt;/em&gt;, gcc va appeler pour vous les outils suivants dans cet ordre :&lt;/p&gt;
@@ -86,20 +88,18 @@ compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
 &lt;p&gt;Voici un petit code C qui utilise la libm.so ainsi qu'un ensemble de fichiers .h que nous aurions placé dans un dossier MyInclude à la racine du dossier utilisateur.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;math.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;myinclude1.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;quot;myinclude2.h&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;"myinclude1.h"&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;"myinclude2.h"&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sin(%g) = %g&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"sin(%g) = %g&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
 &lt;span class="cp"&gt;#ifdef MAXVAL&lt;/span&gt;
-  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;code optionnel, MAX = %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MAX&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;printf&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"code optionnel, MAX = %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MAX&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="cp"&gt;#endif&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;Pour compiler ce fichier en mode debug : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pour compiler ce fichier en mode release : &lt;code&gt;gcc -O2 -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pour activer le code optionnel, il faut juste ajouter &lt;code&gt;-DMAXVAL&lt;/code&gt; aux commandes précédentes.&lt;/p&gt;
@@ -120,21 +120,19 @@ compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
 &lt;span class="cp"&gt;#if (__STDC_VERSION__ != 199901L)&lt;/span&gt;
-&lt;span class="cp"&gt;#error &amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="cp"&gt;#error "Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
 &lt;span class="cp"&gt;#endif&lt;/span&gt;
 
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
-        &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gcc std.c
-error: &lt;span class="s2"&gt;&amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
-&lt;span class="c1"&gt;#error &amp;quot;Ce code est compatible uniquement avec C99 !!!&amp;quot;&lt;/span&gt;
+error: &lt;span class="s2"&gt;"Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
+&lt;span class="c1"&gt;#error "Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
  ^
 &lt;span class="m"&gt;1&lt;/span&gt; error generated.
 $
@@ -143,27 +141,23 @@ $ ./a.out
 &lt;span class="m"&gt;199901&lt;/span&gt;
 $
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;Dans ce second exemple, le standard C doit être au minimum c11 :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
 &lt;span class="cp"&gt;#if (__STDC_VERSION__ &amp;lt; 201112L)&lt;/span&gt;
-&lt;span class="cp"&gt;#error &amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
+&lt;span class="cp"&gt;#error "Ce code nécessite C11 !!!"&lt;/span&gt;
 &lt;span class="cp"&gt;#endif&lt;/span&gt;
 
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c99
-error: &lt;span class="s2"&gt;&amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
-&lt;span class="c1"&gt;#error &amp;quot;Ce code nécessite C11 !!!&amp;quot;&lt;/span&gt;
+error: &lt;span class="s2"&gt;"Ce code nécessite C11 !!!"&lt;/span&gt;
+&lt;span class="c1"&gt;#error "Ce code nécessite C11 !!!"&lt;/span&gt;
  ^
 &lt;span class="m"&gt;1&lt;/span&gt; error generated.
 $
@@ -180,8 +174,6 @@ $ ./a.out
 &lt;span class="m"&gt;201710&lt;/span&gt;
 $
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;Ici, on peut constater que sans option, c'est la norme c11 qui est appliquée.&lt;/p&gt;
 &lt;h2 id="compilation-c"&gt;Compilation C++&lt;/h2&gt;
 &lt;p&gt;Pour compiler du code C++, on utilise &lt;em&gt;g++&lt;/em&gt; au lieu de &lt;em&gt;gcc&lt;/em&gt; et le tour est joué.&lt;/p&gt;
@@ -201,9 +193,7 @@ contient la valeur du standard.&lt;/p&gt;
         &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;__cplusplus&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ g++ std.cpp &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
 &lt;span class="m"&gt;199711&lt;/span&gt;
 $ g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++11 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
@@ -214,8 +204,6 @@ $ g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++17 &lt;span class="p"&g
 &lt;span class="m"&gt;201703&lt;/span&gt;
 $
 &lt;/pre&gt;&lt;/div&gt;
-
-
 &lt;p&gt;Il n'y a pas de &lt;em&gt;return 0&lt;/em&gt; à la fin de mon fichier &lt;em&gt;.cpp&lt;/em&gt;. Ceci n'est pas une faute, la norme c++ définit un &lt;em&gt;return 0&lt;/em&gt;
 implicite à la fin de la fonction main.&lt;/p&gt;
 &lt;h2 id="compilation-de-plusieurs-fichiers"&gt;Compilation de plusieurs fichiers&lt;/h2&gt;

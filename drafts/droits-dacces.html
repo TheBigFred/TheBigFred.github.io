@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="../theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../theme/font-awesome/css/solid.css">
+
+
+    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="FGE">
+<meta name="description" content="Il y a trois notions qui entrent en jeu pour gérer les droits d&#39;accès d&#39;un fichier ou d&#39;un dossier sous UNIX, il s&#39;agit des notions …">
+<meta name="keywords" content="cmd-line">
+
+<meta property="og:site_name" content="fgeDoc's"/>
+<meta property="og:title" content="Droits d&#39;accès"/>
+<meta property="og:description" content="Il y a trois notions qui entrent en jeu pour gérer les droits d&#39;accès d&#39;un fichier ou d&#39;un dossier sous UNIX, il s&#39;agit des notions …"/>
+<meta property="og:locale" content="fr_BE"/>
+<meta property="og:url" content="../drafts/droits-dacces.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-04-29 19:43:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="../author/fge.html">
+<meta property="article:section" content="linux"/>
+<meta property="article:tag" content="cmd-line"/>
+<meta property="og:image" content="">
+
+  <title>fgeDoc's &ndash; Droits d&#39;accès</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <h1><a href="../index.html">FGE Doc's</a></h1>
+
+<p>Sharing notes</p>      <nav>
+        <h2>
+          <a href="../index.html">
+            <span class="fa fa-home"></span>
+            <small> Home</small>
+          </a>
+        </h2>
+        <ul class="list">
+        </ul>
+      </nav>
+      <nav>
+        <h2>
+          <a href="../categories.html">
+            <span class="fa fa-folder-open"></span>
+            <small> Catégories</small>
+          </a>
+        </h2>
+	      <ul class="list">
+          <li><a href="../category/devtools.html">devtools (5)</a></li>
+          <li><a href="../category/linux.html">linux (4)</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <h2>
+          <a href="../tags.html">
+            <span class="fa fa-tags"></span>
+            <small> Tags</small>
+          </a>
+        </h2>
+        <ul class="list">          <li><a href="../tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="../tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="../tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="../tag/xorg.html">Xorg (2)</a></li>
+        </ul>
+      </nav>
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://be.linkedin.com/in/frederic-gerard-32092754" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-rss" href="https://thebigfred.github.io/feeds/all.atom.xml" target="_blank">
+            <i class="fas fa-rss">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="../index.html"><span class="fa fa-home"> Home</a>
+  - <span class="fa fa-folder-open-o" ></span> linux
+      <hr>
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="droits-dacces">Droits d'accès</h1>
+    <p>
+      Posté le Lun 29 avril 2019 dans <a href="../category/linux.html">linux</a>
+
+    </p>
+  </header>
+
+  <div>
+    <p>Il y a trois notions qui entrent en jeu pour gérer les droits d'accès d'un fichier ou d'un dossier sous UNIX, il s'agit des notions : user, group et droits.</p>
+<h2 id="notion-de-user">Notion de user</h2>
+<p>La première est la notion de user (utilisateur), chaque personne travaillant sur une machine UNIX
+est identifiée par son user (login).</p>
+<p>Si vous vous connectez avec le login "fred", vous serez donc l'utilisateur "fred" pour le système.</p>
+<p>Chaque utilisateur est déclaré dans le fichier <em>/etc/password</em>. C'est un fichier au format
+texte dans lequel chaque ligne représente un utilisateur, les différentes valeurs étant séparées par <em>:</em>.</p>
+<div class="highlight"><pre><span></span>$ cat /etc/password 
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/bin/false
+daemon:x:2:2:daemon:/sbin:/bin/false
+mail:x:8:12:mail:/var/spool/mail:/bin/false
+ftp:x:14:11:ftp:/srv/ftp:/bin/false
+http:x:33:33:http:/srv/http:/bin/false
+nobody:x:99:99:nobody:/:/bin/false
+...
+fred:x:1000:1000::/home/fred:/bin/bash
+hugo:x:1001:1001::/home/hugo:/bin/bash
+tom:x:1002:1002::/home/tom:/bin/bash
+...
+</pre></div>
+
+
+<p>Voici dans l'ordre, la signification des 7 champs.</p>
+<ul>
+<li>La première colonne correspond au login.</li>
+<li>Le x indique que le mot de passe de l'utilisateur est stocké dans le fichier <em>/etc/shadow</em>.</li>
+<li>Le premier nombre correspond au <em>userid</em>, c'est l'identifiant de l'utilisateur au niveau du système.</li>
+<li>Le second nombre correspond au <em>groupid</em>, c'est l'identifiant du groupe principale de l'utilisateur au niveau du système (la notion de groupe est expliquée ci-dessous).</li>
+<li>La 5ieme valeur est facultative, elle permet d'indiquer une information tel que le nom complet de l'utilisateur ou son adresse émail.</li>
+<li>Le 6ieme champ indique l'emplacement du dossier personnel de l'utilisateur. C'est le seul endroit
+ou il pourra stocker librement ces fichiers.</li>
+<li>Le dernier champ permet d'indiquer une commande ou un shell à lancer.</li>
+</ul>
+<p>Pour les utilisateurs normaux on indique généralement le shell BASH, mais il peut également s'agir d'un autre shell comme Csh ou Zsh.</p>
+<blockquote>
+<p>Certains utilisateurs peuvent être des programmes. Afin de ne pas pouvoir se connecter sous l'identifiant d'un programme, on indique la commande <em>/bin/false</em> qui invalide la procédure de connexion.</p>
+</blockquote>
+<h3>Pourquoi créer des utilisateurs fictifs pour des programmes ?</h3>
+<p>Lorsqu'un programme est lancé automatiquement au démarrage de la machine, il s'exécute avec l'identité de l'administrateur (nommé root sous UNIX).</p>
+<p>Par exemple, pour un serveur web, s'il interprète du code Php, ce code est exécute sous l'identité
+de l'administrateur. Cela signifie que vous pouvez faire tout et n'importe quoi sur ce serveur (vous avez les droits admin) !</p>
+<p>Pour cette raison, les programmes serveurs doivent être configurés pour s'exécuter avec un 
+utilisateur fictif. Par fictif, on entend : si http est le nom d'utilisateur attribué au serveur 
+web, il n'est pas possible de ce logger à la machine avec ce user.</p>
+<h2 id="notion-de-groupe">Notion de groupe</h2>
+<p>La seconde notion est la notion de groupe (group en anglais). Chaque utilisateur d'une machine UNIX
+est repris dans un ou plusieurs groupes d'utilisateurs.</p>
+<p>Si l'on donne un droit à un groupe, tous les utilisateurs faisant partie de ce groupe possèdent ce droit.</p>
+<p>En général, lorsque l'administrateur de la machine UNIX crée un utilisateur, il crée
+également un groupe portant le même nom et le même <em>userid</em>. Il s'agit de votre groupe par
+défaut.</p>
+<p>Certains groupes représentent des programmes, d'autres des ressources (carte vidéo, la carte son,
+lecteur CD, ...).</p>
+<p>Chaque groupe est déclaré dans le fichier <em>/etc/group</em>. C'est un fichier au format texte dans lequel chaque ligne représente un group, les différentes valeurs étant séparées par <em>:</em>.</p>
+<div class="highlight"><pre><span></span>$ cat /etc/group
+root:x:0:root
+bin:x:1:root,bin,daemon
+daemon:x:2:root,bin,daemon
+...
+video:x:91:fred,hugo,tom
+users:x:100:fred,hugo,tom
+...
+fred:x:1000:
+hugo:x:1001:
+tom:x:1002:
+...
+</pre></div>
+
+
+<p>Voici dans l'ordre la signification des 4 champs.</p>
+<ul>
+<li>La première colonne correspond au nom du groupe.</li>
+<li>Le x représente le mot de passe du groupe, mais n'est pas utilisé.</li>
+<li>La troisième colonne est le <em>groupid</em>.</li>
+<li>Le dernier champ est la liste des utilisateurs faisant partie du groupe. Chaque login est séparé par une virgule.</li>
+</ul>
+<h2 id="attribution-du-usergroup">Attribution du user/group</h2>
+<p>A chaque fichier (ou dossier) est assigné un utilisateur (le propriétaire) et un groupe.</p>
+<p>Plus exactement, le user/group attribué à un fichier (ou dossier) est le userid et le groupid effectif de l'application ou du user qui le créé.</p>
+<p>Lorsque vous créez un fichier (ou un dossier), vous en êtes automatiquement le propriétaire. Le
+groupe assigné au fichier (ou dossier) sera votre groupe par défaut, qui porte généralement le même
+nom que votre nom d'utilisateur.</p>
+<p>Voici un exemple de fichiers et dossiers :</p>
+<div class="highlight"><pre><span></span>$ ls -l
+...      fred   fred   fichier1.txt
+...      fred   fred   dossier1    
+...      fred   user   fichier2.txt
+...      fred   user   dossier2    
+...      tom    tom    fichier3.txt
+...      tom    users  dossier3
+</pre></div>
+
+
+<p>Si vous êtes le propriétaire d'un fichier (ou dossier), vous pouvez changer le groupe de ce fichier
+(ou dossier).</p>
+<p>Si vous êtes le super administrateur (root), vous pouvez changer le propriétaire et le groupe de ce
+que vous voulez.</p>
+<h2 id="notion-de-droits">Notion de droits</h2>
+<p>Il y a trois types de droits :</p>
+<ul>
+<li>
+<p>le droit de lecture, noté "r":</p>
+<ul>
+<li>dans le cas d'un fichier, il permet de lire le fichier ;</li>
+<li>dans le cas d'un dossier, il permet de lister le dossier ;</li>
+</ul>
+</li>
+<li>
+<p>le droit d'écriture, noté "w":</p>
+<ul>
+<li>dans le cas d'un fichier, il permet de modifier/supprimer le fichier ;</li>
+<li>dans le cas d'un dossier, il permet d'écrire dans le dossier ( créer des sous-dossiers, des
+  fichiers, ... ),<br>
+  si vous avez le droit de supprimer touts les fichiers et sous-dossiers contenus, vous pouvez supprimer ce dossier.</li>
+</ul>
+</li>
+<li>
+<p>le droit d'exécution, noté "x":</p>
+<ul>
+<li>dans le cas d'un fichier, il permet de d'exécuter le fichier ( qui doit évidement être un
+  programme, sinon cela n'a pas de sens ) ;</li>
+<li>dans le cas d'un dossier, il permet d'entrer dans le dossier.</li>
+</ul>
+</li>
+</ul>
+<p>Voici un exemple de fichiers et dossiers :</p>
+<div class="highlight"><pre><span></span>$ ls -l
+rw- rw- r--   fred   fred   fichier1.txt
+rwx --- ---   fred   fred   dossier1    
+rw- --- r--   fred   user   fichier2.txt
+r-x r-x r-x   fred   user   dossier2    
+r-- r-- r--   tom    tom    fichier3.txt
+rwx --- r-x   tom    users  dossier3
+</pre></div>
+
+
+<p>Chaque fichier (ou dossier) possède des droits <em>rwx</em> pour <em>le propriétaire</em>, <em>rwx</em> pour <em>le groupe</em> attribué au fichier (ou dossier) et <em>rwx</em> pour <em>les autres</em> (ceux qui ne font pas partie du groupe du fichier). Les droits sont toujours donnés dans l'ordre <em>rwx</em>.</p>
+<p>Dans l'exemple ci avant, pour le fichier <em>le fichier1.txt</em> , le propriétaire peut lire et
+écrire , les utilisateurs du groupe peuvent également lire et écrire dans le fichier, les autres
+utilisateurs du système ne peuvent que lire le fichier. Le - montre l'absence d'un droit.</p>
+<h3>Valeurs numériques des droits</h3>
+<p>Les droits <em>rwx</em> correspondent à un champ de 3 bits. Le bit vaut 1 si le droit est donné, sinon il vaut zéro. Le tableau suivant illustre les valeurs possibles et l'équivalent numérique.</p>
+<table>
+<thead>
+<tr>
+<th align="center">droits</th>
+<th align="center">valeur en binaire</th>
+<th align="center">valeur en décimal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">- - -</td>
+<td align="center">0 0 0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">- - x</td>
+<td align="center">0 0 1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">- w -</td>
+<td align="center">0 1 0</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">r - -</td>
+<td align="center">1 0 0</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">r w x</td>
+<td align="center">1 1 1</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td align="center">r w -</td>
+<td align="center">1 1 0</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">r - x</td>
+<td align="center">1 0 1</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">- w x</td>
+<td align="center">0 1 1</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="partager-un-dossier">Partager un dossier</h2>
+<p>Prenons comme exemple le dossier /home qui contient les dossiers des utilisateurs :</p>
+<div class="highlight"><pre><span></span>$ ls -l /home
+rwx --- ---  fred fred /home/fred
+rwx --- ---  tom  tom  /home/tom
+</pre></div>
+
+
+<p>Ici seul l'utilisateur fred peut accéder au dossier /home/fred, de même que tom ne peut accéder qu'à son dossier.</p>
+<p>Maintenant, nous allons chercher à partager un sous-dossier de fred avec tom.</p>
+<h3>1ier méthode</h3>
+<p>Une première manière de procéder est de donner un droit de lecture et d'exécution au groupe fred et
+de mettre tom dans le groupe fred. Les droits deviennent ceci :</p>
+<div class="highlight"><pre><span></span>$ chmod <span class="m">750</span> /home/fred
+$ ls -l /home
+rwx r-x ---  fred fred /home/fred
+rwx --- ---  tom  tom  /home/tom
+</pre></div>
+
+
+<p>Le problème est que l'administrateur n'ajoutera pas tom dans votre groupe ( il n'a pas que cela à
+faire ). De plus, si votre groupe contient 40 utilisateurs, Ces 40 utilisateurs peuvent accéder au dossier personnel de fred.</p>
+<h3>2ieme méthode</h3>
+<p>Une deuxième manière de faire est de changer le groupe du fichier en tom, les droits deviennent ceci :</p>
+<div class="highlight"><pre><span></span>$ chown fred:tom /home/fred
+$ ls -l /home
+rwx r-x ---  fred tom  /home/fred
+rwx --- ---  tom  tom  /home/tom
+</pre></div>
+
+
+<p>Cette méthode à pour inconvénient que tom et tous les membres du groupe tom peuvent accéder au 
+contenu du dossier personnel de fred.</p>
+<blockquote>
+<p>Si l'on souhaite partéger un autre sous-dossier de /home/fred avec l'utilisateur hugo. On ne sait pas, on ne peut indiquer qu'un seul nom de groupe par fichier et dossier.</p>
+</blockquote>
+<h3>3ieme méthode</h3>
+<p>L'astuce consiste à donner le droit <em>--x</em> à tout le monde sur le dossier /home/fred.</p>
+<p>De cette manière, tout le monde à le droit d'entrer dans le dossier (cd /home_fred), mais pas de lister le contenu du dossier (ls /home/fred).</p>
+<div class="highlight"><pre><span></span>$ chown fred:fred /home/fred
+$ chmod <span class="m">701</span> /home/fred
+$ ls -l /home
+rwx --- --x  fred tom  /home/fred
+rwx --- ---  tom  tom  /home/tom
+</pre></div>
+
+
+<p>Attention, les <em>autres</em> ne savent pas lister le dossier, mais rien n'empêche d'essaier au hasard  dentrer dans un sous-dossier.</p>
+<p>Regardons le contenu du dossier de fred (en tant que fred)</p>
+<div class="highlight"><pre><span></span>$ ls -l /home/fred
+rwx rwx rwx fred fred   top_secret
+rwx rwx rwx fred fred   share_tom
+rw- rw- rw- fred fred   carte_visa.txt
+</pre></div>
+
+
+<p>Ici, tout est en accès libre. Les autres utilisateurs ne voient pas vos fichiers, mais s'ils
+tapent des noms de fichiers (ou de dossiers) au hasard, il est possible qu'ils ouvrent ce qu'ils ne
+doivent pas.</p>
+<p>On doit donc régler les droits dans /home/fred comme ceci:</p>
+<div class="highlight"><pre><span></span>$ chmod <span class="m">770</span> *
+$ ls -l /home/fred
+rwx rwx --- fred fred   top_secret
+rwx rwx --- fred fred   share_tom
+rwx rwx --- fred fred   carte_visa.txt
+</pre></div>
+
+
+<p>Le but est que tom puisse aller lire dans le dossier share_tom, on doit donc adapter le groupe et les droits de ce dossier :</p>
+<div class="highlight"><pre><span></span>$ chmod <span class="m">750</span> share_tom
+$ chown fred:tom share_tom
+$ ls -l /home/fred
+rwx rwx --- fred fred   top_secret
+rwx r-x --- fred tom    share_tom
+rwx rwx --- fred fred   carte_visa.txt
+</pre></div>
+
+
+<p>Attention, tous les membres du groupe tom peuvent accéder au sous-dossier share_tom.
+Il est évident que tom doit connaître le nom du dossier que je lui destine.</p>
+<h2 id="droits-speciaux">Droits spéciaux</h2>
+<p>Un processus est un programme en cours d’exécution. Le fichier binaire qui représente ce programme
+appartient, comme tous fichiers, à un user et à un groupe. C'est ce que l'on nomme  <em>real user
+id</em> (ruid) et <em>real group id</em> (rgid).</p>
+<p>Le ruid et rgid ont généralement la valeur root puisque c'est lui qui installe les logiciels sur le
+système. Vos programmes personnels, stockés dans <em>/home/...</em> auront un ruid et un rgid correspondant à votre user.</p>
+<p>Chaque processus possède également un <em>effective user id</em> (euid) et <em>effective group id</em> (egid). Il
+s'agit du user et du groupe avec lesquels s'exécute le processus. Un processus exécuté par root aura un euid=0 et un egid=0.</p>
+<p>Aux 9 bits des droits <em>classiques</em>, on associe 2 autres bits qui agissent sur les programmes exécutables. Il s'agit de :</p>
+<ul>
+<li>SETUID bit =&gt; valeur décimal 4 ;</li>
+<li>SETGID bit =&gt; valeur décimal 2 ;</li>
+</ul>
+<p>Il y a un 3ieme bit qui agit sur les dossiers :</p>
+<ul>
+<li>STICKY bit =&gt; valeur décimal 1.</li>
+</ul>
+<p>Le sticky bit d'un répertoire, définit que seul le propriétaire peut supprimer les fichiers de ce dossiers. Même si d'autres utilisateurs disposent d'un droit en écriture sur ce répertoire. Cela permet de transformer un dossier en une boite aux lettres.</p>
+<p>Lorsque l'on fait un ls -l, on aura par exemple : <code>rwx rwx rwt</code> <em>t</em> indique que le sticky bit est positionné.</p>
+<p>Pour illustrer setuid et setgid, j'ai écrit un petit programme qui crée un fichier hello.txt dans le dossier /root.</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;/root/hello.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&quot;Hello world!!!&quot;</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Compilons et executons une première fois ce programme.</p>
+<div class="highlight"><pre><span></span>$ gcc -o hello hello.c
+$ ls -l hello
+rwx rwx r-x fred fred  hello
+$ ./hello 
+fopen: Permission denied
+</pre></div>
+
+
+<p>Positionons le setuid.</p>
+<div class="highlight"><pre><span></span>$ sudo chown root:root hello
+$ sudo chmod <span class="m">4755</span> hello
+$ ls -l hello
+rws r-x r-x root:root  hello
+$ sudo ls /root
+$ ./hello
+$ sudo ls /root
+hello.txt
+</pre></div>
+
+
+<p>Tout utilisateur qui exécute le binaire les mêmes droits que le propriétaire du fichier (ici root).</p>
+<p>Si on positionne le setgid (chmod 2755), tout utilisateur exécute le binaire avec les mêmes droits que le goup du fichier (ici root). La commande ls -l hello donnera : <em>rwx r-s r-x root root. hello</em></p>
+  </div>
+  <header><p>
+  </p></header>
+  <div class="tag-cloud">
+    <p>
+      <span class="fa fa-tags" ></span> 
+      <a href="../tag/cmd-line.html">cmd-line</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; FGE 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>Propulsé par <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> thème par <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " fgeDoc's ",
+  "url" : "..",
+  "image": "",
+  "description": "FGE's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

@@ -638,7 +638,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;p&gt;Analysons la ligne OBJS en plusieurs étapes :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;$(wildcard $(SRCDIR)/*.c)&lt;/code&gt; : créer la liste des fichiers .c se trouvant dans le sous dossier &lt;code&gt;src&lt;/code&gt;. Si on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$(wildcard $(SRCDIR)/*.c)&lt;/code&gt; : crée la liste des fichiers .c se trouvant dans le sous dossier &lt;code&gt;src&lt;/code&gt;. Si l'on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;$(patsubst $(SRCDIR)/%.c,%.o,...)&lt;/code&gt; : permet de rempalcer les .c par des .o dans la liste précédement constituée. Notez également que le préfix &lt;em&gt;src/&lt;/em&gt; présent devant chaque nom de fichier est supprimé. La substitution &lt;em&gt;$(patsubst %.c,%.o,...)&lt;/em&gt; ne retire pas les préfix &lt;em&gt;src/&lt;/em&gt;.&lt;/p&gt;
@@ -745,8 +745,8 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à 
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="le-probleme-des-makefiles"&gt;Le problème des makefiles&lt;/h2&gt;
 &lt;p&gt;Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.&lt;/p&gt;
-&lt;p&gt;Par exemple, si votre makefile utilise des librairies tiers, il faut en vérifier leurs présences. Mais également l'emplacement et mettre à jours les variables comme CPPFLAGS ou LDFLAGS. &lt;/p&gt;
-&lt;p&gt;Lorsque vous fournissez un package de source vous ne devriez pas imposer les dossiers des bibliothéques tiers.&lt;/p&gt;
+&lt;p&gt;Par exemple, si votre makefile utilise des librairies tiers (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jours les variables telles que CPPFLAGS ou LDFLAGS. &lt;/p&gt;
+&lt;p&gt;Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothéques tiers.&lt;/p&gt;
 &lt;p&gt;Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Afficher un fichier en hexadécimal</title><link href="http://thebigfred.github.io/afficher-un-fichier-en-hexadecimal.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/afficher-un-fichier-en-hexadecimal.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et en Qt.&lt;/p&gt;
 &lt;p&gt;Par défaut &lt;em&gt;od&lt;/em&gt; (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option &lt;em&gt;-x&lt;/em&gt; pour avoir un affichage hexa.&lt;/p&gt;
 &lt;p&gt;od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc &lt;code&gt;od -x --endian=big hello.txt&lt;/code&gt; ou &lt;code&gt;hexdump -C hello.txt&lt;/code&gt;.&lt;/p&gt;

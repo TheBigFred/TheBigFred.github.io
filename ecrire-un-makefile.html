@@ -568,7 +568,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <p>Analysons la ligne OBJS en plusieurs étapes :</p>
 <ul>
 <li>
-<p><code>$(wildcard $(SRCDIR)/*.c)</code> : créer la liste des fichiers .c se trouvant dans le sous dossier <code>src</code>. Si on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.</p>
+<p><code>$(wildcard $(SRCDIR)/*.c)</code> : crée la liste des fichiers .c se trouvant dans le sous dossier <code>src</code>. Si l'on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.</p>
 </li>
 <li>
 <p><code>$(patsubst $(SRCDIR)/%.c,%.o,...)</code> : permet de rempalcer les .c par des .o dans la liste précédement constituée. Notez également que le préfix <em>src/</em> présent devant chaque nom de fichier est supprimé. La substitution <em>$(patsubst %.c,%.o,...)</em> ne retire pas les préfix <em>src/</em>.</p>
@@ -675,8 +675,8 @@ La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les 
 </pre></div>
 <h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
 <p>Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
-<p>Par exemple, si votre makefile utilise des librairies tiers, il faut en vérifier leurs présences. Mais également l'emplacement et mettre à jours les variables comme CPPFLAGS ou LDFLAGS. </p>
-<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer les dossiers des bibliothéques tiers.</p>
+<p>Par exemple, si votre makefile utilise des librairies tiers (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jours les variables telles que CPPFLAGS ou LDFLAGS. </p>
+<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothéques tiers.</p>
 <p>Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.</p>
   </div>
   <header><p>

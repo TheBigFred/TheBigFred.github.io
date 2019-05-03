@@ -126,7 +126,7 @@
 <li><a href="#target-phony">Target PHONY</a></li>
 <li><a href="#exemple">Exemple</a></li>
 <li><a href="#static-pattern">STATIC PATTERN</a></li>
-<li><a href="#les-regles-implicites">Les régles implicites</a></li>
+<li><a href="#les-regles-implicites">Les règles implicites</a></li>
 <li><a href="#wildcard">Wildcard</a></li>
 <li><a href="#dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</a></li>
 <li><a href="#exemple_1">Exemple</a></li>
@@ -266,7 +266,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <li>utiliser des noms en minuscules pour les variables à usage interne ;</li>
 <li>réserver les noms en majuscules pour :<ul>
 <li>des paramètres contrôlant des règles implicites ;</li>
-<li>des paramètres que l'utilisateur peut (re-)définir par des options de la ligne de commande.</li>
+<li>des paramètres que l'utilisateur peut (re)définir par des options de la ligne de commande.</li>
 </ul>
 </li>
 </ul>
@@ -394,7 +394,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <li>$^ : la liste de dépendance</li>
 </ul>
 <p>La <em>subtilité</em> est ici : <code>%.o : %.c</code>. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.</p>
-<h2 id="les-regles-implicites">Les régles implicites</h2>
+<h2 id="les-regles-implicites">Les règles implicites</h2>
 <p>Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran, TeX et quelques autres.</p>
 <p>Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.</p>
 <p>Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target <code>%.o : %.c</code>, ou même supprimer cette target.</p>
@@ -551,7 +551,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
     rm -f hello
 </pre></div>
 <h2 id="dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</h2>
-<p>Jusqu'a présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.</p>
+<p>Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.</p>
 <p>Le plus simple est alors d'utiliser la variable <code>VPATH</code>. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.</p>
 <p><code>VPATH</code> contient simplement une liste de dossier séparé par <code>:</code> : <code>VPATH=sources:includes</code></p>
 <p>Il existe également la directive <code>vpath</code> (en minuscule) qui permet également de spécifier une liste de dossier pour des fichiers qui respect un pattern donné : <code>vpath %.h includes</code>.</p>
@@ -568,15 +568,15 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <p>Analysons la ligne OBJS en plusieurs étapes :</p>
 <ul>
 <li>
-<p><code>$(wildcard $(SRCDIR)/*.c)</code> : crée la liste des fichiers .c se trouvant dans le sous dossier <code>src</code>. Si l'on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.</p>
+<p><code>$(wildcard $(SRCDIR)/*.c)</code> : crée la liste des fichiers .c se trouvant dans le sous dossier <code>src</code>. Si l'on ne précise pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.</p>
 </li>
 <li>
-<p><code>$(patsubst $(SRCDIR)/%.c,%.o,...)</code> : permet de rempalcer les .c par des .o dans la liste précédement constituée. Notez également que le préfix <em>src/</em> présent devant chaque nom de fichier est supprimé. La substitution <em>$(patsubst %.c,%.o,...)</em> ne retire pas les préfix <em>src/</em>.</p>
+<p><code>$(patsubst $(SRCDIR)/%.c,%.o,...)</code> : permet de remplacer les .c par des .o dans la liste précédemment constituée. Notez également que le préfixe <em>src/</em> présent devant chaque nom de fichier est supprimé. La substitution <em>$(patsubst %.c,%.o,...)</em> ne retire pas les préfixe <em>src/</em>.</p>
 </li>
 </ul>
-<p>La variable <code>OBJS</code> contient donc la liste de tout les fichiers sources mais avec l'extention .o.</p>
+<p>La variable <code>OBJS</code> contient donc la liste de tout les fichiers sources mais avec l’extension .o.</p>
 <p>La recette de <em>%.o: %.c</em> écrit bien les .o dans le sous dossier objs.
-La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.</p>
+La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.</p>
 <div class="highlight"><pre><span></span><span class="nv">APP</span><span class="o">=</span> MyApp
 <span class="nv">SRCDIR</span><span class="o">=</span> src
 <span class="nv">OBJDIR</span><span class="o">=</span> objs
@@ -584,7 +584,7 @@ La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les 
 <span class="nv">VPATH</span><span class="o">=</span> <span class="k">$(</span>OBJDIR<span class="k">)</span>:<span class="k">$(</span>SRCDIR<span class="k">)</span>
 <span class="nv">OBJS</span><span class="o">=</span> <span class="k">$(</span>patsubst <span class="k">$(</span>SRCDIR<span class="k">)</span>/%.c,%.o,<span class="k">$(</span>wildcard <span class="k">$(</span>SRCDIR<span class="k">)</span>/*.c<span class="k">))</span>
 
-<span class="nf">all</span><span class="o">:</span> <span class="n">resource</span> <span class="k">$(</span><span class="nv">APP</span><span class="k">)</span>
+<span class="nf">all</span><span class="o">:</span> <span class="n">ressource</span> <span class="k">$(</span><span class="nv">APP</span><span class="k">)</span>
 
 <span class="nf">$(APP)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">OBJS</span><span class="k">)</span>
     gcc -o <span class="k">$(</span>DISTDIR<span class="k">)</span>/<span class="k">$(</span>APP<span class="k">)</span> <span class="k">$(</span>patsubst %.o,<span class="k">$(</span>OBJDIR<span class="k">)</span>/%.o,<span class="k">$(</span>OBJS<span class="k">))</span>
@@ -592,11 +592,11 @@ La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les 
 <span class="nf">%.o</span><span class="o">:</span> %.<span class="n">c</span>
     gcc -c $&lt; -o <span class="k">$(</span>OBJDIR<span class="k">)</span>/<span class="nv">$@</span>
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">resource</span>
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">ressource</span>
 <span class="nf">clean</span><span class="o">:</span>
     @rm -rf <span class="k">$(</span>DISTDIR<span class="k">)</span> <span class="k">$(</span>OBJDIR<span class="k">)</span>
 
-<span class="nf">resource</span><span class="o">:</span>
+<span class="nf">ressource</span><span class="o">:</span>
     mkdir -p <span class="k">$(</span>OBJDIR<span class="k">)</span> <span class="k">$(</span>DISTDIR<span class="k">)</span>
 </pre></div>
 <p> </p>
@@ -653,7 +653,7 @@ La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les 
 <p>Pour installer le résultat généré par make,</p>
 <ul>
 <li>il faut copier les fichiers dans les dossiers de destinations,</li>
-<li>modifier le propriétaire et le gourpe des fichiers,</li>
+<li>modifier le propriétaire et le groupe des fichiers,</li>
 <li>modifier les droits.</li>
 </ul>
 <p>La commande <em>install</em> permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.</p>
@@ -676,8 +676,8 @@ La recette <em>$(APP)</em> utilise une subsitution pour indiquer à gcc que les 
 <h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
 <p>Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
 <p>Par exemple, si votre makefile utilise des librairies tiers (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jours les variables telles que CPPFLAGS ou LDFLAGS. </p>
-<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothéques tiers.</p>
-<p>Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.</p>
+<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothèques tiers.</p>
+<p>Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfère l'outil cmake.</p>
   </div>
   <header><p>
         <br>Série build :

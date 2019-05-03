@@ -65,7 +65,7 @@ Un simple &lt;code&gt;gcc hello.c&lt;/code&gt; appel une suite d'outils dans un 
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souahitez compiler votre code avec d'autres
+&lt;p&gt;Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souhaitez compiler votre code avec d'autres
 compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -216,7 +216,7 @@ implicite à la fin de la fonction main.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;L'idée est de compilé chaque fichier .c en .o avec l'option &lt;em&gt;-c&lt;/em&gt; de gcc : &lt;code&gt;gcc -c mesfonctions.c&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Lorsque tous les fichiers &lt;em&gt;.c&lt;/em&gt; sont compilés, il reste à les linker : &lt;code&gt;gcc -g -o myApp main.o mesfonctions.o -lm -I$HOME/MyInclude&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.&lt;/p&gt;
+&lt;p&gt;Il reste un inconvénient, si l'on modifie un .c dont dépendent d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.&lt;/p&gt;
 &lt;p&gt;Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est &lt;strong&gt;make&lt;/strong&gt;.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Écrire un Makefile</title><link href="http://thebigfred.github.io/ecrire-un-makefile.html" rel="alternate"></link><published>2017-02-05T21:55:00+01:00</published><updated>2019-04-23T20:23:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2017-02-05:/ecrire-un-makefile.html</id><summary type="html">
 &lt;p&gt;Make est un outil qui permet d'exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d'un projet.&lt;/p&gt;
 &lt;p&gt;Cet article est une …&lt;/p&gt;</summary><content type="html">
@@ -336,7 +336,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;li&gt;utiliser des noms en minuscules pour les variables à usage interne ;&lt;/li&gt;
 &lt;li&gt;réserver les noms en majuscules pour :&lt;ul&gt;
 &lt;li&gt;des paramètres contrôlant des règles implicites ;&lt;/li&gt;
-&lt;li&gt;des paramètres que l'utilisateur peut (re-)définir par des options de la ligne de commande.&lt;/li&gt;
+&lt;li&gt;des paramètres que l'utilisateur peut (re)définir par des options de la ligne de commande.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -464,7 +464,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;li&gt;$^ : la liste de dépendance&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;La &lt;em&gt;subtilité&lt;/em&gt; est ici : &lt;code&gt;%.o : %.c&lt;/code&gt;. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.&lt;/p&gt;
-&lt;h2 id="les-regles-implicites"&gt;Les régles implicites&lt;/h2&gt;
+&lt;h2 id="les-regles-implicites"&gt;Les règles implicites&lt;/h2&gt;
 &lt;p&gt;Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran, TeX et quelques autres.&lt;/p&gt;
 &lt;p&gt;Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.&lt;/p&gt;
 &lt;p&gt;Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target &lt;code&gt;%.o : %.c&lt;/code&gt;, ou même supprimer cette target.&lt;/p&gt;
@@ -621,7 +621,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
     rm -f hello
 &lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="dossier-de-rechercher-des-dependances"&gt;Dossier de rechercher des dépendances&lt;/h2&gt;
-&lt;p&gt;Jusqu'a présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.&lt;/p&gt;
+&lt;p&gt;Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.&lt;/p&gt;
 &lt;p&gt;Le plus simple est alors d'utiliser la variable &lt;code&gt;VPATH&lt;/code&gt;. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;VPATH&lt;/code&gt; contient simplement une liste de dossier séparé par &lt;code&gt;:&lt;/code&gt; : &lt;code&gt;VPATH=sources:includes&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Il existe également la directive &lt;code&gt;vpath&lt;/code&gt; (en minuscule) qui permet également de spécifier une liste de dossier pour des fichiers qui respect un pattern donné : &lt;code&gt;vpath %.h includes&lt;/code&gt;.&lt;/p&gt;
@@ -638,15 +638,15 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 &lt;p&gt;Analysons la ligne OBJS en plusieurs étapes :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;$(wildcard $(SRCDIR)/*.c)&lt;/code&gt; : crée la liste des fichiers .c se trouvant dans le sous dossier &lt;code&gt;src&lt;/code&gt;. Si l'on ne présice pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$(wildcard $(SRCDIR)/*.c)&lt;/code&gt; : crée la liste des fichiers .c se trouvant dans le sous dossier &lt;code&gt;src&lt;/code&gt;. Si l'on ne précise pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;$(patsubst $(SRCDIR)/%.c,%.o,...)&lt;/code&gt; : permet de rempalcer les .c par des .o dans la liste précédement constituée. Notez également que le préfix &lt;em&gt;src/&lt;/em&gt; présent devant chaque nom de fichier est supprimé. La substitution &lt;em&gt;$(patsubst %.c,%.o,...)&lt;/em&gt; ne retire pas les préfix &lt;em&gt;src/&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$(patsubst $(SRCDIR)/%.c,%.o,...)&lt;/code&gt; : permet de remplacer les .c par des .o dans la liste précédemment constituée. Notez également que le préfixe &lt;em&gt;src/&lt;/em&gt; présent devant chaque nom de fichier est supprimé. La substitution &lt;em&gt;$(patsubst %.c,%.o,...)&lt;/em&gt; ne retire pas les préfixe &lt;em&gt;src/&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;La variable &lt;code&gt;OBJS&lt;/code&gt; contient donc la liste de tout les fichiers sources mais avec l'extention .o.&lt;/p&gt;
+&lt;p&gt;La variable &lt;code&gt;OBJS&lt;/code&gt; contient donc la liste de tout les fichiers sources mais avec l’extension .o.&lt;/p&gt;
 &lt;p&gt;La recette de &lt;em&gt;%.o: %.c&lt;/em&gt; écrit bien les .o dans le sous dossier objs.
-La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.&lt;/p&gt;
+La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; MyApp
 &lt;span class="nv"&gt;SRCDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; src
 &lt;span class="nv"&gt;OBJDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; objs
@@ -654,7 +654,7 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à 
 &lt;span class="nv"&gt;VPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;:&lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.c,%.o,&lt;span class="k"&gt;$(&lt;/span&gt;wildcard &lt;span class="k"&gt;$(&lt;/span&gt;SRCDIR&lt;span class="k"&gt;)&lt;/span&gt;/*.c&lt;span class="k"&gt;))&lt;/span&gt;
 
-&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;ressource&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;APP&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
 
 &lt;span class="nf"&gt;$(APP)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
     gcc -o &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;/&lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJS&lt;span class="k"&gt;))&lt;/span&gt;
@@ -662,11 +662,11 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à 
 &lt;span class="nf"&gt;%.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;c&lt;/span&gt;
     gcc -c $&amp;lt; -o &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/&lt;span class="nv"&gt;$@&lt;/span&gt;
 
-&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;resource&lt;/span&gt;
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;ressource&lt;/span&gt;
 &lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     @rm -rf &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;
 
-&lt;span class="nf"&gt;resource&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nf"&gt;ressource&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir -p &lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
@@ -723,7 +723,7 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à 
 &lt;p&gt;Pour installer le résultat généré par make,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;il faut copier les fichiers dans les dossiers de destinations,&lt;/li&gt;
-&lt;li&gt;modifier le propriétaire et le gourpe des fichiers,&lt;/li&gt;
+&lt;li&gt;modifier le propriétaire et le groupe des fichiers,&lt;/li&gt;
 &lt;li&gt;modifier les droits.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;La commande &lt;em&gt;install&lt;/em&gt; permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.&lt;/p&gt;
@@ -746,8 +746,8 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une subsitution pour indiquer à 
 &lt;h2 id="le-probleme-des-makefiles"&gt;Le problème des makefiles&lt;/h2&gt;
 &lt;p&gt;Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.&lt;/p&gt;
 &lt;p&gt;Par exemple, si votre makefile utilise des librairies tiers (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jours les variables telles que CPPFLAGS ou LDFLAGS. &lt;/p&gt;
-&lt;p&gt;Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothéques tiers.&lt;/p&gt;
-&lt;p&gt;Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfére l'outil cmake.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Afficher un fichier en hexadécimal</title><link href="http://thebigfred.github.io/afficher-un-fichier-en-hexadecimal.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/afficher-un-fichier-en-hexadecimal.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et en Qt.&lt;/p&gt;
+&lt;p&gt;Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothèques tiers.&lt;/p&gt;
+&lt;p&gt;Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfère l'outil cmake.&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>Afficher un fichier en hexadécimal</title><link href="http://thebigfred.github.io/afficher-un-fichier-en-hexadecimal.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/afficher-un-fichier-en-hexadecimal.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;od&lt;/strong&gt; et &lt;strong&gt;hexdump&lt;/strong&gt; permettent de visualiser le contenu d'un fichier sous forme hexadécimal. &lt;strong&gt;Ghex&lt;/strong&gt; et &lt;strong&gt;Okteta&lt;/strong&gt; en sont la version graphique, respectivement en GTK et en Qt.&lt;/p&gt;
 &lt;p&gt;Par défaut &lt;em&gt;od&lt;/em&gt; (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option &lt;em&gt;-x&lt;/em&gt; pour avoir un affichage hexa.&lt;/p&gt;
 &lt;p&gt;od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc &lt;code&gt;od -x --endian=big hello.txt&lt;/code&gt; ou &lt;code&gt;hexdump -C hello.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;La commande &lt;code&gt;hexdump -C hello.txt&lt;/code&gt; donne :&lt;/p&gt;
@@ -833,7 +833,7 @@ Voici le fichier hello.c original :&lt;/p&gt;
 &lt;p&gt;Admettons que vous modifiez un fichier .c du kernel, le meilleur moyen pour diffuser ou conserver cette modification est un fichier &lt;em&gt;patch&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Lorsque vous recevez un &lt;em&gt;patch&lt;/em&gt;, vous pouvez l'éditer et voir les modifications qui seront apportées à l'arborescence.&lt;/p&gt;
 &lt;p&gt;Votre patch sera même peut être applicable sur les versions successives du kernel. En une commande vous pouvez ré-appliquer vos modifications. &lt;/p&gt;
-&lt;p&gt;Par contre si vous diffusez une archive complète du kernel contenant votre modification, comment faire pour intégrer votre modification au kernel suivant ou à une version sur laquelle d'autres patchs ont déjà été appliqués ?&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>indent</title><link href="http://thebigfred.github.io/indent.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/indent.html</id><summary type="html">&lt;p&gt;Fini de perdre du temps à ré-indenter du code selon vos gouts !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.&lt;/p&gt;
+&lt;p&gt;Par contre si vous diffusez une archive complète du kernel contenant votre modification, comment faire pour intégrer votre modification au kernel suivant ou à une version sur laquelle d'autres patchs ont déjà été appliqués ?&lt;/p&gt;</content><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>indent</title><link href="http://thebigfred.github.io/indent.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/indent.html</id><summary type="html">&lt;p&gt;Fini de perdre du temps à ré-indenter du code selon vos goûts !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.&lt;/p&gt;
 &lt;p&gt;Voici un petit programme &lt;em&gt;cochonné&lt;/em&gt; pour illustrer la suite :&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="cp"&gt;#define TXT &amp;quot;Hello Wolrd!\n&amp;quot;&lt;/span&gt;

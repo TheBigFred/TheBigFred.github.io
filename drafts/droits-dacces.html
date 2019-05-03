@@ -182,7 +182,7 @@ est repris dans un ou plusieurs groupes d'utilisateurs.</p>
 défaut.</p>
 <p>Certains groupes représentent des programmes, d'autres des ressources (carte vidéo, la carte son,
 lecteur CD, ...).</p>
-<p>Chaque groupe est déclaré dans le fichier <em>/etc/group</em>. C'est un fichier au format texte dans lequel chaque ligne représente un group, les différentes valeurs étant séparées par <em>:</em>.</p>
+<p>Chaque groupe est déclaré dans le fichier <em>/etc/group</em>. C'est un fichier au format texte dans lequel chaque ligne représente un groupe, les différentes valeurs étant séparées par <em>:</em>.</p>
 <div class="highlight"><pre><span></span>$ cat /etc/group
 root:x:0:root
 bin:x:1:root,bin,daemon
@@ -356,7 +356,7 @@ rwx --- ---  tom  tom  /home/tom
 <p>Cette méthode à pour inconvénient que tom et tous les membres du groupe tom peuvent accéder au 
 contenu du dossier personnel de fred.</p>
 <blockquote>
-<p>Si l'on souhaite partéger un autre sous-dossier de /home/fred avec l'utilisateur hugo. On ne sait pas, on ne peut indiquer qu'un seul nom de groupe par fichier et dossier.</p>
+<p>Si l'on souhaite partager un autre sous-dossier de /home/fred avec l'utilisateur hugo. On ne sait pas, on ne peut indiquer qu'un seul nom de groupe par fichier et dossier.</p>
 </blockquote>
 <h3>3ieme méthode</h3>
 <p>L'astuce consiste à donner le droit <em>--x</em> à tout le monde sur le dossier /home/fred.</p>
@@ -369,7 +369,7 @@ rwx --- ---  tom  tom  /home/tom
 </pre></div>
 
 
-<p>Attention, les <em>autres</em> ne savent pas lister le dossier, mais rien n'empêche d'essaier au hasard  dentrer dans un sous-dossier.</p>
+<p>Attention, les <em>autres</em> ne savent pas lister le dossier, mais rien n'empêche d’essayer au hasard  d’entrer dans un sous-dossier.</p>
 <p>Regardons le contenu du dossier de fred (en tant que fred)</p>
 <div class="highlight"><pre><span></span>$ ls -l /home/fred
 rwx rwx rwx fred fred   top_secret
@@ -439,7 +439,7 @@ s'agit du user et du groupe avec lesquels s'exécute le processus. Un processus 
 </pre></div>
 
 
-<p>Compilons et executons une première fois ce programme.</p>
+<p>Compilons et exécutons une première fois ce programme.</p>
 <div class="highlight"><pre><span></span>$ gcc -o hello hello.c
 $ ls -l hello
 rwx rwx r-x fred fred  hello
@@ -448,7 +448,7 @@ fopen: Permission denied
 </pre></div>
 
 
-<p>Positionons le setuid.</p>
+<p>Positionnons le setuid.</p>
 <div class="highlight"><pre><span></span>$ sudo chown root:root hello
 $ sudo chmod <span class="m">4755</span> hello
 $ ls -l hello

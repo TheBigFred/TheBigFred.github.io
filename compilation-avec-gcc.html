@@ -208,7 +208,7 @@ Un simple <code>gcc hello.c</code> appel une suite d'outils dans un ordre préci
 </ul>
 </li>
 </ul>
-<p>Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souahitez compiler votre code avec d'autres
+<p>Il existe également les extensions gnu : gnu90, gnu99, gnu11, gnu17. Si vous souhaitez compiler votre code avec d'autres
 compilateur que gcc, n'utilisez pas ces extensions.</p>
 <ul>
 <li>
@@ -359,7 +359,7 @@ implicite à la fin de la fonction main.</p>
 </ul>
 <p>L'idée est de compilé chaque fichier .c en .o avec l'option <em>-c</em> de gcc : <code>gcc -c mesfonctions.c</code>.</p>
 <p>Lorsque tous les fichiers <em>.c</em> sont compilés, il reste à les linker : <code>gcc -g -o myApp main.o mesfonctions.o -lm -I$HOME/MyInclude</code>.</p>
-<p>Il reste un inconvéniant, si l'on modifie un .c dont dépendents d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.</p>
+<p>Il reste un inconvénient, si l'on modifie un .c dont dépendent d'autres fichiers, il faut s'en souvenir est les recompiler également. En résumé, il faut gérer les dépendances entre fichiers.</p>
 <p>Il existe des outils permettant de gérer presque automatiquement ces dépendances. Un des plus connu est <strong>make</strong>.</p>
   </div>
   <header><p>

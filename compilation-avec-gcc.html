@@ -36,7 +36,8 @@
 <meta name="author" content="FGE">
 <meta name="description" content="GCC, Gnu Compiler Collection, est l&#39;ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable. Un simple gcc hello.c appel une …">
 <meta name="keywords" content="cmd-line, GNU-Tools">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="Compilation avec GCC"/>
 <meta property="og:description" content="GCC, Gnu Compiler Collection, est l&#39;ensemble des outils nécessaires pour transformer votre code source en un binaire exécutable. Un simple gcc hello.c appel une …"/>
@@ -382,6 +383,25 @@ implicite à la fin de la fonction main.</p>
 
 
 
+<!-- gittalk -->
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	const gitalk = new Gitalk({
+		clientID: 'ff500cd58d3176eccb54',
+		clientSecret: 'c5f7d6a38b1cc73dea3b02a075e8630eaad15617',
+		repo: 'comments',      // The repository of store comments,
+		owner: 'TheBigFred',
+		admin: ['TheBigFred'],
+		id: 'Compilation avec GCC',      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End gittalk -->
 </article>
 
     <footer>

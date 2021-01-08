@@ -302,7 +302,7 @@ La &lt;em&gt;target mesfonctions.o&lt;/em&gt; dépend des fichiers &lt;em&gt;mes
 &lt;blockquote&gt;
 &lt;p&gt;Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Si nous exécutons plusieurs fois la &lt;code&gt;make&lt;/code&gt;, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !&lt;/p&gt;
+&lt;p&gt;Si nous exécutons plusieurs fois &lt;code&gt;make&lt;/code&gt;, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; make
 &lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
 &lt;span class="gp"&gt;$&lt;/span&gt; make
@@ -730,7 +730,7 @@ La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une substitution pour indiquer à
 &lt;p&gt;Par défaut, les programmes sont installés dans /usr/local.&lt;/p&gt;
 &lt;p&gt;La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : &lt;code&gt;make DESTDIR=$HOME/stage install&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;INSTALL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; install
-&lt;span class="nv"&gt;INSTALL_PROGRAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;INSTALL_PROGRAM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;INSTALL_DATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt; -m &lt;span class="m"&gt;644&lt;/span&gt;
 
 &lt;span class="nv"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /usr/local

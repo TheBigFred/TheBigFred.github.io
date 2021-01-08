@@ -36,7 +36,8 @@
 <meta name="author" content="FGE">
 <meta name="description" content="Make est un outil qui permet d&#39;exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d&#39;un projet. Cet article est une …">
 <meta name="keywords" content="cmd-line, GNU-Tools">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <meta property="og:site_name" content="fgeDoc's"/>
 <meta property="og:title" content="Écrire un Makefile"/>
 <meta property="og:description" content="Make est un outil qui permet d&#39;exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d&#39;un projet. Cet article est une …"/>
@@ -232,7 +233,7 @@ La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> e
 <blockquote>
 <p>Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.</p>
 </blockquote>
-<p>Si nous exécutons plusieurs fois la <code>make</code>, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !</p>
+<p>Si nous exécutons plusieurs fois <code>make</code>, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> make
 <span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
 <span class="gp">$</span> make
@@ -660,7 +661,7 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
 <p>Par défaut, les programmes sont installés dans /usr/local.</p>
 <p>La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : <code>make DESTDIR=$HOME/stage install</code>.</p>
 <div class="highlight"><pre><span></span><span class="nv">INSTALL</span> <span class="o">=</span> install
-<span class="nv">INSTALL_PROGRAME</span> <span class="o">=</span> <span class="k">$(</span>INSTALL<span class="k">)</span>
+<span class="nv">INSTALL_PROGRAM</span> <span class="o">=</span> <span class="k">$(</span>INSTALL<span class="k">)</span>
 <span class="nv">INSTALL_DATA</span> <span class="o">=</span> <span class="k">$(</span>INSTALL<span class="k">)</span> -m <span class="m">644</span>
 
 <span class="nv">prefix</span> <span class="o">=</span> /usr/local
@@ -699,6 +700,25 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
 
 
 
+<!-- gittalk -->
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+	const gitalk = new Gitalk({
+		clientID: 'ff500cd58d3176eccb54',
+		clientSecret: 'c5f7d6a38b1cc73dea3b02a075e8630eaad15617',
+		repo: 'comments',      // The repository of store comments,
+		owner: 'TheBigFred',
+		admin: ['TheBigFred'],
+		id: 'Écrire un Makefile',      // Ensure uniqueness and length less than 50
+		distractionFreeMode: false  // Facebook-like distraction free mode
+	})
+
+	gitalk.render('gitalk-container')
+</script>
+<noscript>
+    Veuillez activer le JavaScript pour voir les commentaires.
+</noscript>
+<!-- End gittalk -->
 </article>
 
     <footer>

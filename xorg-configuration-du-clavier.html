@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
 
 
-    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="Xorg - configuration du clavier"/>
 <meta property="og:description" content="En finir avec son clavier mal configuré"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="./xorg-configuration-du-clavier.html"/>
+<meta property="og:url" content="/xorg-configuration-du-clavier.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2010-12-03 10:20:00+01:00"/>
 <meta property="article:modified_time" content="2018-05-02 06:34:00+02:00"/>
-<meta property="article:author" content="./author/fge.html">
+<meta property="article:author" content="/author/fge.html">
 <meta property="article:section" content="linux"/>
 <meta property="article:tag" content="Xorg"/>
 <meta property="og:image" content="">
@@ -57,11 +57,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="./index.html">FGE Doc's</a></h1>
+      <h1><a href="/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="./index.html">
+          <a href="/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -71,27 +71,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="./categories.html">
+          <a href="/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="./category/devtools.html">devtools (5)</a></li>
-          <li><a href="./category/linux.html">linux (4)</a></li>
+          <li><a href="/category/devtools.html">devtools (5)</a></li>
+          <li><a href="/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="./tags.html">
+          <a href="/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="./tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="./tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="./tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="./tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -113,7 +113,7 @@
   <main>
 
     <nav>
-      <a href="./index.html"><span class="fa fa-home"> Home</a>
+      <a href="/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> linux
       <hr>
     </nav>
@@ -123,7 +123,7 @@
       
     <h1 id="xorg-configuration-du-clavier">Xorg - configuration du clavier</h1>
     <p>
-      Posté le Ven 03 décembre 2010 dans <a href="./category/linux.html">linux</a>
+      Posté le Ven 03 décembre 2010 dans <a href="/category/linux.html">linux</a>
 
     </p>
   </header>
@@ -131,7 +131,7 @@
   <div>
     <p>Lors de son démarrage, xorg scrute une liste de dossiers dans un ordre déterminé, à la recherche d'un fichier <em>xorg.conf</em> ou de fichiers .conf dans un dossier nommé <em>xorg.conf.d</em>. Le dossier <em>xorg.conf.d</em> permet simplement de découper la configuration en plusieurs fichiers.</p>
 <p>Notez que si vous utilisez le fichier <em>xorg.conf</em>, le dossier <em>xorg.cond.d</em> est simplement ignoré et que, dès lors le fichier <em>xorg.conf</em> doit contenir la totalité de la configuration.</p>
-<p>La liste de dossier scruté par xorg est généralement :</p>
+<p>La liste de dossiers scrutés par xorg est généralement :</p>
 <ul>
 <li>/etc/X11/xorg.conf</li>
 <li>/etc/X11/xorg.conf.d/…</li>
@@ -207,7 +207,7 @@ Option &quot;XkbVariant&quot; &quot;mac&quot;
 
 <p>La touche @ correspond au keycode 94 et la touche &lt; correspond au keycode 49.
 L'inverse de ce que le message précédent nous indique.</p>
-<p>La commande <code>xmodmap -pke</code> affiche le mapping du clavier. Les commandes suivantes permettent d'extraire uniquement les lignes qui nous intéresse et de les placer directement dans le fichier <em>.Xmodmap</em>  (situé à la racine de votre dossier personnel).</p>
+<p>La commande <code>xmodmap -pke</code> affiche le mapping du clavier. Les commandes suivantes permettent d'extraire uniquement les lignes qui nous intéressent et de les placer directement dans le fichier <em>.Xmodmap</em>  (situé à la racine de votre dossier personnel).</p>
 <p>Noter qu'il y a deux espaces entre keycode et le nombre.</p>
 <div class="highlight"><pre><span></span> xmodmap -pke | grep &#39;keycode  49 =&#39; &gt;&gt; ~/.Xmodmap
  xmodmap -pke | grep &#39;keycode  94 =&#39; &gt;&gt; ~/.Xmodmap
@@ -234,7 +234,7 @@ keycode 49 = less greater less greater VoidSymbol ...
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="./tag/xorg.html">Xorg</a>
+      <a href="/tag/xorg.html">Xorg</a>
     </p>
   </div>
 
@@ -289,7 +289,7 @@ keycode 49 = less greater less greater VoidSymbol ...
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : ".",
+  "url" : "",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
 
 
-    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="Écrire un Makefile"/>
 <meta property="og:description" content="Make est un outil qui permet d&#39;exécuter des commandes et de gérer les dépendances qui existent entre les fichiers d&#39;un projet. Cet article est une …"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="./ecrire-un-makefile.html"/>
+<meta property="og:url" content="/ecrire-un-makefile.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-02-05 21:55:00+01:00"/>
 <meta property="article:modified_time" content="2019-04-23 20:23:00+02:00"/>
-<meta property="article:author" content="./author/fge.html">
+<meta property="article:author" content="/author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
@@ -58,11 +58,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="./index.html">FGE Doc's</a></h1>
+      <h1><a href="/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="./index.html">
+          <a href="/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -72,27 +72,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="./categories.html">
+          <a href="/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="./category/devtools.html">devtools (5)</a></li>
-          <li><a href="./category/linux.html">linux (4)</a></li>
+          <li><a href="/category/devtools.html">devtools (5)</a></li>
+          <li><a href="/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="./tags.html">
+          <a href="/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="./tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="./tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="./tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="./tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -114,7 +114,7 @@
   <main>
 
     <nav>
-      <a href="./index.html"><span class="fa fa-home"> Home</a>
+      <a href="/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
@@ -138,10 +138,10 @@
       
     <h1 id="ecrire-un-makefile">Écrire un Makefile</h1>
     <p>
-      Posté le Dim 05 février 2017 dans <a href="./category/devtools.html">devtools</a>
+      Posté le Dim 05 février 2017 dans <a href="/category/devtools.html">devtools</a>
 
         <br>Article de la série build :
-            <a href='./compilation-avec-gcc.html'>Compilation avec GCC</a>
+            <a href='/compilation-avec-gcc.html'>Compilation avec GCC</a>
            - 
    
             Écrire un Makefile
@@ -156,9 +156,9 @@
 <p>Make n'est pas dévolu à la compilation de programmes écrit en C, il peut aussi bien être utilisé pour compiler des fichiers latex ou simplement pour exécuter des commandes shell.</p>
 <p>Les commandes à exécuter ainsi que les dépendances entre fichiers sont décrites dans un fichier nommé makefile.</p>
 <h2 id="les-bases">Les bases</h2>
-<p>Un makefile est composé d'une ou plusieurs règles. Une règles peut représenter un exécutable, une bibliothèque ou un groupe de commandes quelconques.</p>
+<p>Un makefile est composé d'une ou plusieurs règles. Une règle peut représenter un exécutable, une bibliothèque ou un groupe de commandes quelconques.</p>
 <p>Lorsque l'on exécute la commande <code>make</code>, GNU make cherche dans le dossier courant après un fichier nommé GNUmakefile, makefile, Makefile (dans cet ordre).</p>
-<p>Il est recommandé d'utiliser le nom Makefile, car le <em>M</em> est plus visible. Le nom GNUmakefile n'est à utilisé que si vous utilisé des spécificités de GNU make.</p>
+<p>Il est recommandé d'utiliser le nom Makefile, car le <em>M</em> est plus visible. Le nom GNUmakefile n'est à utiliser que si vous utilisez des spécificités de GNU make.</p>
 <p>Une règle de makefile ressemble à ceci :</p>
 <div class="highlight"><pre><span></span><span class="nf">cible </span><span class="o">:</span> <span class="n">d</span>é<span class="n">pendances</span>
     recette
@@ -172,7 +172,7 @@
     …
 </pre></div>
 <blockquote>
-<p>Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabullation.</p>
+<p>Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabulation.</p>
 </blockquote>
 <h3>Premier exemple</h3>
 <div class="highlight"><pre><span></span><span class="nf">hello</span><span class="o">:</span>
@@ -183,7 +183,7 @@
 </pre></div>
 <p>Ce <em>makefile</em> est constitué de deux cibles :</p>
 <ul>
-<li>La cible hello : permet de créer l'application nommé hello.bin</li>
+<li>La cible hello : permet de créer l'application nommée hello.bin</li>
 <li>La cible clean : permet de supprimer cette application.</li>
 </ul>
 <p>La commande <code>make hello</code> crée l'exécutable, la commande <code>make clean</code> le supprime. La commande <code>make</code>, sans target, exécutera uniquement la première target trouvée dans le makefile.</p>
@@ -208,7 +208,7 @@
 <p>Nous avons également ajouté des dépendances, il s'agit de la liste de fichiers qui suit la définition de la <em>target</em>.</p>
 <p>La <em>target hello</em> dépend des fichiers <em>hello.c</em> et <em>mesfonctions.o</em>.
 La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> et <em>mesfonctions.h</em>.</p>
-<p>Avant d’exécuté la recette de la target <em>hello</em>, <em>make</em> va vérifier si ces dépendances sont à jour. <em>make</em>  rechercher la target <em>mesfonctions.o</em>.</p>
+<p>Avant d’exécuter la recette de la target <em>hello</em>, <em>make</em> va vérifier si ces dépendances sont à jour. <em>make</em>  recherche la target <em>mesfonctions.o</em>.</p>
 <p>La vérification de la target <em>mesfonctions.o</em> consiste à vérifier que la date et l'heure du fichier <em>mesfonctions.o</em> est plus récente que celles de ses dépendances.  Si c'est la cas, make continue sans exécuter la recette de la cible <em>mesfonctions.o</em>, sinon il l'exécute.</p>
 <p>Ce mécanisme permet de recompiler uniquement les fichiers qui ont été modifié depuis la dernière compilation.</p>
 <p>Voici le résultat de l'exécution :</p>
@@ -242,7 +242,7 @@ La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> e
 </pre></div>
 <p>Ceci est dû au fait que nous générons un fichier <em>hello.bin</em> non pas <em>hello</em>.
 Lorsque make 'vérifie' une target, il cherche un fichier qui porte le même nom que la target.
-Il faut donc veiller à ce que le nom des targets et des fichiers générés coïncides.</p>
+Il faut donc veiller à ce que les noms des targets et des fichiers générés coïncident.</p>
 <div class="highlight"><pre><span></span><span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
     gcc -o hello hello.c mesfonctions.o
 
@@ -252,7 +252,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <span class="nf">clean</span><span class="o">:</span>
     rm hello mesfonctions.o
 </pre></div>
-<p>Maintenant deux appels consécutif à make ne recompile plus inutilement <em>hello</em>.</p>
+<p>Maintenant deux appels consécutifs à make ne recompilent plus inutilement <em>hello</em>.</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> make
 <span class="go">gcc -o hello hello.c mesfonctions.o</span>
 <span class="gp">$</span> make
@@ -271,22 +271,22 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </ul>
 </li>
 </ul>
-<h3>Définir une variables</h3>
+<h3>Définir une variable</h3>
 <p>Pour définir une variable, on débute une nouvelle ligne  qui commence par le nom de la variable, suivi par '=', ':=' ou '::='. Tout ce qui se trouve à droite du signe d'affectation est le contenu de la variable.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
 </pre></div>
-<p>Ceci définit une variable nommé <em>objects</em> dont le contenu est : <em>hello.o mesfonctions.o</em>. Les espaces entourant le signe d'affectation sont ignorés.</p>
-<p>Pour utilisé une variable, on utilise la notation <code>$(nom_variable)</code>ou <code>${nom_variable}</code>.</p>
+<p>Ceci définit une variable nommée <em>objects</em> dont le contenu est : <em>hello.o mesfonctions.o</em>. Les espaces entourant le signe d'affectation sont ignorés.</p>
+<p>Pour utiliser une variable, on utilise la notation <code>$(nom_variable)</code>ou <code>${nom_variable}</code>.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
 <span class="nf">hello </span><span class="o">:</span> <span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
         gcc -o hello.bin <span class="k">$(</span>objects<span class="k">)</span>
 </pre></div>
-<p>Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utilisé une variable <em>x</em> et y faire référence pas <em>$x</em>. Cette pratique est fortement découragée.</p>
+<p>Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utiliser une variable <em>x</em> et y faire référence pas <em>$x</em>. Cette pratique est fortement découragée.</p>
 <p>Il n'y a pas de limite sur la longueur du contenu d'une variable (à l'exception de la taille de la mémoire disponible).</p>
-<h4>Type de variables</h4>
+<h4>Type de variable</h4>
 <p>Il existe deux catégories de variables : <em>les variables expansées récursivement</em> et <em>les variables simplement expansées</em>.</p>
 <h5>Variables expansées récursivement</h5>
-<p>Elle se définissent en utilisant le signe '=' ou la directive <em>define</em>.</p>
+<p>Elles se définissent en utilisant le signe '=' ou la directive <em>define</em>.</p>
 <p>Si une variable de ce type fait référence à une seconde variable, la seconde variable sera évaluée et son contenu la remplacera et ceci de manière récursive.</p>
 <div class="highlight"><pre><span></span><span class="nv">foo</span> <span class="o">=</span> <span class="k">$(</span>bar<span class="k">)</span>
 <span class="nv">bar</span> <span class="o">=</span> Hello <span class="k">$(</span>who<span class="k">)</span>
@@ -297,7 +297,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </pre></div>
 <p>Ce makefile affichera <em>Hello world !!!</em>, comme on s'y attend.</p>
 <blockquote>
-<p>Ce type de variable à plusieurs inconvénient, dont un majeur, il n'est pas possible d'affecter une variable à elle même.</p>
+<p>Ce type de variable a plusieurs inconvénients, dont un majeur, il n'est pas possible d'affecter une variable à elle-même.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><span class="nv">CFLAGS</span> <span class="o">=</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> -O
 </pre></div>
@@ -305,8 +305,8 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <h5>Variables simplement expansées</h5>
 <p>Elles permettent de contourner les problèmes des variables expansées récursivement.</p>
 <p>Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.</p>
-<p>Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut être pas supporté par une ancienne version de make.</p>
-<p>La valeur d'une variable simplement expansée est calculé une seule fois lors de sa définition.</p>
+<p>Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut-être pas supporté par une ancienne version de make.</p>
+<p>La valeur d'une variable simplement expansée est calculée une seule fois lors de sa définition.</p>
 <div class="highlight"><pre><span></span><span class="nv">x</span> <span class="o">:=</span> Hello
 <span class="nv">y</span> <span class="o">:=</span> <span class="k">$(</span>x<span class="k">)</span> world
 <span class="nv">x</span> <span class="o">:=</span> !!!
@@ -316,7 +316,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <span class="nv">x</span> <span class="o">:=</span> !!!
 </pre></div>
 <h3>Ajouter du contenu à une variable</h3>
-<p>Pour concaténer du contenu à une variable, quelque soit son type, on utilise le signe '+='.</p>
+<p>Pour concaténer du contenu à une variable, quel que soit son type, on utilise le signe '+='.</p>
 <div class="highlight"><pre><span></span><span class="nv">objects</span> <span class="o">=</span> main.o foo.o bar.o utils.o
 <span class="nv">objects</span> <span class="o">+=</span> another.o
 </pre></div>
@@ -328,15 +328,15 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <h3>Supprimer une variable</h3>
 <p>Pour supprimer le contenu d'une variable, il suffit de lui affecter un contenu vide.</p>
 <p>Cependant, il y a une différence entre une variable non définie et une variable vide. Une variable non définie n'existe pas, alors qu'une variable vide existe, mais n'a pas de contenu.</p>
-<p>Le mot clef <em>undefine</em> permet de supprimer une variable.</p>
+<p>Le mot-clef <em>undefine</em> permet de supprimer une variable.</p>
 <h3>Les variables d'environnement</h3>
-<p>Toutes les variables d'environnement vue par make lors de son démarrage sont transformées en variable make avec le même nom et la même valeur.</p>
+<p>Toutes les variables d'environnement vu par make lors de son démarrage sont transformées en variable make avec le même nom et la même valeur.</p>
 <p>Il est ainsi possible de passer des options de compilation sans modifier le makefile. Il faut pour cela que le makefile n’écrase pas le contenu de cette variable par une affection avec <code>=</code> ou <code>:=</code>.</p>
 <h2 id="target-phony">Target PHONY</h2>
 <p>Dans certains <em>makefile</em> écrits jusqu’à présent, nous avons une <em>target clean</em> qui n'a pas de dépendance et qui ne produit aucun fichier.</p>
 <p>Si votre dossier contient un fichier nommé <em>clean</em>, cela va poser un problème.</p>
 <p>Lors de l'appel de la commande <code>make clean</code>, <em>make</em> va détecter le fichier <em>clean</em> et considérer qu'il est à jour ! La recette ne sera jamais exécutée.</p>
-<p>Pour résoudre se problème, on déclare simplement clean comme dépendance à la cible spécial <em>.PHONY</em>.</p>
+<p>Pour résoudre ce problème, on déclare simplement clean comme dépendance à la cible spécial <em>.PHONY</em>.</p>
 <p>Les dépendances de la cible <em>.PHONY</em> sont exécutées inconditionnellement.</p>
 <div class="highlight"><pre><span></span><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
 
@@ -394,13 +394,13 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 <li>$&lt; : le nom de la 1er dépendance</li>
 <li>$^ : la liste de dépendance</li>
 </ul>
-<p>La <em>subtilité</em> est ici : <code>%.o : %.c</code>. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier de même nom et d'extension .c.</p>
+<p>La <em>subtilité</em> est ici : <code>%.o : %.c</code>. Ceci précise à make que lorsqu'il recherche une target se terminant par .o (d'extension .o), cette target dépend d'un fichier du même nom et d'extension .c.</p>
 <h2 id="les-regles-implicites">Les règles implicites</h2>
-<p>Des recettes par défauts sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran, TeX et quelques autres.</p>
+<p>Des recettes par défaut sont définies par make pour plusieurs langages, notamment le C, le C++, le fortran, TeX et quelques autres.</p>
 <p>Pour utiliser une règle implicite, il suffit de définir une target sans recette, ou encore ne pas écrire la target.</p>
 <p>Si l'on reprend l'exemple ci-dessus, on peut supprimer la recette de la target <code>%.o : %.c</code>, ou même supprimer cette target.</p>
-<p>En rencontrant <em>hello.o</em> et <em>mesfonctions.o</em>, make va chercher à utiliser une de ces règles implicites. Dans ce cas ci, make trouvera des fichiers .c correspondants aux dépendances et utilisera donc la règle implicite du C.</p>
-<p>Un fichier .o est fabriqué automatiquement à partir d'un fichier de même nom, l’extension du fichier désigne la recette qui sera utilisée.</p>
+<p>En rencontrant <em>hello.o</em> et <em>mesfonctions.o</em>, make va chercher à utiliser une de ces règles implicites. Dans ce cas ci, make trouvera des fichiers .c correspondant aux dépendances et utilisera donc la règle implicite du C.</p>
+<p>Un fichier .o est fabriqué automatiquement à partir d'un fichier du même nom, l’extension du fichier désigne la recette qui sera utilisée.</p>
 <table>
 <thead>
 <tr>
@@ -417,7 +417,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </tr>
 <tr>
 <td align="center">.cc / .cpp / .C</td>
-<td><code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code> </td>
+<td><code>$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c</code></td>
 <td>Compilateur C++</td>
 </tr>
 <tr>
@@ -427,10 +427,10 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </tr>
 </tbody>
 </table>
-<p>Un fichier .s est fabriqué automatiquement à partir d'un fichier de même nom et d’extension .S. La recette utilisée sera celle du pré-processeur : <code>$(CPP) $(CPPFLAGS)</code>.</p>
-<p>Un binaire sera fabriqué automatiquement depuis un fichier de même nom et d’extension .o. La recette utilisée sera celle de l'éditeur de liens (linker) : <code>$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)</code>.</p>
+<p>Un fichier .s est fabriqué automatiquement à partir d'un fichier du même nom et d’extension .S. La recette utilisée sera celle du préprocesseur : <code>$(CPP) $(CPPFLAGS)</code>.</p>
+<p>Un binaire sera fabriqué automatiquement depuis un fichier du même nom et d’extension .o. La recette utilisée sera celle de l'éditeur de liens (linker) : <code>$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)</code>.</p>
 <p>Cette règle fonctionne pour un programme simple d'un fichier source. Elle fonctionne également avec plusieurs fichiers sources, un des fichiers sources devant définir le nom du binaire <code>x: y.o z.o</code></p>
-<p>Dans les cas plus complexe, il faut écrire les recettes de l'éditeur de liens.</p>
+<p>Dans les cas plus complexes, il faut écrire les recettes de l'éditeur de liens.</p>
 <p>Voici les variables utilisées par les règles implicites :</p>
 <table>
 <thead>
@@ -503,7 +503,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </tr>
 </tbody>
 </table>
-<p>On peut maintenant ré-écrire l’exemple précédent :</p>
+<p>On peut maintenant réécrire l’exemple précédent :</p>
 <div class="highlight"><pre><span></span><span class="nv">CC</span> <span class="o">=</span> gcc
 <span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
 <span class="nv">CFLAGS</span>   <span class="o">+=</span>                     <span class="c1"># -O2 -std=c11</span>
@@ -521,7 +521,7 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
 </pre></div>
 <h2 id="wildcard">Wildcard</h2>
 <p>Si votre projet comporte beaucoup de fichiers, cela devient problématique de maintenir la liste des dépendances du binaire.</p>
-<p>On peut alors être tenté de créer une variable <code>objects = *.o</code> qui désignerait tout les fichiers .o.</p>
+<p>On peut alors être tenté de créer une variable <code>objects = *.o</code> qui désignerait tous les fichiers .o.</p>
 <p>La variable <em>objects</em> contient la chaîne de caractères *.o et non l'ensemble des fichiers .o. De plus, si votre dossier ne contient aucun fichier .o, l’expansion de *.o est vide.</p>
 <p>Voici comment procéder :</p>
 <ul>
@@ -552,32 +552,32 @@ Il faut donc veiller à ce que le nom des targets et des fichiers générés co�
     rm -f hello
 </pre></div>
 <h2 id="dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</h2>
-<p>Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous dossiers.</p>
+<p>Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous-dossiers.</p>
 <p>Le plus simple est alors d'utiliser la variable <code>VPATH</code>. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.</p>
-<p><code>VPATH</code> contient simplement une liste de dossier séparé par <code>:</code> : <code>VPATH=sources:includes</code></p>
-<p>Il existe également la directive <code>vpath</code> (en minuscule) qui permet également de spécifier une liste de dossier pour des fichiers qui respect un pattern donné : <code>vpath %.h includes</code>.</p>
+<p><code>VPATH</code> contient simplement une liste de dossiers séparés par <code>:</code> : <code>VPATH=sources:includes</code></p>
+<p>Il existe également la directive <code>vpath</code> (en minuscule) qui permet également de spécifier une liste de dossiers pour des fichiers qui respectent un pattern donné : <code>vpath %.h includes</code>.</p>
 <p>Lorsqu'une dépendance est trouvée dans un dossier référencé par VPATH, cela n'adapte pas la recette. Il faut donc écrire les recettes pour prendre en compte ces dossiers.</p>
 <p>Notez également que les wildcard ou la substitution de pattern vu ci-dessus ne tiennent pas compte de <code>VPATH</code>. Lorsque l'on écrit <code>$(wildcard *.c)</code>, on demande à make de faire la liste des fichiers .c du dossier dans lequel se trouve le makefile.</p>
 <h2 id="exemple_1">Exemple</h2>
-<p>Le projets est organisé comme suit :</p>
+<p>Le projet est organisé comme suit :</p>
 <ul>
-<li>le sous dossier <em>src</em> contient toutes les sources de l'application;</li>
-<li>j'ai également décidé de déplacer chaque fichier .o dans un sous dossier <em>objs</em>;</li>
-<li>l'application finale sera placé dans le sous dossier <em>dist</em>.</li>
+<li>le sous-dossier <em>src</em> contient toutes les sources de l'application ;</li>
+<li>j'ai également décidé de déplacer chaque fichier .o dans un sous-dossier <em>objs</em> ;</li>
+<li>l'application finale sera placée dans le sous-dossier <em>dist</em>.</li>
 </ul>
-<p>Je définis des variables contenant le nom des dossiers <em>src</em>, <em>objs</em> et <em>dist</em>. Cela permet par la suite modifier plus facilement les noms de ces dossiers si besoin.</p>
+<p>Je définis des variables contenant les noms des dossiers <em>src</em>, <em>objs</em> et <em>dist</em>. Cela permet par la suite modifier plus facilement les noms de ces dossiers si besoin.</p>
 <p>Analysons la ligne OBJS en plusieurs étapes :</p>
 <ul>
 <li>
-<p><code>$(wildcard $(SRCDIR)/*.c)</code> : crée la liste des fichiers .c se trouvant dans le sous dossier <code>src</code>. Si l'on ne précise pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous dossier src.</p>
+<p><code>$(wildcard $(SRCDIR)/*.c)</code> : crée la liste des fichiers .c se trouvant dans le sous-dossier <code>src</code>. Si l'on ne précise pas le dossier $(SRCDIR), la liste sera vide, tous les fichiers sources étant dans le sous-dossier src.</p>
 </li>
 <li>
-<p><code>$(patsubst $(SRCDIR)/%.c,%.o,...)</code> : permet de remplacer les .c par des .o dans la liste précédemment constituée. Notez également que le préfixe <em>src/</em> présent devant chaque nom de fichier est supprimé. La substitution <em>$(patsubst %.c,%.o,...)</em> ne retire pas les préfixe <em>src/</em>.</p>
+<p><code>$(patsubst $(SRCDIR)/%.c,%.o,...)</code> : permettent de remplacer les .c par des .o dans la liste précédemment constituée. Notez également que le préfixe <em>src/</em> présent devant chaque nom de fichier est supprimé. La substitution <em>$(patsubst %.c,%.o,...)</em> ne retire pas les préfixe <em>src/</em>.</p>
 </li>
 </ul>
-<p>La variable <code>OBJS</code> contient donc la liste de tout les fichiers sources mais avec l’extension .o.</p>
-<p>La recette de <em>%.o: %.c</em> écrit bien les .o dans le sous dossier objs.
-La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous dossier objs.</p>
+<p>La variable <code>OBJS</code> contient donc la liste de tous les fichiers sources mais avec l’extension .o.</p>
+<p>La recette de <em>%.o: %.c</em> écrit bien les .o dans le sous-dossier objs.
+La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous-dossier objs.</p>
 <div class="highlight"><pre><span></span><span class="nv">APP</span><span class="o">=</span> MyApp
 <span class="nv">SRCDIR</span><span class="o">=</span> src
 <span class="nv">OBJDIR</span><span class="o">=</span> objs
@@ -610,12 +610,12 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
 <span class="go">mkdir -p objs dist</span>
 <span class="go">gcc -o dist/MyApp objs/hello.o objs/myfunction.o</span>
 </pre></div>
-<p>On peut constaté que le fait de déplacer l'application dans le sous dossier <em>dist</em> relance la phase de link. Il serait préférable de copier l'application dans le dossier <em>dist</em>.</p>
+<p>On peut constater que le fait de déplacer l'application dans le sous-dossier <em>dist</em> relance la phase de link. Il serait préférable de copier l'application dans le dossier <em>dist</em>.</p>
 <div class="highlight"><pre><span></span><span class="nf">$(APP)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">OBJS</span><span class="k">)</span>
     gcc -o <span class="k">$(</span>APP<span class="k">)</span> <span class="k">$(</span>patsubst %.o,<span class="k">$(</span>OBJDIR<span class="k">)</span>/%.o,<span class="k">$(</span>OBJS<span class="k">))</span>
     cp <span class="k">$(</span>APP<span class="k">)</span> <span class="k">$(</span>DISTDIR<span class="k">)</span>
 </pre></div>
-<p>Le fait de créer les .o dans le sous dossier <em>objs</em> complexifie la ligne de link. Voici le make file réécrit sans ce dossier.</p>
+<p>Le fait de créer les .o dans le sous-dossier <em>objs</em> complexifie la ligne de link. Voici le makefile réécrit sans ce dossier.</p>
 <div class="highlight"><pre><span></span><span class="nv">APP</span><span class="o">=</span> MyApp
 <span class="nv">SRCDIR</span><span class="o">=</span> src
 <span class="nv">DISTDIR</span><span class="o">=</span> dist
@@ -657,7 +657,7 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
 <li>modifier le propriétaire et le groupe des fichiers,</li>
 <li>modifier les droits.</li>
 </ul>
-<p>La commande <em>install</em> permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra de à l’utilisateur du makefile, de redéfinir la commande si nécessaire.</p>
+<p>La commande <em>install</em> permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra à l’utilisateur du makefile, de redéfinir la commande si nécessaire.</p>
 <p>Par défaut, les programmes sont installés dans /usr/local.</p>
 <p>La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : <code>make DESTDIR=$HOME/stage install</code>.</p>
 <div class="highlight"><pre><span></span><span class="nv">INSTALL</span> <span class="o">=</span> install
@@ -675,14 +675,14 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
     <span class="k">$(</span>INSTALL_DATA<span class="k">)</span> libhello.a <span class="k">$(</span>DESTDIR<span class="k">)$(</span>libdir<span class="k">)</span>/libhello.a
 </pre></div>
 <h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
-<p>Le problème principale est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
-<p>Par exemple, si votre makefile utilise des librairies tiers (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jours les variables telles que CPPFLAGS ou LDFLAGS. </p>
-<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothèques tiers.</p>
-<p>Les autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfère l'outil cmake.</p>
+<p>Le problème principal est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
+<p>Par exemple, si votre makefile utilise des librairies tierses (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jour les variables telles que CPPFLAGS ou LDFLAGS. </p>
+<p>Lorsque vous fournissez un package de source vous ne devriez pas imposer l'emplacement des bibliothèques tierses.</p>
+<p>Les Autotools permettent de résoudre ces problèmes. Assez compliqué à mettre en oeuvre, aujourd'hui on préfère l'outil cmake.</p>
   </div>
   <header><p>
         <br>Série build :
-            <a href='./compilation-avec-gcc.html'>Compilation avec GCC</a>
+            <a href='/compilation-avec-gcc.html'>Compilation avec GCC</a>
            - 
    
             Écrire un Makefile
@@ -691,8 +691,8 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="./tag/cmd-line.html">cmd-line</a>
-      <a href="./tag/gnu-tools.html">GNU-Tools</a>
+      <a href="/tag/cmd-line.html">cmd-line</a>
+      <a href="/tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
 
@@ -747,7 +747,7 @@ La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : ".",
+  "url" : "",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

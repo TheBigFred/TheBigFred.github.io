@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
 
 
-    <link href="http://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="diff &amp; patch"/>
 <meta property="og:description" content="diff et patch sont deux outils en ligne de commande. diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de …"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="./diff-patch.html"/>
+<meta property="og:url" content="/diff-patch.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-09-25 00:00:00+02:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/fge.html">
+<meta property="article:author" content="/author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
@@ -58,11 +58,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="./index.html">FGE Doc's</a></h1>
+      <h1><a href="/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="./index.html">
+          <a href="/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -72,27 +72,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="./categories.html">
+          <a href="/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="./category/devtools.html">devtools (5)</a></li>
-          <li><a href="./category/linux.html">linux (4)</a></li>
+          <li><a href="/category/devtools.html">devtools (5)</a></li>
+          <li><a href="/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="./tags.html">
+          <a href="/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="./tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="./tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="./tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="./tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -114,7 +114,7 @@
   <main>
 
     <nav>
-      <a href="./index.html"><span class="fa fa-home"> Home</a>
+      <a href="/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
@@ -124,7 +124,7 @@
       
     <h1 id="diff-patch">diff & patch</h1>
     <p>
-      Posté le Dim 25 septembre 2016 dans <a href="./category/devtools.html">devtools</a>
+      Posté le Dim 25 septembre 2016 dans <a href="/category/devtools.html">devtools</a>
 
     </p>
   </header>
@@ -133,7 +133,7 @@
     <p>diff et patch sont deux outils en ligne de commande.</p>
 <p>diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de voir les ajouts et/ou suppressions qu'il y a eu entre chaque fichier.
 Ce résultat peut être stocké dans un fichier, que l'on nomme patch.</p>
-<p>La commande patch permet d'appliquer un <em>patch</em>. Le but est donc de pouvoir ré-appliquer une modification sur un fichier ou dossier en version original.</p>
+<p>La commande patch permet d'appliquer un <em>patch</em>. Le but est donc de pouvoir réappliquer une modification sur un fichier ou dossier en version originale.</p>
 <h2 id="diff">diff</h2>
 <ul>
 <li><code>diff -q fichier1 fichier2</code> permet de savoir si les fichiers sont différents.</li>
@@ -145,7 +145,7 @@ Ce résultat peut être stocké dans un fichier, que l'on nomme patch.</p>
 <li><code>diff -r dossier1 dossier2</code> permet de comparer deux dossiers récursivement.</li>
 <li><code>diff -N dossier1 dossier2</code> traite les fichiers absents comme étant vides.</li>
 </ul>
-<p>Il y a évidement une multitude d'autres options que vous découvrirez dans <code>man diff</code>.</p>
+<p>Il y a évidemment une multitude d'autres options que vous découvrirez dans <code>man diff</code>.</p>
 <p><strong>Meld</strong>, <strong>Kdiff3</strong> et <strong>Kompare</strong> sont des versions graphiques de diff. Le premier est basé sur GTK, les deux autres sur Qt.</p>
 <h2 id="creer-un-patch">Créer un patch</h2>
 <p>Admettons que votre répertoire de travail est $HOME/projetX. Avant de le modifier, faite en une copie <code>cp -r $HOME/projetX $HOME/projetX.orig</code>.
@@ -189,7 +189,7 @@ Voici le fichier hello.c original :</p>
 <p>Pour la suite supprimer le dossier <em>projectX</em> <code>rm -r $HOME/projetX</code> et renommer <em>projetX.orig</em> <code>mv projetX.orig projetX</code> (on applique le patch sur la version d'origine).</p>
 </blockquote>
 <h2 id="appliquer-un-patch">Appliquer un patch</h2>
-<p>Placez vous dans le dossier parent de votre projet. La commande <code>patch -p0 &lt; $hOME/bug1.patch</code> appliquera votre patch sur le dossier <em>projetX</em>.</p>
+<p>Placez-vous dans le dossier parent de votre projet. La commande <code>patch -p0 &lt; $hOME/bug1.patch</code> appliquera votre patch sur le dossier <em>projetX</em>.</p>
 <p>Si vous avez renommé, ou souhaitez appliquer le patch sur une copie du projet, appliquez la commande depuis le dossier du projet avec l'option <em>-p1</em>: <code>patch -p1 &lt; $HOME/bug1.patch</code>.</p>
 <p>Cette option <em>-p1</em> permet à la commande patch d'enlever un niveau de dossier au chemin indiqué dans le fichier <em>.patch</em>.</p>
 <blockquote>
@@ -199,13 +199,13 @@ Voici le fichier hello.c original :</p>
 <p>Voici quelques exemples d'utilisation.</p>
 <h3>Exemple 1</h3>
 <p>Vous venez de modifier votre site web, votre modification porte sur plusieurs fichiers php, js, html et css. Soit vous transférez complètement la dernière version de votre site, soit uniquement les fichiers impactés.</p>
-<p>Dans le premier cas, cela peu prendre un petit peu de temps. Dans le second cas, il faut veiller à ne pas oublier de fichiers.</p>
-<p>Une autre solution est possible, créer un patch et appliquer ce patch sur le serveur. Le patch est de petite taille comparé à la totalité du site (transfert instantané), aucune modification n'est oubliée.</p>
+<p>Dans le premier cas, cela peut prendre un petit peu de temps. Dans le second cas, il faut veiller à ne pas oublier de fichiers.</p>
+<p>Une autre solution est possible, créer un patch et appliquer ce patch sur le serveur. Le patch est de petite taille comparée à la totalité du site (transfert instantané), aucune modification n'est oubliée.</p>
 <p>Ici, il faut soit un accès en ssh à votre serveur, soit une interface web qui permet d'appliquer un patch.</p>
 <h3>Exemple 2</h3>
 <p>Admettons que vous modifiez un fichier .c du kernel, le meilleur moyen pour diffuser ou conserver cette modification est un fichier <em>patch</em>.</p>
 <p>Lorsque vous recevez un <em>patch</em>, vous pouvez l'éditer et voir les modifications qui seront apportées à l'arborescence.</p>
-<p>Votre patch sera même peut être applicable sur les versions successives du kernel. En une commande vous pouvez ré-appliquer vos modifications. </p>
+<p>Votre patch sera même peut-être applicable sur les versions successives du kernel. En une commande vous pouvez réappliquer vos modifications. </p>
 <p>Par contre si vous diffusez une archive complète du kernel contenant votre modification, comment faire pour intégrer votre modification au kernel suivant ou à une version sur laquelle d'autres patchs ont déjà été appliqués ?</p>
   </div>
   <header><p>
@@ -213,8 +213,8 @@ Voici le fichier hello.c original :</p>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="./tag/cmd-line.html">cmd-line</a>
-      <a href="./tag/gnu-tools.html">GNU-Tools</a>
+      <a href="/tag/cmd-line.html">cmd-line</a>
+      <a href="/tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
 
@@ -269,7 +269,7 @@ Voici le fichier hello.c original :</p>
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : ".",
+  "url" : "",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

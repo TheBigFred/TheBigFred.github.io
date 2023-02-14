@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>fgeDoc's - linux</title><link href="https://thebigfred.github.io/" rel="alternate"></link><link href="https://thebigfred.github.io/feeds/linux.atom.xml" rel="self"></link><id>https://thebigfred.github.io/</id><updated>2018-05-02T06:34:00+02:00</updated><subtitle>Sharing notes</subtitle><entry><title>Wildcards</title><link href="https://thebigfred.github.io/wildcards.html" rel="alternate"></link><published>2016-03-06T21:52:00+01:00</published><updated>2016-03-06T21:52:00+01:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-03-06:/wildcards.html</id><summary type="html">&lt;p&gt;Les caractères génériques&lt;/p&gt;</summary><content type="html">&lt;p&gt;Les caractères génériques ou wilcards, permettent d'appliquer une commande à un groupe de fichiers et/ou dossiers dont les noms sont similaires.&lt;/p&gt;
+&lt;p&gt;Une chaîne de texte est un &lt;strong&gt;wildcard pattern&lt;/strong&gt; si elle contient au moins un de ces caractères &lt;strong&gt;?&lt;/strong&gt; &lt;strong&gt;*&lt;/strong&gt; &lt;strong&gt;[&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Le &lt;strong&gt;globbing&lt;/strong&gt; est l'opération qui développe un &lt;strong&gt;wildcard pattern&lt;/strong&gt; en une liste de mots qui correspondent au pattern.&lt;/p&gt;
+&lt;p&gt;Ce qui suit est inspiré de la page &lt;code&gt;man 7 glob&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="lasterisque"&gt;L'astérisque *&lt;/h2&gt;
+&lt;p&gt;Permet de remplacer de zéro à plusieurs caractères.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls img*&lt;/code&gt; liste les noms de fichiers débutant par &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls *img&lt;/code&gt; liste les noms de fichiers se terminant par &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls *img*&lt;/code&gt; liste tous les noms de fichiers contenant &lt;em&gt;img&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="le-point-dinterrogation"&gt;Le point d’interrogation ?&lt;/h2&gt;
+&lt;p&gt;Représente toujours un seul caractère.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls ?&lt;/code&gt; liste les noms comportant un seul caractère.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ls img????.jpg&lt;/code&gt; liste les noms de fichiers commençant par &lt;em&gt;img&lt;/em&gt; suivi de quatre caractères et qui se terminent par &lt;em&gt;.jpg&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On peut évidement mixer &lt;em&gt;*&lt;/em&gt; et &lt;em&gt;?&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls img????*&lt;/code&gt; liste les noms de fichiers commençant par &lt;em&gt;img&lt;/em&gt; suivi de quatre caractères et se terminant par un nombre quelconque de caractères.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="les-crochets"&gt;Les crochets [ ]&lt;/h2&gt;
+&lt;p&gt;Les crochets permettent d'indiquer une liste de caractères de remplacement.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;ls ?mg*&lt;/code&gt; liste les noms de fichiers contenant &lt;em&gt;m&lt;/em&gt; et &lt;em&gt;g&lt;/em&gt; à la seconde et troisième position.&lt;/p&gt;
+&lt;p&gt;On peut souhaiter limiter la sélection aux fichiers &lt;em&gt;Img...&lt;/em&gt; et &lt;em&gt;img...&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls [iI]mg*&lt;/code&gt; liste donc les noms commençant par &lt;em&gt;img&lt;/em&gt; ou &lt;em&gt;Img&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Si le point d'exclamation &lt;strong&gt;!&lt;/strong&gt; suit le crochet ouvrant &lt;strong&gt;[&lt;/strong&gt;, l'expression est inversée.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls [!iI]mg*&lt;/code&gt; sélectionne tout les fichiers ne commençant par &lt;strong&gt;i&lt;/strong&gt; ou &lt;strong&gt;I&lt;/strong&gt;, dont la seconde et troisième lettre sont &lt;em&gt;m&lt;/em&gt; et &lt;em&gt;g&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Notez :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Les crochets ne peuvent pas être vide.&lt;/li&gt;
+&lt;li&gt;Le crochet fermant &lt;strong&gt;]&lt;/strong&gt; peut être présent. Dans ce cas, il doit suivre le crochet ouvrant.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;[ ][!]&lt;/strong&gt; permet de faire correspondre les caractères &lt;strong&gt;]&lt;/strong&gt; &lt;strong&gt;[&lt;/strong&gt; et &lt;strong&gt;!&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il est également possible d'indiquer une plage de caractères (range) en utilisant le tiret &lt;strong&gt;-&lt;/strong&gt; : &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;[a-f]&lt;/em&gt; est équivalent à &lt;em&gt;[abcdef]&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;[a-fA-F0-9]&lt;/em&gt; est équivalent à &lt;em&gt;[abcdefABCDEF0123456789]&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Si le tiret doit faire partie des caractères de remplacement, il doit être placé en première ou dernière position.&lt;/p&gt;
+&lt;h2 id="pathnames"&gt;Pathnames&lt;/h2&gt;
+&lt;p&gt;Le globbing s'applique séparément sur chaque élément d'un chemin. Le caractère &lt;strong&gt;/&lt;/strong&gt; ne peut être remplacé par le point d'interrogation, l'astérisque ou une range.&lt;/p&gt;</content><category term="linux"></category><category term="cmd-Line"></category></entry><entry><title>XFCE4 - Menu Whisker</title><link href="https://thebigfred.github.io/xfce4-menu-whisker.html" rel="alternate"></link><published>2016-02-28T00:00:00+01:00</published><updated>2016-02-28T00:00:00+01:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-02-28:/xfce4-menu-whisker.html</id><summary type="html">&lt;p&gt;Ajouter &lt;em&gt;Menu whisker&lt;/em&gt; à XFCE sous Debian.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Voici comment ajouter &lt;em&gt;Menu whisker&lt;/em&gt; à XFCE sous Debian.
+Il permet de remplacer le menu par défaut par trop à mon goût.&lt;/p&gt;
+&lt;p&gt;Comme toujours, il faut mettre à jour la base de données d'aptitude avant de commencer.&lt;/p&gt;
+&lt;h2 id="etape-1-installer-le-plugin-whiskermenu"&gt;Etape 1 : installer le plugin whiskermenu&lt;/h2&gt;
+&lt;p&gt;Dans un terminal faites ceci :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo aptitude update
+sudo aptitude install xfce4-whiskermenu-plugin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Voilà qui est fait, il reste à le mettre en place.&lt;/p&gt;
+&lt;h2 id="etape-2-ouvrir-le-gestionnaire-du-tableau-de-bord"&gt;Etape 2 : ouvrir le gestionnaire du tableau de bord&lt;/h2&gt;
+&lt;h3 id="menu-parametres"&gt;Menu paramètres&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Dans le menu choisir : Paramètres.&lt;/p&gt;
+&lt;p&gt;Chercher après l'item &lt;em&gt;Tableau de bord&lt;/em&gt; ou passez par le &lt;em&gt;Gestionnaire de paramètre&lt;/em&gt;. Le gestionnaire de paramètres présente les choses plus proprement.&lt;/p&gt;
+&lt;h3 id="gestionnaire-de-parametres"&gt;Gestionnaire de paramètres&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Les barres de menu sont nommées &lt;em&gt;Tableau de bord&lt;/em&gt;, c'est là que l'on peut modifier, ajouter ou supprimer des barres des menus.&lt;/p&gt;
+&lt;p&gt;Cliquer sur l'icône &lt;em&gt;Tableau de bord&lt;/em&gt;.&lt;/p&gt;
+&lt;h3 id="gestionnaire-de-tableaux-de-bords"&gt;Gestionnaire de tableaux de bords&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-3.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Tableau de bord 1&lt;/em&gt; correspond au menu situé en haut de l'écran, le &lt;em&gt;Tableau de bord 2&lt;/em&gt; à celui en bas de l'écran.&lt;/p&gt;
+&lt;p&gt;Choisissez l'onglet &lt;em&gt;Greffons&lt;/em&gt; qui permet de modifier le contenu du tableau de bord sélectionné.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-4.png"&gt;&lt;/p&gt;
+&lt;p&gt;Les boutons latéraux permettent de modifier l'ordre des plugins, d'en ajouter ou supprimer.&lt;/p&gt;
+&lt;p&gt;Cliquer sur le bouton &lt;em&gt;plus&lt;/em&gt; pour passer à la fenêtre suivante.&lt;/p&gt;
+&lt;h3 id="ajouter-le-greffon-au-tableau-de-bords"&gt;Ajouter le greffon au tableau de bords&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-5.png"&gt;&lt;/p&gt;
+&lt;p&gt;Il n'y a plus qu'à sélectionner &lt;em&gt;Menu Whisker&lt;/em&gt;, cliquer sur &lt;em&gt;Ajouter&lt;/em&gt; et ensuite
+&lt;em&gt;Fermer&lt;/em&gt;. La fenêtre des greffons devrait être la suivante :&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-6.png"&gt;&lt;/p&gt;
+&lt;p&gt;Sélectionner l'item &lt;em&gt;Menu Whisker&lt;/em&gt; et faite le remonter avec le bouton &lt;em&gt;flèche
+haut&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Sélectionner l'item &lt;em&gt;Menu des applications&lt;/em&gt; et supprimer le avec le bouton
+&lt;em&gt;moins&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Vous devriez avoir ceci maintenant.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Alt Text" src="https://thebigfred.github.io/images/menu-whisker-7.png"&gt;&lt;/p&gt;</content><category term="linux"></category><category term="XFCE4"></category></entry><entry><title>Xorg - configuration du clavier</title><link href="https://thebigfred.github.io/xorg-configuration-du-clavier.html" rel="alternate"></link><published>2010-12-03T10:20:00+01:00</published><updated>2018-05-02T06:34:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2010-12-03:/xorg-configuration-du-clavier.html</id><summary type="html">&lt;p&gt;En finir avec son clavier mal configuré&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lors de son démarrage, xorg scrute une liste de dossiers dans un ordre déterminé, à la recherche d'un fichier &lt;em&gt;xorg.conf&lt;/em&gt; ou de fichiers .conf dans un dossier nommé &lt;em&gt;xorg.conf.d&lt;/em&gt;. Le dossier &lt;em&gt;xorg.conf.d&lt;/em&gt; permet simplement de découper la configuration en plusieurs fichiers.&lt;/p&gt;
+&lt;p&gt;Notez que si vous utilisez le fichier &lt;em&gt;xorg.conf&lt;/em&gt;, le dossier &lt;em&gt;xorg.cond.d&lt;/em&gt; est simplement ignoré et que, dès lors le fichier &lt;em&gt;xorg.conf&lt;/em&gt; doit contenir la totalité de la configuration.&lt;/p&gt;
+&lt;p&gt;La liste de dossiers scrutés par xorg est généralement :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;/etc/X11/xorg.conf&lt;/li&gt;
+&lt;li&gt;/etc/X11/xorg.conf.d/…&lt;/li&gt;
+&lt;li&gt;/usr/share/X11/xorg.conf&lt;/li&gt;
+&lt;li&gt;/usr/share/X11/xorg.conf.d/…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il est fort probable de ne rien trouver dans /etc/X11, qui est là pour vous permettre de modifier la configuration sans toucher aux fichiers d'origines. Il suffit alors de recopier (avec sudo) le fichier que vous souhaitez modifier depuis &lt;em&gt;/usr/share/X11/…&lt;/em&gt; vers &lt;em&gt;/etc/X11/…&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="modifier-le-clavier"&gt;Modifier le clavier&lt;/h2&gt;
+&lt;!--
+Généralement je ne modifie que le fichier 10-evdev.conf pour configurer correctement mon clavier.
+
+Sous Archlinux
+
+        sudo mkdir -p /etc/X11/xorg.conf.d
+        sudo cp /usr/share/xorg.conf.d/10-evdev.conf /etc/X11/xorg.conf.d
+
+    Dans ce fichier, je cherche le code suivant :
+
+        Section "InputClass"
+            Identifier      "evdev keyboard catchall"
+            MatchIsKeyboard "on"
+            MatchDevicePath "/dev/input/event*"
+            Driver          "evdev"
+        EndSection
+--&gt;
+
+&lt;p&gt;Sous Archlinux, je crée dans &lt;em&gt;/etc/X11/xorg.conf.d&lt;/em&gt; un fichier nommé &lt;em&gt;10-keyboard-layout.conf&lt;/em&gt;, avec le code suivant:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Section &amp;quot;InputClass&amp;quot;
+        Identifier      &amp;quot;keyboard Layout&amp;quot;
+        MatchIsKeyboard &amp;quot;on&amp;quot;
+EndSection
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Pour un clavier belge, j'ajoute après la ligne driver :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Option &amp;quot;XkbLayout&amp;quot; &amp;quot;be&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Pour un clavier mac, j'ajoute :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Option &amp;quot;XkbLayout&amp;quot; &amp;quot;fr&amp;quot;
+Option &amp;quot;XkbVariant&amp;quot; &amp;quot;mac&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Sous Debian, il est conseillé de modifier le fichier &lt;em&gt;/etc/default/keyboard&lt;/em&gt; et d'utiliser la commande &lt;code&gt;dpkg-reconfigure keyboard-configuration&lt;/code&gt;, à exécuter en &lt;em&gt;sudo&lt;/em&gt;. Celle-ci lance un utilitaire de configuration qui modifiera le fichier de configuration de xorg pour vous.&lt;/p&gt;
+&lt;h2 id="modifier-temporairement-le-clavier"&gt;Modifier temporairement le clavier&lt;/h2&gt;
+&lt;p&gt;Il est également possible de modifier le clavier temporairement - jusqu'à la prochaine déconnexion de l'interface graphique - en utilisant la commande &lt;code&gt;setxkbmap&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;setxkbmap&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;layout&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;fr&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;variant&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;mac&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="corriger-les-touches-qui-deconnent"&gt;Corriger les touches qui déconnent&lt;/h2&gt;
+&lt;p&gt;Si comme moi les touches @ et &amp;lt; sont inversées sur votre clavier mac, il est possible de corriger le mapping clavier.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;xev&lt;/code&gt; (à lancer dans un terminal) permet de connaître le keycode des touches. Elle affiche le contenu de chaque événement capté par l'interface graphique. Le moindre mouvement de souris, pression ou relâchement de touche génère un événement.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;xev&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;KeyPress&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;serial&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;37&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;synthetic&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;NO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x3200001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x165&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;subw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3927162&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;163&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;474&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;228&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;keycode&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;94&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keysym&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x3c&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;less&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;same_screen&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XLookupString&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gives&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XmbLookupString&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gives&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XFilterEvent&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;returns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;False&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;KeyPress&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;serial&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;37&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;synthetic&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;NO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x3200001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x165&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;subw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3927914&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;163&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;474&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;228&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;keycode&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;49&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keysym&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;0x40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;at&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;same_screen&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;YES&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XLookupString&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gives&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;@&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XmbLookupString&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;gives&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;@&amp;quot;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;XFilterEvent&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;returns&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;False&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;La touche @ correspond au keycode 94 et la touche &amp;lt; correspond au keycode 49.
+L'inverse de ce que le message précédent nous indique.&lt;/p&gt;
+&lt;p&gt;La commande &lt;code&gt;xmodmap -pke&lt;/code&gt; affiche le mapping du clavier. Les commandes suivantes permettent d'extraire uniquement les lignes qui nous intéressent et de les placer directement dans le fichier &lt;em&gt;.Xmodmap&lt;/em&gt;  (situé à la racine de votre dossier personnel).&lt;/p&gt;
+&lt;p&gt;Noter qu'il y a deux espaces entre keycode et le nombre.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt; xmodmap -pke | grep &amp;#39;keycode  49 =&amp;#39; &amp;gt;&amp;gt; ~/.Xmodmap
+ xmodmap -pke | grep &amp;#39;keycode  94 =&amp;#39; &amp;gt;&amp;gt; ~/.Xmodmap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Éditer le fichier &lt;em&gt;~/.Xmodmap&lt;/em&gt;, vous devriez avoir ceci à la fin du fichier :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;keycode 49 = at numbersign at numbersign periodcentered ...
+keycode 94 = less greater less greater VoidSymbol ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Il reste à intervertir le 49 et le 94 comme suit :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;keycode 94 = at numbersign at numbersign periodcentered ...
+keycode 49 = less greater less greater VoidSymbol ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Pour prendre en compte cette modification, il faut quitter sa session graphique.&lt;/p&gt;
+&lt;p&gt;Chaque utilisateur devra copier ce fichier dans son dossier personnel. L'idéal est d'en placer une copie dans le dossier &lt;em&gt;/etc/skel&lt;/em&gt;, de cette manière, à chaque création d'un nouvel utilisateur, ce fichier sera copié.&lt;/p&gt;</content><category term="linux"></category><category term="Xorg"></category></entry><entry><title>Xorg - dual screen</title><link href="https://thebigfred.github.io/xorg-dual-screen.html" rel="alternate"></link><published>2010-12-03T10:20:00+01:00</published><updated>2010-12-03T10:20:00+01:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2010-12-03:/xorg-dual-screen.html</id><summary type="html">&lt;p&gt;Brancher un second écran sur votre ordinateurs&lt;/p&gt;</summary><content type="html">&lt;p&gt;Rien à faire, pas moyen d'avoir l'image sur votre second écran !
+Ce qui va suivre devrait intéresser les personnes qui souhaitent :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;brancher un projecteur vidéo sur leur portable ;&lt;/li&gt;
+&lt;li&gt;utiliser un écran plus confortable que celui de leur portable lorsqu'ils sont au bureau ou à la maison ;&lt;/li&gt;
+&lt;li&gt;utiliser un bureau étendu, c'est-à-dire un bureau réparti sur deux écrans ;&lt;/li&gt;
+&lt;li&gt;brancher votre ordinateur à la télévision grâce au connecteur HDMI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Je présenterai uniquement l'activation du double écran pour les ordinateurs possédant une seule carte graphique muni de deux connecteurs. Ce qui est le cas des ordinateurs portables et des personnes qui disposent de plusieurs connecteurs sur leur carte graphique.&lt;/p&gt;
+&lt;p&gt;J'ai réalisé cette configuration sur un vieux portable équipé d'une carte ATI Radeon Mobility IGP-320M (c'est-à-dire une carte pas très performante).
+La version de Xorg était la 7.4.1 nous sommes aujourd'hui à la version 7.7, mais ce qui suit fonctionne toujours.&lt;/p&gt;
+&lt;h2 id="xorg"&gt;Xorg&lt;/h2&gt;
+&lt;p&gt;Xorg, c'est la partie de votre GNU/Linux qui gère l'affichage en mode graphique.
+Depuis la version 7.3 (à vérifier pour la version), le fichier xorg.conf n'est plus obligatoire. Xorg est (en général) capable de détecter et configurer votre matériel tout seul. Et c'est bien comme cela, nous ne devrons pas y toucher !&lt;/p&gt;
+&lt;p&gt;Si vous lisez la page de man sur xorg.conf, pour activer le double écran, il est indiqué de spécifier une section screen par connecteur, une section monitor par écran, … et blablabla. Cette méthode n'a jamais fonctionné chez moi et fait planter le serveur X. On peut donc oublier tout ceci.&lt;/p&gt;
+&lt;h2 id="xrandr"&gt;XRandr&lt;/h2&gt;
+&lt;p&gt;C'est grâce à Xrandr que nous allons configurer le double écran. Il permet de déterminer la taille de l'écran, son orientation, sa réflexion, la définition des moniteurs. xrandr est un outil à utiliser en ligne de commande, ce qui suit doit donc être tapé dans une console. Voici ce que donne comme résultat la commande xrandr sur ma machine :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1050&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+VGA-0 connected 1680x1050+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 433mm x 271mm
+   1680x1050      &lt;span class="m"&gt;60&lt;/span&gt;.0*+   &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1600x1024      &lt;span class="m"&gt;60&lt;/span&gt;.2  
+   1400x1050      &lt;span class="m"&gt;74&lt;/span&gt;.8     &lt;span class="m"&gt;70&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1280x1024      &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1440x900       &lt;span class="m"&gt;59&lt;/span&gt;.9  
+   1280x960       &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1360x768       &lt;span class="m"&gt;59&lt;/span&gt;.8  
+   1152x864       &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;70&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   1024x768       &lt;span class="m"&gt;75&lt;/span&gt;.1     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;70&lt;/span&gt;.1     &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   832x624        &lt;span class="m"&gt;74&lt;/span&gt;.6  
+   800x600        &lt;span class="m"&gt;72&lt;/span&gt;.2     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;60&lt;/span&gt;.3     &lt;span class="m"&gt;56&lt;/span&gt;.2  
+   640x480        &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;72&lt;/span&gt;.8     &lt;span class="m"&gt;72&lt;/span&gt;.8     &lt;span class="m"&gt;75&lt;/span&gt;.0     &lt;span class="m"&gt;66&lt;/span&gt;.7     &lt;span class="m"&gt;60&lt;/span&gt;.0     &lt;span class="m"&gt;59&lt;/span&gt;.9  
+   720x400        &lt;span class="m"&gt;70&lt;/span&gt;.1  
+LVDS connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 0mm x 0mm
+   1024x768       &lt;span class="m"&gt;60&lt;/span&gt;.0*+   &lt;span class="m"&gt;60&lt;/span&gt;.0  
+   800x600        &lt;span class="m"&gt;60&lt;/span&gt;.3  
+   640x480        &lt;span class="m"&gt;59&lt;/span&gt;.9  
+S-video disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;xrandr indique qu'il y a trois sorties sur la carte graphique :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VGA-0 : connecteur VGA situé à l'arrière du portable ;&lt;/li&gt;
+&lt;li&gt;LVDS : écran du portable ;&lt;/li&gt;
+&lt;li&gt;S-video : sortie TV.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Pour chacune des sorties, xrandr indique également les possibilités offertes par les écrans. Par défaut, chaque écran utilise la meilleure de ces définitions. Ce dernier point peut poser un problème.&lt;/p&gt;
+&lt;p&gt;Dans le cas de ma carte graphique, si l'on souhaite utiliser simultanément VGA-0 et LVDS, leurs définitions doivent être identiques, sinon l'affichage est impossible.&lt;/p&gt;
+&lt;p&gt;Pour régler le problème, nous allons donc re-configurer VGA-0&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ xrandr --output VGA-0 --mode 1024x768 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1024&lt;/span&gt; x &lt;span class="m"&gt;768&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+VGA-0 connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 433mm x 271mm
+  1680x1050 &lt;span class="m"&gt;60&lt;/span&gt;.0 + &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1600x1024 &lt;span class="m"&gt;60&lt;/span&gt;.2
+  1400x1050 &lt;span class="m"&gt;74&lt;/span&gt;.8 &lt;span class="m"&gt;70&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1280x1024 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1440x900 &lt;span class="m"&gt;59&lt;/span&gt;.9
+  1280x960 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1360x768 &lt;span class="m"&gt;59&lt;/span&gt;.8
+  1152x864 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;70&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.0
+  1024x768 &lt;span class="m"&gt;75&lt;/span&gt;.1 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;70&lt;/span&gt;.1 &lt;span class="m"&gt;60&lt;/span&gt;.0*
+  832x624 &lt;span class="m"&gt;74&lt;/span&gt;.6
+  800x600 &lt;span class="m"&gt;72&lt;/span&gt;.2 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;60&lt;/span&gt;.3 &lt;span class="m"&gt;56&lt;/span&gt;.2
+  640x480 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;72&lt;/span&gt;.8 &lt;span class="m"&gt;72&lt;/span&gt;.8 &lt;span class="m"&gt;75&lt;/span&gt;.0 &lt;span class="m"&gt;66&lt;/span&gt;.7 &lt;span class="m"&gt;60&lt;/span&gt;.0 &lt;span class="m"&gt;59&lt;/span&gt;.9
+  720x400 &lt;span class="m"&gt;70&lt;/span&gt;.1
+LVDS connected 1024x768+0+0 &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt; 0mm x 0mm
+  1024x768 &lt;span class="m"&gt;60&lt;/span&gt;.0*+ &lt;span class="m"&gt;60&lt;/span&gt;.0
+  800x600 &lt;span class="m"&gt;60&lt;/span&gt;.3
+  640x480 &lt;span class="m"&gt;59&lt;/span&gt;.9
+S-video disconnected &lt;span class="o"&gt;(&lt;/span&gt;normal left inverted right x axis y axis&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Comme d'habitude, cela ne fonctionne pas du premier coup, loi de Murphy oblige, il n'y a toujours rien sur mon écran externe.&lt;/p&gt;
+&lt;p&gt;Il suffit d'arrêter et de redémarrer le LVDS !!! (il fallait le sucer de son pouce). Le problème est que si vous arrêtez LVDS, comme VGA-0 ne fonctionne toujours pas et bien vous n'avez plus d'affichage. Il faut donc tapez les deux lignes de commande en une fois.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ xrandr --output LVDS --off&lt;span class="p"&gt;;&lt;/span&gt; xrandr --output LVDS --auto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Et là, comme par magie, mon écran externe s'est allumé, VGA-0 est donc un clone de LVDS.&lt;/p&gt;
+&lt;h2 id="scripts-dactivationsdesactivations"&gt;Scripts d'activations/désactivations&lt;/h2&gt;
+&lt;p&gt;Pour me faciliter la vie, j'ai placé sur mon bureau 4 scripts qui permettent de passer d'un mode à un autre d'un simple clic.&lt;/p&gt;
+&lt;h3 id="lvds-seul"&gt;LVDS seul&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# LVDS only&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="vga-0-seul-en-automatique"&gt;VGA-0 seul en automatique&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 only @home&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --auto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="vga-0-seul-avec-une-definition-specifique"&gt;VGA-0 seul avec une définition spécifique&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 only @office&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1400x1050
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="clonage-lvds-vga-0"&gt;Clonage LVDS VGA-0&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;#LVDS VGA-0 clone&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 1024x768 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+xrandr --output LVDS --off
+xrandr --output LVDS --auto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Comme vous l'aurez remarqué dans les 4 scripts, j'éteins les sorties avant de les configurer.&lt;/p&gt;
+&lt;h2 id="bureau-etendu"&gt;Bureau étendu&lt;/h2&gt;
+&lt;p&gt;Pour le bureau étendu, il faut tenir compte de la taille maximum que peut avoir votre bureau.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ xrandr
+Screen &lt;span class="m"&gt;0&lt;/span&gt;: minimum &lt;span class="m"&gt;320&lt;/span&gt; x &lt;span class="m"&gt;200&lt;/span&gt;, current &lt;span class="m"&gt;1024&lt;/span&gt; x &lt;span class="m"&gt;768&lt;/span&gt;, maximum &lt;span class="m"&gt;1680&lt;/span&gt; x &lt;span class="m"&gt;1200&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Dans mon cas, le maximum est de 1680×1200.&lt;/p&gt;
+&lt;p&gt;Comme ma carte oblige à ce que les définitions soient identiques lorsque les deux sorties sont activées, je peux avoir les configurations suivantes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;si le deuxième écran est à gauche ou à droite du portable : 1680/2 soit une largeur maximale de 840 pour chaque écran ;&lt;/li&gt;
+&lt;li&gt;si le deuxième écran est au-dessus ou au-dessous du portable : 1200/2 soit une hauteur maximale de 600 pour chaque écran.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="bureau-etendu-a-droite"&gt;Bureau étendu à droite&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c1"&gt;# VGA-0 right of LVDS&lt;/span&gt;
+xrandr --output VGA-0 --off
+xrandr --output VGA-0 --mode 800x600 --rate &lt;span class="m"&gt;60&lt;/span&gt; --right-of LVDS
+xrandr --output LVDS --off
+xrandr --output LVDS --mode 800x600 --rate &lt;span class="m"&gt;60&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="linux"></category><category term="Xorg"></category></entry></feed>

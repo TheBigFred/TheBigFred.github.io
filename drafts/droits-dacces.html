@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="https://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="Droits d&#39;accès"/>
 <meta property="og:description" content="Il y a trois notions qui entrent en jeu pour gérer les droits d&#39;accès d&#39;un fichier ou d&#39;un dossier sous UNIX, il s&#39;agit des notions …"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="/drafts/droits-dacces.html"/>
+<meta property="og:url" content="https://thebigfred.github.io/drafts/droits-dacces.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-04-29 19:43:00+02:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/fge.html">
+<meta property="article:author" content="https://thebigfred.github.io/author/fge.html">
 <meta property="article:section" content="linux"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="og:image" content="">
@@ -57,11 +57,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="/index.html">FGE Doc's</a></h1>
+      <h1><a href="https://thebigfred.github.io/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="/index.html">
+          <a href="https://thebigfred.github.io/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -71,27 +71,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="/categories.html">
+          <a href="https://thebigfred.github.io/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="/category/devtools.html">devtools (5)</a></li>
-          <li><a href="/category/linux.html">linux (4)</a></li>
+          <li><a href="https://thebigfred.github.io/category/devtools.html">devtools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="/tags.html">
+          <a href="https://thebigfred.github.io/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -113,7 +113,7 @@
   <main>
 
     <nav>
-      <a href="/index.html"><span class="fa fa-home"> Home</a>
+      <a href="https://thebigfred.github.io/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> linux
       <hr>
     </nav>
@@ -123,20 +123,20 @@
       
     <h1 id="droits-dacces">Droits d'accès</h1>
     <p>
-      Posté le Lun 29 avril 2019 dans <a href="/category/linux.html">linux</a>
+      Posté le lun 29 avril 2019 dans <a href="https://thebigfred.github.io/category/linux.html">linux</a>
 
     </p>
   </header>
 
   <div>
-    <p>Il y a trois notions qui entrent en jeu pour gérer les droits d'accès d'un fichier ou d'un dossier sous UNIX, il s'agit des notions : user, group et droits.</p>
+    <p>Il y a trois notions qui entrent en jeu pour gérer les droits d'accès d'un fichier ou d'un dossier sous UNIX, il s'agit des notions : <em>user</em>, <em>group</em> et droits.</p>
 <h2 id="notion-de-user">Notion de user</h2>
 <p>La première est la notion de user (utilisateur), chaque personne travaillant sur une machine UNIX
 est identifiée par son user (login).</p>
 <p>Si vous vous connectez avec le login "fred", vous serez donc l'utilisateur "fred" pour le système.</p>
 <p>Chaque utilisateur est déclaré dans le fichier <em>/etc/password</em>. C'est un fichier au format
 texte dans lequel chaque ligne représente un utilisateur, les différentes valeurs étant séparées par <em>:</em>.</p>
-<div class="highlight"><pre><span></span>$ cat /etc/password 
+<div class="highlight"><pre><span></span><code>$ cat /etc/password 
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/bin/false
 daemon:x:2:2:daemon:/sbin:/bin/false
@@ -149,16 +149,15 @@ fred:x:1000:1000::/home/fred:/bin/bash
 hugo:x:1001:1001::/home/hugo:/bin/bash
 tom:x:1002:1002::/home/tom:/bin/bash
 ...
-</pre></div>
-
+</code></pre></div>
 
 <p>Voici dans l'ordre, la signification des 7 champs.</p>
 <ul>
 <li>La première colonne correspond au login.</li>
 <li>Le x indique que le mot de passe de l'utilisateur est stocké dans le fichier <em>/etc/shadow</em>.</li>
 <li>Le premier nombre correspond au <em>userid</em>, c'est l'identifiant de l'utilisateur au niveau du système.</li>
-<li>Le second nombre correspond au <em>groupid</em>, c'est l'identifiant du groupe principale de l'utilisateur au niveau du système (la notion de groupe est expliquée ci-dessous).</li>
-<li>La 5ieme valeur est facultative, elle permet d'indiquer une information tel que le nom complet de l'utilisateur ou son adresse émail.</li>
+<li>Le second nombre correspond au <em>groupid</em>, c'est l'identifiant du groupe principal de l'utilisateur au niveau du système (la notion de groupe est expliquée ci-dessous).</li>
+<li>La 5ieme valeur est facultative, elle permet d'indiquer une information telle que le nom complet de l'utilisateur ou son adresse émail.</li>
 <li>Le 6ieme champ indique l'emplacement du dossier personnel de l'utilisateur. C'est le seul endroit
 ou il pourra stocker librement ces fichiers.</li>
 <li>Le dernier champ permet d'indiquer une commande ou un shell à lancer.</li>
@@ -167,13 +166,13 @@ ou il pourra stocker librement ces fichiers.</li>
 <blockquote>
 <p>Certains utilisateurs peuvent être des programmes. Afin de ne pas pouvoir se connecter sous l'identifiant d'un programme, on indique la commande <em>/bin/false</em> qui invalide la procédure de connexion.</p>
 </blockquote>
-<h3>Pourquoi créer des utilisateurs fictifs pour des programmes ?</h3>
+<h3 id="pourquoi-creer-des-utilisateurs-fictifs-pour-des-programmes">Pourquoi créer des utilisateurs fictifs pour des programmes ?</h3>
 <p>Lorsqu'un programme est lancé automatiquement au démarrage de la machine, il s'exécute avec l'identité de l'administrateur (nommé root sous UNIX).</p>
-<p>Par exemple, pour un serveur web, s'il interprète du code Php, ce code est exécute sous l'identité
+<p>Par exemple, pour un serveur web, s'il interprète du code Php, ce code est exécuté sous l'identité
 de l'administrateur. Cela signifie que vous pouvez faire tout et n'importe quoi sur ce serveur (vous avez les droits admin) !</p>
 <p>Pour cette raison, les programmes serveurs doivent être configurés pour s'exécuter avec un 
 utilisateur fictif. Par fictif, on entend : si http est le nom d'utilisateur attribué au serveur 
-web, il n'est pas possible de ce logger à la machine avec ce user.</p>
+web, il n'est pas possible de se logger à la machine avec cet user.</p>
 <h2 id="notion-de-groupe">Notion de groupe</h2>
 <p>La seconde notion est la notion de groupe (group en anglais). Chaque utilisateur d'une machine UNIX
 est repris dans un ou plusieurs groupes d'utilisateurs.</p>
@@ -184,7 +183,7 @@ défaut.</p>
 <p>Certains groupes représentent des programmes, d'autres des ressources (carte vidéo, la carte son,
 lecteur CD, ...).</p>
 <p>Chaque groupe est déclaré dans le fichier <em>/etc/group</em>. C'est un fichier au format texte dans lequel chaque ligne représente un groupe, les différentes valeurs étant séparées par <em>:</em>.</p>
-<div class="highlight"><pre><span></span>$ cat /etc/group
+<div class="highlight"><pre><span></span><code>$ cat /etc/group
 root:x:0:root
 bin:x:1:root,bin,daemon
 daemon:x:2:root,bin,daemon
@@ -196,8 +195,7 @@ fred:x:1000:
 hugo:x:1001:
 tom:x:1002:
 ...
-</pre></div>
-
+</code></pre></div>
 
 <p>Voici dans l'ordre la signification des 4 champs.</p>
 <ul>
@@ -213,15 +211,14 @@ tom:x:1002:
 groupe assigné au fichier (ou dossier) sera votre groupe par défaut, qui porte généralement le même
 nom que votre nom d'utilisateur.</p>
 <p>Voici un exemple de fichiers et dossiers :</p>
-<div class="highlight"><pre><span></span>$ ls -l
+<div class="highlight"><pre><span></span><code>$ ls -l
 ...      fred   fred   fichier1.txt
 ...      fred   fred   dossier1    
 ...      fred   user   fichier2.txt
 ...      fred   user   dossier2    
 ...      tom    tom    fichier3.txt
 ...      tom    users  dossier3
-</pre></div>
-
+</code></pre></div>
 
 <p>Si vous êtes le propriétaire d'un fichier (ou dossier), vous pouvez changer le groupe de ce fichier
 (ou dossier).</p>
@@ -243,34 +240,33 @@ que vous voulez.</p>
 <li>dans le cas d'un fichier, il permet de modifier/supprimer le fichier ;</li>
 <li>dans le cas d'un dossier, il permet d'écrire dans le dossier ( créer des sous-dossiers, des
   fichiers, ... ),<br>
-  si vous avez le droit de supprimer touts les fichiers et sous-dossiers contenus, vous pouvez supprimer ce dossier.</li>
+  si vous avez le droit de supprimer tous les fichiers et sous-dossiers contenus, vous pouvez supprimer ce dossier.</li>
 </ul>
 </li>
 <li>
 <p>le droit d'exécution, noté "x":</p>
 <ul>
-<li>dans le cas d'un fichier, il permet de d'exécuter le fichier ( qui doit évidement être un
+<li>dans le cas d'un fichier, il permet de d'exécuter le fichier ( qui doit évidemment être un
   programme, sinon cela n'a pas de sens ) ;</li>
 <li>dans le cas d'un dossier, il permet d'entrer dans le dossier.</li>
 </ul>
 </li>
 </ul>
 <p>Voici un exemple de fichiers et dossiers :</p>
-<div class="highlight"><pre><span></span>$ ls -l
+<div class="highlight"><pre><span></span><code>$ ls -l
 rw- rw- r--   fred   fred   fichier1.txt
 rwx --- ---   fred   fred   dossier1    
 rw- --- r--   fred   user   fichier2.txt
 r-x r-x r-x   fred   user   dossier2    
 r-- r-- r--   tom    tom    fichier3.txt
 rwx --- r-x   tom    users  dossier3
-</pre></div>
-
+</code></pre></div>
 
 <p>Chaque fichier (ou dossier) possède des droits <em>rwx</em> pour <em>le propriétaire</em>, <em>rwx</em> pour <em>le groupe</em> attribué au fichier (ou dossier) et <em>rwx</em> pour <em>les autres</em> (ceux qui ne font pas partie du groupe du fichier). Les droits sont toujours donnés dans l'ordre <em>rwx</em>.</p>
 <p>Dans l'exemple ci avant, pour le fichier <em>le fichier1.txt</em> , le propriétaire peut lire et
 écrire , les utilisateurs du groupe peuvent également lire et écrire dans le fichier, les autres
 utilisateurs du système ne peuvent que lire le fichier. Le - montre l'absence d'un droit.</p>
-<h3>Valeurs numériques des droits</h3>
+<h3 id="valeurs-numeriques-des-droits">Valeurs numériques des droits</h3>
 <p>Les droits <em>rwx</em> correspondent à un champ de 3 bits. Le bit vaut 1 si le droit est donné, sinon il vaut zéro. Le tableau suivant illustre les valeurs possibles et l'équivalent numérique.</p>
 <table>
 <thead>
@@ -325,81 +321,74 @@ utilisateurs du système ne peuvent que lire le fichier. Le - montre l'absence d
 </table>
 <h2 id="partager-un-dossier">Partager un dossier</h2>
 <p>Prenons comme exemple le dossier /home qui contient les dossiers des utilisateurs :</p>
-<div class="highlight"><pre><span></span>$ ls -l /home
+<div class="highlight"><pre><span></span><code>$ ls -l /home
 rwx --- ---  fred fred /home/fred
 rwx --- ---  tom  tom  /home/tom
-</pre></div>
-
+</code></pre></div>
 
 <p>Ici seul l'utilisateur fred peut accéder au dossier /home/fred, de même que tom ne peut accéder qu'à son dossier.</p>
 <p>Maintenant, nous allons chercher à partager un sous-dossier de fred avec tom.</p>
-<h3>1ier méthode</h3>
+<h3 id="1ier-methode">1ier méthode</h3>
 <p>Une première manière de procéder est de donner un droit de lecture et d'exécution au groupe fred et
 de mettre tom dans le groupe fred. Les droits deviennent ceci :</p>
-<div class="highlight"><pre><span></span>$ chmod <span class="m">750</span> /home/fred
+<div class="highlight"><pre><span></span><code>$ chmod <span class="m">750</span> /home/fred
 $ ls -l /home
 rwx r-x ---  fred fred /home/fred
 rwx --- ---  tom  tom  /home/tom
-</pre></div>
-
+</code></pre></div>
 
 <p>Le problème est que l'administrateur n'ajoutera pas tom dans votre groupe ( il n'a pas que cela à
 faire ). De plus, si votre groupe contient 40 utilisateurs, Ces 40 utilisateurs peuvent accéder au dossier personnel de fred.</p>
-<h3>2ieme méthode</h3>
+<h3 id="2ieme-methode">2ieme méthode</h3>
 <p>Une deuxième manière de faire est de changer le groupe du fichier en tom, les droits deviennent ceci :</p>
-<div class="highlight"><pre><span></span>$ chown fred:tom /home/fred
+<div class="highlight"><pre><span></span><code>$ chown fred:tom /home/fred
 $ ls -l /home
 rwx r-x ---  fred tom  /home/fred
 rwx --- ---  tom  tom  /home/tom
-</pre></div>
-
+</code></pre></div>
 
 <p>Cette méthode à pour inconvénient que tom et tous les membres du groupe tom peuvent accéder au 
 contenu du dossier personnel de fred.</p>
 <blockquote>
 <p>Si l'on souhaite partager un autre sous-dossier de /home/fred avec l'utilisateur hugo. On ne sait pas, on ne peut indiquer qu'un seul nom de groupe par fichier et dossier.</p>
 </blockquote>
-<h3>3ieme méthode</h3>
+<h3 id="3ieme-methode">3ieme méthode</h3>
 <p>L'astuce consiste à donner le droit <em>--x</em> à tout le monde sur le dossier /home/fred.</p>
 <p>De cette manière, tout le monde à le droit d'entrer dans le dossier (cd /home_fred), mais pas de lister le contenu du dossier (ls /home/fred).</p>
-<div class="highlight"><pre><span></span>$ chown fred:fred /home/fred
+<div class="highlight"><pre><span></span><code>$ chown fred:fred /home/fred
 $ chmod <span class="m">701</span> /home/fred
 $ ls -l /home
 rwx --- --x  fred tom  /home/fred
 rwx --- ---  tom  tom  /home/tom
-</pre></div>
-
+</code></pre></div>
 
 <p>Attention, les <em>autres</em> ne savent pas lister le dossier, mais rien n'empêche d’essayer au hasard  d’entrer dans un sous-dossier.</p>
 <p>Regardons le contenu du dossier de fred (en tant que fred)</p>
-<div class="highlight"><pre><span></span>$ ls -l /home/fred
+<div class="highlight"><pre><span></span><code>$ ls -l /home/fred
 rwx rwx rwx fred fred   top_secret
 rwx rwx rwx fred fred   share_tom
 rw- rw- rw- fred fred   carte_visa.txt
-</pre></div>
-
+</code></pre></div>
 
 <p>Ici, tout est en accès libre. Les autres utilisateurs ne voient pas vos fichiers, mais s'ils
 tapent des noms de fichiers (ou de dossiers) au hasard, il est possible qu'ils ouvrent ce qu'ils ne
 doivent pas.</p>
 <p>On doit donc régler les droits dans /home/fred comme ceci:</p>
-<div class="highlight"><pre><span></span>$ chmod <span class="m">770</span> *
+<div class="highlight"><pre><span></span><code>$ chmod <span class="m">770</span> *
 $ ls -l /home/fred
 rwx rwx --- fred fred   top_secret
 rwx rwx --- fred fred   share_tom
 rwx rwx --- fred fred   carte_visa.txt
-</pre></div>
-
+</code></pre></div>
 
 <p>Le but est que tom puisse aller lire dans le dossier share_tom, on doit donc adapter le groupe et les droits de ce dossier :</p>
-<div class="highlight"><pre><span></span>$ chmod <span class="m">750</span> share_tom
+<div class="highlight"><pre><span></span><code>$ chmod <span class="m">750</span> share_tom
 $ chown fred:tom share_tom
 $ ls -l /home/fred
 rwx rwx --- fred fred   top_secret
 rwx r-x --- fred tom    share_tom
 rwx rwx --- fred fred   carte_visa.txt
-</pre></div>
-
+</code></pre></div>
 
 <p>Attention, tous les membres du groupe tom peuvent accéder au sous-dossier share_tom.
 Il est évident que tom doit connaître le nom du dossier que je lui destine.</p>
@@ -423,34 +412,32 @@ s'agit du user et du groupe avec lesquels s'exécute le processus. Un processus 
 <p>Le sticky bit d'un répertoire, définit que seul le propriétaire peut supprimer les fichiers de ce dossiers. Même si d'autres utilisateurs disposent d'un droit en écriture sur ce répertoire. Cela permet de transformer un dossier en une boite aux lettres.</p>
 <p>Lorsque l'on fait un ls -l, on aura par exemple : <code>rwx rwx rwt</code> <em>t</em> indique que le sticky bit est positionné.</p>
 <p>Pour illustrer setuid et setgid, j'ai écrit un petit programme qui crée un fichier hello.txt dans le dossier /root.</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="kt">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;/root/hello.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">FILE</span><span class="o">*</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;/root/hello.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&quot;Hello world!!!&quot;</span><span class="p">);</span>
-    <span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&quot;Hello world!!!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
 
 <p>Compilons et exécutons une première fois ce programme.</p>
-<div class="highlight"><pre><span></span>$ gcc -o hello hello.c
+<div class="highlight"><pre><span></span><code>$ gcc -o hello hello.c
 $ ls -l hello
 rwx rwx r-x fred fred  hello
 $ ./hello 
 fopen: Permission denied
-</pre></div>
-
+</code></pre></div>
 
 <p>Positionnons le setuid.</p>
-<div class="highlight"><pre><span></span>$ sudo chown root:root hello
+<div class="highlight"><pre><span></span><code>$ sudo chown root:root hello
 $ sudo chmod <span class="m">4755</span> hello
 $ ls -l hello
 rws r-x r-x root:root  hello
@@ -458,8 +445,7 @@ $ sudo ls /root
 $ ./hello
 $ sudo ls /root
 hello.txt
-</pre></div>
-
+</code></pre></div>
 
 <p>Tout utilisateur qui exécute le binaire les mêmes droits que le propriétaire du fichier (ici root).</p>
 <p>Si on positionne le setgid (chmod 2755), tout utilisateur exécute le binaire avec les mêmes droits que le goup du fichier (ici root). La commande ls -l hello donnera : <em>rwx r-s r-x root root. hello</em></p>
@@ -469,7 +455,7 @@ hello.txt
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="/tag/cmd-line.html">cmd-line</a>
+      <a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line</a>
     </p>
   </div>
 
@@ -524,7 +510,7 @@ hello.txt
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : "",
+  "url" : "https://thebigfred.github.io",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

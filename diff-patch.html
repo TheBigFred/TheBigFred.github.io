@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="https://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="diff &amp; patch"/>
 <meta property="og:description" content="diff et patch sont deux outils en ligne de commande. diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de …"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="/diff-patch.html"/>
+<meta property="og:url" content="https://thebigfred.github.io/diff-patch.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-09-25 00:00:00+02:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/fge.html">
+<meta property="article:author" content="https://thebigfred.github.io/author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
@@ -58,11 +58,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="/index.html">FGE Doc's</a></h1>
+      <h1><a href="https://thebigfred.github.io/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="/index.html">
+          <a href="https://thebigfred.github.io/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -72,27 +72,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="/categories.html">
+          <a href="https://thebigfred.github.io/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="/category/devtools.html">devtools (5)</a></li>
-          <li><a href="/category/linux.html">linux (4)</a></li>
+          <li><a href="https://thebigfred.github.io/category/devtools.html">devtools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="/tags.html">
+          <a href="https://thebigfred.github.io/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -114,7 +114,7 @@
   <main>
 
     <nav>
-      <a href="/index.html"><span class="fa fa-home"> Home</a>
+      <a href="https://thebigfred.github.io/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
@@ -124,7 +124,7 @@
       
     <h1 id="diff-patch">diff & patch</h1>
     <p>
-      Posté le Dim 25 septembre 2016 dans <a href="/category/devtools.html">devtools</a>
+      Posté le dim 25 septembre 2016 dans <a href="https://thebigfred.github.io/category/devtools.html">devtools</a>
 
     </p>
   </header>
@@ -150,39 +150,36 @@ Ce résultat peut être stocké dans un fichier, que l'on nomme patch.</p>
 <h2 id="creer-un-patch">Créer un patch</h2>
 <p>Admettons que votre répertoire de travail est $HOME/projetX. Avant de le modifier, faite en une copie <code>cp -r $HOME/projetX $HOME/projetX.orig</code>.
 Voici le fichier hello.c original :</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
 
 <p>Que vous modifiez en :</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World !!!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World !!!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
 
 <p>La commande <code>diff -Naur projetX.orig projetX</code> donne comme résultat :</p>
-<div class="highlight"><pre><span></span><span class="gh">diff -Naur projetX.orig/hello.c projetX/hello.c</span>
-<span class="gd">--- projetX.orig/hello.c  2016-09-25 03:48:01.216191638 +0000</span>
-<span class="gi">+++ projetX/hello.c 2016-09-25 03:48:12.059524697 +0000</span>
-<span class="gu">@@ -1,6 +1,6 @@</span>
- #include &lt;stdio.h&gt;
- int main()
- {
-<span class="gd">-    printf(&quot;Hello\n&quot;);</span>
-<span class="gi">+    printf(&quot;Hello world !!!\n&quot;);</span>
-     return 0;
- }
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="gh">diff -Naur projetX.orig/hello.c projetX/hello.c</span><span class="w"></span>
+<span class="gd">--- projetX.orig/hello.c  2016-09-25 03:48:01.216191638 +0000</span><span class="w"></span>
+<span class="gi">+++ projetX/hello.c 2016-09-25 03:48:12.059524697 +0000</span><span class="w"></span>
+<span class="gu">@@ -1,6 +1,6 @@</span><span class="w"></span>
+<span class="w"> </span>#include &lt;stdio.h&gt;<span class="w"></span>
+<span class="w"> </span>int main()<span class="w"></span>
+<span class="w"> </span>{<span class="w"></span>
+<span class="gd">-    printf(&quot;Hello\n&quot;);</span><span class="w"></span>
+<span class="gi">+    printf(&quot;Hello world !!!\n&quot;);</span><span class="w"></span>
+<span class="w"> </span>    return 0;<span class="w"></span>
+<span class="w"> </span>}<span class="w"></span>
+</code></pre></div>
 
 <p>Pour créer le patch, il suffit de rediriger la commande diff dans un fichier : <code>diff -Naur projetX.orig projetX &gt; $HOME/bug1.patch</code></p>
 <blockquote>
@@ -197,12 +194,12 @@ Voici le fichier hello.c original :</p>
 </blockquote>
 <h2 id="est-ce-vraiment-utile-tout-cela">Est-ce vraiment utile tout cela ?</h2>
 <p>Voici quelques exemples d'utilisation.</p>
-<h3>Exemple 1</h3>
+<h3 id="exemple-1">Exemple 1</h3>
 <p>Vous venez de modifier votre site web, votre modification porte sur plusieurs fichiers php, js, html et css. Soit vous transférez complètement la dernière version de votre site, soit uniquement les fichiers impactés.</p>
 <p>Dans le premier cas, cela peut prendre un petit peu de temps. Dans le second cas, il faut veiller à ne pas oublier de fichiers.</p>
 <p>Une autre solution est possible, créer un patch et appliquer ce patch sur le serveur. Le patch est de petite taille comparée à la totalité du site (transfert instantané), aucune modification n'est oubliée.</p>
 <p>Ici, il faut soit un accès en ssh à votre serveur, soit une interface web qui permet d'appliquer un patch.</p>
-<h3>Exemple 2</h3>
+<h3 id="exemple-2">Exemple 2</h3>
 <p>Admettons que vous modifiez un fichier .c du kernel, le meilleur moyen pour diffuser ou conserver cette modification est un fichier <em>patch</em>.</p>
 <p>Lorsque vous recevez un <em>patch</em>, vous pouvez l'éditer et voir les modifications qui seront apportées à l'arborescence.</p>
 <p>Votre patch sera même peut-être applicable sur les versions successives du kernel. En une commande vous pouvez réappliquer vos modifications. </p>
@@ -213,8 +210,8 @@ Voici le fichier hello.c original :</p>
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="/tag/cmd-line.html">cmd-line</a>
-      <a href="/tag/gnu-tools.html">GNU-Tools</a>
+      <a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line</a>
+      <a href="https://thebigfred.github.io/tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
 
@@ -269,7 +266,7 @@ Voici le fichier hello.c original :</p>
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : "",
+  "url" : "https://thebigfred.github.io",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

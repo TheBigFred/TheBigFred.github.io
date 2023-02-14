@@ -10,15 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/monokai.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://thebigfred.github.io/theme/font-awesome/css/solid.css">
 
 
-    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
+    <link href="https://thebigfred.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="fgeDoc's Atom">
 
 
 
@@ -42,11 +42,11 @@
 <meta property="og:title" content="Introduction à CMake"/>
 <meta property="og:description" content="CMake est un outil open-source et cross-platform qui permet la gestion du processus de compilation d&#39;une application et ce de manière indépendante du système d&#39;exploitation …"/>
 <meta property="og:locale" content="fr_BE"/>
-<meta property="og:url" content="/drafts/introduction-a-cmake.html"/>
+<meta property="og:url" content="https://thebigfred.github.io/drafts/introduction-a-cmake.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-04-29 19:43:00+02:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/fge.html">
+<meta property="article:author" content="https://thebigfred.github.io/author/fge.html">
 <meta property="article:section" content="devtools"/>
 <meta property="article:tag" content="cmd-line"/>
 <meta property="article:tag" content="GNU-Tools"/>
@@ -58,11 +58,11 @@
 <body>
   <aside>
     <div>
-      <h1><a href="/index.html">FGE Doc's</a></h1>
+      <h1><a href="https://thebigfred.github.io/index.html">FGE Doc's</a></h1>
 
 <p>Sharing notes</p>      <nav>
         <h2>
-          <a href="/index.html">
+          <a href="https://thebigfred.github.io/index.html">
             <span class="fa fa-home"></span>
             <small> Home</small>
           </a>
@@ -72,27 +72,27 @@
       </nav>
       <nav>
         <h2>
-          <a href="/categories.html">
+          <a href="https://thebigfred.github.io/categories.html">
             <span class="fa fa-folder-open"></span>
             <small> Catégories</small>
           </a>
         </h2>
 	      <ul class="list">
-          <li><a href="/category/devtools.html">devtools (5)</a></li>
-          <li><a href="/category/linux.html">linux (4)</a></li>
+          <li><a href="https://thebigfred.github.io/category/devtools.html">devtools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/category/linux.html">linux (4)</a></li>
         </ul>
       </nav>
       <nav>
         <h2>
-          <a href="/tags.html">
+          <a href="https://thebigfred.github.io/tags.html">
             <span class="fa fa-tags"></span>
             <small> Tags</small>
           </a>
         </h2>
-        <ul class="list">          <li><a href="/tag/cmd-line.html">cmd-line (6)</a></li>
-          <li><a href="/tag/gnu-tools.html">GNU-Tools (5)</a></li>
-          <li><a href="/tag/xfce4.html">XFCE4 (1)</a></li>
-          <li><a href="/tag/xorg.html">Xorg (2)</a></li>
+        <ul class="list">          <li><a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line (6)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/gnu-tools.html">GNU-Tools (5)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xfce4.html">XFCE4 (1)</a></li>
+          <li><a href="https://thebigfred.github.io/tag/xorg.html">Xorg (2)</a></li>
         </ul>
       </nav>
       <ul class="social">
@@ -114,7 +114,7 @@
   <main>
 
     <nav>
-      <a href="/index.html"><span class="fa fa-home"> Home</a>
+      <a href="https://thebigfred.github.io/index.html"><span class="fa fa-home"> Home</a>
   - <span class="fa fa-folder-open-o" ></span> devtools
       <hr>
     </nav>
@@ -122,27 +122,50 @@
 <article class="single">
   <header>
       <div class="toc"><span class="toctitle">Content</span><ul>
-<li><a href="#pre-requis">Pré-requis</a></li>
-<li><a href="#installation-de-cmake">Installation de cmake</a></li>
-<li><a href="#premier-exemple">Premier exemple</a></li>
-<li><a href="#global-vs-target">Global vs target</a></li>
-<li><a href="#une-application-simple">Une application simple</a></li>
-<li><a href="#_1"></a></li>
-<li><a href="#une-application-qui-utilise-des-bibliotheques">Une application qui utilise des bibliothèques</a></li>
-<li><a href="#creer-une-bibliotheques">Créer une bibliothèques</a></li>
-<li><a href="#tests-unitaires">Tests unitaires</a></li>
-<li><a href="#doxygen">Doxygen</a></li>
-<li><a href="#packaging">Packaging</a></li>
-<li><a href="#une-bibliotheque-avec-dependances">Une Bibliothèque avec dépendances</a></li>
-<li><a href="#organisation-ces-sources">Organisation ces sources</a></li>
-<li><a href="#ne-pas-deployer-projet-de-projet">Ne pas déployer (Projet de projet)</a></li>
-<li><a href="#_2"></a></li>
+<li><a href="#1-concepts-de-base">1. Concepts de base</a></li>
+<li><a href="#2-pre-requis">2. Pré-requis</a></li>
+<li><a href="#3-installation-de-cmake">3. Installation de cmake</a></li>
+<li><a href="#4-generation-dun-projet">4. Génération d'un projet</a><ul>
+<li><a href="#41-choix-du-generateur">4.1 Choix du générateur</a></li>
+<li><a href="#42-choix-du-type-de-compilation">4.2 Choix du type de compilation</a></li>
+<li><a href="#44-utiliser-la-commande-cmake-a-la-place-de-make-ou-ninja">4.4 Utiliser la commande cmake à la place de make ou ninja</a></li>
+<li><a href="#45-preset">4.5 Preset</a></li>
+</ul>
+</li>
+<li><a href="#5-application-simple">5. Application simple</a></li>
+<li><a href="#6-outils-du-langage-cmake">6 Outils du langage cmake</a><ul>
+<li><a href="#61-variables">6.1 Variables</a></li>
+<li><a href="#62-les-listes">6.2 Les listes</a></li>
+<li><a href="#63-afficher-des-messages">6.3 Afficher des messages</a></li>
+<li><a href="#64-generation-de-fichiers">6.4 Génération de fichiers</a></li>
+<li><a href="#65-gestion-doptions">6.5 Gestion d'options</a></li>
+<li><a href="#66-les-conditions">6.6 Les conditions</a></li>
+<li><a href="#67-custom_target">6.7 custom_target</a></li>
+</ul>
+</li>
+<li><a href="#7-une-application-qui-utilise-des-bibliotheques">7 Une application qui utilise des bibliothèques</a></li>
+<li><a href="#8-creer-une-bibliotheques">8 Créer une bibliothèques</a><ul>
+<li><a href="#81-statique-ou-partagee">8.1 Statique ou partagée</a></li>
+<li><a href="#82-statique-et-partagee">8.2 Statique et partagée</a></li>
+<li><a href="#83-visibilite-des-symboles-dune-bibliotheques-partagee">8.3 Visibilité des symboles d'une bibliothèques partagée</a></li>
+<li><a href="#84-exporter-sa-bibliotheque">8.4 Exporter sa bibliothèque</a></li>
+<li><a href="#85-une-bibliotheque-avec-dependances">8.5 Une bibliothèque avec dépendances</a></li>
+</ul>
+</li>
+<li><a href="#9-tests-unitaires">9 Tests unitaires</a></li>
+<li><a href="#10-documentation">10 Documentation</a></li>
+<li><a href="#11-packaging">11 Packaging</a></li>
+<li><a href="#12-ne-pas-deployer-projet-de-projet">12 Ne pas déployer (Projet de projet)</a></li>
+<li><a href="#13-organisation-des-sources">13 Organisation des sources</a></li>
+<li><a href="#14-macros-et-fonctions">14 Macros et fonctions</a></li>
+<li><a href="#15-parser-un-fichier">15 Parser un fichier</a></li>
+<li><a href="#5-portee-des-variables-commandes-et-proprietes">5. Portée des variables, commandes et propriétés</a></li>
 </ul>
 </div>
       
     <h1 id="introduction-a-cmake">Introduction à CMake</h1>
     <p>
-      Posté le Lun 29 avril 2019 dans <a href="/category/devtools.html">devtools</a>
+      Posté le lun 29 avril 2019 dans <a href="https://thebigfred.github.io/category/devtools.html">devtools</a>
 
         <br>Article de la série  :
     </p>
@@ -150,57 +173,64 @@
 
   <div>
     
-<p>CMake est un outil open-source et cross-platform qui permet la gestion du processus de compilation d'une application et ce de manière indépendante du système d'exploitation et du compilateur utilisé.</p>
-<p>En bref, vous écrivez un simple fichier texte nommé CMakeLists.txt qui décrit votre projet et cmake vous générera un projet à base de makefile, ninja, un projet Eclipse, un projet Visual Studio, ...</p>
-<p>Il est possible de construire des applications, des bibliothèques statiques et/ou partagées. Mais également de générer des pacquages, d'exécuter des tests unitaires, et d'autres choses.</p>
+<p><img alt="cmake-gui" src="https://thebigfred.github.io/images/cmake-gui-icon-128px.png" style="float: left; margin: 5px;"/>
+CMake est un outil open-source et cross-platform qui permet la gestion du processus de compilation d'une application et ce de manière indépendante du système d'exploitation, du compilateur utilisé et de l'IDE utilisé.</p>
+<p>En bref, vous écrivez un fichier texte nommé CMakeLists.txt qui décrit votre projet et cmake vous générera un projet à base de makefile, ninja, un projet Eclipse, un projet Visual Studio, ...</p>
+<p>Il est possible de construire des applications, des bibliothèques statiques et/ou partagées. Mais également de cross compiler, de générer des pacquages, d'exécuter des tests unitaires et d'autres choses.</p>
 <p>Les langages supportés <em>out of the box</em> sont le C, C++, CUDA, Fortran et l'assembleur.</p>
 <p>CMake est extensible par le biais de modules existants que l'on peut charger, ou par le biais de modules que l'on peut écrire soit même.</p>
 <p>Il existe par exemple des modules permettant de prendre en charge d'autres langages comme python, java ou latex.</p>
 <p>A mes débuts en cmake, l'inconvénient majeur était la documentation. Il n'y avait pas de tutoriel officiel. On trouve également beaucoup de tuto ou de post sur les forums avec des pratiques qualifiées de mauvaises depuis la version 3.0.</p>
 <p>Depuis la version 3.0, on parle de <a href="https://cliutils.gitlab.io/modern-cmake"><em>Modern cmake</em></a> et c'est "la bonne pratique" à suivre. Depuis la version 3.16, il existe un <a href="https://cmake.org/cmake/help/v3.16/guide/tutorial/index.html">tuto officiel</a>.</p>
-<h2 id="pre-requis">Pré-requis</h2>
+<h1 id="1-concepts-de-base">1. Concepts de base</h1>
+<p>Voici quelques mots de vocabulaires à connaître avant d'aller plus loin.</p>
+<p>Un <em>buildsystem</em> est un outil permettant de compiler un projet depuis son code source. Make et son fichier Makefile ou une solution Visual Studio en sont des exemples. CMake est un générateur de buildsystem. Il va permettre de ne pas devoir maintenir un Makefile et une solution Visual Studio pour un projet que l'on souhaite compiler sous Linux et sous Windows.</p>
+<p><em>Source tree</em> désigne le dossier racine contenant les sources du projet.</p>
+<p><em>Build tree</em> désigne le dossier racine dans lequel les artefacts de compilations et de cmake se trouveront.</p>
+<p>Une <em>target</em> désigne un ensemble de commandes, de propriétés et de dépendances. Elles peuvent correspondre à un exécutable, une bibliothèque ou un ensemble de commandes quelconques. Il est possible d'exprimer des dépendances entre targets.</p>
+<h1 id="2-pre-requis">2. Pré-requis</h1>
 <p>Votre système d'exploitation doit disposer au minimum d'un compilateur et de l'outil make.</p>
 <ul>
-<li>Sous Windows, vous pouvez installer MinGW-W64 ou Visual Studio Community.</li>
+<li>Sous Windows, vous pouvez installer MinGW-W64 ou Visual C++.</li>
 <li>Sous MacOS, installez "Xcode Command Line Tools".</li>
-<li>Sous Linux, il y a génèralement un méta-pacquage nommé "build-essential".</li>
+<li>Sous Linux, il y a généralement un méta-package nommé "build-essential".</li>
 </ul>
-<h2 id="installation-de-cmake">Installation de cmake</h2>
+<h1 id="3-installation-de-cmake">3. Installation de cmake</h1>
 <p>Des versions binaires sont disponibles sur <a href="https://cmake.org/download/">cmake.org</a>. Je vous conseil d'utiliser la <em>Latest Release</em>.</p>
-<p>Il faut noter que d'une version à l'autre de cmake, certain changement peuvent casser vos CMakeLists. Pensez à lire la release note.</p>
-<p>Sous Linux, je procéde comme suit pour gérer mes versions de cmake.</p>
+<p>Il faut noter que d'une version à l'autre de cmake, certain changement peuvent casser vos CMakeLists. Pensez à lire la release note avant de changer votre version de cmake.</p>
+<p>Sous Linux, je procède comme suit pour gérer mes versions de cmake.</p>
 <ol>
-<li>Je download une version, par exemple <a href="https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2-linux-x86_64.tar.gz">cmake-3.22.2-linuxx86_64.tar.gz</a>.</li>
+<li>Je download une version, par exemple <a href="https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2-linux-x86_64.tar.gz">cmake-3.22.2-linux-x86_64.tar.gz</a>.</li>
 <li>Je la décompresse dans le dossier /opt/kitware/cmake-3.22.2</li>
 <li>Je crée un lien symbolique /opt/kitware/cmake qui redirige vers une des versions que j'ai installé.</li>
-<li>J'ajoute le dossier /opt/kitware/cmake/bin au début de la variable d'environement PATH.</li>
+<li>J'ajoute le dossier /opt/kitware/cmake/bin au début de la variable d'environnement PATH.</li>
 <li>J'ajoute cet export à la fin du fichier .bashrc (à ne faire qu'une fois).</li>
 </ol>
 <p>Ce qui donne en pratique :</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> wget https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2-linux-x86_64.tar.gz
-<span class="gp">$</span> sudo tar xaf cmake-3.22.2-linux-x86_64.tar.gz -C /opt/kitware/cmake-3.22.2
-<span class="gp">$</span> sudo rm -rf /opt/kitware/cmake
-<span class="gp">$</span> sudo ln -s /opt/kitware/cmake-3.22.2 /opt/kitware/cmake
-<span class="gp">$</span> <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/opt/kitware/cmake/bin:<span class="nv">$PATH</span>
-<span class="gp">$</span> cat &gt;&gt; <span class="nv">$HOME</span>/.bashrc &lt;&lt; EOF
-<span class="go">CMAKE_PATH=/opt/kitware/cmake/bin</span>
-<span class="go">[[ -d $CMAKE_PATH &amp;&amp; ! $PATH =~ $CMAKE_PATH ]] &amp;&amp; export PATH=$CMAKE_PATH:$PATH</span>
-<span class="go">EOF</span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>wget https://github.com/Kitware/CMake/releases/download/v3.22.2/cmake-3.22.2-linux-x86_64.tar.gz
+<span class="gp">$ </span>sudo mkdir -p /opt/kitware
+<span class="gp">$ </span>sudo tar xaf cmake-3.22.2-linux-x86_64.tar.gz -C /opt/kitware/cmake-3.22.2
+<span class="gp">$ </span>sudo ln -s /opt/kitware/cmake-3.22.2 /opt/kitware/cmake
+<span class="gp">$ </span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/opt/kitware/cmake/bin:<span class="nv">$PATH</span>
+<span class="gp">$ </span>cat &gt;&gt; ~/.bashrc &lt;&lt; EOF
+<span class="go">&gt; CMAKE_PATH=/opt/kitware/cmake/bin</span>
+<span class="go">&gt; [[ -d $CMAKE_PATH &amp;&amp; ! $PATH =~ $CMAKE_PATH ]] &amp;&amp; export PATH=$CMAKE_PATH:$PATH</span>
+<span class="go">&gt; EOF</span>
 <span class="gp">$</span>
-</pre></div>
-<h2 id="premier-exemple">Premier exemple</h2>
+</code></pre></div>
+<h1 id="4-generation-dun-projet">4. Génération d'un projet</h1>
 <p>Placez-vous dans un dossier de travail, par exemple <em>$HOME/cmake/exp01</em>.</p>
 <p>Écrivez le code suivant dans un fichier texte et nommez le <em>CMakeLists.txt</em>.</p>
-<div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0.2</span><span class="p">)</span>   <span class="c"># définit la version minimum de cmake</span>
-<span class="nb">project</span><span class="p">(</span><span class="s">MonApplication</span><span class="p">)</span>                 <span class="c"># Configure le nom du projet</span>
-<span class="nb">add_executable</span><span class="p">(</span><span class="s">app01</span> <span class="s">main.cpp</span><span class="p">)</span>          <span class="c"># Création d'une application app01 depuis main.cpp</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0.2</span><span class="p">)</span><span class="w">   </span><span class="c"># définit la version minimum de cmake</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MonApplication</span><span class="p">)</span><span class="w">                 </span><span class="c"># Configure le nom du projet</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">app01</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span><span class="w">          </span><span class="c"># Création d'une application app01 depuis main.cpp</span>
+</code></pre></div>
 <p>Créez le fichier <em>main.cpp</em> suivant :</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{}</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
+<span class="p">{}</span><span class="w"></span>
+</code></pre></div>
 <p>Dans une console, placez-vous dans le dossier contenant votre <em>CMakeLists.txt</em> et le fichier main.cpp. Tapez <strong>cmake .</strong></p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> cmake .
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>cmake .
 <span class="go">-- The C compiler identification is GNU 9.3.0</span>
 <span class="go">-- The CXX compiler identification is GNU 9.3.0</span>
 <span class="go">-- Check for working C compiler: /usr/bin/cc</span>
@@ -219,251 +249,548 @@
 <span class="go">-- Generating done</span>
 <span class="go">-- Build files have been written to: /home/fred/cmake/exp01</span>
 <span class="gp">$</span>
-</pre></div>
+</code></pre></div>
 <p>Nous venons de générer un projet makefile.</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> ls -l
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>ls -l
 <span class="go">CMakeCache.txt         </span>
 <span class="go">CMakeFiles</span>
 <span class="go">cmake_install.cmake</span>
 <span class="go">CMakeLists.txt         # Notre fichier CMakeLists.txt</span>
 <span class="go">main.cpp               # Les sources de notre application</span>
 <span class="go">Makefile               # Le makefile généré</span>
-</pre></div>
+</code></pre></div>
 <p>Comme on le voit, cmake à généré un dossier et plusieurs fichiers dont un Makefile.
 Il n'y a plus qu'à compiler notre application grace à make.</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> make
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
 <span class="go">Scanning dependencies of target app01</span>
 <span class="go">[ 50%] Building CXX object CMakeFiles/app01.dir/main.cpp.o</span>
 <span class="go">[100%] Linking CXX executable app01</span>
 <span class="go">[100%] Built target app01</span>
 <span class="gp">$</span>
-</pre></div>
+</code></pre></div>
 <p>Une manière plus <em>propre</em> de travailler est de générer les fichiers cmake dans un répertoire différent.
 Soit dans un sous dossier des sources, soit un dossier en dehors des sources.</p>
-<p>Il y a deux manières de procéder :</p>
+<p>Il y a quatre manières de procéder :</p>
 <ul>
 <li>Vous vous placez dans le dossier de <em>compilation</em> et vous indiquez à cmake où se trouve le fichier CMakeLists.txt.</li>
 <li>Vous utilisez les options -S et -B de cmake pour indiquer respectivement, le dossier des sources et le de dossier de build.</li>
+<li>Vous utilisez l'interface cmake-gui (sera abordé en annexe).</li>
+<li>Vous utilisez l'interface de votre IDE.</li>
 </ul>
 <blockquote>
-<p>Supprimer les fichiers générer entre chaque exemple.</p>
+<p>Supprimer les fichiers générés entre chaque exemple.</p>
 </blockquote>
-<p>Méthode 1</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$HOME</span>/cmake/exp01      <span class="c1"># Le dossier des sources</span>
-<span class="gp">$</span> mkdir build               <span class="c1"># Création d'un sous dossier de compilation</span>
-<span class="gp">$</span> <span class="nb">cd</span> build                  <span class="c1"># On se déplace dans le dossier build</span>
-<span class="gp">$</span> cmake ..                  <span class="c1"># Exécution de cmake avec le path (ici relatif) des sources</span>
+<h3 id="methode-1">Méthode 1</h3>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$HOME</span>/cmake/exp01      <span class="c1"># Le dossier des sources</span>
+<span class="gp">$ </span>mkdir build               <span class="c1"># Création d'un sous dossier de compilation</span>
+<span class="gp">$ </span><span class="nb">cd</span> build                  <span class="c1"># On se déplace dans le dossier build</span>
+<span class="gp">$ </span>cmake ..                  <span class="c1"># Exécution de cmake avec le path (ici relatif) des sources</span>
+<span class="gp">$ </span>make                      <span class="c1"># Compilation du projet</span>
 <span class="go">...</span>
-</pre></div>
+</code></pre></div>
 <p>Ou encore</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> mkdir <span class="nv">$HOME</span>/build         <span class="c1"># Création d'un dossier de compilation hors des sources</span>
-<span class="gp">$</span> <span class="nb">cd</span> <span class="nv">$HOME</span>/build            <span class="c1"># On se déplace dans le dossier build</span>
-<span class="gp">$</span> cmake <span class="nv">$HOME</span>/cmake/exp01   <span class="c1"># Exécution de cmake avec le path absolu des sources</span>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>mkdir <span class="nv">$HOME</span>/build         <span class="c1"># Création d'un dossier de compilation hors des sources</span>
+<span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$HOME</span>/build            <span class="c1"># On se déplace dans le dossier build</span>
+<span class="gp">$ </span>cmake <span class="nv">$HOME</span>/cmake/exp01   <span class="c1"># Exécution de cmake avec le path absolu des sources</span>
+<span class="gp">$ </span>make                      <span class="c1"># Compilation du projet</span>
 <span class="go">...</span>
-</pre></div>
-<p>Méthode 2</p>
-<div class="highlight"><pre><span></span><span class="gp">$</span> mkdir <span class="nv">$HOME</span>/build
-<span class="gp">$</span> cmake -S <span class="nv">$HOME</span>/cmake/exp01 -B <span class="nv">$HOME</span>/build
+</code></pre></div>
+<h3 id="methode-2">Méthode 2</h3>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>mkdir <span class="nv">$HOME</span>/build                           <span class="c1"># Création d'un dossier de compilation hors des sources</span>
+<span class="gp">$ </span>cmake -S <span class="nv">$HOME</span>/cmake/exp01 -B <span class="nv">$HOME</span>/build   <span class="c1"># Exécution de cmake</span>
+<span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$HOME</span>/build                              <span class="c1"># On se déplace dans le dossier build</span>
+<span class="gp">$ </span>make                                        <span class="c1"># Compilation du projet</span>
 <span class="go">...</span>
-</pre></div>
-<h2 id="global-vs-target">Global vs target</h2>
-<p>Dans notre premier CMakeLists.txt, la commande <strong>add_executable(app01 main.cpp)</strong> crée une cible (ou target en anglais) <em>app01</em>.</p>
-<p>Une <em>target</em> reprend un ensemble de paramètres et d'actions à éxecuter.</p>
-<p>Il est également possible de définir certains paramètres de manière globale.</p>
+</code></pre></div>
+<!-- ### Méthode 3 : cmake-gui
+
+CMake propose une interface graphique qui permet de générer un projet.
+Il suffit d'indiquer le dossier contenant les sources et un dossier de build.
+Cliquer ensuite sur le bouton configure.
+
+![cmake-gui - choix du générateur de projet]({static}/images/cmake-gui-1.png)
+
+Une nouvelle fenêtre apparaît, elle vous demande le type de projet que vous souhaitez générer ainsi que le compilateur à utiliser.
+
+Ces paramètres peuvent également être indiquer via la ligne de commande. Nous aborderons cela plus loin.
+
+![cmake-gui - choix du générateur de projet]({static}/images/cmake-gui-2.png)
+![cmake-gui - configure]({static}/images/cmake-gui-3.png)
+![cmake-gui - generate]({static}/images/cmake-gui-4.png) -->
+<h2 id="41-choix-du-generateur">4.1 Choix du générateur</h2>
+<p>Pour obtenir la liste des générateurs disponible, placez-vous dans une console et tapez <strong>cmake -G</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>cmake -G
+<span class="go">CMake Error: No generator specified for -G</span>
+
+<span class="go">Generators</span>
+<span class="go">* Unix Makefiles             = Generates standard UNIX makefiles.</span>
+<span class="go">Green Hills MULTI            = Generates Green Hills MULTI files</span>
+<span class="go">                               (experimental, work-in-progress).</span>
+<span class="go">Ninja                        = Generates build.ninja files.</span>
+<span class="go">Ninja Multi-Config           = Generates build-&lt;Config&gt;.ninja files.</span>
+<span class="go">Watcom WMake                 = Generates Watcom WMake makefiles.</span>
+<span class="go">CodeBlocks - Ninja           = Generates CodeBlocks project files.</span>
+<span class="go">CodeBlocks - Unix Makefiles  = Generates CodeBlocks project files.</span>
+<span class="go">CodeLite - Ninja             = Generates CodeLite project files.</span>
+<span class="go">CodeLite - Unix Makefiles    = Generates CodeLite project files.</span>
+<span class="go">Sublime Text 2 - Ninja       = Generates Sublime Text 2 project files.</span>
+<span class="go">Sublime Text 2 - Unix Makefiles</span>
+<span class="go">                             = Generates Sublime Text 2 project files.</span>
+<span class="go">Kate - Ninja                 = Generates Kate project files.</span>
+<span class="go">Kate - Unix Makefiles        = Generates Kate project files.</span>
+<span class="go">Eclipse CDT4 - Ninja         = Generates Eclipse CDT 4.0 project files.</span>
+<span class="go">Eclipse CDT4 - Unix Makefiles= Generates Eclipse CDT 4.0 project files.</span>
+</code></pre></div>
+<p>Unix Makefiles est le choix par défaut. Pour utiliser <em>Ninja</em>, on fera donc:</p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span>cmake -G<span class="s2">"Ninja"</span> -S <span class="nv">$HOME</span>/cmake/exp01 -B <span class="nv">$HOME</span>/build
+<span class="go">...</span>
+</code></pre></div>
+<p>La liste des générateurs disponible varie en fonction du système (Windows, MacOs, Linux).</p>
+<h2 id="42-choix-du-type-de-compilation">4.2 Choix du type de compilation</h2>
+<p>Lorsque l'on compile un projet, on souhaite pourvoir modifier certains 'flags' de compilation.
+Comme par exemple :</p>
+<ul>
+<li>le niveau d'optimisations -O0 ou -O2 ;</li>
+<li>ajouter les symboles au binaire avec l'option -g ;</li>
+<li>activer ou désactiver certaines traces dans le code.</li>
+</ul>
+<p>On parle généralement de configuration du code en mode 'Debug' ou en mode 'Release'.</p>
+<p>La manière de configurer ce mode est influencé par le générateur utilisé.</p>
+<p>CMake propose deux types de générateurs :</p>
+<ul>
+<li>les générateurs à configuration unique (single-configuration generators), comme "Unix Makefile" ou "Ninja" ;</li>
+<li>les générateurs multi-configuration (multi-configuration generators), comme "Ninja Multi-Config", "Visual Studio" ou "Xcode".</li>
+</ul>
+<p>Pour les <em>single-configuration generators</em>, le type de compilation est choisi à la génération du projet.</p>
+<p>La variable <strong>CMAKE_BUILD_TYPE</strong> permet de choir le type de build, elle peut valoir : <em>Debug</em>, <em>Release</em>, <em>RelWithDebInfo</em> ets <em>MinSizeRel</em>.
+Des valeurs customisées peuvent être définies.</p>
+<p>En fonction du langage et du compilateur utilisé, les options par défaut des différents types de build peuvent varier.</p>
+<p>Si l'on ne spécifie pas le type de build, une valeur par défaut est choisie en fonction du langage et du compilateur utilisé.</p>
+<p>Pour les <em>multi-configuration generators</em>, le type de compilation est choisi lors de la compilation.</p>
+<p>La variable <strong>CMAKE_CONFIGURATION_TYPES</strong> reprendre la liste des configurations disponibles. La variable <strong>CMAKE_BUILD_TYPE</strong> est simplement ignorée.</p>
+<p>Il ne faut donc jamais utilisé la variable <strong>CMAKE_BUILD_TYPE</strong> dans vos CMakeLists pour déterminer le type de build, à la place, on utilisera un générateur d'expression comme par exemple <em>$&lt;CONFIG:DEBUG&gt;</em>.</p>
 <blockquote>
-<p>C'est ici qu'il faut prendre les bonnes habitudes. Il est recommandé de ne pas touchez aux paramètres globaux, mais uniquement aux targets !!!</p>
+<p>Notez que le générateur d'expression n'est pas sensible à la case, <em>$&lt;CONFIG:DEBUG&gt;</em> est donc équivalent à <em>$&lt;CONFIG:Debug&gt;</em>.
+Notez également que le générateur d'expression est évalué lors de la compilation et non lors de la génération du projet.</p>
 </blockquote>
-<p>Lorsque l'on écrit un cmake, il faut garder à l'esprit, qu'il pourrait être appelé depuis un autre CMakeLists.txt. En assignant une valeur à une option globale, on écrase éventuellement des valeurs déjà configurées dans le CMakeLists de plus haut niveau et vous imposez ces valeurs aux autres targets.</p>
-<div class="highlight"><pre><span></span><span class="nb">compile_options</span><span class="p">(</span><span class="s">-Wall</span> <span class="s">-Wextra</span> <span class="s">-O3</span><span class="p">)</span>    <span class="c"># option globale</span>
-<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">app01</span> <span class="s">-O0</span><span class="p">)</span>     <span class="c"># option pour la target app01</span>
-</pre></div>
-<h2 id="une-application-simple">Une application simple</h2>
-<p>Ce second exemple reprend les options classiques de gcc. On complétera ce canevas par la suite.</p>
-<div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.0.2</span><span class="p">)</span>
-<span class="nb">project</span><span class="p">(</span><span class="s">App02</span> <span class="s">VERSION</span> <span class="s">1.2.3.4</span> <span class="s">LANGUAGES</span> <span class="s">CXX</span><span class="p">)</span>
+<p>Illustrons tout ceci. Placez-vous dans un dossier de travail, <em>$HOME/cmake/exp02</em>.</p>
+<p>Recopier le fichier main.cpp de l'exemple 01 et écrivez le code suivant dans le fichier <em>CMakeLists.txt</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0.2</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MonApplication</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">app02</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"CMAKE_BUILD_TYPE          : ${CMAKE_BUILD_TYPE}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"CMAKE_CONFIGURATION_TYPES : ${CMAKE_CONFIGURATION_TYPES}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"CMAKE_CXX_FLAGS_DEBUG     : ${CMAKE_CXX_FLAGS_DEBUG}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"CMAKE_CXX_FLAGS_RELEASE   : ${CMAKE_CXX_FLAGS_RELEASE}"</span><span class="p">)</span>
+
+<span class="nb">add_custom_target</span><span class="p">(</span><span class="s">print_config</span><span class="w"> </span><span class="s">ALL</span>
+<span class="w">    </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s">echo</span><span class="w"> </span><span class="s2">"Config is $&lt;CONFIG&gt;"</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Ce CMakeLists.txt affichera 4 messages permettant de voir le contenu de 4 variables.
+<em>add_custom_target</em> (qui sera abordé plus tard) nous permet d'afficher la valeur de $&lt;CONFIG&gt; lors de la compilation.</p>
+<p>J'utilise la "méthode 1" pour générer les projets.</p>
+<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$HOME</span>/cmake/exp02
+<span class="gp">$ </span>mkdir build
+<span class="gp">$ </span><span class="nb">cd</span> build
+<span class="gp">$ </span>cmake cmake -G<span class="s2">"Ninja"</span> -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug ..
+<span class="go">...</span>
+<span class="go">-- CMAKE_BUILD_TYPE          : Debug</span>
+<span class="go">-- CMAKE_CONFIGURATION_TYPES : </span>
+<span class="go">-- CMAKE_CXX_FLAGS_DEBUG     : -g</span>
+<span class="go">-- CMAKE_CXX_FLAGS_RELEASE   : -O3 -DNDEBUG</span>
+<span class="go">...</span>
+<span class="gp">$ </span>ninja
+<span class="go">...</span>
+<span class="go">Config is Debug</span>
+<span class="go">...</span>
+<span class="gp">$ </span>rm -rf *
+<span class="gp">$ </span>cmake -G<span class="s2">"Ninja Multi-Config"</span> -DCMAKE_CONFIGURATION_TYPES<span class="o">=</span><span class="s2">"Debug;Release"</span> ..
+<span class="go">...</span>
+<span class="go">-- CMAKE_BUILD_TYPE          : </span>
+<span class="go">-- CMAKE_CONFIGURATION_TYPES : Debug;Release</span>
+<span class="go">-- CMAKE_CXX_FLAGS_DEBUG     : -g</span>
+<span class="go">-- CMAKE_CXX_FLAGS_RELEASE   : -O3 -DNDEBUG</span>
+<span class="go">...</span>
+<span class="gp">$ </span>ninja -f build-Debug.ninja
+<span class="go">...</span>
+<span class="go">Config is Debug</span>
+<span class="go">...</span>
+<span class="gp">$ </span>ninja -f build-Release.ninja
+<span class="go">...</span>
+<span class="go">Config is Release</span>
+<span class="go">...</span>
+</code></pre></div>
+<p>Dans le cas de <em>Ninja Multi-Config</em>, cmake à généré autant de fichiers build-&lt;CONFIG&gt;.ninja que ce qu'il y a de valeurs dans <em>CMAKE_CONFIGURATION_TYPES</em>.</p>
+<h2 id="44-utiliser-la-commande-cmake-a-la-place-de-make-ou-ninja">4.4 Utiliser la commande cmake à la place de make ou ninja</h2>
+<p>Une fois notre projet généré, nous nous sommes placé dans le dossier de build et avons utilisé la commande <code>make</code> ou <code>ninja</code>.</p>
+<p>Il est possible de lancer la compilation de manière indépendante du générateur choisi. La syntaxe est la suivante : <code>cmake --build &lt;dir&gt; [&lt;options&gt;] [-- &lt;build-tool-options&gt;]</code>.</p>
+<p>Les options sont :</p>
+<ul>
+<li>
+<p>-t &lt;target_name&gt; ou --target &lt;target_name&gt; : permet de préciser la target à compiler. Plusieurs targets peuvent être indiquée en les séparent d'un espace.</p>
+</li>
+<li>
+<p>--config &lt;config_name&gt; : permet de choisir la configuration pour <em>multi-configuration generators</em>.</p>
+</li>
+<li>
+<p>--clean-first : appel la target clean avant de lancer le build.</p>
+</li>
+<li>
+<p>-j [&lt;nb_jobs&gt;] ou --parallel [<nb_jobs>] : disponible depuis la version 3.12, indique le nombre maximum de tâches qui peuvent être effectuées en parallèle. Si l'on indique pas &lt;nb_jobs&gt;, le nombre par défaut du générateur est utilisé. La variable <em>CMAKE_BUILD_PARALLEL_LEVEL</em> permet de spécifier une valeur par défaut si cette option n'est pas présente.</nb_jobs></p>
+</li>
+</ul>
+<h2 id="45-preset">4.5 Preset</h2>
+<p>Un des inconvénients de cmake est le partage de la ligne de commande à utiliser pour configurer correctement un projet.
+Pour l'instant, nous ne connaissons que le paramètre <em>CMAKE_BUILD_TYPE</em>, mais on peut en avoir facilement de 3 à 5.</p>
+<p>Avant la version 3.19 de cmake, on écrivait donc un petit scripts contenant la ligne de commande cmake.</p>
+<p>Depuis cmake 3.19, on peut utiliser deux fichiers <em>CMakePresets.json</em> et <em>CMakeUserPresets.json</em> pour stocker et partager ces paramètres.</p>
+<p>Ces deux fichiers doivent être stockés dans le dossier racine du projet, avec le fichier CMakeLists.txt. Ils ont le même format et au minimum un seul des deux est requit si vous utilisez l'option <em>--preset</em> de cmake.</p>
+<p>CMakePresets.json est destiné à être utiliser avec votre CI par exemple, tandis que CMakeUserPresets.json est destiné à stocker des détailles spécifiques et local au développeur. Il est conseillé d'ajouter CMakeUserPresets.json au fichier .gitignore.</p>
+<p>Placer le contenu suivant dans le fichier CMakePreset.json</p>
+<p>:::json
+   {
+      "version": 1,
+      "configurePresets": [
+         {
+            "name": "release",
+            "binaryDir": "${sourceDir}/_build-${presetName}",
+            "generator": "Ninja",
+            "cacheVariables": {
+               "CMAKE_BUILD_TYPE": "Release"
+            }
+         }
+      ]
+   }</p>
+<p>Pour configurer le projet, faite <code>cmake -S . --preset release</code></p>
+<p>Le contenu des fichiers de preset évolue avec les versions de cmake et peut être assez conséquent. Pour aller plus loin, reportez vous à la <a href="https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html">documentation</a>.</p>
+<h1 id="5-application-simple">5. Application simple</h1>
+<p>Cet exemple reprend les options classiques de gcc. On complétera ce canevas par la suite. Les fichiers sont disponible <a href="https://github.com/TheBigFred/tutoCmake"><em>ici</em></a>.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0.2</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">app03</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.2.3.4</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
 
 <span class="c"># Définition de la target</span>
-<span class="nb">add_executable</span><span class="p">(</span>         <span class="c"># Equivalent de g++ -o App02 main.cpp alog.cpp algo.h</span>
-    <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>     <span class="c"># Définition de la target avec la variable cmake</span>
-                        <span class="c"># contenant le nom du projet, ici App02.</span>
-    <span class="s">main.cpp</span>            <span class="c"># Liste des fichiers sources</span>
-    <span class="s">algo.cpp</span>
-    <span class="s">algo.h</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="w">         </span><span class="c"># Equivalent de g++ -o app03 main.cpp pipotron.cpp pipotron.h</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w">     </span><span class="c"># Définition d'une target avec la variable cmake</span>
+<span class="w">                        </span><span class="c"># contenant le nom du projet, ici app03.</span>
+<span class="w">    </span><span class="s">main.cpp</span><span class="w">            </span><span class="c"># Liste des fichiers sources</span>
+<span class="w">    </span><span class="s">pipotron.cpp</span>
+<span class="w">    </span><span class="s">pipotron.h</span>
 <span class="p">)</span>
 
-<span class="c"># CXXFLAGS : Flags passés à g++</span>
-<span class="nb">target_compile_options</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">PRIVATE</span>
-        <span class="s">-Wall</span> <span class="s">-Wextra</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:-O0&gt;</span>      <span class="c"># options utilisées uniquement en mode Debug</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">:-O3&gt;</span>    <span class="c"># options utilisées uniquement en mode Release</span>
+<span class="c"># CXXFLAGS : Flags passés au compilateur</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="c"># Attention : les flags gcc ne sont pas compatible avec tout les compilateurs !</span>
+<span class="w">        </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:-O0&gt;</span><span class="w">      </span><span class="c"># options utilisées uniquement en mode Debug</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">:-O3&gt;</span><span class="w">    </span><span class="c"># options utilisées uniquement en mode Release</span>
 <span class="p">)</span>
 
 <span class="c"># On force l'utilisation de C++11</span>
-<span class="nb">set_target_properties</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">PROPERTIES</span> 
-        <span class="s">CXX_STANDARD</span>          <span class="s">11</span>
-        <span class="s">CXX_STANDARD_REQUIRED</span> <span class="s">YES</span>
+<span class="nb">set_target_properties</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PROPERTIES</span><span class="w"> </span>
+<span class="w">        </span><span class="s">CXX_STANDARD</span><span class="w">          </span><span class="s">11</span>
+<span class="w">        </span><span class="s">CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">YES</span>
 <span class="p">)</span>
 
-<span class="c"># Ajout d'un define, équivalent g++ -DDEBUG ...</span>
-<span class="nb">target_compile_definitions</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">PRIVATE</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:DEBUG&gt;</span>    <span class="c"># Ajoute -DDEBUG uniquement en mode Debug</span>
+<span class="c"># Ajout d'un define, équivalent g++ -DDEBUG</span>
+<span class="nb">target_compile_definitions</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:DEBUG&gt;</span><span class="w">    </span><span class="c"># Ajoute -DDEBUG uniquement en mode Debug</span>
+<span class="p">)</span>
+
+<span class="c"># On retire les symboles de l'exécutable</span>
+<span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span>
+<span class="w">    </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--only-keep-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span>
+<span class="w">    </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--strip-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--add-gnu-debuglink=</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
 <span class="p">)</span>
 
 <span class="c"># Directive d'installation</span>
 <span class="nb">install</span><span class="p">(</span>
-    <span class="s">TARGETS</span>         <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">DESTINATION</span>     <span class="s">bin</span>
+<span class="w">    </span><span class="s">TARGETS</span><span class="w">         </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">DESTINATION</span><span class="w">     </span><span class="s">bin</span>
 <span class="p">)</span>
-</pre></div>
-<h3>cmake_minimum_required</h3>
+</code></pre></div>
+<h3 id="cmake_minimum_required">cmake_minimum_required</h3>
 <p>On en reparlera plus en détail plus loin, mais il est possible d'include d'autre CMakeLists.txt au votre.</p>
-<p>Le cmake de plus haut niveau doit commencer par <strong>cmake_minimum_required</strong> qui permet de définir la version minimum de cmake à utiliser.</p>
-<p>Ce "top level" CMakeLists.txt doit également contenir explicitement une ligne <strong>project(...)</strong>, inclure un fichier qui contient une ligne <em>project(...)</em> n'est pas suffisant.</p>
-<h3>project</h3>
-<p>Définit le nom du projet qui est stoké dans la variable <strong>PROJECT_NAME</strong>.</p>
+<p>Le cmake de plus haut niveau doit commencer par <strong><a href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">cmake_minimum_required</a></strong> qui permet de définir la version minimum de cmake à utiliser.</p>
+<p>Ce <em>top level</em> CMakeLists.txt doit également contenir explicitement une ligne <strong>project(...)</strong>, inclure un fichier qui contient une ligne <em>project(...)</em> n'est pas suffisant.</p>
+<h3 id="project">project</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/project.html">project</a></strong> définit le nom du projet qui est stocké dans la variable <strong>PROJECT_NAME</strong>.</p>
 <p>Définit les variables :</p>
 <ul>
-<li><strong>PROJECT_SOURCE_DIR</strong>   : le path du CMakeLists contenant la commande <em>project</em>.</li>
+<li><strong>CMAKE_PROJECT_NAME</strong>    : uniquement dans le <em>top level</em> CMakeLists.txt</li>
+<li><strong>PROJECT_IS_TOP_LEVEL</strong>  : booléen disponible depuis la version 3.21</li>
+<li><strong>PROJECT_SOURCE_DIR</strong>    : le path du CMakeLists contenant la commande <em>project</em>.</li>
 <li><strong>PROJECT_BINARY_DIR</strong>    : le path du dossier de build.</li>
-<li><strong>PROJECT_VERSION</strong>       : la version compléte.</li>
+</ul>
+<p>Chacune des variables <strong>PROJECT_XXXXX</strong> sont déclinées en <strong>&lt;PROJECT_NAME&gt;_XXXXX</strong>,
+ainsi  <strong>app03_SOURCE_DIR</strong> est l'équivalent de <strong>PROJECT_SOURCE_DIR</strong>.</p>
+<p>L'option <em>VERSION</em> définit :</p>
+<ul>
+<li><strong>PROJECT_VERSION</strong>       : la version complète.</li>
 <li><strong>PROJECT_VERSION_MAJOR</strong> : le 1ier digit de la version.</li>
 <li><strong>PROJECT_VERSION_MINOR</strong> : le 2eme digit de la version.</li>
 <li><strong>PROJECT_VERSION_PATCH</strong> : le 3eme digit de la version.</li>
 <li><strong>PROJECT_VERSION_TWEAK</strong> : le 4eme digit de la version.</li>
+<li><strong>CMAKE_PROJECT_VERSION</strong> : uniquement dans le <em>top level</em> CMakeLists.txt depuis la version 3.12.</li>
 </ul>
-<p>Chacune de ces variables est déclinée en &lt;PROJECT_NAME&gt;_XXXXX, ainsi  <strong>App02_SOURCE_DIR</strong> est l'équivalent de <strong>PROJECT_SOURCE_DIR</strong>.</p>
-<h3>Création d'une target</h3>
-<p>La commande <strong>add_executable</strong> prend en premier paramètre le nom de la target à créer suivit d'une liste (éventuellement vide) de fichiers.</p>
-<p>Il peut évidement y a voir plusieurs target dans un même CMakeLists, elles doivent juste avoir des noms différents.</p>
-<h3>Options de compilation</h3>
-<p>La commande <strong>target_compile_options</strong> définit les options passées au compilateur.</p>
-<p>Pour prendre en compte plusieurs compilateurs différents, il faut jouer avec des "if" ou avec la notation absconde du générateur d'expression cmake.</p>
-<p>Dans l'exemple suivant, <em>if (MSVC)</em> est true si le compilateur est Microsift Visual C++.</p>
-<div class="highlight"><pre><span></span><span class="nb">if</span> <span class="p">(</span><span class="s">MSVC</span><span class="p">)</span>
-    <span class="c"># warning level 4 and all warnings as errors</span>
-    <span class="nb">target_compile_options</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PRIVATE</span> <span class="s">/W4</span> <span class="s">/WX</span> <span class="p">)</span>
-<span class="nb">else</span><span class="p">()</span>
-    <span class="c"># lots of warnings and all warnings as errors</span>
-    <span class="nb">target_compile_options</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PRIVATE</span> <span class="s">-Wall</span> <span class="s">-Wextra</span> <span class="s">-Werror</span> <span class="p">)</span>
-<span class="nb">endif</span><span class="p">()</span>
-</pre></div>
-<p>L'exemple suivant utilise le générateur d'expression</p>
-<div class="highlight"><pre><span></span><span class="nb">target_compile_options</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">PRIVATE</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:CMAKE_MSVC_COMPILER_ID</span><span class="o">&gt;</span><span class="s">:</span> <span class="s">/W4</span> <span class="s">/WX&gt;</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:CMAKE_GNU_COMPILER_ID</span><span class="o">&gt;</span><span class="s">:-Wall</span> <span class="s">-Wextra</span> <span class="s">-fmessage-length=0&gt;</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:CMAKE_GNU_COMPILER_ID</span><span class="o">&gt;</span><span class="s">&gt;:-O0</span> <span class="s">-ggdb&gt;</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:CMAKE_GNU_COMPILER_ID</span><span class="o">&gt;</span><span class="s">&gt;:-O3</span> <span class="s">-ggdb&gt;</span>
-<span class="p">)</span>
-</pre></div>
-<p>$&lt;$&lt;CXX_COMPILER_ID:CMAKE_MSVC_COMPILER_ID&gt; se lit :</p>
+<p>L'option <em>LANGUAGES</em>  permet de préciser les langages nécessaires à la compilation du projet.
+Les langages supporté sont :</p>
 <ul>
-<li>Si la variable <strong>CXX_COMPILER_ID</strong> à la valeur <strong>CMAKE_MSVC_COMPILER_ID</strong>.</li>
+<li>C, CXX (C++), Fortran, ASM (Assembleur).</li>
+<li>OBJC, OBJCXX (objective-C).</li>
+<li><a href="https://developer.amd.com/resources/rocm-learning-center/fundamentals-of-hip-programming">HPI</a>, <a href="https://ispc.github.io/ispc.html">ISPC</a>, <a href="https://en.wikipedia.org/wiki/CUDA">CUDA</a></li>
+</ul>
+<p>Le support des différents langages est apparut au travers des différentes versions de CMake, il faut donc consulter la documentation pour indiquer la bonne version de cmake dans la commande <em>cmake_minimum_required</em>.</p>
+<p>Les langages C et C++ sont activés par défaut si l'option <em>LANGUAGES</em> est absente.</p>
+<p>Si votre projet mix des fichiers assembleurs et C++, alors lister ASM en dernier.
+Cela permet à cmake de vérifier que votre compilateur C++ peut également compiler les fichiers assembleurs.</p>
+<h3 id="creation-dun-executable">Création d'un exécutable</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/add_executable.html">add_executable</a></strong> prend en premier paramètre le nom de la target à créer suivit d'une liste (éventuellement vide) de fichiers.</p>
+<p>Il peut évidement y a voir plusieurs target dans un même CMakeLists, elles doivent juste avoir des noms différents.</p>
+<h3 id="options-de-compilation">Options de compilation</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/target_compile_options.html">target_compile_options</a></strong> définit les options passées au compilateur.</p>
+<p>Évidement, tout les compilateurs n'ont pas des options identiques. Pour prendre cela an compte, il faut jouer avec des "if" ou avec la notation absconse du générateur d'expression cmake.</p>
+<p>Dans l'exemple suivant, <em>if (MSVC)</em> est true si le compilateur est Microsoft Visual C++.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">if</span> <span class="p">(</span><span class="s">MSVC</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">/W4</span><span class="w"> </span><span class="s">/WX</span><span class="w"> </span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">target_compile_options</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="w"> </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+<p>L'exemple suivant utilise le générateur d'expression.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">target_compile_options</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="c"># GCC Flags</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">:-Wall</span><span class="w"> </span><span class="s">-Wextra&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">&gt;:-O0</span><span class="w"> </span><span class="s">-ggdb&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">&gt;:-O2</span><span class="w"> </span><span class="s">-ggdb&gt;</span>
+
+<span class="w">        </span><span class="c"># MSVC Flags</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">:</span><span class="w"> </span><span class="s">/W4</span><span class="w"> </span><span class="s">/WX&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">&gt;:</span><span class="w"> </span><span class="s">/Od&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">&gt;:</span><span class="w"> </span><span class="s">/O2&gt;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>$&lt;$&lt;CXX_COMPILER_ID:MSVC&gt; se lit :</p>
+<ul>
+<li>Si la variable <strong>CXX_COMPILER_ID</strong> à la valeur <strong>MSVC</strong>.</li>
 <li>Alors on ajoute les flags <strong>/W4 /WX</strong>.</li>
 </ul>
-<p>$&lt;$&lt;AND:$&lt;CONFIG:RELEASE&gt;,$&lt;CXX_COMPILER_ID:CMAKE_GNU_COMPILER_ID&gt;&gt;:-O3 -ggdb&gt; se lit :</p>
+<p>$&lt;$&lt;AND:$&lt;CONFIG:RELEASE&gt;,$&lt;CXX_COMPILER_ID:GNU&gt;&gt;:-O3 -ggdb&gt; se lit :</p>
 <ul>
-<li>Si le build est de type <strong>release</strong> et que la variable <strong>CXX_COMPILER_ID</strong> à la valeur <strong>CMAKE_GNU_COMPILER_ID</strong>.</li>
+<li>Si le build est de type <strong>release</strong> et que la variable <strong>CXX_COMPILER_ID</strong> à la valeur <strong>GNU</strong>.</li>
 <li>Alors on ajoute les flags <strong>-03 -ggdb</strong>.</li>
 </ul>
-<p>La liste des compilateurs disponibles varie d'une version de cmake à l'autre : <a href="https://cmake.org/cmake/help/v3.19/variable/CMAKE_LANG_COMPILER_ID.html#variable:CMAKE_%3CLANG%3E_COMPILER_ID">Compiler Id</a></p>
+<p>La liste des compilateurs disponibles varie d'une version de cmake à l'autre : <a href="https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER_ID.html">Compiler Id</a></p>
 <p>Le mot clef <em>private</em> sera détaillé lorsque l'on abordera la création de bibliothèques.</p>
-<h3>Définition du standard C++</h3>
-<p>La seule méthode "valable" est celle reprise ci-dessus. Il n'est pas conseillé d'indiquer <em>-std=C++11</em> dans <strong>target_compile_options</strong>. </p>
-<p>De manière générale, il faut éviter d'utiliser des options spécifiques à un compilateur et préférer utiliser une commande cmake.</p>
-<p>Le tutoriel cmake officiel définit le standard de manière globale <strong>set(CMAKE_CXX_STANDARD 11)</strong>. Comme dit plus haut, ce n'est pas recommandé.</p>
-<p>En effet, rien ne nous empéche de créer plusieurs targets certaines utilisant du C++11 et d'autres du C++20.</p>
-<h3>Options pour le préprocesseur</h3>
-<p>La commande <strong>target_compile_definitions</strong> permet de définir (#define) ou supprimer (#undef) des variables (également nommé macro) au niveau du préprocesseur. En cmake, pour supprimer on fait précéder la macro de -D (D pour delete). Le <em>-D</em> de cmake correspond donc au _-U_de gcc.</p>
-<div class="highlight"><pre><span></span><span class="nb">target_compile_definitions</span><span class="p">(</span> <span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
-    <span class="s">PRIVATE</span>
-        <span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:DEBUG&gt;</span>    <span class="c"># Correspond à "#define DEBUG" ou à g++ -DDEBUG</span>
-        <span class="s">SIZE=5</span>                      <span class="c"># Correspond à "#define SIZE 5" ou à g++ -DSIZE=5</span>
-        <span class="s">-DTEST</span>                      <span class="c"># Correspond à "#undef TEST" ou à g++ -UTEST</span>
+<h3 id="definition-du-standard-c">Définition du standard C++</h3>
+<p>La seule méthode "valable" est celle reprise ci-dessus. Il n'est pas conseillé d'indiquer <em>-std=C++11</em> dans <strong>target_compile_options</strong>,
+de manière générale, il faut éviter d'utiliser des options spécifiques à un compilateur et préférer utiliser une commande cmake.</p>
+<p>Le tutoriel cmake officiel définit le standard de manière globale <strong>set(CMAKE_CXX_STANDARD 11)</strong>. Ce n'est pas recommandé, j'expliquerai pourquoi au point suivant.</p>
+<p>En effet, rien ne nous empêche de créer plusieurs targets certaines utilisant du C++11 et d'autres du C++20.</p>
+<h3 id="options-du-preprocesseur">Options du préprocesseur</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html">target_compile_definitions</a></strong> permet de définir (#define) ou supprimer (#undef) des variables (également nommé macro) au niveau du préprocesseur. En cmake, pour supprimer on fait précéder la macro de -D (D pour delete). Le <em>-D</em> de cmake correspond donc au _-U_de gcc.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:DEBUG&gt;</span><span class="w">    </span><span class="c"># Correspond à "#define DEBUG" ou à g++ -DDEBUG</span>
+<span class="w">        </span><span class="s">SIZE=5</span><span class="w">                      </span><span class="c"># Correspond à "#define SIZE 5" ou à g++ -DSIZE=5</span>
+<span class="w">        </span><span class="s">-DTEST</span><span class="w">                      </span><span class="c"># Correspond à "#undef TEST" ou à g++ -UTEST</span>
 <span class="p">)</span>
-</pre></div>
-<h3>Directive d'installation</h3>
-<p>La commande <strong>install</strong> ajoute au Makefile génèré une cible <em>install</em>, on pourra dès lors utiliser <em>make install</em>.</p>
-<p>Le dossier d'installation par défaut est <em>/usr/local</em> sous UNIX et <em>C:/Program Files/${PROJECT_NAME}</em> sous Windows.</p>
-<p>Sous UNIX,  one can use the DESTDIR mechanism in order to relocate the whole installation to a staging area. See the DESTDIR environment variable for more information.</p>
+</code></pre></div>
+<blockquote>
+<p>Attention à ne pas confondre une option <em>"-D..."</em> passé en ligne de commande à cmake et le <em>"-DTEST"</em> de la commande <em>target_compile_definitions</em>.</p>
+</blockquote>
+<p>Une option <em>"-D..."</em> de la ligne de commande crée/set une variable que vous pouvez utiliser dans votre CMakeLists.txt pour effectuer divers tests.</p>
+<h3 id="retirer-les-symboles-du-binaire">Retirer les symboles du binaire</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/add_custom_command.html">add_custom_command</a></strong> permet d'ajouter des commandes à executer à une target.</p>
+<p>Notez que l'on utilise pas directement l'utilitaire <em>objcopy</em>, mais la variable <em>${CMAKE_OBJCOPY}</em>.</p>
+<p>Ces commandes permettent d'extraire les symboles du binaire et de le stocker dans un fichier nommé <em>${PROJECT_NAME}.debug</em>. Et d'associer ce fichier à l'executable.</p>
+<blockquote>
+<p>Sous Windows avec le compilateur MSVC, ceci ne fonctionne pas. De plus ce n'est pas nécessaire, MSVC strip automatiquement les binaires et place les symboles dans un fichier .pdb</p>
+</blockquote>
+<p>Il faut donc modifier ce que nous avons écrit plus haut comme suit :</p>
+<div class="highlight"><pre><span></span><code><span class="nb">if</span> <span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CXX_COMPILER_ID</span><span class="o">}</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">"GNU"</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># On retire les symboles de l'exécutable</span>
+<span class="w">    </span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--only-keep-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--strip-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--add-gnu-debuglink=</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="directive-dinstallation">Directive d'installation</h3>
+<p>La commande <strong><a href="https://cmake.org/cmake/help/latest/command/install.html">install</a></strong> ajoute au Makefile généré une cible <em>install</em>, on pourra dès lors invoquer <em>make install</em> ou <em>cmake --install .</em></p>
 <p>Le dossier de destination peut être absolu ou relatif. Il est préférable de toujours utiliser un dossier relatif, il sera alors possible
-de reloger les fichers à installer au moment de l'installation.</p>
-<p>Un chemin relatif sera préfixé par le contenu de la variable <strong>CMAKE_INSTALL_PREFIX</strong>. Cette variable peut être définie lors de la configration du projet <code>cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$PWD/local</code> ou lors de l'installation `DESTIR=$HOMR/local
-cd build
-make install</p>
-<p>Pour reloger les fichiers, il y a deux manière de procéder, soit lors de la configuration du projet, soit lors de l'installation.</p>
-<p>cmake -S </p>
-<p>The prefix can be relocated at install time using the DESTDIR mechanism explained in the CMAKE_INSTALL_PREFIX variable documentation.</p>
-<p>DESTIR=/my/install/prefix make install
-cmake --install . --prefix /my/install/prefix</p>
-<div class="highlight"><pre><span></span>If an absolute path (with a leading slash or drive letter) is given it is used verbatim.
+de reloger les fichiers à installer au moment de l'installation.</p>
+<p>Si le dossier de destination est un chemin relatif, il sera préfixé par le contenu de la variable <strong>CMAKE_INSTALL_PREFIX</strong>. La valeur par défaut de cette variable est : <em>/usr/local</em> sous UNIX et <em>C:/Program Files/${PROJECT_NAME}</em> sous Windows.</p>
+<p>Cette variable peut être définie lors de la configuration du projet <code>cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$HOME/local</code>, mais également au moment de l'installation <code>cmake --install . --prefix $HOME/local</code>. Ces deux commandes installeront votre binaire dans <em>$HOME/local/bin</em>.</p>
+<p>Sous UNIX, attention de ne pas confondre le <em>mécanisme</em> DESTIR avec l'<em>INSTALL_PREFIX</em>. L'appel <code>make DESTDIR=/tmp install</code>à pour effet de déplacer l'ensemble de l'installation vers un autre dossier.</p>
+<p>Ainsi, si <em>CMAKE_INSTALL_PREFIX=/opt/MyCompany</em>, <em>make DESTIR=/tmp install</em> installera votre projet dans <em>/tmp/opt/MyCompany</em>.</p>
+<p>Le module <em>GNUInstallDirs</em> fournit un ensemble de variables permettant de respecter le style d'organisation des dossiers GNU. On les utilisera dans pour les bibliothèques.</p>
+<h3 id="reecriture-portable-du-cmakeliststtxt">Réécriture portable du CMakeListst.txt</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0.2</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">app04</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.2.3.4</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
 
-As absolute paths are not supported by cpack installer generators, it is preferable to use relative paths throughout. In particular, there is no need to make paths absolute by prepending CMAKE_INSTALL_PREFIX; this prefix is used by default if the DESTINATION is a relative path.
-</pre></div>
-<p>The installation prefix is also added to CMAKE_SYSTEM_PREFIX_PATH so that find_package(), find_program(), find_library(), find_path(), and find_file() will search the prefix for other software.</p>
-<p>Note</p>
-<p>Use the GNUInstallDirs module to provide GNU-style options for the layout of directories within the installation.</p>
-<p>The CMAKE_INSTALL_PREFIX may be defined when configuring a build tree to set its installation prefix. Or, when using the cmake(1) command-line tool's --install mode, one may specify a different prefix using the --prefix option:</p>
-<h2 id="_1"></h2>
-<h3>Afficher des messages</h3>
-<p>message(STATUS "Mon message")</p>
-<h3>Génération de fichiers</h3>
-<p>configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in 
-    ${CMAKE_CURRENT_BINARY_DIR}/config.h
-)</p>
-<h3>Variables</h3>
-<p>Cmake nous permet de définir des variables avec la syntaxe <em>set( nom-de-variable valeur )</em>. Le nom d'une variable est case sensitive. ${nom-de-variable} permet d'utiliser le contenu d'une varible.</p>
-<div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span> <span class="s">VAR</span> <span class="s">toto</span> <span class="p">)</span>         <span class="c"># La variable VAR contient toto</span>
-<span class="nb">set</span><span class="p">(</span> <span class="s">VAR</span> <span class="s">titi</span> <span class="p">)</span>         <span class="c"># La variable VAR contient titi, on à écrasé l'ancienne valeur.</span>
-<span class="nb">set</span><span class="p">(</span> <span class="s">VAR</span> <span class="s">toto</span> <span class="s">titi</span> <span class="p">)</span>    <span class="c"># La variable VAR contient la liste toto;titi</span>
-<span class="nb">set</span><span class="p">(</span> <span class="s">VAR</span> <span class="o">${</span><span class="nv">VAR</span><span class="o">}</span> <span class="s">tutu</span> <span class="p">)</span>  <span class="c"># La variable VAR contient la liste toto;titi;tutu; (concaténation)</span>
-</pre></div>
-<p>CMake réserve les variables commencant par :</p>
+<span class="c"># Définition de la target</span>
+<span class="nb">add_executable</span><span class="p">(</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">main.cpp</span>
+<span class="w">    </span><span class="s">pipotron.cpp</span>
+<span class="w">    </span><span class="s">pipotron.h</span>
+<span class="p">)</span>
+
+<span class="c"># CXXFLAGS : Flags passés au compilateur</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="c"># GCC Flags</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">:-Wall</span><span class="w"> </span><span class="s">-Wextra&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">&gt;:-O0</span><span class="w"> </span><span class="s">-ggdb&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:GNU</span><span class="o">&gt;</span><span class="s">&gt;:-O2</span><span class="w"> </span><span class="s">-ggdb&gt;</span>
+
+<span class="w">        </span><span class="c"># MSVC Flags</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">:</span><span class="w"> </span><span class="s">/W4</span><span class="w"> </span><span class="s">/WX&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">&gt;:</span><span class="w"> </span><span class="s">/Od&gt;</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;AND:$&lt;CONFIG:RELEASE</span><span class="o">&gt;</span><span class="s">,</span><span class="o">$&lt;</span><span class="nv">CXX_COMPILER_ID:MSVC</span><span class="o">&gt;</span><span class="s">&gt;:</span><span class="w"> </span><span class="s">/O2&gt;</span>
+<span class="p">)</span>
+
+<span class="c"># On force l'utilisation de C++11</span>
+<span class="nb">set_target_properties</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PROPERTIES</span><span class="w"> </span>
+<span class="w">        </span><span class="s">CXX_STANDARD</span><span class="w">          </span><span class="s">11</span>
+<span class="w">        </span><span class="s">CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">YES</span>
+<span class="p">)</span>
+
+<span class="c"># Ajout d'un define, équivalent g++ -DDEBUG</span>
+<span class="nb">target_compile_definitions</span><span class="p">(</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="o">$&lt;</span><span class="nv">$&lt;CONFIG:DEBUG</span><span class="o">&gt;</span><span class="s">:DEBUG&gt;</span><span class="w">    </span><span class="c"># Ajoute -DDEBUG uniquement en mode Debug</span>
+<span class="p">)</span>
+
+<span class="nb">if</span> <span class="p">(</span><span class="o">${</span><span class="nv">CMAKE_CXX_COMPILER_ID</span><span class="o">}</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">"GNU"</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># On retire les symboles de l'exécutable</span>
+<span class="w">    </span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--only-keep-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--strip-debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_OBJCOPY</span><span class="o">}</span><span class="w"> </span><span class="s">--add-gnu-debuglink=</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="s">.debug</span><span class="w"> </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Directive d'installation</span>
+<span class="nb">install</span><span class="p">(</span>
+<span class="w">    </span><span class="s">TARGETS</span><span class="w">         </span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+<span class="w">    </span><span class="s">DESTINATION</span><span class="w">     </span><span class="s">bin</span>
+<span class="p">)</span>
+</code></pre></div>
+<h1 id="6-outils-du-langage-cmake">6 Outils du langage cmake</h1>
+<h2 id="61-variables">6.1 Variables</h2>
+<p>CMake nous permet de définir des variables avec la syntaxe <strong><a href="https://cmake.org/cmake/help/latest/command/set.html">set</a>( nom-de-variable valeur )</strong>. Le nom d'une variable est case sensitive. <strong>${nom-de-variable}</strong> permet d'utiliser le contenu d'une variable.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="w"> </span><span class="s">VAR</span><span class="w"> </span><span class="s">toto</span><span class="w"> </span><span class="p">)</span><span class="w">         </span><span class="c"># La variable VAR contient toto</span>
+<span class="nb">set</span><span class="p">(</span><span class="w"> </span><span class="s">VAR</span><span class="w"> </span><span class="s">titi</span><span class="w"> </span><span class="p">)</span><span class="w">         </span><span class="c"># La variable VAR contient titi, on à écrasé l'ancienne valeur.</span>
+<span class="nb">set</span><span class="p">(</span><span class="w"> </span><span class="s">VAR</span><span class="w"> </span><span class="s">toto</span><span class="w"> </span><span class="s">titi</span><span class="w"> </span><span class="p">)</span><span class="w">    </span><span class="c"># La variable VAR contient la liste toto;titi</span>
+<span class="nb">set</span><span class="p">(</span><span class="w"> </span><span class="s">VAR</span><span class="w"> </span><span class="o">${</span><span class="nv">VAR</span><span class="o">}</span><span class="w"> </span><span class="s">tutu</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="c"># La variable VAR contient la liste toto;titi;tutu; (concaténation)</span>
+</code></pre></div>
+<p>CMake se réserve les variables commençant par :</p>
 <ul>
 <li>cmake (upper case, lower case ou mixed case),</li>
 <li>_cmake (upper case, lower case ou mixed case),</li>
 <li>_ suivi d'un nom de commande.</li>
 </ul>
-<p>Le scope d'une variable est :</p>
+<p>La portée d'une variable est :</p>
 <ul>
 <li>soit la fonction dans laquelle est définie;</li>
-<li>soit le fichier CMakLists (et donc dossier contenant ce fichier) si elle définie hors d'une fonction;</li>
-<li>soit persistance dans le cache.</li>
+<li>soit le fichier CMakeLists.txt (et donc dossier contenant ce fichier) si elle définie hors d'une fonction;</li>
+<li>soit persistante dans le cache.</li>
 </ul>
-<p>CMake stocke un ensemble de variables de manière peritance dans le fichier de cache CMakeCache.txt. Les variables du cache on un scope globale et necessite d'utiliser l'option CACHE de la commande set pour être modifiées.</p>
-<div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span> <span class="s">variable</span> <span class="s">valeur</span> <span class="s">CACHE</span> <span class="s">&lt;STRING\&gt;</span> <span class="s2">"DESCRIPTION"</span> <span class="s">FORCE</span> <span class="p">)</span>
-</pre></div>
-<h3>Les listes</h3>
-<p>list(APPEND 
+<p>L'option <strong>PARENT_SCOPE</strong> permet de définir la variable dans la portée de niveau supérieur.</p>
+<p>CMake stocke un ensemble de variables de manière persistante dans le fichier de cache CMakeCache.txt. Les variables du cache on un scope globale et nécessite d'utiliser l'option CACHE de la commande <em>set</em> pour être modifiées. La syntaxe est : <code>set( variable valeur CACHE &lt;TYPE&gt; "DESCRIPTION" [FORCE] )</code>.</p>
+<p>Pour une variable stockée dans le cache, il faut préciser son type :</p>
+<ul>
+<li>BOOL : booléen, valeurs : ON/OFF.</li>
+<li>FILEPATH : chemin d'un fichier sur le disque.</li>
+<li>PATH : chemin d'un dossier.</li>
+<li>STRING : une ligne de texte.</li>
+<li>INTERNAL : une ligne de texte, mais qui ne sera pas affichée dans le cmake-gui. Ce type de variable requière l'option force.</li>
+</ul>
+<p>La description doit également être présente, des guillemets vide sont suffisant.</p>
+<p>L'option <em>FORCE</em> permet d'écraser la valeur d'une variable déjà présente dans le cache.</p>
+<h2 id="62-les-listes">6.2 Les listes</h2>
+<p><a href="https://cmake.org/cmake/help/latest/command/list.html">list</a>(APPEND
 )</p>
-<h3>Options</h3>
-<p>option(ENABLE_YYYY        "Enable YYYY"                OFF)</p>
-<h3>Les conditions</h3>
-<h2 id="une-application-qui-utilise-des-bibliotheques">Une application qui utilise des bibliothèques</h2>
-<h3>find_library</h3>
-<h3>find_package</h3>
-<h3>Bibliothèques "third party"</h3>
-<h2 id="creer-une-bibliotheques">Créer une bibliothèques</h2>
-<h3>Statique ou partaguée</h3>
-<h3>Statique et partaguée</h3>
-<h3>Visibilité des symboles d'une bibliothèques partaguée</h3>
-<h3>Exporter sa bibliothéque</h3>
-<h2 id="tests-unitaires">Tests unitaires</h2>
-<h2 id="doxygen">Doxygen</h2>
-<h2 id="packaging">Packaging</h2>
-<h2 id="une-bibliotheque-avec-dependances">Une Bibliothèque avec dépendances</h2>
-<h2 id="organisation-ces-sources">Organisation ces sources</h2>
-<h3>Avant 3.14</h3>
-<h3>Après 3.14</h3>
-<h2 id="ne-pas-deployer-projet-de-projet">Ne pas déployer (Projet de projet)</h2>
-<h2 id="_2"></h2>
-<h3>Macros et fonctions</h3>
-<h3>Parser un fichier</h3>
-<h3>custom_target</h3>
+<h2 id="63-afficher-des-messages">6.3 Afficher des messages</h2>
+<p>message(STATUS "Mon message")</p>
+<h2 id="64-generation-de-fichiers">6.4 Génération de fichiers</h2>
+<p>configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/config.h
+)</p>
+<h2 id="65-gestion-doptions">6.5 Gestion d'options</h2>
+<p>option(ENABLE_YYYY "Enable YYYY" OFF)</p>
+<h2 id="66-les-conditions">6.6 Les conditions</h2>
+<h2 id="67-custom_target">6.7 custom_target</h2>
+<h1 id="7-une-application-qui-utilise-des-bibliotheques">7 Une application qui utilise des bibliothèques</h1>
+<h3 id="find_library">find_library</h3>
+<h3 id="find_package">find_package</h3>
+<h3 id="bibliotheques-third-party">Bibliothèques "third party"</h3>
+<h1 id="8-creer-une-bibliotheques">8 Créer une bibliothèques</h1>
+<h2 id="81-statique-ou-partagee">8.1 Statique ou partagée</h2>
+<h2 id="82-statique-et-partagee">8.2 Statique et partagée</h2>
+<h2 id="83-visibilite-des-symboles-dune-bibliotheques-partagee">8.3 Visibilité des symboles d'une bibliothèques partagée</h2>
+<h2 id="84-exporter-sa-bibliotheque">8.4 Exporter sa bibliothèque</h2>
+<h2 id="85-une-bibliotheque-avec-dependances">8.5 Une bibliothèque avec dépendances</h2>
+<h1 id="9-tests-unitaires">9 Tests unitaires</h1>
+<h1 id="10-documentation">10 Documentation</h1>
+<h1 id="11-packaging">11 Packaging</h1>
+<h1 id="12-ne-pas-deployer-projet-de-projet">12 Ne pas déployer (Projet de projet)</h1>
+<h1 id="13-organisation-des-sources">13 Organisation des sources</h1>
+<h3 id="avant-314">Avant 3.14</h3>
+<h3 id="apres-314">Après 3.14</h3>
+<h1 id="14-macros-et-fonctions">14 Macros et fonctions</h1>
+<h1 id="15-parser-un-fichier">15 Parser un fichier</h1>
+<h1 id="5-portee-des-variables-commandes-et-proprietes">5. Portée des variables, commandes et propriétés</h1>
+<p>Lorsque l'on set une variable, une propriété ou utilise une commande, elles ont un certain champs d'action que l'on nomme <em>portée</em>.</p>
+<p>Prenons en exemple les commandes <em>target_compile_options</em> et <em>add_compile_options</em>.
+Ces deux commandes ont le même rôle, mais pas le même portée.</p>
+<p><em>target_compile_options</em> ajoute des options uniquement à une target, tandis que <em>add_compile_options</em> ajoute des options à toutes les targets du répertoire courant et des sous-répertoires ajoutés après.</p>
+<p>Pour l'exemple suivant, j'ai utilisé le fichier main.cpp de exp01.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.0.2</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">app03</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">1.2.3.4</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">target1</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+
+<span class="nb">add_compile_options</span><span class="p">(</span><span class="s">-werror</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">target2</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">target3</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">target1</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span>
+<span class="nb">target_compile_options</span><span class="p">(</span><span class="s">target2</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span>
+
+<span class="nb">get_property</span><span class="p">(</span><span class="s">G_CO</span><span class="w"> </span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">PROPERTY</span><span class="w"> </span><span class="s">COMPILE_OPTIONS</span><span class="p">)</span>
+<span class="nb">get_target_property</span><span class="p">(</span><span class="s">T1_CO</span><span class="w"> </span><span class="s">target1</span><span class="w"> </span><span class="s">COMPILE_OPTIONS</span><span class="p">)</span>
+<span class="nb">get_target_property</span><span class="p">(</span><span class="s">T2_CO</span><span class="w"> </span><span class="s">target2</span><span class="w"> </span><span class="s">COMPILE_OPTIONS</span><span class="p">)</span>
+<span class="nb">get_target_property</span><span class="p">(</span><span class="s">T3_CO</span><span class="w"> </span><span class="s">target3</span><span class="w"> </span><span class="s">COMPILE_OPTIONS</span><span class="p">)</span>
+
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"COMPILE_OPTIONS        : ${G_CO}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"target1 compile options: ${T1_CO}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"target2 compile options: ${T2_CO}"</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">"target3 compile options: ${T3_CO}"</span><span class="p">)</span>
+
+<span class="err">:::console</span>
+<span class="err">$</span><span class="w"> </span><span class="err">cmake</span><span class="w"> </span><span class="err">..</span>
+<span class="err">--</span><span class="w"> </span><span class="err">COMPILE_OPTIONS</span><span class="w">        </span><span class="err">:</span><span class="w"> </span><span class="err">-werror</span>
+<span class="err">--</span><span class="w"> </span><span class="err">target1</span><span class="w"> </span><span class="err">compile</span><span class="w"> </span><span class="err">options:</span><span class="w"> </span><span class="err">-Wall;-Wextra</span>
+<span class="err">--</span><span class="w"> </span><span class="err">target2</span><span class="w"> </span><span class="err">compile</span><span class="w"> </span><span class="err">options:</span><span class="w"> </span><span class="err">-werror;-Wall;-Wextra</span>
+<span class="err">--</span><span class="w"> </span><span class="err">target3</span><span class="w"> </span><span class="err">compile</span><span class="w"> </span><span class="err">options:</span><span class="w"> </span><span class="err">-werror</span>
+<span class="err">--</span><span class="w"> </span><span class="err">Configuring</span><span class="w"> </span><span class="err">done</span>
+<span class="err">--</span><span class="w"> </span><span class="err">Generating</span><span class="w"> </span><span class="err">done</span>
+</code></pre></div>
+<p>On constate que la ligne <em>add_compile_options(-werror)</em> n'a pas modifié la target1 crée juste avant, mais bien les targets 2 et 3.</p>
+<p>Il est déconseillé d'utiliser les commandes non préfixées par <em>target</em> ou d'assigner une variable à portée globale. Dans un projet vous pourriez être amener à inclure d'autre CMakeLists.txt et donc modifier des paramètres sans le vouloir.</p>
   </div>
   <header><p>
         <br>Série  :
@@ -471,8 +798,8 @@ As absolute paths are not supported by cpack installer generators, it is prefera
   <div class="tag-cloud">
     <p>
       <span class="fa fa-tags" ></span> 
-      <a href="/tag/cmd-line.html">cmd-line</a>
-      <a href="/tag/gnu-tools.html">GNU-Tools</a>
+      <a href="https://thebigfred.github.io/tag/cmd-line.html">cmd-line</a>
+      <a href="https://thebigfred.github.io/tag/gnu-tools.html">GNU-Tools</a>
     </p>
   </div>
 
@@ -527,7 +854,7 @@ As absolute paths are not supported by cpack installer generators, it is prefera
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " fgeDoc's ",
-  "url" : "",
+  "url" : "https://thebigfred.github.io",
   "image": "",
   "description": "FGE's Thoughts and Writings"
 }

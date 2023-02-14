@@ -136,7 +136,7 @@ est identifiée par son user (login).</p>
 <p>Si vous vous connectez avec le login "fred", vous serez donc l'utilisateur "fred" pour le système.</p>
 <p>Chaque utilisateur est déclaré dans le fichier <em>/etc/password</em>. C'est un fichier au format
 texte dans lequel chaque ligne représente un utilisateur, les différentes valeurs étant séparées par <em>:</em>.</p>
-<div class="highlight"><pre><span></span><code>$ cat /etc/password 
+<pre><code>$ cat /etc/password 
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/bin:/bin/false
 daemon:x:2:2:daemon:/sbin:/bin/false
@@ -149,8 +149,7 @@ fred:x:1000:1000::/home/fred:/bin/bash
 hugo:x:1001:1001::/home/hugo:/bin/bash
 tom:x:1002:1002::/home/tom:/bin/bash
 ...
-</code></pre></div>
-
+</code></pre>
 <p>Voici dans l'ordre, la signification des 7 champs.</p>
 <ul>
 <li>La première colonne correspond au login.</li>
@@ -183,7 +182,7 @@ défaut.</p>
 <p>Certains groupes représentent des programmes, d'autres des ressources (carte vidéo, la carte son,
 lecteur CD, ...).</p>
 <p>Chaque groupe est déclaré dans le fichier <em>/etc/group</em>. C'est un fichier au format texte dans lequel chaque ligne représente un groupe, les différentes valeurs étant séparées par <em>:</em>.</p>
-<div class="highlight"><pre><span></span><code>$ cat /etc/group
+<pre><code>$ cat /etc/group
 root:x:0:root
 bin:x:1:root,bin,daemon
 daemon:x:2:root,bin,daemon
@@ -195,8 +194,7 @@ fred:x:1000:
 hugo:x:1001:
 tom:x:1002:
 ...
-</code></pre></div>
-
+</code></pre>
 <p>Voici dans l'ordre la signification des 4 champs.</p>
 <ul>
 <li>La première colonne correspond au nom du groupe.</li>
@@ -211,15 +209,14 @@ tom:x:1002:
 groupe assigné au fichier (ou dossier) sera votre groupe par défaut, qui porte généralement le même
 nom que votre nom d'utilisateur.</p>
 <p>Voici un exemple de fichiers et dossiers :</p>
-<div class="highlight"><pre><span></span><code>$ ls -l
+<pre><code>$ ls -l
 ...      fred   fred   fichier1.txt
 ...      fred   fred   dossier1    
 ...      fred   user   fichier2.txt
 ...      fred   user   dossier2    
 ...      tom    tom    fichier3.txt
 ...      tom    users  dossier3
-</code></pre></div>
-
+</code></pre>
 <p>Si vous êtes le propriétaire d'un fichier (ou dossier), vous pouvez changer le groupe de ce fichier
 (ou dossier).</p>
 <p>Si vous êtes le super administrateur (root), vous pouvez changer le propriétaire et le groupe de ce
@@ -253,15 +250,14 @@ que vous voulez.</p>
 </li>
 </ul>
 <p>Voici un exemple de fichiers et dossiers :</p>
-<div class="highlight"><pre><span></span><code>$ ls -l
+<pre><code>$ ls -l
 rw- rw- r--   fred   fred   fichier1.txt
 rwx --- ---   fred   fred   dossier1    
 rw- --- r--   fred   user   fichier2.txt
 r-x r-x r-x   fred   user   dossier2    
 r-- r-- r--   tom    tom    fichier3.txt
 rwx --- r-x   tom    users  dossier3
-</code></pre></div>
-
+</code></pre>
 <p>Chaque fichier (ou dossier) possède des droits <em>rwx</em> pour <em>le propriétaire</em>, <em>rwx</em> pour <em>le groupe</em> attribué au fichier (ou dossier) et <em>rwx</em> pour <em>les autres</em> (ceux qui ne font pas partie du groupe du fichier). Les droits sont toujours donnés dans l'ordre <em>rwx</em>.</p>
 <p>Dans l'exemple ci avant, pour le fichier <em>le fichier1.txt</em> , le propriétaire peut lire et
 écrire , les utilisateurs du groupe peuvent également lire et écrire dans le fichier, les autres
@@ -321,32 +317,29 @@ utilisateurs du système ne peuvent que lire le fichier. Le - montre l'absence d
 </table>
 <h2 id="partager-un-dossier">Partager un dossier</h2>
 <p>Prenons comme exemple le dossier /home qui contient les dossiers des utilisateurs :</p>
-<div class="highlight"><pre><span></span><code>$ ls -l /home
+<pre><code>$ ls -l /home
 rwx --- ---  fred fred /home/fred
 rwx --- ---  tom  tom  /home/tom
-</code></pre></div>
-
+</code></pre>
 <p>Ici seul l'utilisateur fred peut accéder au dossier /home/fred, de même que tom ne peut accéder qu'à son dossier.</p>
 <p>Maintenant, nous allons chercher à partager un sous-dossier de fred avec tom.</p>
 <h3 id="1ier-methode">1ier méthode</h3>
 <p>Une première manière de procéder est de donner un droit de lecture et d'exécution au groupe fred et
 de mettre tom dans le groupe fred. Les droits deviennent ceci :</p>
-<div class="highlight"><pre><span></span><code>$ chmod <span class="m">750</span> /home/fred
+<pre><code>$ chmod 750 /home/fred
 $ ls -l /home
 rwx r-x ---  fred fred /home/fred
 rwx --- ---  tom  tom  /home/tom
-</code></pre></div>
-
+</code></pre>
 <p>Le problème est que l'administrateur n'ajoutera pas tom dans votre groupe ( il n'a pas que cela à
 faire ). De plus, si votre groupe contient 40 utilisateurs, Ces 40 utilisateurs peuvent accéder au dossier personnel de fred.</p>
 <h3 id="2ieme-methode">2ieme méthode</h3>
 <p>Une deuxième manière de faire est de changer le groupe du fichier en tom, les droits deviennent ceci :</p>
-<div class="highlight"><pre><span></span><code>$ chown fred:tom /home/fred
+<pre><code>$ chown fred:tom /home/fred
 $ ls -l /home
 rwx r-x ---  fred tom  /home/fred
 rwx --- ---  tom  tom  /home/tom
-</code></pre></div>
-
+</code></pre>
 <p>Cette méthode à pour inconvénient que tom et tous les membres du groupe tom peuvent accéder au 
 contenu du dossier personnel de fred.</p>
 <blockquote>
@@ -355,41 +348,37 @@ contenu du dossier personnel de fred.</p>
 <h3 id="3ieme-methode">3ieme méthode</h3>
 <p>L'astuce consiste à donner le droit <em>--x</em> à tout le monde sur le dossier /home/fred.</p>
 <p>De cette manière, tout le monde à le droit d'entrer dans le dossier (cd /home_fred), mais pas de lister le contenu du dossier (ls /home/fred).</p>
-<div class="highlight"><pre><span></span><code>$ chown fred:fred /home/fred
-$ chmod <span class="m">701</span> /home/fred
+<pre><code>$ chown fred:fred /home/fred
+$ chmod 701 /home/fred
 $ ls -l /home
 rwx --- --x  fred tom  /home/fred
 rwx --- ---  tom  tom  /home/tom
-</code></pre></div>
-
+</code></pre>
 <p>Attention, les <em>autres</em> ne savent pas lister le dossier, mais rien n'empêche d’essayer au hasard  d’entrer dans un sous-dossier.</p>
 <p>Regardons le contenu du dossier de fred (en tant que fred)</p>
-<div class="highlight"><pre><span></span><code>$ ls -l /home/fred
+<pre><code>$ ls -l /home/fred
 rwx rwx rwx fred fred   top_secret
 rwx rwx rwx fred fred   share_tom
 rw- rw- rw- fred fred   carte_visa.txt
-</code></pre></div>
-
+</code></pre>
 <p>Ici, tout est en accès libre. Les autres utilisateurs ne voient pas vos fichiers, mais s'ils
 tapent des noms de fichiers (ou de dossiers) au hasard, il est possible qu'ils ouvrent ce qu'ils ne
 doivent pas.</p>
 <p>On doit donc régler les droits dans /home/fred comme ceci:</p>
-<div class="highlight"><pre><span></span><code>$ chmod <span class="m">770</span> *
+<pre><code>$ chmod 770 *
 $ ls -l /home/fred
 rwx rwx --- fred fred   top_secret
 rwx rwx --- fred fred   share_tom
 rwx rwx --- fred fred   carte_visa.txt
-</code></pre></div>
-
+</code></pre>
 <p>Le but est que tom puisse aller lire dans le dossier share_tom, on doit donc adapter le groupe et les droits de ce dossier :</p>
-<div class="highlight"><pre><span></span><code>$ chmod <span class="m">750</span> share_tom
+<pre><code>$ chmod 750 share_tom
 $ chown fred:tom share_tom
 $ ls -l /home/fred
 rwx rwx --- fred fred   top_secret
 rwx r-x --- fred tom    share_tom
 rwx rwx --- fred fred   carte_visa.txt
-</code></pre></div>
-
+</code></pre>
 <p>Attention, tous les membres du groupe tom peuvent accéder au sous-dossier share_tom.
 Il est évident que tom doit connaître le nom du dossier que je lui destine.</p>
 <h2 id="droits-speciaux">Droits spéciaux</h2>
@@ -412,41 +401,39 @@ s'agit du user et du groupe avec lesquels s'exécute le processus. Un processus 
 <p>Le sticky bit d'un répertoire, définit que seul le propriétaire peut supprimer les fichiers de ce dossiers. Même si d'autres utilisateurs disposent d'un droit en écriture sur ce répertoire. Cela permet de transformer un dossier en une boite aux lettres.</p>
 <p>Lorsque l'on fait un ls -l, on aura par exemple : <code>rwx rwx rwt</code> <em>t</em> indique que le sticky bit est positionné.</p>
 <p>Pour illustrer setuid et setgid, j'ai écrit un petit programme qui crée un fichier hello.txt dans le dossier /root.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code>:::C
+#include &lt;stdio.h&gt;
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kt">FILE</span><span class="o">*</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;/root/hello.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;fopen&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+int main()
+{
+    FILE* fp = fopen("/root/hello.txt","w");
+    if (fp == NULL) {
+        perror("fopen");
+        return 1;
+    }
 
-<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span><span class="s">&quot;Hello world!!!&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
-
+    fprintf(fp,"Hello world!!!");
+    fclose(fp);
+    return 0;
+}
+</code></pre>
 <p>Compilons et exécutons une première fois ce programme.</p>
-<div class="highlight"><pre><span></span><code>$ gcc -o hello hello.c
+<pre><code>$ gcc -o hello hello.c
 $ ls -l hello
 rwx rwx r-x fred fred  hello
 $ ./hello 
 fopen: Permission denied
-</code></pre></div>
-
+</code></pre>
 <p>Positionnons le setuid.</p>
-<div class="highlight"><pre><span></span><code>$ sudo chown root:root hello
-$ sudo chmod <span class="m">4755</span> hello
+<pre><code>$ sudo chown root:root hello
+$ sudo chmod 4755 hello
 $ ls -l hello
 rws r-x r-x root:root  hello
 $ sudo ls /root
 $ ./hello
 $ sudo ls /root
 hello.txt
-</code></pre></div>
-
+</code></pre>
 <p>Tout utilisateur qui exécute le binaire les mêmes droits que le propriétaire du fichier (ici root).</p>
 <p>Si on positionne le setgid (chmod 2755), tout utilisateur exécute le binaire avec les mêmes droits que le goup du fichier (ici root). La commande ls -l hello donnera : <em>rwx r-s r-x root root. hello</em></p>
   </div>

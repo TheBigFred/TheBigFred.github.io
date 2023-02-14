@@ -159,65 +159,57 @@ Sous Archlinux
 -->
 
 <p>Sous Archlinux, je crée dans <em>/etc/X11/xorg.conf.d</em> un fichier nommé <em>10-keyboard-layout.conf</em>, avec le code suivant:</p>
-<div class="highlight"><pre><span></span><code>Section &quot;InputClass&quot;
-        Identifier      &quot;keyboard Layout&quot;
-        MatchIsKeyboard &quot;on&quot;
+<pre><code>Section "InputClass"
+        Identifier      "keyboard Layout"
+        MatchIsKeyboard "on"
 EndSection
-</code></pre></div>
-
+</code></pre>
 <p>Pour un clavier belge, j'ajoute après la ligne driver :</p>
-<div class="highlight"><pre><span></span><code>Option &quot;XkbLayout&quot; &quot;be&quot;
-</code></pre></div>
-
+<pre><code>Option "XkbLayout" "be"
+</code></pre>
 <p>Pour un clavier mac, j'ajoute :</p>
-<div class="highlight"><pre><span></span><code>Option &quot;XkbLayout&quot; &quot;fr&quot;
-Option &quot;XkbVariant&quot; &quot;mac&quot;
-</code></pre></div>
-
+<pre><code>Option "XkbLayout" "fr"
+Option "XkbVariant" "mac"
+</code></pre>
 <p>Sous Debian, il est conseillé de modifier le fichier <em>/etc/default/keyboard</em> et d'utiliser la commande <code>dpkg-reconfigure keyboard-configuration</code>, à exécuter en <em>sudo</em>. Celle-ci lance un utilitaire de configuration qui modifiera le fichier de configuration de xorg pour vous.</p>
 <h2 id="modifier-temporairement-le-clavier">Modifier temporairement le clavier</h2>
 <p>Il est également possible de modifier le clavier temporairement - jusqu'à la prochaine déconnexion de l'interface graphique - en utilisant la commande <code>setxkbmap</code> :</p>
-<div class="highlight"><pre><span></span><code><span class="n">setxkbmap</span><span class="w"> </span><span class="o">-</span><span class="n">layout</span><span class="w"> </span><span class="s2">&quot;fr&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">variant</span><span class="w"> </span><span class="s2">&quot;mac&quot;</span><span class="w"></span>
-</code></pre></div>
-
+<pre><code>setxkbmap -layout "fr" -variant "mac"
+</code></pre>
 <h2 id="corriger-les-touches-qui-deconnent">Corriger les touches qui déconnent</h2>
 <p>Si comme moi les touches @ et &lt; sont inversées sur votre clavier mac, il est possible de corriger le mapping clavier.</p>
 <p>La commande <code>xev</code> (à lancer dans un terminal) permet de connaître le keycode des touches. Elle affiche le contenu de chaque événement capté par l'interface graphique. Le moindre mouvement de souris, pression ou relâchement de touche génère un événement.</p>
-<div class="highlight"><pre><span></span><code><span class="n">xev</span><span class="w"></span>
-<span class="p">...</span><span class="w"></span>
-<span class="n">KeyPress</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">serial</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="n">synthetic</span><span class="w"> </span><span class="nb">NO</span><span class="p">,</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="mh">0x3200001</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">root</span><span class="w"> </span><span class="mh">0x165</span><span class="p">,</span><span class="w"> </span><span class="n">subw</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="mi">3927162</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">163</span><span class="p">,</span><span class="mi">-10</span><span class="p">),</span><span class="w"> </span><span class="n">root</span><span class="o">:</span><span class="p">(</span><span class="mi">474</span><span class="p">,</span><span class="mi">228</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="mh">0x10</span><span class="p">,</span><span class="w"> </span><span class="n">keycode</span><span class="w"> </span><span class="mi">94</span><span class="w"> </span><span class="p">(</span><span class="n">keysym</span><span class="w"> </span><span class="mh">0x3c</span><span class="p">,</span><span class="w"> </span><span class="n">less</span><span class="p">),</span><span class="w"> </span><span class="n">same_screen</span><span class="w"> </span><span class="nb">YES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">XLookupString</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bytes</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;&lt;&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">XmbLookupString</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bytes</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;&lt;&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">XFilterEvent</span><span class="w"> </span><span class="n">returns</span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"></span>
+<pre><code>xev
+...
+KeyPress event, serial 37, synthetic NO, window 0x3200001,
+    root 0x165, subw 0x0, time 3927162, (163,-10), root:(474,228),
+    state 0x10, keycode 94 (keysym 0x3c, less), same_screen YES,
+    XLookupString gives 1 bytes: (3c) "&lt;"
+    XmbLookupString gives 1 bytes: (3c) "&lt;"
+    XFilterEvent returns: False
 
-<span class="n">KeyPress</span><span class="w"> </span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">serial</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w"> </span><span class="n">synthetic</span><span class="w"> </span><span class="nb">NO</span><span class="p">,</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="mh">0x3200001</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">root</span><span class="w"> </span><span class="mh">0x165</span><span class="p">,</span><span class="w"> </span><span class="n">subw</span><span class="w"> </span><span class="mh">0x0</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="mi">3927914</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">163</span><span class="p">,</span><span class="mi">-10</span><span class="p">),</span><span class="w"> </span><span class="n">root</span><span class="o">:</span><span class="p">(</span><span class="mi">474</span><span class="p">,</span><span class="mi">228</span><span class="p">),</span><span class="w"></span>
-<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="mh">0x10</span><span class="p">,</span><span class="w"> </span><span class="n">keycode</span><span class="w"> </span><span class="mi">49</span><span class="w"> </span><span class="p">(</span><span class="n">keysym</span><span class="w"> </span><span class="mh">0x40</span><span class="p">,</span><span class="w"> </span><span class="n">at</span><span class="p">),</span><span class="w"> </span><span class="n">same_screen</span><span class="w"> </span><span class="nb">YES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">XLookupString</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bytes</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="mi">40</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">XmbLookupString</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bytes</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="mi">40</span><span class="p">)</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="n">XFilterEvent</span><span class="w"> </span><span class="n">returns</span><span class="o">:</span><span class="w"> </span><span class="n">False</span><span class="w"></span>
-</code></pre></div>
-
+KeyPress event, serial 37, synthetic NO, window 0x3200001,
+    root 0x165, subw 0x0, time 3927914, (163,-10), root:(474,228),
+    state 0x10, keycode 49 (keysym 0x40, at), same_screen YES,
+    XLookupString gives 1 bytes: (40) "@"
+    XmbLookupString gives 1 bytes: (40) "@"
+    XFilterEvent returns: False
+</code></pre>
 <p>La touche @ correspond au keycode 94 et la touche &lt; correspond au keycode 49.
 L'inverse de ce que le message précédent nous indique.</p>
 <p>La commande <code>xmodmap -pke</code> affiche le mapping du clavier. Les commandes suivantes permettent d'extraire uniquement les lignes qui nous intéressent et de les placer directement dans le fichier <em>.Xmodmap</em>  (situé à la racine de votre dossier personnel).</p>
 <p>Noter qu'il y a deux espaces entre keycode et le nombre.</p>
-<div class="highlight"><pre><span></span><code> xmodmap -pke | grep &#39;keycode  49 =&#39; &gt;&gt; ~/.Xmodmap
- xmodmap -pke | grep &#39;keycode  94 =&#39; &gt;&gt; ~/.Xmodmap
-</code></pre></div>
-
+<pre><code> xmodmap -pke | grep 'keycode  49 =' &gt;&gt; ~/.Xmodmap
+ xmodmap -pke | grep 'keycode  94 =' &gt;&gt; ~/.Xmodmap
+</code></pre>
 <p>Éditer le fichier <em>~/.Xmodmap</em>, vous devriez avoir ceci à la fin du fichier :</p>
-<div class="highlight"><pre><span></span><code>keycode 49 = at numbersign at numbersign periodcentered ...
+<pre><code>keycode 49 = at numbersign at numbersign periodcentered ...
 keycode 94 = less greater less greater VoidSymbol ...
-</code></pre></div>
-
+</code></pre>
 <p>Il reste à intervertir le 49 et le 94 comme suit :</p>
-<div class="highlight"><pre><span></span><code>keycode 94 = at numbersign at numbersign periodcentered ...
+<pre><code>keycode 94 = at numbersign at numbersign periodcentered ...
 keycode 49 = less greater less greater VoidSymbol ...
-</code></pre></div>
-
+</code></pre>
 <p>Pour prendre en compte cette modification, il faut quitter sa session graphique.</p>
 <p>Chaque utilisateur devra copier ce fichier dans son dossier personnel. L'idéal est d'en placer une copie dans le dossier <em>/etc/skel</em>, de cette manière, à chaque création d'un nouvel utilisateur, ce fichier sera copié.</p>
   </div>

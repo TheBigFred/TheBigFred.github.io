@@ -230,20 +230,21 @@ compilateur que gcc, n'utilisez pas ces extensions.</p>
 </ul>
 <h2 id="exemple">Exemple</h2>
 <p>Voici un petit code C qui utilise la libm.so ainsi qu'un ensemble de fichiers .h que nous aurions placé dans un dossier MyInclude à la racine du dossier utilisateur.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"myinclude1.h"</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">"myinclude2.h"</span><span class="cp"></span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="s">"sin(%g) = %g</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">sin</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">));</span><span class="w"></span>
-<span class="cp">#ifdef MAXVAL</span>
-<span class="w">  </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="s">"code optionnel, MAX = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">MAX</span><span class="p">);</span><span class="w"></span>
-<span class="cp">#endif</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+<pre><code>:::C
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+#include "myinclude1.h"
+#include "myinclude2.h"
+int main ()
+{
+  double a = 5.0;
+  printf ("sin(%g) = %g\n",a,sin (a));
+#ifdef MAXVAL
+  printf ("code optionnel, MAX = %d\n",MAX);
+#endif
+  return 0;
+}
+</code></pre>
 <p>Pour compiler ce fichier en mode debug : <code>gcc -g -o myApp main.c -lm -I$HOME/MyInclude</code></p>
 <p>Pour compiler ce fichier en mode release : <code>gcc -O2 -o myApp main.c -lm -I$HOME/MyInclude</code></p>
 <p>Pour activer le code optionnel, il faut juste ajouter <code>-DMAXVAL</code> aux commandes précédentes.</p>
@@ -261,63 +262,67 @@ compilateur que gcc, n'utilisez pas ces extensions.</p>
 </ul>
 <p>En utilisant des directives de précompilation, il est donc possible de vérifier la version de la norme utilisée pour compiler un code.</p>
 <p>Voici un premier exemple qui nécessite d'utiliser l'option <code>-std=c99</code> :</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code>:::C
+#include &lt;stdio.h&gt;
 
-<span class="cp">#if (__STDC_VERSION__ != 199901L)</span>
-<span class="cp">#error "Ce code est compatible uniquement avec C99 !!!"</span>
-<span class="cp">#endif</span>
+#if (__STDC_VERSION__ != 199901L)
+#error "Ce code est compatible uniquement avec C99 !!!"
+#endif
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"%ld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">__STDC_VERSION__</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main()
+{
+        printf("%ld\n",__STDC_VERSION__);
+        return 0;
+}
+</code></pre>
 <p> </p>
-<div class="highlight"><pre><span></span><code>$ gcc std.c
-error: <span class="s2">"Ce code est compatible uniquement avec C99 !!!"</span>
-<span class="c1">#error "Ce code est compatible uniquement avec C99 !!!"</span>
+<pre><code>:::shell
+$ gcc std.c
+error: "Ce code est compatible uniquement avec C99 !!!"
+#error "Ce code est compatible uniquement avec C99 !!!"
  ^
-<span class="m">1</span> error generated.
+1 error generated.
 $
-$ gcc std.c -std<span class="o">=</span>c99
+$ gcc std.c -std=c99
 $ ./a.out 
-<span class="m">199901</span>
+199901
 $
-</code></pre></div>
+</code></pre>
 <p>Dans ce second exemple, le standard C doit être au minimum c11 :</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<pre><code>:::C
+#include &lt;stdio.h&gt;
 
-<span class="cp">#if (__STDC_VERSION__ &lt; 201112L)</span>
-<span class="cp">#error "Ce code nécessite C11 !!!"</span>
-<span class="cp">#endif</span>
+#if (__STDC_VERSION__ &lt; 201112L)
+#error "Ce code nécessite C11 !!!"
+#endif
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">"%ld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">__STDC_VERSION__</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main()
+{
+  printf("%ld\n",__STDC_VERSION__);
+  return 0;
+}
+</code></pre>
 <p> </p>
-<div class="highlight"><pre><span></span><code>$ gcc std.c -std<span class="o">=</span>c99
-error: <span class="s2">"Ce code nécessite C11 !!!"</span>
-<span class="c1">#error "Ce code nécessite C11 !!!"</span>
+<pre><code>:::shell
+$ gcc std.c -std=c99
+error: "Ce code nécessite C11 !!!"
+#error "Ce code nécessite C11 !!!"
  ^
-<span class="m">1</span> error generated.
+1 error generated.
 $
 $ gcc std.c
 $ ./a.out 
-<span class="m">201112</span>
+201112
 $
-$ gcc std.c -std<span class="o">=</span>c11
+$ gcc std.c -std=c11
 $ ./a.out 
-<span class="m">201112</span>
+201112
 $
-$ gcc std.c -std<span class="o">=</span>c17
+$ gcc std.c -std=c17
 $ ./a.out 
-<span class="m">201710</span>
+201710
 $
-</code></pre></div>
+</code></pre>
 <p>Ici, on peut constater que sans option, c'est la norme c11 qui est appliquée.</p>
 <h2 id="compilation-c">Compilation C++</h2>
 <p>Pour compiler du code C++, on utilise <em>g++</em> au lieu de <em>gcc</em> et le tour est joué.</p>
@@ -330,24 +335,26 @@ contient la valeur du standard.</p>
 <li>C++17 : pour l'ISO C++ 2017, __cplusplus est définit à 201703L.</li>
 </ul>
 <p>Il existe également les extensions gnu : gnu++98, gnu++11, gnu++14 et gnu++17.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<pre><code>:::C
+#include &lt;iostream&gt;
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">__cplusplus</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</code></pre></div>
+int main()
+{
+        std::cout &lt;&lt; __cplusplus &lt;&lt; std::endl;
+}
+</code></pre>
 <p> </p>
-<div class="highlight"><pre><span></span><code>$ g++ std.cpp <span class="p">;</span> ./a.out 
-<span class="m">199711</span>
-$ g++ std.cpp -std<span class="o">=</span>c++11 <span class="p">;</span> ./a.out 
-<span class="m">201103</span>
-$ g++ std.cpp -std<span class="o">=</span>c++14 <span class="p">;</span> ./a.out 
-<span class="m">201402</span>
-$ g++ std.cpp -std<span class="o">=</span>c++17 <span class="p">;</span> ./a.out 
-<span class="m">201703</span>
+<pre><code>:::shell
+$ g++ std.cpp ; ./a.out 
+199711
+$ g++ std.cpp -std=c++11 ; ./a.out 
+201103
+$ g++ std.cpp -std=c++14 ; ./a.out 
+201402
+$ g++ std.cpp -std=c++17 ; ./a.out 
+201703
 $
-</code></pre></div>
+</code></pre>
 <p>Il n'y a pas de <em>return 0</em> à la fin de mon fichier <em>.cpp</em>. Ceci n'est pas une faute, la norme c++ définit un <em>return 0</em>
 implicite à la fin de la fonction main.</p>
 <h2 id="compilation-de-plusieurs-fichiers">Compilation de plusieurs fichiers</h2>

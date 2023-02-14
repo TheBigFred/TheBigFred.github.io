@@ -160,27 +160,30 @@
 <p>Lorsque l'on exécute la commande <code>make</code>, GNU make cherche dans le dossier courant après un fichier nommé GNUmakefile, makefile, Makefile (dans cet ordre).</p>
 <p>Il est recommandé d'utiliser le nom Makefile, car le <em>M</em> est plus visible. Le nom GNUmakefile n'est à utiliser que si vous utilisez des spécificités de GNU make.</p>
 <p>Une règle de makefile ressemble à ceci :</p>
-<div class="highlight"><pre><span></span><code><span class="nf">cible </span><span class="o">:</span> <span class="n">d</span>é<span class="n">pendances</span>
+<pre><code>:::basemake
+cible : dépendances
     recette
     …
     …
-</code></pre></div>
+</code></pre>
 <p>Avec le vocable anglais :</p>
-<div class="highlight"><pre><span></span><code><span class="nf">target </span><span class="o">:</span> <span class="n">prerequisites</span>
+<pre><code>:::basemake
+target : prerequisites
     recipe
     …
     …
-</code></pre></div>
+</code></pre>
 <blockquote>
 <p>Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabulation.</p>
 </blockquote>
 <h3 id="premier-exemple">Premier exemple</h3>
-<div class="highlight"><pre><span></span><code><span class="nf">hello</span><span class="o">:</span>
+<pre><code>:::basemake
+hello:
     gcc -o hello.bin hello.c
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
     rm hello.bin
-</code></pre></div>
+</code></pre>
 <p>Ce <em>makefile</em> est constitué de deux cibles :</p>
 <ul>
 <li>La cible hello : permet de créer l'application nommée hello.bin</li>
@@ -188,22 +191,24 @@
 </ul>
 <p>La commande <code>make hello</code> crée l'exécutable, la commande <code>make clean</code> le supprime. La commande <code>make</code>, sans target, exécutera uniquement la première target trouvée dans le makefile.</p>
 <p>Voici le résultat de l'exécution :</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
-<span class="go">gcc -o hello.bin hello.c</span>
-<span class="gp">$ </span>make clean
-<span class="go">rm hello.bin</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ make
+gcc -o hello.bin hello.c
+$ make clean
+rm hello.bin
+$
+</code></pre>
 <h3 id="second-exemple">Second exemple</h3>
-<div class="highlight"><pre><span></span><code><span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
+<pre><code>:::basemake
+hello: hello.c mesfonctions.o
     gcc -o hello.bin hello.c mesfonctions.o
 
-<span class="nf">mesfonctions.o</span><span class="o">:</span> <span class="n">mesfonctions</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">h</span>
+mesfonctions.o: mesfonctions.c mesfonctions.h
     gcc -c mesfonctions.c
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
     rm hello.bin mesfonctions.o
-</code></pre></div>
+</code></pre>
 <p>Nous avons ajouté une target <em>mesfonctions.o</em> qui compile le fichier <em>mesfonctions.c</em>.</p>
 <p>Nous avons également ajouté des dépendances, il s'agit de la liste de fichiers qui suit la définition de la <em>target</em>.</p>
 <p>La <em>target hello</em> dépend des fichiers <em>hello.c</em> et <em>mesfonctions.o</em>.
@@ -212,53 +217,59 @@ La <em>target mesfonctions.o</em> dépend des fichiers <em>mesfonctions.c</em> e
 <p>La vérification de la target <em>mesfonctions.o</em> consiste à vérifier que la date et l'heure du fichier <em>mesfonctions.o</em> est plus récente que celles de ses dépendances.  Si c'est la cas, make continue sans exécuter la recette de la cible <em>mesfonctions.o</em>, sinon il l'exécute.</p>
 <p>Ce mécanisme permet de recompiler uniquement les fichiers qui ont été modifié depuis la dernière compilation.</p>
 <p>Voici le résultat de l'exécution :</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
-<span class="go">gcc -c mesfonctions.c</span>
-<span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ make
+gcc -c mesfonctions.c
+gcc -o hello.bin hello.c mesfonctions.o
+$
+</code></pre>
 <p>Une modification du fichier <em>mesfonctions.c</em> recompile le tout :</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">" "</span> &gt;&gt; mesfonctions.c 
-<span class="gp">$ </span>make
-<span class="go">gcc -c mesfonctions.c</span>
-<span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ echo " " &gt;&gt; mesfonctions.c 
+$ make
+gcc -c mesfonctions.c
+gcc -o hello.bin hello.c mesfonctions.o
+$
+</code></pre>
 <p>Une modification du fichier <em>hello.c</em> ne recompile pas le fichier <em>mesfonctions.c</em> :</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">" "</span> &gt;&gt; hello.c 
-<span class="gp">$ </span>make
-<span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ echo " " &gt;&gt; hello.c 
+$ make
+gcc -o hello.bin hello.c mesfonctions.o
+$
+</code></pre>
 <blockquote>
 <p>Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.</p>
 </blockquote>
 <p>Si nous exécutons plusieurs fois <code>make</code>, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
-<span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
-<span class="gp">$ </span>make
-<span class="go">gcc -o hello.bin hello.c mesfonctions.o</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ make
+gcc -o hello.bin hello.c mesfonctions.o
+$ make
+gcc -o hello.bin hello.c mesfonctions.o
+$
+</code></pre>
 <p>Ceci est dû au fait que nous générons un fichier <em>hello.bin</em> non pas <em>hello</em>.
 Lorsque make 'vérifie' une target, il cherche un fichier qui porte le même nom que la target.
 Il faut donc veiller à ce que les noms des targets et des fichiers générés coïncident.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
+<pre><code>:::basemake
+hello: hello.c mesfonctions.o
     gcc -o hello hello.c mesfonctions.o
 
-<span class="nf">mesfonctions.o</span><span class="o">:</span> <span class="n">mesfonctions</span>.<span class="n">c</span> <span class="n">mesfonctions</span>.<span class="n">h</span>
+mesfonctions.o: mesfonctions.c mesfonctions.h
     gcc -c mesfonctions.c
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
     rm hello mesfonctions.o
-</code></pre></div>
+</code></pre>
 <p>Maintenant deux appels consécutifs à make ne recompilent plus inutilement <em>hello</em>.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
-<span class="go">gcc -o hello hello.c mesfonctions.o</span>
-<span class="gp">$ </span>make
-<span class="go">make: 'hello' is up to date.</span>
-<span class="gp">$</span>
-</code></pre></div>
+<pre><code>:::console
+$ make
+gcc -o hello hello.c mesfonctions.o
+$ make
+make: 'hello' is up to date.
+$
+</code></pre>
 <h2 id="les-variables">Les variables</h2>
 <p>Les variables, parfois appelées MACRO, permettent de substituer du texte. Le nom d'une variable ne peut contenir les symboles ':', '#', '=' et l'espace.</p>
 <p>Il est généralement conseillé de n'utiliser que des lettres, des nombres et le symbole underscore. Le nom d'une variable est <em>case-sensitive</em>.</p>
@@ -273,14 +284,16 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 </ul>
 <h3 id="definir-une-variable">Définir une variable</h3>
 <p>Pour définir une variable, on débute une nouvelle ligne  qui commence par le nom de la variable, suivi par '=', ':=' ou '::='. Tout ce qui se trouve à droite du signe d'affectation est le contenu de la variable.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
-</code></pre></div>
+<pre><code>:::basemake
+objects = hello.o mesfonctions.o
+</code></pre>
 <p>Ceci définit une variable nommée <em>objects</em> dont le contenu est : <em>hello.o mesfonctions.o</em>. Les espaces entourant le signe d'affectation sont ignorés.</p>
 <p>Pour utiliser une variable, on utilise la notation <code>$(nom_variable)</code>ou <code>${nom_variable}</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">objects</span> <span class="o">=</span> hello.o mesfonctions.o
-<span class="nf">hello </span><span class="o">:</span> <span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
-        gcc -o hello.bin <span class="k">$(</span>objects<span class="k">)</span>
-</code></pre></div>
+<pre><code>:::basemake
+objects = hello.o mesfonctions.o
+hello : $(objects)
+        gcc -o hello.bin $(objects)
+</code></pre>
 <p>Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utiliser une variable <em>x</em> et y faire référence pas <em>$x</em>. Cette pratique est fortement découragée.</p>
 <p>Il n'y a pas de limite sur la longueur du contenu d'une variable (à l'exception de la taille de la mémoire disponible).</p>
 <h4 id="type-de-variable">Type de variable</h4>
@@ -288,42 +301,48 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 <h5 id="variables-expansees-recursivement">Variables expansées récursivement</h5>
 <p>Elles se définissent en utilisant le signe '=' ou la directive <em>define</em>.</p>
 <p>Si une variable de ce type fait référence à une seconde variable, la seconde variable sera évaluée et son contenu la remplacera et ceci de manière récursive.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">foo</span> <span class="o">=</span> <span class="k">$(</span>bar<span class="k">)</span>
-<span class="nv">bar</span> <span class="o">=</span> Hello <span class="k">$(</span>who<span class="k">)</span>
-<span class="nv">who</span> <span class="o">=</span> world !!!
+<pre><code>:::basemake
+foo = $(bar)
+bar = Hello $(who)
+who = world !!!
 
-<span class="nf">all</span><span class="o">:</span>
-    <span class="nb">echo</span> <span class="k">$(</span>foo<span class="k">)</span>
-</code></pre></div>
+all:
+    echo $(foo)
+</code></pre>
 <p>Ce makefile affichera <em>Hello world !!!</em>, comme on s'y attend.</p>
 <blockquote>
 <p>Ce type de variable a plusieurs inconvénients, dont un majeur, il n'est pas possible d'affecter une variable à elle-même.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><span class="nv">CFLAGS</span> <span class="o">=</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> -O
-</code></pre></div>
+<pre><code>:::basemake
+CFLAGS = $(CFLAGS) -O
+</code></pre>
 <p>Ceci crée une boucle infinie !</p>
 <h5 id="variables-simplement-expansees">Variables simplement expansées</h5>
 <p>Elles permettent de contourner les problèmes des variables expansées récursivement.</p>
 <p>Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.</p>
 <p>Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut-être pas supporté par une ancienne version de make.</p>
 <p>La valeur d'une variable simplement expansée est calculée une seule fois lors de sa définition.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">x</span> <span class="o">:=</span> Hello
-<span class="nv">y</span> <span class="o">:=</span> <span class="k">$(</span>x<span class="k">)</span> world
-<span class="nv">x</span> <span class="o">:=</span> !!!
-</code></pre></div>
+<pre><code>:::basemake
+x := Hello
+y := $(x) world
+x := !!!
+</code></pre>
 <p>est équivalent à </p>
-<div class="highlight"><pre><span></span><code><span class="nv">y</span> <span class="o">:=</span> Hello world
-<span class="nv">x</span> <span class="o">:=</span> !!!
-</code></pre></div>
+<pre><code>:::basemake
+y := Hello world
+x := !!!
+</code></pre>
 <h3 id="ajouter-du-contenu-a-une-variable">Ajouter du contenu à une variable</h3>
 <p>Pour concaténer du contenu à une variable, quel que soit son type, on utilise le signe '+='.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">objects</span> <span class="o">=</span> main.o foo.o bar.o utils.o
-<span class="nv">objects</span> <span class="o">+=</span> another.o
-</code></pre></div>
+<pre><code>:::basemake
+objects = main.o foo.o bar.o utils.o
+objects += another.o
+</code></pre>
 <p>Ce qui est l'équivalent de </p>
-<div class="highlight"><pre><span></span><code><span class="nv">objects</span> <span class="o">=</span> main.o foo.o bar.o utils.o
-<span class="nv">objects</span> <span class="o">:=</span> <span class="k">$(</span>objects<span class="k">)</span> another.o
-</code></pre></div>
+<pre><code>:::basemake
+objects = main.o foo.o bar.o utils.o
+objects := $(objects) another.o
+</code></pre>
 <p>Si la variable n'est pas définie, avec l'utilisation du signe '+=', celui-ci agira comme '=' et définira donc une variable expansée récursivement.</p>
 <h3 id="supprimer-une-variable">Supprimer une variable</h3>
 <p>Pour supprimer le contenu d'une variable, il suffit de lui affecter un contenu vide.</p>
@@ -338,56 +357,59 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 <p>Lors de l'appel de la commande <code>make clean</code>, <em>make</em> va détecter le fichier <em>clean</em> et considérer qu'il est à jour ! La recette ne sera jamais exécutée.</p>
 <p>Pour résoudre ce problème, on déclare simplement clean comme dépendance à la cible spécial <em>.PHONY</em>.</p>
 <p>Les dépendances de la cible <em>.PHONY</em> sont exécutées inconditionnellement.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+<pre><code>:::basemake
+.PHONY: clean
 
-<span class="nf">clean</span><span class="o">:</span>
+clean:
     rm -f *.o
-</code></pre></div>
+</code></pre>
 <h2 id="exemple">Exemple</h2>
 <p>Dans l'exemple suivant, les variables <em>CPPFLAGS</em>,<em>CFLAGS</em>,<em>LDFLAGS</em>,<em>LDLIBS</em> sont vides. Ce qui suit le caractère <em>#</em> est en commentaire pour donner un exemple d'utilisation de ces variables.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CC</span> <span class="o">=</span> gcc
-<span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
-<span class="nv">CFLAGS</span>   <span class="o">+=</span>                     <span class="c1"># -O2 -std=c11</span>
-<span class="nv">LDFLAGS</span>  <span class="o">+=</span>                     <span class="c1"># -L/opt/XXXX/lib</span>
-<span class="nv">LDLIBS</span>   <span class="o">+=</span>                     <span class="c1"># -lpthread -lrt -lm -lXYZ</span>
+<pre><code>:::basemake
+CC = gcc
+CPPFLAGS +=                     # -I/opt/XXXX/include
+CFLAGS   +=                     # -O2 -std=c11
+LDFLAGS  +=                     # -L/opt/XXXX/lib
+LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
 
-<span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">o</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
-    <span class="k">$(</span>CC<span class="k">)</span> -o hello hello.o mesfonctions.o <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="k">$(</span>LDLIBS<span class="k">)</span>
+hello: hello.o mesfonctions.o
+    $(CC) -o hello hello.o mesfonctions.o $(LDFLAGS) $(LDLIBS)
 
-<span class="nf">hello.o</span><span class="o">:</span> 
-    <span class="k">$(</span>CC<span class="k">)</span> -c hello.c <span class="k">$(</span>CPPFLAGS<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span>
+hello.o: 
+    $(CC) -c hello.c $(CPPFLAGS) $(CFLAGS)
 
-<span class="nf">mesfonctions.o</span><span class="o">:</span> <span class="n">mesfonctions</span>.<span class="n">c</span>
-    <span class="k">$(</span>CC<span class="k">)</span> -c mesfonctions.c <span class="k">$(</span>CPPFLAGS<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span>
+mesfonctions.o: mesfonctions.c
+    $(CC) -c mesfonctions.c $(CPPFLAGS) $(CFLAGS)
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">mrproper</span>
-<span class="nf">clean</span><span class="o">:</span>
+.PHONY: clean mrproper
+clean:
     rm -f *.o
 
-<span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
+mrproper: clean
     rm -f hello
-</code></pre></div>
+</code></pre>
 <h2 id="static-pattern">STATIC PATTERN</h2>
 <p>Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser une règle <em>générique</em>.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CC</span> <span class="o">=</span> gcc
-<span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
-<span class="nv">CFLAGS</span>   <span class="o">+=</span>                     <span class="c1"># -O2 -std=c11</span>
-<span class="nv">LDFLAGS</span>  <span class="o">+=</span>                     <span class="c1"># -L/opt/XXXX/lib</span>
-<span class="nv">LDLIBS</span>   <span class="o">+=</span>                     <span class="c1"># -lpthread -lrt -lm -lXYZ</span>
+<pre><code>:::basemake
+CC = gcc
+CPPFLAGS +=                     # -I/opt/XXXX/include
+CFLAGS   +=                     # -O2 -std=c11
+LDFLAGS  +=                     # -L/opt/XXXX/lib
+LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
 
-<span class="nf">hello</span><span class="o">:</span> <span class="n">hello</span>.<span class="n">o</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
-    <span class="k">$(</span>CC<span class="k">)</span> -o <span class="nv">$@</span> $^ <span class="k">$(</span>LDFLAGS<span class="k">)</span> <span class="k">$(</span>LDLIBS<span class="k">)</span>
+hello: hello.o mesfonctions.o
+    $(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
-<span class="nf">%.o </span><span class="o">:</span> %.<span class="n">c</span>
-    <span class="k">$(</span>CC<span class="k">)</span> -c $&lt; <span class="k">$(</span>CPPFLAGS<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span>
+%.o : %.c
+    $(CC) -c $&lt; $(CPPFLAGS) $(CFLAGS)
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">mrproper</span>
-<span class="nf">clean</span><span class="o">:</span>
+.PHONY: clean mrproper
+clean:
     rm -f *.o
 
-<span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
+mrproper: clean
     rm -f hello
-</code></pre></div>
+</code></pre>
 <p>Voici la signification des variables spéciales utilisée ci-dessus :</p>
 <ul>
 <li>$@ : le nom de la cible </li>
@@ -504,21 +526,22 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 </tbody>
 </table>
 <p>On peut maintenant réécrire l’exemple précédent :</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CC</span> <span class="o">=</span> gcc
-<span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
-<span class="nv">CFLAGS</span>   <span class="o">+=</span>                     <span class="c1"># -O2 -std=c11</span>
-<span class="nv">LDFLAGS</span>  <span class="o">+=</span>                     <span class="c1"># -L/opt/XXXX/lib</span>
-<span class="nv">LDLIBS</span>   <span class="o">+=</span>                     <span class="c1"># -lpthread -lrt -lm -lXYZ</span>
+<pre><code>:::basemake
+CC = gcc
+CPPFLAGS +=                     # -I/opt/XXXX/include
+CFLAGS   +=                     # -O2 -std=c11
+LDFLAGS  +=                     # -L/opt/XXXX/lib
+LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
 
-<span class="nf">hello</span><span class="o">:</span> <span class="n">mesfonctions</span>.<span class="n">o</span>
+hello: mesfonctions.o
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">mrproper</span>
-<span class="nf">clean</span><span class="o">:</span>
+.PHONY: clean mrproper
+clean:
     rm -f *.o
 
-<span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
+mrproper: clean
     rm -f hello
-</code></pre></div>
+</code></pre>
 <h2 id="wildcard">Wildcard</h2>
 <p>Si votre projet comporte beaucoup de fichiers, cela devient problématique de maintenir la liste des dépendances du binaire.</p>
 <p>On peut alors être tenté de créer une variable <code>objects = *.o</code> qui désignerait tous les fichiers .o.</p>
@@ -535,22 +558,23 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 <li>le troisième la liste des fichiers à traiter.</li>
 </ul>
 <p>Votre makefile devient ceci :</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CC</span> <span class="o">=</span> gcc
-<span class="nv">CPPFLAGS</span> <span class="o">+=</span>                     <span class="c1"># -I/opt/XXXX/include</span>
-<span class="nv">CFLAGS</span>   <span class="o">+=</span>                     <span class="c1"># -O2 -std=c11</span>
-<span class="nv">LDFLAGS</span>  <span class="o">+=</span>                     <span class="c1"># -L/opt/XXXX/lib</span>
-<span class="nv">LDLIBS</span>   <span class="o">+=</span>                     <span class="c1"># -lpthread -lrt -lm -lXYZ</span>
+<pre><code>:::basemake
+CC = gcc
+CPPFLAGS +=                     # -I/opt/XXXX/include
+CFLAGS   +=                     # -O2 -std=c11
+LDFLAGS  +=                     # -L/opt/XXXX/lib
+LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
 
-<span class="nv">objects</span> <span class="o">:=</span> <span class="k">$(</span>patsubst %.c,%.o,<span class="k">$(</span>wildcard *.c<span class="k">))</span>
-<span class="nf">hello </span><span class="o">:</span> <span class="k">$(</span><span class="nv">objects</span><span class="k">)</span>
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+hello : $(objects)
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span> <span class="n">mrproper</span>
-<span class="nf">clean</span><span class="o">:</span>
+.PHONY: clean mrproper
+clean:
     rm -f *.o
 
-<span class="nf">mrproper</span><span class="o">:</span> <span class="n">clean</span>
+mrproper: clean
     rm -f hello
-</code></pre></div>
+</code></pre>
 <h2 id="dossier-de-rechercher-des-dependances">Dossier de rechercher des dépendances</h2>
 <p>Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous-dossiers.</p>
 <p>Le plus simple est alors d'utiliser la variable <code>VPATH</code>. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.</p>
@@ -578,78 +602,83 @@ Il faut donc veiller à ce que les noms des targets et des fichiers générés c
 <p>La variable <code>OBJS</code> contient donc la liste de tous les fichiers sources mais avec l’extension .o.</p>
 <p>La recette de <em>%.o: %.c</em> écrit bien les .o dans le sous-dossier objs.
 La recette <em>$(APP)</em> utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous-dossier objs.</p>
-<div class="highlight"><pre><span></span><code><span class="n">APP</span><span class="p">=</span><span class="w"> </span><span class="n">MyApp</span><span class="w"></span>
-<span class="n">SRCDIR</span><span class="p">=</span><span class="w"> </span><span class="n">src</span><span class="w"></span>
-<span class="n">OBJDIR</span><span class="p">=</span><span class="w"> </span><span class="n">objs</span><span class="w"></span>
-<span class="n">DISTDIR</span><span class="p">=</span><span class="w"> </span><span class="n">dist</span><span class="w"></span>
-<span class="n">VPATH</span><span class="p">=</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJDIR</span><span class="p">):</span>$<span class="p">(</span><span class="n">SRCDIR</span><span class="p">)</span><span class="w"></span>
-<span class="n">OBJS</span><span class="p">=</span><span class="w"> </span>$<span class="p">(</span><span class="n">patsubst</span><span class="w"> </span>$<span class="p">(</span><span class="n">SRCDIR</span><span class="p">)</span><span class="o">/</span><span class="c">%.c,%.o,$(wildcard $(SRCDIR)/*.c))</span><span class="w"></span>
+<pre><code>:::basmake
+APP= MyApp
+SRCDIR= src
+OBJDIR= objs
+DISTDIR= dist
+VPATH= $(OBJDIR):$(SRCDIR)
+OBJS= $(patsubst $(SRCDIR)/%.c,%.o,$(wildcard $(SRCDIR)/*.c))
 
-<span class="nb">all</span><span class="p">:</span><span class="w"> </span><span class="n">ressource</span><span class="w"> </span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"></span>
+all: ressource $(APP)
 
-$<span class="p">(</span><span class="n">APP</span><span class="p">):</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJS</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="o">/</span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"> </span>$<span class="p">(</span><span class="n">patsubst</span><span class="w"> </span><span class="c">%.o,$(OBJDIR)/%.o,$(OBJS))</span><span class="w"></span>
+$(APP): $(OBJS)
+    gcc -o $(DISTDIR)/$(APP) $(patsubst %.o,$(OBJDIR)/%.o,$(OBJS))
 
-<span class="c">%.o: %.c</span><span class="w"></span>
-<span class="w">    </span><span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span>$<span class="o">&lt;</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJDIR</span><span class="p">)</span><span class="o">/</span>$<span class="p">@</span><span class="w"></span>
+%.o: %.c
+    gcc -c $&lt; -o $(OBJDIR)/$@
 
-<span class="p">.</span><span class="n">PHONY</span><span class="p">:</span><span class="w"> </span><span class="n">clean</span><span class="w"> </span><span class="n">ressource</span><span class="w"></span>
-<span class="n">clean</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">@</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJDIR</span><span class="p">)</span><span class="w"></span>
+.PHONY: clean ressource
+clean:
+    @rm -rf $(DISTDIR) $(OBJDIR)
 
-<span class="n">ressource</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nb">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJDIR</span><span class="p">)</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
+ressource:
+    mkdir -p $(OBJDIR) $(DISTDIR)
+</code></pre>
 <p> </p>
-<div class="highlight"><pre><span></span><code><span class="gp">$ </span>make
-<span class="go">mkdir -p objs dist</span>
-<span class="go">gcc -c src/hello.c -o objs/hello.o</span>
-<span class="go">gcc -c src/myfunction.c -o objs/myfunction.o</span>
-<span class="go">gcc -o dist/MyApp objs/hello.o objs/myfunction.o </span>
-<span class="gp">$ </span>make
-<span class="go">mkdir -p objs dist</span>
-<span class="go">gcc -o dist/MyApp objs/hello.o objs/myfunction.o</span>
-</code></pre></div>
+<pre><code>:::console
+$ make
+mkdir -p objs dist
+gcc -c src/hello.c -o objs/hello.o
+gcc -c src/myfunction.c -o objs/myfunction.o
+gcc -o dist/MyApp objs/hello.o objs/myfunction.o 
+$ make
+mkdir -p objs dist
+gcc -o dist/MyApp objs/hello.o objs/myfunction.o
+</code></pre>
 <p>On peut constater que le fait de déplacer l'application dans le sous-dossier <em>dist</em> relance la phase de link. Il serait préférable de copier l'application dans le dossier <em>dist</em>.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">$(APP)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">OBJS</span><span class="k">)</span>
-    gcc -o <span class="k">$(</span>APP<span class="k">)</span> <span class="k">$(</span>patsubst %.o,<span class="k">$(</span>OBJDIR<span class="k">)</span>/%.o,<span class="k">$(</span>OBJS<span class="k">))</span>
-    cp <span class="k">$(</span>APP<span class="k">)</span> <span class="k">$(</span>DISTDIR<span class="k">)</span>
-</code></pre></div>
+<pre><code>:::basemake
+$(APP): $(OBJS)
+    gcc -o $(APP) $(patsubst %.o,$(OBJDIR)/%.o,$(OBJS))
+    cp $(APP) $(DISTDIR)
+</code></pre>
 <p>Le fait de créer les .o dans le sous-dossier <em>objs</em> complexifie la ligne de link. Voici le makefile réécrit sans ce dossier.</p>
-<div class="highlight"><pre><span></span><code><span class="n">APP</span><span class="p">=</span><span class="w"> </span><span class="n">MyApp</span><span class="w"></span>
-<span class="n">SRCDIR</span><span class="p">=</span><span class="w"> </span><span class="n">src</span><span class="w"></span>
-<span class="n">DISTDIR</span><span class="p">=</span><span class="w"> </span><span class="n">dist</span><span class="w"></span>
-<span class="n">VPATH</span><span class="p">=</span><span class="w"> </span>$<span class="p">(</span><span class="n">SRCDIR</span><span class="p">)</span><span class="w"></span>
-<span class="n">OBJS</span><span class="p">=</span><span class="w"> </span>$<span class="p">(</span><span class="n">patsubst</span><span class="w"> </span>$<span class="p">(</span><span class="n">SRCDIR</span><span class="p">)</span><span class="o">/</span><span class="c">%.c,%.o,$(wildcard $(SRCDIR)/*.c))</span><span class="w"></span>
+<pre><code>:::basmake
+APP= MyApp
+SRCDIR= src
+DISTDIR= dist
+VPATH= $(SRCDIR)
+OBJS= $(patsubst $(SRCDIR)/%.c,%.o,$(wildcard $(SRCDIR)/*.c))
 
-<span class="nb">all</span><span class="p">:</span><span class="w"> </span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"></span>
+all: $(APP)
 
-$<span class="p">(</span><span class="n">APP</span><span class="p">):</span><span class="w"> </span>$<span class="p">(</span><span class="n">OBJS</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"> </span>$^<span class="w"></span>
-<span class="w">    </span><span class="nb">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">cp</span><span class="w"> </span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="w"></span>
+$(APP): $(OBJS)
+    gcc -o $(APP) $^
+    mkdir -p $(DISTDIR)
+    cp $(APP) $(DISTDIR)
 
-<span class="c">%.o: %.c</span><span class="w"></span>
-<span class="w">    </span><span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span>$<span class="o">&lt;</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span>$<span class="p">@</span><span class="w"></span>
+%.o: %.c
+    gcc -c $&lt; -o $@
 
-<span class="p">.</span><span class="n">PHONY</span><span class="p">:</span><span class="w"> </span><span class="n">clean</span><span class="w"> </span><span class="n">mrproper</span><span class="w"></span>
-<span class="n">clean</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p">@</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span>$<span class="p">(</span><span class="n">APP</span><span class="p">)</span><span class="w"></span>
+.PHONY: clean mrproper
+clean:
+    @rm -f $(APP)
 
-<span class="n">mrproper</span><span class="p">:</span><span class="w"> </span><span class="n">clean</span><span class="w"></span>
-<span class="w">    </span><span class="p">@</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">rf</span><span class="w"> </span>$<span class="p">(</span><span class="n">DISTDIR</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">@</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">f</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="n">o</span><span class="w"></span>
-</code></pre></div>
+mrproper: clean
+    @rm -rf $(DISTDIR)
+    @rm -f *.o
+</code></pre>
 <p> </p>
-<div class="highlight"><pre><span></span><code><span class="gp">$</span>make
-<span class="go">gcc -c src/hello.c -o hello.o</span>
-<span class="go">gcc -c src/myfunction.c -o myfunction.o</span>
-<span class="go">gcc -o MyApp hello.o myfunction.o</span>
-<span class="go">mkdir -p dist</span>
-<span class="go">cp MyApp dist </span>
-<span class="gp">$ </span>make
-<span class="go">make: Nothing to be done for `all'.</span>
-</code></pre></div>
+<pre><code>:::console
+$make
+gcc -c src/hello.c -o hello.o
+gcc -c src/myfunction.c -o myfunction.o
+gcc -o MyApp hello.o myfunction.o
+mkdir -p dist
+cp MyApp dist 
+$ make
+make: Nothing to be done for `all'.
+</code></pre>
 <h2 id="installation">Installation</h2>
 <p>Pour installer le résultat généré par make,</p>
 <ul>
@@ -660,20 +689,21 @@ $<span class="p">(</span><span class="n">APP</span><span class="p">):</span><spa
 <p>La commande <em>install</em> permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra à l’utilisateur du makefile, de redéfinir la commande si nécessaire.</p>
 <p>Par défaut, les programmes sont installés dans /usr/local.</p>
 <p>La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : <code>make DESTDIR=$HOME/stage install</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">INSTALL</span> <span class="o">=</span> install
-<span class="nv">INSTALL_PROGRAM</span> <span class="o">=</span> <span class="k">$(</span>INSTALL<span class="k">)</span>
-<span class="nv">INSTALL_DATA</span> <span class="o">=</span> <span class="k">$(</span>INSTALL<span class="k">)</span> -m <span class="m">644</span>
+<pre><code>:::makefile
+INSTALL = install
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = $(INSTALL) -m 644
 
-<span class="nv">prefix</span> <span class="o">=</span> /usr/local
-<span class="nv">bindir</span> <span class="o">=</span> <span class="k">$(</span>prefix<span class="k">)</span>/bin
-<span class="nv">libdir</span> <span class="o">=</span> <span class="k">$(</span>prefix<span class="k">)</span>/lib
+prefix = /usr/local
+bindir = $(prefix)/bin
+libdir = $(prefix)/lib
 
-<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">install</span>
-<span class="nf">install</span><span class="o">:</span>
+.PHONY: install
+install:
 
-    <span class="k">$(</span>INSTALL_PROGRAM<span class="k">)</span> hello <span class="k">$(</span>DESTDIR<span class="k">)$(</span>bindir<span class="k">)</span>/hello
-    <span class="k">$(</span>INSTALL_DATA<span class="k">)</span> libhello.a <span class="k">$(</span>DESTDIR<span class="k">)$(</span>libdir<span class="k">)</span>/libhello.a
-</code></pre></div>
+    $(INSTALL_PROGRAM) hello $(DESTDIR)$(bindir)/hello
+    $(INSTALL_DATA) libhello.a $(DESTDIR)$(libdir)/libhello.a
+</code></pre>
 <h2 id="le-probleme-des-makefiles">Le problème des makefiles</h2>
 <p>Le problème principal est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.</p>
 <p>Par exemple, si votre makefile utilise des librairies tierses (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jour les variables telles que CPPFLAGS ou LDFLAGS. </p>

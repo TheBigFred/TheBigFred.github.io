@@ -134,10 +134,10 @@
 <p>Par défaut <em>od</em> (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option <em>-x</em> pour avoir un affichage hexa.</p>
 <p>od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc <code>od -x --endian=big hello.txt</code> ou <code>hexdump -C hello.txt</code>.</p>
 <p>La commande <code>hexdump -C hello.txt</code> donne :</p>
-<pre><code>:::shell
-00000000  68 65 6c 6c 6f 0a                                 |hello.|
-00000006
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="m">00000000</span>  <span class="m">68</span> <span class="m">65</span> 6c 6c 6f 0a                                 <span class="p">|</span>hello.<span class="p">|</span>
+<span class="m">00000006</span>
+</code></pre></div>
+
 <p>La première colonne correspond à l'offset des données présentées dans la seconde colonne.</p>
   </div>
   <header><p>

@@ -132,85 +132,85 @@
   <div>
     <p>Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.</p>
 <p>Voici un petit programme <em>cochonné</em> pour illustrer la suite :</p>
-<pre><code>:::C
-#include &lt;stdio.h&gt;
-#define TXT "Hello Wolrd!\n"
-void hello(char    *name  );
-int main     (      int argc,char **argv) {/*A comment*/
-hello(argv[1]); return 0;}
-void hello( char *name){if(name){ printf("Hello %s\ni", name);}else {
-printf("Hello Wolrd!\n");}}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#define TXT &quot;Hello Wolrd!\n&quot;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="kt">char</span><span class="w">    </span><span class="o">*</span><span class="n">name</span><span class="w">  </span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w">     </span><span class="p">(</span><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="cm">/*A comment*/</span><span class="w"></span>
+<span class="n">hello</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">){</span><span class="k">if</span><span class="p">(</span><span class="n">name</span><span class="p">){</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello %s</span><span class="se">\n</span><span class="s">i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);}</span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Wolrd!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);}}</span><span class="w"></span>
+</code></pre></div>
+
 <p><strong>indent</strong> propose 3 styles prédéfinis.</p>
 <p>Le style GNU (le style par défaut) : <code>indent demo.c</code> ou <code>indent -gnu demo.c</code></p>
-<pre><code>:::C
-#include &lt;stdio.h&gt;
-void hello (char *name);
-int
-main (int argc, char **argv)
-{
-  /*A comment */
-  hello (argv[1]);
-  return 0;
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"></span>
+<span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/*A comment */</span><span class="w"></span>
+<span class="w">  </span><span class="n">hello</span><span class="w"> </span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-void
-hello (char *name)
-{
-  if (name)
-    {
-      printf ("Hello %s\ni", name);
-    }
-  else
-    {
-      printf ("Hello Wolrd!\n");
-    }
-}
-</code></pre>
+<span class="kt">void</span><span class="w"></span>
+<span class="nf">hello</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Hello %s</span><span class="se">\n</span><span class="s">i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Hello Wolrd!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
 <p>Le style Kernighan &amp; Ritchie (ou style k&amp;r, les concepteurs du C) : <code>indent -kr demo.c</code> </p>
-<pre><code>:::C
-#include &lt;stdio.h&gt;
-void hello(char *name);
-int main(int argc, char **argv)
-{
-    /*A comment */
-    hello(argv[1]);
-    return 0;
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*A comment */</span><span class="w"></span>
+<span class="w">    </span><span class="n">hello</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-void hello(char *name)
-{
-    if (name) {
-      printf("Hello %s\ni", name);
-    } else {
-      printf("Hello Wolrd!\n");
-    }
-}
-</code></pre>
+<span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello %s</span><span class="se">\n</span><span class="s">i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Wolrd!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
 <p>Le style Berkeley (le style d'origine) : <code>indent -orig demo.c</code></p>
-<pre><code>:::C
-#include &lt;stdio.h&gt;
-int             hello(char *name);
-int
-main(int argc, char **argv)
-{
-    /*
-     * A comment 
-     */
-    hello(argv[1]);
-    return 0;
-}
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="kt">int</span><span class="w">             </span><span class="nf">hello</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"></span>
+<span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * A comment </span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="n">hello</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-void
-hello(char *name)
-{
-    if (name) {
-      printf("Hello %s\ni", name);
-    } else {
-      printf("Hello Wolrd!\n");
-    }
-}
-</code></pre>
+<span class="kt">void</span><span class="w"></span>
+<span class="nf">hello</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello %s</span><span class="se">\n</span><span class="s">i&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello Wolrd!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
 <p>Ces styles définissent chacun un ensemble d'options. Vous pouvez alors ajouter et/ou redéfinir quelques options, ou même sélectionner vous-même les options que vous souhaitez.</p>
 <p>Pour ne pas indiquer 15 options à chaque appel d'<em>indent</em>, vous pouvez :</p>
 <ul>

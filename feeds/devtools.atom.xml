@@ -86,21 +86,20 @@ compilateur que gcc, n'utilisez pas ces extensions.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 id="exemple"&gt;Exemple&lt;/h2&gt;
 &lt;p&gt;Voici un petit code C qui utilise la libm.so ainsi qu'un ensemble de fichiers .h que nous aurions placé dans un dossier MyInclude à la racine du dossier utilisateur.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;math.h&amp;gt;
-#include "myinclude1.h"
-#include "myinclude2.h"
-int main ()
-{
-  double a = 5.0;
-  printf ("sin(%g) = %g\n",a,sin (a));
-#ifdef MAXVAL
-  printf ("code optionnel, MAX = %d\n",MAX);
-#endif
-  return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;math.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;"myinclude1.h"&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;"myinclude2.h"&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="kt"&gt;double&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"sin(%g) = %g&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#ifdef MAXVAL&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"code optionnel, MAX = %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;MAX&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Pour compiler ce fichier en mode debug : &lt;code&gt;gcc -g -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pour compiler ce fichier en mode release : &lt;code&gt;gcc -O2 -o myApp main.c -lm -I$HOME/MyInclude&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Pour activer le code optionnel, il faut juste ajouter &lt;code&gt;-DMAXVAL&lt;/code&gt; aux commandes précédentes.&lt;/p&gt;
@@ -118,67 +117,63 @@ int main ()
 &lt;/ul&gt;
 &lt;p&gt;En utilisant des directives de précompilation, il est donc possible de vérifier la version de la norme utilisée pour compiler un code.&lt;/p&gt;
 &lt;p&gt;Voici un premier exemple qui nécessite d'utiliser l'option &lt;code&gt;-std=c99&lt;/code&gt; :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
-#if (__STDC_VERSION__ != 199901L)
-#error "Ce code est compatible uniquement avec C99 !!!"
-#endif
+&lt;span class="cp"&gt;#if (__STDC_VERSION__ != 199901L)&lt;/span&gt;
+&lt;span class="cp"&gt;#error "Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
 
-int main()
-{
-        printf("%ld\n",__STDC_VERSION__);
-        return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::shell
-$ gcc std.c
-error: "Ce code est compatible uniquement avec C99 !!!"
-#error "Ce code est compatible uniquement avec C99 !!!"
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ gcc std.c
+error: &lt;span class="s2"&gt;"Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
+&lt;span class="c1"&gt;#error "Ce code est compatible uniquement avec C99 !!!"&lt;/span&gt;
  ^
-1 error generated.
+&lt;span class="m"&gt;1&lt;/span&gt; error generated.
 $
-$ gcc std.c -std=c99
+$ gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c99
 $ ./a.out 
-199901
+&lt;span class="m"&gt;199901&lt;/span&gt;
 $
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Dans ce second exemple, le standard C doit être au minimum c11 :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
-#if (__STDC_VERSION__ &amp;lt; 201112L)
-#error "Ce code nécessite C11 !!!"
-#endif
+&lt;span class="cp"&gt;#if (__STDC_VERSION__ &amp;lt; 201112L)&lt;/span&gt;
+&lt;span class="cp"&gt;#error "Ce code nécessite C11 !!!"&lt;/span&gt;
+&lt;span class="cp"&gt;#endif&lt;/span&gt;
 
-int main()
-{
-  printf("%ld\n",__STDC_VERSION__);
-  return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"%ld&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;__STDC_VERSION__&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::shell
-$ gcc std.c -std=c99
-error: "Ce code nécessite C11 !!!"
-#error "Ce code nécessite C11 !!!"
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c99
+error: &lt;span class="s2"&gt;"Ce code nécessite C11 !!!"&lt;/span&gt;
+&lt;span class="c1"&gt;#error "Ce code nécessite C11 !!!"&lt;/span&gt;
  ^
-1 error generated.
+&lt;span class="m"&gt;1&lt;/span&gt; error generated.
 $
 $ gcc std.c
 $ ./a.out 
-201112
+&lt;span class="m"&gt;201112&lt;/span&gt;
 $
-$ gcc std.c -std=c11
+$ gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c11
 $ ./a.out 
-201112
+&lt;span class="m"&gt;201112&lt;/span&gt;
 $
-$ gcc std.c -std=c17
+$ gcc std.c -std&lt;span class="o"&gt;=&lt;/span&gt;c17
 $ ./a.out 
-201710
+&lt;span class="m"&gt;201710&lt;/span&gt;
 $
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ici, on peut constater que sans option, c'est la norme c11 qui est appliquée.&lt;/p&gt;
 &lt;h2 id="compilation-c"&gt;Compilation C++&lt;/h2&gt;
 &lt;p&gt;Pour compiler du code C++, on utilise &lt;em&gt;g++&lt;/em&gt; au lieu de &lt;em&gt;gcc&lt;/em&gt; et le tour est joué.&lt;/p&gt;
@@ -191,26 +186,24 @@ contient la valeur du standard.&lt;/p&gt;
 &lt;li&gt;C++17 : pour l'ISO C++ 2017, __cplusplus est définit à 201703L.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Il existe également les extensions gnu : gnu++98, gnu++11, gnu++14 et gnu++17.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;iostream&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
-int main()
-{
-        std::cout &amp;lt;&amp;lt; __cplusplus &amp;lt;&amp;lt; std::endl;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;__cplusplus&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::shell
-$ g++ std.cpp ; ./a.out 
-199711
-$ g++ std.cpp -std=c++11 ; ./a.out 
-201103
-$ g++ std.cpp -std=c++14 ; ./a.out 
-201402
-$ g++ std.cpp -std=c++17 ; ./a.out 
-201703
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ g++ std.cpp &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="m"&gt;199711&lt;/span&gt;
+$ g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++11 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="m"&gt;201103&lt;/span&gt;
+$ g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++14 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="m"&gt;201402&lt;/span&gt;
+$ g++ std.cpp -std&lt;span class="o"&gt;=&lt;/span&gt;c++17 &lt;span class="p"&gt;;&lt;/span&gt; ./a.out 
+&lt;span class="m"&gt;201703&lt;/span&gt;
 $
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Il n'y a pas de &lt;em&gt;return 0&lt;/em&gt; à la fin de mon fichier &lt;em&gt;.cpp&lt;/em&gt;. Ceci n'est pas une faute, la norme c++ définit un &lt;em&gt;return 0&lt;/em&gt;
 implicite à la fin de la fonction main.&lt;/p&gt;
 &lt;h2 id="compilation-de-plusieurs-fichiers"&gt;Compilation de plusieurs fichiers&lt;/h2&gt;
@@ -236,30 +229,27 @@ implicite à la fin de la fonction main.&lt;/p&gt;
 &lt;p&gt;Lorsque l'on exécute la commande &lt;code&gt;make&lt;/code&gt;, GNU make cherche dans le dossier courant après un fichier nommé GNUmakefile, makefile, Makefile (dans cet ordre).&lt;/p&gt;
 &lt;p&gt;Il est recommandé d'utiliser le nom Makefile, car le &lt;em&gt;M&lt;/em&gt; est plus visible. Le nom GNUmakefile n'est à utiliser que si vous utilisez des spécificités de GNU make.&lt;/p&gt;
 &lt;p&gt;Une règle de makefile ressemble à ceci :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-cible : dépendances
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;cible &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;é&lt;span class="n"&gt;pendances&lt;/span&gt;
     recette
     …
     …
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Avec le vocable anglais :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-target : prerequisites
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;target &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;prerequisites&lt;/span&gt;
     recipe
     …
     …
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Les commandes écrites sous les cibles doivent être indentées obligatoirement avec une tabulation.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id="premier-exemple"&gt;Premier exemple&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-hello:
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     gcc -o hello.bin hello.c
 
-clean:
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm hello.bin
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ce &lt;em&gt;makefile&lt;/em&gt; est constitué de deux cibles :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;La cible hello : permet de créer l'application nommée hello.bin&lt;/li&gt;
@@ -267,24 +257,22 @@ clean:
 &lt;/ul&gt;
 &lt;p&gt;La commande &lt;code&gt;make hello&lt;/code&gt; crée l'exécutable, la commande &lt;code&gt;make clean&lt;/code&gt; le supprime. La commande &lt;code&gt;make&lt;/code&gt;, sans target, exécutera uniquement la première target trouvée dans le makefile.&lt;/p&gt;
 &lt;p&gt;Voici le résultat de l'exécution :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ make
-gcc -o hello.bin hello.c
-$ make clean
-rm hello.bin
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c&lt;/span&gt;
+&lt;span class="gp"&gt;$ &lt;/span&gt;make clean
+&lt;span class="go"&gt;rm hello.bin&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="second-exemple"&gt;Second exemple&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-hello: hello.c mesfonctions.o
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
     gcc -o hello.bin hello.c mesfonctions.o
 
-mesfonctions.o: mesfonctions.c mesfonctions.h
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;h&lt;/span&gt;
     gcc -c mesfonctions.c
 
-clean:
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm hello.bin mesfonctions.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Nous avons ajouté une target &lt;em&gt;mesfonctions.o&lt;/em&gt; qui compile le fichier &lt;em&gt;mesfonctions.c&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Nous avons également ajouté des dépendances, il s'agit de la liste de fichiers qui suit la définition de la &lt;em&gt;target&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;La &lt;em&gt;target hello&lt;/em&gt; dépend des fichiers &lt;em&gt;hello.c&lt;/em&gt; et &lt;em&gt;mesfonctions.o&lt;/em&gt;.
@@ -293,59 +281,53 @@ La &lt;em&gt;target mesfonctions.o&lt;/em&gt; dépend des fichiers &lt;em&gt;mes
 &lt;p&gt;La vérification de la target &lt;em&gt;mesfonctions.o&lt;/em&gt; consiste à vérifier que la date et l'heure du fichier &lt;em&gt;mesfonctions.o&lt;/em&gt; est plus récente que celles de ses dépendances.  Si c'est la cas, make continue sans exécuter la recette de la cible &lt;em&gt;mesfonctions.o&lt;/em&gt;, sinon il l'exécute.&lt;/p&gt;
 &lt;p&gt;Ce mécanisme permet de recompiler uniquement les fichiers qui ont été modifié depuis la dernière compilation.&lt;/p&gt;
 &lt;p&gt;Voici le résultat de l'exécution :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ make
-gcc -c mesfonctions.c
-gcc -o hello.bin hello.c mesfonctions.o
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -c mesfonctions.c&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Une modification du fichier &lt;em&gt;mesfonctions.c&lt;/em&gt; recompile le tout :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ echo " " &amp;gt;&amp;gt; mesfonctions.c 
-$ make
-gcc -c mesfonctions.c
-gcc -o hello.bin hello.c mesfonctions.o
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" "&lt;/span&gt; &amp;gt;&amp;gt; mesfonctions.c 
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -c mesfonctions.c&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Une modification du fichier &lt;em&gt;hello.c&lt;/em&gt; ne recompile pas le fichier &lt;em&gt;mesfonctions.c&lt;/em&gt; :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ echo " " &amp;gt;&amp;gt; hello.c 
-$ make
-gcc -o hello.bin hello.c mesfonctions.o
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;" "&lt;/span&gt; &amp;gt;&amp;gt; hello.c 
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Si l'on modifie l'heure du PC, il faut supprimer tous les fichiers générés.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Si nous exécutons plusieurs fois &lt;code&gt;make&lt;/code&gt;, hello.bin est systématiquement recompilé, même si nous ne modifions pas les fichiers sources !&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ make
-gcc -o hello.bin hello.c mesfonctions.o
-$ make
-gcc -o hello.bin hello.c mesfonctions.o
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -o hello.bin hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ceci est dû au fait que nous générons un fichier &lt;em&gt;hello.bin&lt;/em&gt; non pas &lt;em&gt;hello&lt;/em&gt;.
 Lorsque make 'vérifie' une target, il cherche un fichier qui porte le même nom que la target.
 Il faut donc veiller à ce que les noms des targets et des fichiers générés coïncident.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-hello: hello.c mesfonctions.o
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
     gcc -o hello hello.c mesfonctions.o
 
-mesfonctions.o: mesfonctions.c mesfonctions.h
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;h&lt;/span&gt;
     gcc -c mesfonctions.c
 
-clean:
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm hello mesfonctions.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Maintenant deux appels consécutifs à make ne recompilent plus inutilement &lt;em&gt;hello&lt;/em&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ make
-gcc -o hello hello.c mesfonctions.o
-$ make
-make: 'hello' is up to date.
-$
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;gcc -o hello hello.c mesfonctions.o&lt;/span&gt;
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;make: 'hello' is up to date.&lt;/span&gt;
+&lt;span class="gp"&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="les-variables"&gt;Les variables&lt;/h2&gt;
 &lt;p&gt;Les variables, parfois appelées MACRO, permettent de substituer du texte. Le nom d'une variable ne peut contenir les symboles ':', '#', '=' et l'espace.&lt;/p&gt;
 &lt;p&gt;Il est généralement conseillé de n'utiliser que des lettres, des nombres et le symbole underscore. Le nom d'une variable est &lt;em&gt;case-sensitive&lt;/em&gt;.&lt;/p&gt;
@@ -360,16 +342,14 @@ $
 &lt;/ul&gt;
 &lt;h3 id="definir-une-variable"&gt;Définir une variable&lt;/h3&gt;
 &lt;p&gt;Pour définir une variable, on débute une nouvelle ligne  qui commence par le nom de la variable, suivi par '=', ':=' ou '::='. Tout ce qui se trouve à droite du signe d'affectation est le contenu de la variable.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-objects = hello.o mesfonctions.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; hello.o mesfonctions.o
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ceci définit une variable nommée &lt;em&gt;objects&lt;/em&gt; dont le contenu est : &lt;em&gt;hello.o mesfonctions.o&lt;/em&gt;. Les espaces entourant le signe d'affectation sont ignorés.&lt;/p&gt;
 &lt;p&gt;Pour utiliser une variable, on utilise la notation &lt;code&gt;$(nom_variable)&lt;/code&gt;ou &lt;code&gt;${nom_variable}&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-objects = hello.o mesfonctions.o
-hello : $(objects)
-        gcc -o hello.bin $(objects)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; hello.o mesfonctions.o
+&lt;span class="nf"&gt;hello &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+        gcc -o hello.bin &lt;span class="k"&gt;$(&lt;/span&gt;objects&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Si le nom de la variable ne fait qu'un caractère, les parenthèses ou les accolades ne sont pas nécessaires. On peut donc utiliser une variable &lt;em&gt;x&lt;/em&gt; et y faire référence pas &lt;em&gt;$x&lt;/em&gt;. Cette pratique est fortement découragée.&lt;/p&gt;
 &lt;p&gt;Il n'y a pas de limite sur la longueur du contenu d'une variable (à l'exception de la taille de la mémoire disponible).&lt;/p&gt;
 &lt;h4 id="type-de-variable"&gt;Type de variable&lt;/h4&gt;
@@ -377,48 +357,42 @@ hello : $(objects)
 &lt;h5 id="variables-expansees-recursivement"&gt;Variables expansées récursivement&lt;/h5&gt;
 &lt;p&gt;Elles se définissent en utilisant le signe '=' ou la directive &lt;em&gt;define&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Si une variable de ce type fait référence à une seconde variable, la seconde variable sera évaluée et son contenu la remplacera et ceci de manière récursive.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-foo = $(bar)
-bar = Hello $(who)
-who = world !!!
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;bar&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; Hello &lt;span class="k"&gt;$(&lt;/span&gt;who&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;who&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; world !!!
 
-all:
-    echo $(foo)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="nf"&gt;all&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;foo&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ce makefile affichera &lt;em&gt;Hello world !!!&lt;/em&gt;, comme on s'y attend.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Ce type de variable a plusieurs inconvénients, dont un majeur, il n'est pas possible d'affecter une variable à elle-même.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-CFLAGS = $(CFLAGS) -O
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt; -O
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ceci crée une boucle infinie !&lt;/p&gt;
 &lt;h5 id="variables-simplement-expansees"&gt;Variables simplement expansées&lt;/h5&gt;
 &lt;p&gt;Elles permettent de contourner les problèmes des variables expansées récursivement.&lt;/p&gt;
 &lt;p&gt;Les variables simplement expansées sont définies en utilisant le signe ':=' ou '::='. Les deux signes sont équivalents.&lt;/p&gt;
 &lt;p&gt;Cependant, le signe '::=' à été ajouté dans la norme 2012 du standard POSIX et n'est donc peut-être pas supporté par une ancienne version de make.&lt;/p&gt;
 &lt;p&gt;La valeur d'une variable simplement expansée est calculée une seule fois lors de sa définition.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-x := Hello
-y := $(x) world
-x := !!!
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello
+&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;x&lt;span class="k"&gt;)&lt;/span&gt; world
+&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; !!!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;est équivalent à &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-y := Hello world
-x := !!!
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; Hello world
+&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; !!!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="ajouter-du-contenu-a-une-variable"&gt;Ajouter du contenu à une variable&lt;/h3&gt;
 &lt;p&gt;Pour concaténer du contenu à une variable, quel que soit son type, on utilise le signe '+='.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-objects = main.o foo.o bar.o utils.o
-objects += another.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; main.o foo.o bar.o utils.o
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; another.o
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ce qui est l'équivalent de &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-objects = main.o foo.o bar.o utils.o
-objects := $(objects) another.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; main.o foo.o bar.o utils.o
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;objects&lt;span class="k"&gt;)&lt;/span&gt; another.o
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Si la variable n'est pas définie, avec l'utilisation du signe '+=', celui-ci agira comme '=' et définira donc une variable expansée récursivement.&lt;/p&gt;
 &lt;h3 id="supprimer-une-variable"&gt;Supprimer une variable&lt;/h3&gt;
 &lt;p&gt;Pour supprimer le contenu d'une variable, il suffit de lui affecter un contenu vide.&lt;/p&gt;
@@ -433,59 +407,56 @@ objects := $(objects) another.o
 &lt;p&gt;Lors de l'appel de la commande &lt;code&gt;make clean&lt;/code&gt;, &lt;em&gt;make&lt;/em&gt; va détecter le fichier &lt;em&gt;clean&lt;/em&gt; et considérer qu'il est à jour ! La recette ne sera jamais exécutée.&lt;/p&gt;
 &lt;p&gt;Pour résoudre ce problème, on déclare simplement clean comme dépendance à la cible spécial &lt;em&gt;.PHONY&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Les dépendances de la cible &lt;em&gt;.PHONY&lt;/em&gt; sont exécutées inconditionnellement.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-.PHONY: clean
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
 
-clean:
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm -f *.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="exemple"&gt;Exemple&lt;/h2&gt;
 &lt;p&gt;Dans l'exemple suivant, les variables &lt;em&gt;CPPFLAGS&lt;/em&gt;,&lt;em&gt;CFLAGS&lt;/em&gt;,&lt;em&gt;LDFLAGS&lt;/em&gt;,&lt;em&gt;LDLIBS&lt;/em&gt; sont vides. Ce qui suit le caractère &lt;em&gt;#&lt;/em&gt; est en commentaire pour donner un exemple d'utilisation de ces variables.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-CC = gcc
-CPPFLAGS +=                     # -I/opt/XXXX/include
-CFLAGS   +=                     # -O2 -std=c11
-LDFLAGS  +=                     # -L/opt/XXXX/lib
-LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
 
-hello: hello.o mesfonctions.o
-    $(CC) -o hello hello.o mesfonctions.o $(LDFLAGS) $(LDLIBS)
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -o hello hello.o mesfonctions.o &lt;span class="k"&gt;$(&lt;/span&gt;LDFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;LDLIBS&lt;span class="k"&gt;)&lt;/span&gt;
 
-hello.o: 
-    $(CC) -c hello.c $(CPPFLAGS) $(CFLAGS)
+&lt;span class="nf"&gt;hello.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c hello.c &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
 
-mesfonctions.o: mesfonctions.c
-    $(CC) -c mesfonctions.c $(CPPFLAGS) $(CFLAGS)
+&lt;span class="nf"&gt;mesfonctions.o&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;c&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c mesfonctions.c &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
 
-.PHONY: clean mrproper
-clean:
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm -f *.o
 
-mrproper: clean
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
     rm -f hello
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="static-pattern"&gt;STATIC PATTERN&lt;/h2&gt;
 &lt;p&gt;Afin de ne pas devoir écrire explicitement une recette pour chaque fichier .c, il est possible d'utiliser une règle &lt;em&gt;générique&lt;/em&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-CC = gcc
-CPPFLAGS +=                     # -I/opt/XXXX/include
-CFLAGS   +=                     # -O2 -std=c11
-LDFLAGS  +=                     # -L/opt/XXXX/lib
-LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
 
-hello: hello.o mesfonctions.o
-    $(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -o &lt;span class="nv"&gt;$@&lt;/span&gt; $^ &lt;span class="k"&gt;$(&lt;/span&gt;LDFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;LDLIBS&lt;span class="k"&gt;)&lt;/span&gt;
 
-%.o : %.c
-    $(CC) -c $&amp;lt; $(CPPFLAGS) $(CFLAGS)
+&lt;span class="nf"&gt;%.o &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;c&lt;/span&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;CC&lt;span class="k"&gt;)&lt;/span&gt; -c $&amp;lt; &lt;span class="k"&gt;$(&lt;/span&gt;CPPFLAGS&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;CFLAGS&lt;span class="k"&gt;)&lt;/span&gt;
 
-.PHONY: clean mrproper
-clean:
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm -f *.o
 
-mrproper: clean
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
     rm -f hello
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Voici la signification des variables spéciales utilisée ci-dessus :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$@ : le nom de la cible &lt;/li&gt;
@@ -602,22 +573,21 @@ mrproper: clean
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;On peut maintenant réécrire l’exemple précédent :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-CC = gcc
-CPPFLAGS +=                     # -I/opt/XXXX/include
-CFLAGS   +=                     # -O2 -std=c11
-LDFLAGS  +=                     # -L/opt/XXXX/lib
-LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
 
-hello: mesfonctions.o
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;mesfonctions&lt;/span&gt;.&lt;span class="n"&gt;o&lt;/span&gt;
 
-.PHONY: clean mrproper
-clean:
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm -f *.o
 
-mrproper: clean
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
     rm -f hello
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="wildcard"&gt;Wildcard&lt;/h2&gt;
 &lt;p&gt;Si votre projet comporte beaucoup de fichiers, cela devient problématique de maintenir la liste des dépendances du binaire.&lt;/p&gt;
 &lt;p&gt;On peut alors être tenté de créer une variable &lt;code&gt;objects = *.o&lt;/code&gt; qui désignerait tous les fichiers .o.&lt;/p&gt;
@@ -634,23 +604,22 @@ mrproper: clean
 &lt;li&gt;le troisième la liste des fichiers à traiter.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Votre makefile devient ceci :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-CC = gcc
-CPPFLAGS +=                     # -I/opt/XXXX/include
-CFLAGS   +=                     # -O2 -std=c11
-LDFLAGS  +=                     # -L/opt/XXXX/lib
-LDLIBS   +=                     # -lpthread -lrt -lm -lXYZ
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;CC&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; gcc
+&lt;span class="nv"&gt;CPPFLAGS&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -I/opt/XXXX/include&lt;/span&gt;
+&lt;span class="nv"&gt;CFLAGS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -O2 -std=c11&lt;/span&gt;
+&lt;span class="nv"&gt;LDFLAGS&lt;/span&gt;  &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -L/opt/XXXX/lib&lt;/span&gt;
+&lt;span class="nv"&gt;LDLIBS&lt;/span&gt;   &lt;span class="o"&gt;+=&lt;/span&gt;                     &lt;span class="c1"&gt;# -lpthread -lrt -lm -lXYZ&lt;/span&gt;
 
-objects := $(patsubst %.c,%.o,$(wildcard *.c))
-hello : $(objects)
+&lt;span class="nv"&gt;objects&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.c,%.o,&lt;span class="k"&gt;$(&lt;/span&gt;wildcard *.c&lt;span class="k"&gt;))&lt;/span&gt;
+&lt;span class="nf"&gt;hello &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;objects&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
 
-.PHONY: clean mrproper
-clean:
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;mrproper&lt;/span&gt;
+&lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     rm -f *.o
 
-mrproper: clean
+&lt;span class="nf"&gt;mrproper&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
     rm -f hello
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="dossier-de-rechercher-des-dependances"&gt;Dossier de rechercher des dépendances&lt;/h2&gt;
 &lt;p&gt;Jusqu’à présent, les fichiers sources ont toujours été dans le même dossier que le fichier Makefile. Mais, lorsque le nombre de fichiers augmente, ou peut vouloir organiser ces sources dans différents sous-dossiers.&lt;/p&gt;
 &lt;p&gt;Le plus simple est alors d'utiliser la variable &lt;code&gt;VPATH&lt;/code&gt;. Cette variable indique à make dans quels dossiers chercher les fichiers qu'il ne trouve pas dans le dossier contenant le Makefile.&lt;/p&gt;
@@ -678,83 +647,78 @@ mrproper: clean
 &lt;p&gt;La variable &lt;code&gt;OBJS&lt;/code&gt; contient donc la liste de tous les fichiers sources mais avec l’extension .o.&lt;/p&gt;
 &lt;p&gt;La recette de &lt;em&gt;%.o: %.c&lt;/em&gt; écrit bien les .o dans le sous-dossier objs.
 La recette &lt;em&gt;$(APP)&lt;/em&gt; utilise une substitution pour indiquer à gcc que les fichiers .o se trouvent dans le sous-dossier objs.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basmake
-APP= MyApp
-SRCDIR= src
-OBJDIR= objs
-DISTDIR= dist
-VPATH= $(OBJDIR):$(SRCDIR)
-OBJS= $(patsubst $(SRCDIR)/%.c,%.o,$(wildcard $(SRCDIR)/*.c))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;OBJDIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;objs&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;VPATH&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJDIR&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;OBJS&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patsubst&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="c"&gt;%.c,%.o,$(wildcard $(SRCDIR)/*.c))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-all: ressource $(APP)
+&lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ressource&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-$(APP): $(OBJS)
-    gcc -o $(DISTDIR)/$(APP) $(patsubst %.o,$(OBJDIR)/%.o,$(OBJS))
+$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJS&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patsubst&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c"&gt;%.o,$(OBJDIR)/%.o,$(OBJS))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-%.o: %.c
-    gcc -c $&amp;lt; -o $(OBJDIR)/$@
+&lt;span class="c"&gt;%.o: %.c&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;$&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-.PHONY: clean ressource
-clean:
-    @rm -rf $(DISTDIR) $(OBJDIR)
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PHONY&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ressource&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-ressource:
-    mkdir -p $(OBJDIR) $(DISTDIR)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="n"&gt;ressource&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;mkdir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$ make
-mkdir -p objs dist
-gcc -c src/hello.c -o objs/hello.o
-gcc -c src/myfunction.c -o objs/myfunction.o
-gcc -o dist/MyApp objs/hello.o objs/myfunction.o 
-$ make
-mkdir -p objs dist
-gcc -o dist/MyApp objs/hello.o objs/myfunction.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;mkdir -p objs dist&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/hello.c -o objs/hello.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/myfunction.c -o objs/myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o dist/MyApp objs/hello.o objs/myfunction.o &lt;/span&gt;
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;mkdir -p objs dist&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o dist/MyApp objs/hello.o objs/myfunction.o&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;On peut constater que le fait de déplacer l'application dans le sous-dossier &lt;em&gt;dist&lt;/em&gt; relance la phase de link. Il serait préférable de copier l'application dans le dossier &lt;em&gt;dist&lt;/em&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basemake
-$(APP): $(OBJS)
-    gcc -o $(APP) $(patsubst %.o,$(OBJDIR)/%.o,$(OBJS))
-    cp $(APP) $(DISTDIR)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nf"&gt;$(APP)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;OBJS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    gcc -o &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;patsubst %.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJDIR&lt;span class="k"&gt;)&lt;/span&gt;/%.o,&lt;span class="k"&gt;$(&lt;/span&gt;OBJS&lt;span class="k"&gt;))&lt;/span&gt;
+    cp &lt;span class="k"&gt;$(&lt;/span&gt;APP&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;DISTDIR&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Le fait de créer les .o dans le sous-dossier &lt;em&gt;objs&lt;/em&gt; complexifie la ligne de link. Voici le makefile réécrit sans ce dossier.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::basmake
-APP= MyApp
-SRCDIR= src
-DISTDIR= dist
-VPATH= $(SRCDIR)
-OBJS= $(patsubst $(SRCDIR)/%.c,%.o,$(wildcard $(SRCDIR)/*.c))
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MyApp&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;VPATH&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;OBJS&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patsubst&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;SRCDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="c"&gt;%.c,%.o,$(wildcard $(SRCDIR)/*.c))&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-all: $(APP)
+&lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-$(APP): $(OBJS)
-    gcc -o $(APP) $^
-    mkdir -p $(DISTDIR)
-    cp $(APP) $(DISTDIR)
+$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;OBJS&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$^&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;mkdir&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-%.o: %.c
-    gcc -c $&amp;lt; -o $@
+&lt;span class="c"&gt;%.o: %.c&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-.PHONY: clean mrproper
-clean:
-    @rm -f $(APP)
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PHONY&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;mrproper&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;APP&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-mrproper: clean
-    @rm -rf $(DISTDIR)
-    @rm -f *.o
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="n"&gt;mrproper&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;$&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;DISTDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;rm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::console
-$make
-gcc -c src/hello.c -o hello.o
-gcc -c src/myfunction.c -o myfunction.o
-gcc -o MyApp hello.o myfunction.o
-mkdir -p dist
-cp MyApp dist 
-$ make
-make: Nothing to be done for `all'.
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gp"&gt;$&lt;/span&gt;make
+&lt;span class="go"&gt;gcc -c src/hello.c -o hello.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -c src/myfunction.c -o myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;gcc -o MyApp hello.o myfunction.o&lt;/span&gt;
+&lt;span class="go"&gt;mkdir -p dist&lt;/span&gt;
+&lt;span class="go"&gt;cp MyApp dist &lt;/span&gt;
+&lt;span class="gp"&gt;$ &lt;/span&gt;make
+&lt;span class="go"&gt;make: Nothing to be done for `all'.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
 &lt;p&gt;Pour installer le résultat généré par make,&lt;/p&gt;
 &lt;ul&gt;
@@ -765,21 +729,20 @@ make: Nothing to be done for `all'.
 &lt;p&gt;La commande &lt;em&gt;install&lt;/em&gt; permet de réaliser ses 3 étapes en une seule. Le manuel de GNU Make recommande de ne pas utiliser directement la commande install, mais de passer par une variable $(INSTALL). Ceci permettra à l’utilisateur du makefile, de redéfinir la commande si nécessaire.&lt;/p&gt;
 &lt;p&gt;Par défaut, les programmes sont installés dans /usr/local.&lt;/p&gt;
 &lt;p&gt;La variable DESTIR est ajoutée devant chaque destination. Ceci permet à l'utilisateur de spécifier un path absolu comme dossier d'installation : &lt;code&gt;make DESTDIR=$HOME/stage install&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::makefile
-INSTALL = install
-INSTALL_PROGRAM = $(INSTALL)
-INSTALL_DATA = $(INSTALL) -m 644
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;INSTALL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; install
+&lt;span class="nv"&gt;INSTALL_PROGRAM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;INSTALL_DATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL&lt;span class="k"&gt;)&lt;/span&gt; -m &lt;span class="m"&gt;644&lt;/span&gt;
 
-prefix = /usr/local
-bindir = $(prefix)/bin
-libdir = $(prefix)/lib
+&lt;span class="nv"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /usr/local
+&lt;span class="nv"&gt;bindir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;prefix&lt;span class="k"&gt;)&lt;/span&gt;/bin
+&lt;span class="nv"&gt;libdir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;prefix&lt;span class="k"&gt;)&lt;/span&gt;/lib
 
-.PHONY: install
-install:
+&lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt;
+&lt;span class="nf"&gt;install&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
 
-    $(INSTALL_PROGRAM) hello $(DESTDIR)$(bindir)/hello
-    $(INSTALL_DATA) libhello.a $(DESTDIR)$(libdir)/libhello.a
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL_PROGRAM&lt;span class="k"&gt;)&lt;/span&gt; hello &lt;span class="k"&gt;$(&lt;/span&gt;DESTDIR&lt;span class="k"&gt;)$(&lt;/span&gt;bindir&lt;span class="k"&gt;)&lt;/span&gt;/hello
+    &lt;span class="k"&gt;$(&lt;/span&gt;INSTALL_DATA&lt;span class="k"&gt;)&lt;/span&gt; libhello.a &lt;span class="k"&gt;$(&lt;/span&gt;DESTDIR&lt;span class="k"&gt;)$(&lt;/span&gt;libdir&lt;span class="k"&gt;)&lt;/span&gt;/libhello.a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="le-probleme-des-makefiles"&gt;Le problème des makefiles&lt;/h2&gt;
 &lt;p&gt;Le problème principal est pour moi la portabilité d'un makefile entre différentes distributions Linux/UNIX ou entre OS différents.&lt;/p&gt;
 &lt;p&gt;Par exemple, si votre makefile utilise des librairies tierses (qui ne font partie de l'OS), il faut en vérifier la présence, leurs emplacements et mettre à jour les variables telles que CPPFLAGS ou LDFLAGS. &lt;/p&gt;
@@ -788,10 +751,10 @@ install:
 &lt;p&gt;Par défaut &lt;em&gt;od&lt;/em&gt; (octal dump) affiche les données en base 7, il faut donc lui adjoindre l'option &lt;em&gt;-x&lt;/em&gt; pour avoir un affichage hexa.&lt;/p&gt;
 &lt;p&gt;od et hexdump ne présentent pas les données en big endian par défaut. on utilisera donc &lt;code&gt;od -x --endian=big hello.txt&lt;/code&gt; ou &lt;code&gt;hexdump -C hello.txt&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;La commande &lt;code&gt;hexdump -C hello.txt&lt;/code&gt; donne :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::shell
-00000000  68 65 6c 6c 6f 0a                                 |hello.|
-00000006
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="m"&gt;00000000&lt;/span&gt;  &lt;span class="m"&gt;68&lt;/span&gt; &lt;span class="m"&gt;65&lt;/span&gt; 6c 6c 6f 0a                                 &lt;span class="p"&gt;|&lt;/span&gt;hello.&lt;span class="p"&gt;|&lt;/span&gt;
+&lt;span class="m"&gt;00000006&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;La première colonne correspond à l'offset des données présentées dans la seconde colonne.&lt;/p&gt;</content><category term="devtools"></category><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>diff &amp; patch</title><link href="https://thebigfred.github.io/diff-patch.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/diff-patch.html</id><summary type="html">&lt;p&gt;diff et patch sont deux outils en ligne de commande.&lt;/p&gt;
 &lt;p&gt;diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de …&lt;/p&gt;</summary><content type="html">&lt;p&gt;diff et patch sont deux outils en ligne de commande.&lt;/p&gt;
 &lt;p&gt;diff, va vous permettre de comparer le contenu de deux fichiers ou dossiers et de voir les ajouts et/ou suppressions qu'il y a eu entre chaque fichier.
@@ -813,37 +776,37 @@ Ce résultat peut être stocké dans un fichier, que l'on nomme patch.&lt;/p&gt;
 &lt;h2 id="creer-un-patch"&gt;Créer un patch&lt;/h2&gt;
 &lt;p&gt;Admettons que votre répertoire de travail est $HOME/projetX. Avant de le modifier, faite en une copie &lt;code&gt;cp -r $HOME/projetX $HOME/projetX.orig&lt;/code&gt;.
 Voici le fichier hello.c original :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-int main()
-{
-    printf("Hello\n");
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Que vous modifiez en :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-int main()
-{
-    printf("Hello World !!!\n");
-    return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello World !!!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;La commande &lt;code&gt;diff -Naur projetX.orig projetX&lt;/code&gt; donne comme résultat :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::diff
-diff -Naur projetX.orig/hello.c projetX/hello.c
---- projetX.orig/hello.c  2016-09-25 03:48:01.216191638 +0000
-+++ projetX/hello.c 2016-09-25 03:48:12.059524697 +0000
-@@ -1,6 +1,6 @@
- #include &amp;lt;stdio.h&amp;gt;
- int main()
- {
--    printf("Hello\n");
-+    printf("Hello world !!!\n");
-     return 0;
- }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="gh"&gt;diff -Naur projetX.orig/hello.c projetX/hello.c&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gd"&gt;--- projetX.orig/hello.c  2016-09-25 03:48:01.216191638 +0000&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+++ projetX/hello.c 2016-09-25 03:48:12.059524697 +0000&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -1,6 +1,6 @@&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;#include &amp;lt;stdio.h&amp;gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;int main()&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;{&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gd"&gt;-    printf(&amp;quot;Hello\n&amp;quot;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="gi"&gt;+    printf(&amp;quot;Hello world !!!\n&amp;quot;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;    return 0;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;}&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Pour créer le patch, il suffit de rediriger la commande diff dans un fichier : &lt;code&gt;diff -Naur projetX.orig projetX &amp;gt; $HOME/bug1.patch&lt;/code&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Pour la suite supprimer le dossier &lt;em&gt;projectX&lt;/em&gt; &lt;code&gt;rm -r $HOME/projetX&lt;/code&gt; et renommer &lt;em&gt;projetX.orig&lt;/em&gt; &lt;code&gt;mv projetX.orig projetX&lt;/code&gt; (on applique le patch sur la version d'origine).&lt;/p&gt;
@@ -868,85 +831,85 @@ diff -Naur projetX.orig/hello.c projetX/hello.c
 &lt;p&gt;Votre patch sera même peut-être applicable sur les versions successives du kernel. En une commande vous pouvez réappliquer vos modifications. &lt;/p&gt;
 &lt;p&gt;Par contre si vous diffusez une archive complète du kernel contenant votre modification, comment faire pour intégrer votre modification au kernel suivant ou à une version sur laquelle d'autres patchs ont déjà été appliqués ?&lt;/p&gt;</content><category term="devtools"></category><category term="cmd-line"></category><category term="GNU-Tools"></category></entry><entry><title>indent</title><link href="https://thebigfred.github.io/indent.html" rel="alternate"></link><published>2016-09-25T00:00:00+02:00</published><updated>2016-09-25T00:00:00+02:00</updated><author><name>FGE</name></author><id>tag:thebigfred.github.io,2016-09-25:/indent.html</id><summary type="html">&lt;p&gt;Fini de perdre du temps à réindenter du code selon vos goûts !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Que vous codiez comme un cochon, que vous récupériez le code d'un autre développeur ou que votre supérieur vous impose un style particulier, fini de perdre du temps à réaligner du code.&lt;/p&gt;
 &lt;p&gt;Voici un petit programme &lt;em&gt;cochonné&lt;/em&gt; pour illustrer la suite :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-#define TXT "Hello Wolrd!\n"
-void hello(char    *name  );
-int main     (      int argc,char **argv) {/*A comment*/
-hello(argv[1]); return 0;}
-void hello( char *name){if(name){ printf("Hello %s\ni", name);}else {
-printf("Hello Wolrd!\n");}}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#define TXT &amp;quot;Hello Wolrd!\n&amp;quot;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="cm"&gt;/*A comment*/&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);}}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;strong&gt;indent&lt;/strong&gt; propose 3 styles prédéfinis.&lt;/p&gt;
 &lt;p&gt;Le style GNU (le style par défaut) : &lt;code&gt;indent demo.c&lt;/code&gt; ou &lt;code&gt;indent -gnu demo.c&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-void hello (char *name);
-int
-main (int argc, char **argv)
-{
-  /*A comment */
-  hello (argv[1]);
-  return 0;
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="cm"&gt;/*A comment */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-void
-hello (char *name)
-{
-  if (name)
-    {
-      printf ("Hello %s\ni", name);
-    }
-  else
-    {
-      printf ("Hello Wolrd!\n");
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Le style Kernighan &amp;amp; Ritchie (ou style k&amp;amp;r, les concepteurs du C) : &lt;code&gt;indent -kr demo.c&lt;/code&gt; &lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-void hello(char *name);
-int main(int argc, char **argv)
-{
-    /*A comment */
-    hello(argv[1]);
-    return 0;
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="cm"&gt;/*A comment */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-void hello(char *name)
-{
-    if (name) {
-      printf("Hello %s\ni", name);
-    } else {
-      printf("Hello Wolrd!\n");
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Le style Berkeley (le style d'origine) : &lt;code&gt;indent -orig demo.c&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:::C
-#include &amp;lt;stdio.h&amp;gt;
-int             hello(char *name);
-int
-main(int argc, char **argv)
-{
-    /*
-     * A comment 
-     */
-    hello(argv[1]);
-    return 0;
-}
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#include&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;     * A comment &lt;/span&gt;
+&lt;span class="cm"&gt;     */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
-void
-hello(char *name)
-{
-    if (name) {
-      printf("Hello %s\ni", name);
-    } else {
-      printf("Hello Wolrd!\n");
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello %s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;i&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello Wolrd!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;p&gt;Ces styles définissent chacun un ensemble d'options. Vous pouvez alors ajouter et/ou redéfinir quelques options, ou même sélectionner vous-même les options que vous souhaitez.&lt;/p&gt;
 &lt;p&gt;Pour ne pas indiquer 15 options à chaque appel d'&lt;em&gt;indent&lt;/em&gt;, vous pouvez :&lt;/p&gt;
 &lt;ul&gt;
